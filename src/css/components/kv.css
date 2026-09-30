@@ -1,0 +1,96 @@
+/*
+ * Key/value list — label : value facts with hairline rhythm.
+ * Labels are quiet, values are strong; numbers are tabular.
+ *
+ *   <dl class="os-kv">
+ *     <div><dt>Boligtype</dt><dd>Leilighet</dd></div>
+ *     <div><dt>Soverom</dt><dd>1</dd></div>
+ *   </dl>
+ *
+ * Variants:
+ *   --cols    flows into as many columns as fit (min 16rem each)
+ *   --end     values right-aligned (summaries, price breakdowns)
+ *   --stack   label above value (very narrow spaces)
+ *   --plain   no hairlines
+ *   --lg      larger values
+ */
+@layer os.components {
+  .os-kv {
+    margin: 0;
+  }
+
+  .os-kv > div {
+    display: grid;
+    grid-template-columns: minmax(0, var(--os-kv-key-width, 11rem)) minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--os-space-1) var(--os-space-4);
+    padding-block: var(--os-row-pad);
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
+    break-inside: avoid;
+  }
+
+  .os-kv dt {
+    color: var(--os-color-text-muted);
+  }
+
+  .os-kv dd {
+    margin: 0;
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-medium);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .os-kv dd small {
+    color: var(--os-color-text-muted);
+    font-weight: var(--os-weight-regular);
+  }
+
+  .os-kv--cols {
+    column-width: 16rem;
+    column-gap: var(--os-space-10);
+  }
+
+  .os-kv--cols > div {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .os-kv--end > div {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .os-kv--end dd {
+    text-align: end;
+  }
+
+  .os-kv--stack > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .os-kv--plain > div {
+    border-block-end: 0;
+  }
+
+  .os-kv--lg dd {
+    font-size: var(--os-text-lg);
+    font-weight: var(--os-weight-strong);
+  }
+
+  .os-kv--sm {
+    font-size: var(--os-text-sm);
+  }
+
+  .os-kv > div:last-child:not(.os-kv--cols > div) {
+    border-block-end-color: transparent;
+  }
+
+  .os-kv--ruled > div:last-child {
+    border-block-end-color: var(--os-color-border-subtle);
+  }
+
+  @container (max-width: 22rem) {
+    .os-kv:not(.os-kv--end) > div {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+}

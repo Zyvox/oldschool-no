@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tokens – Oldschool</title>
+  <meta name="description" content="Every Oldschool design token, rendered live for the active theme, mode and density.">
+  <meta name="color-scheme" content="light dark">
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='comfortable')d.dataset.density=p.density}catch(e){}})()</script>
+  <link rel="stylesheet" href="../dist/oldschool.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script src="assets/generated/themes.js" defer></script>
+  <script src="assets/generated/tokens.js" defer></script>
+  <script src="assets/site.js" defer></script>
+  <script src="../dist/oldschool.js" defer></script>
+  <script src="assets/tokens-page.js" defer></script>
+</head>
+<body class="os-page">
+  <a class="os-skiplink" href="#main">Skip to content</a>
+  <header class="os-masthead">
+    <div class="os-container os-masthead__inner">
+      <a class="os-brand" href="index.html">
+        <svg class="os-brand__mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><rect x="2" y="2" width="9" height="11" rx="2.5"/><rect x="14" y="2" width="16" height="11" rx="2.5"/><rect x="2" y="16" width="9" height="14" rx="2.5"/><rect x="14" y="16" width="16" height="14" rx="2.5"/></g></svg>
+        <span class="os-brand__name">oldschool</span>
+        <span class="os-brand__product">tokens</span>
+      </a>
+      <p class="os-text-sm os-text-muted os-hide-below-md">Source: <code>tokens/*.mjs</code> · Resolved: <a href="../dist/tokens.json">dist/tokens.json</a></p>
+    </div>
+  </header>
+
+  <div class="os-page__body">
+    <main class="os-container os-stack os-stack--gap" id="main">
+      <section class="os-panel">
+        <div class="os-panel__body os-stack os-stack--sm">
+          <h1>Design tokens</h1>
+          <p class="os-heading__lead">Three tiers: a raw <strong>palette</strong> generated in OKLCH, <strong>semantic colors</strong> and <strong>role tokens</strong> that components use, and <strong>themes</strong> that decide which ramps feed them. Everything on this page is read from the live CSS, so switch theme, mode or density above and watch the values change.</p>
+          <ul class="os-seplist os-text-sm" role="list">
+            <li><a href="#h-semantic">Semantic colors</a></li>
+            <li><a href="#h-roles">Role tokens</a></li>
+            <li><a href="#h-type">Type</a></li>
+            <li><a href="#h-space">Space</a></li>
+            <li><a href="#h-shape">Shape &amp; elevation</a></li>
+            <li><a href="#h-palette">Palette</a></li>
+            <li><a href="#h-icons">Icons</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <h2 id="h-semantic" class="hx-page-h2">Semantic colors</h2>
+      <p class="hx-lede">What a color is <em>for</em>. The contrast badge is measured against <code>--os-color-surface</code> in the current theme and mode. <code>npm run check</code> verifies 37 pairs for every theme × mode.</p>
+      <div class="os-grid" id="semantic" style="--os-grid-min: 46rem"></div>
+
+      <h2 id="h-roles" class="hx-page-h2">Role tokens</h2>
+      <p class="hx-lede">Spacing, shape, type and control sizes by role. Themes and <code>data-density</code> re-point these.</p>
+      <section class="os-panel" aria-labelledby="h-roles"><div class="os-panel__body" id="roles"></div></section>
+
+      <h2 id="h-type" class="hx-page-h2">Type scale</h2>
+      <p class="hx-lede">Inter, self-hosted, with optical sizing. Headline sizes are fluid between 360px and 1280px viewports.</p>
+      <section class="os-panel" aria-labelledby="h-type"><div class="os-panel__body" id="type"></div></section>
+
+      <div class="os-grid os-grid--2">
+        <div class="os-stack os-stack--sm">
+          <h2 id="h-space" class="hx-page-h2">Space</h2>
+          <section class="os-panel" aria-labelledby="h-space"><div class="os-panel__body" id="space"></div></section>
+        </div>
+        <div class="os-stack os-stack--sm">
+          <h2 id="h-shape" class="hx-page-h2">Shape &amp; elevation</h2>
+          <section class="os-panel" aria-labelledby="h-shape"><div class="os-panel__body hx-shapes" id="radius"></div></section>
+        </div>
+      </div>
+
+      <h2 id="h-palette" class="hx-page-h2">Palette</h2>
+      <p class="hx-lede">Raw ramps with identical OKLCH lightness per step — any accent ramp can replace any other without breaking contrast. Named after Norwegian nature.</p>
+      <section class="os-panel" aria-labelledby="h-palette"><div class="os-panel__body os-stack os-stack--lg" id="palette"></div></section>
+
+      <h2 id="h-icons" class="hx-page-h2">Icons</h2>
+      <p class="hx-lede">Lucide (ISC), drawn at a lighter 1.75 stroke. Use <code>&lt;svg class="os-icon"&gt;&lt;use href="icons.svg#os-<em>name</em>"&gt;&lt;/use&gt;&lt;/svg&gt;</code>.</p>
+      <section class="os-panel" aria-labelledby="h-icons"><div class="os-panel__body"><ul class="hx-icons" id="icons" role="list"></ul></div></section>
+    </main>
+  </div>
+</body>
+</html>

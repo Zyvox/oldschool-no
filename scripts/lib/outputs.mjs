@@ -1,0 +1,215 @@
+/**
+ * Secondary outputs derived from the tokens: Tailwind bridges and the
+ * generated token reference in docs/tokens.md.
+ */
+import { semanticColors, primitives, buildPalette, resolveColors, resolveRoles, themes, defaultTheme } from './tokens.mjs';
+import * as foundation from '../../tokens/foundation.mjs';
+import { ACCENT_STEPS, NEUTRAL_STEPS } from '../../src/js/color.js';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+
+/** Semantic color name → Tailwind color name (avoids `text-text-muted`). */
+export function tailwindColorName(name) {
+  if (name === 'text') return 'fg';
+  if (name === 'text-on-accent') return 'on-accent';
+  if (name.startsWith('text-')) return `fg-${name.slice(5)}`;
+  if (name === 'border') return 'line';
+  if (name.startsWith('border-')) return `line-${name.slice(7)}`;
+  return name;
+}
+
+function tailwindEntries(pal) {
+  const colors = Object.keys(semanticColors()).map((n) => [tailwindColorName(n), `var(--os-color-${n})`]);
+  const ramps = [
+    ...ACCENT_STEPS.map((s) => [`accent-${s}`, `var(--os-accent-${s})`]),
+    ...NEUTRAL_STEPS.map((s) => [`neutral-${s}`, `var(--os-neutral-${s})`]),
+  ];
+  const paletteRamps = Object.entries(pal).flatMap(([name, { ramp }]) =>
+    Object.keys(ramp).map((s) => [`${kebab(name)}-${s}`, `var(--os-${kebab(name)}-${s})`]));
+  return { colors, ramps, paletteRamps };
+}
+
+export function tailwindV4(pal) {
+  const { colors, ramps, paletteRamps } = tailwindEntries(pal);
+  const lines = [
+    '/* GENERATED — Oldschool → Tailwind CSS v4 bridge.',
+    '   Load after Tailwind and Oldschool:',
+    '     @import "tailwindcss";',
+    '     @import "oldschool-no/dist/oldschool.css";',
+    '     @import "oldschool-no/dist/tailwind.css";',
+    '   Utilities then follow the active data-theme / data-mode:',
+    '     bg-canvas  bg-surface  bg-surface-tint  text-fg  text-fg-muted  text-link',
+    '     border-line  border-line-subtle  bg-accent  text-on-accent  rounded-panel … */',
+    '@theme inline {',
+    '  /* Semantic colors */',
+    ...colors.map(([k, v]) => `  --color-${k}: ${v};`),
+    '  /* Theme ramps */',
+    ...ramps.map(([k, v]) => `  --color-${k}: ${v};`),
+    '  /* Raw palette */',
+    ...paletteRamps.map(([k, v]) => `  --color-${k}: ${v};`),
+    '  /* Type */',
+    '  --font-sans: var(--os-font-body);',
+    '  --font-heading: var(--os-font-heading);',
+    '  --font-mono: var(--os-font-mono);',
+    ...Object.keys(foundation.text).map((k) => `  --text-${k}: var(--os-text-${k});`),
+    '  /* Shape */',
+    '  --radius-panel: var(--os-radius-panel);',
+    '  --radius-control: var(--os-radius-control);',
+    '  --radius-media: var(--os-radius-media);',
+    '  --radius-badge: var(--os-radius-badge);',
+    '  /* Elevation */',
+    '  --shadow-raised: var(--os-shadow-raised);',
+    '  --shadow-overlay: var(--os-shadow-overlay);',
+    '  /* Layout */',
+    '  --container-page: var(--os-container-width);',
+    '  --spacing-gutter: var(--os-gutter);',
+    '  --spacing-gap: var(--os-gap);',
+    '  --spacing-pad: var(--os-pad);',
+    '  --breakpoint-sm: 40rem;',
+    '  --breakpoint-md: 60rem;',
+    '  --breakpoint-lg: 76rem;',
+    '}',
+  ];
+  return `${lines.join('\n')}\n`;
+}
+
+export function tailwindV3(pal) {
+  const { colors, ramps, paletteRamps } = tailwindEntries(pal);
+  const obj = (entries) => `{\n${entries.map(([k, v]) => `        '${k}': '${v}',`).join('\n')}\n      }`;
+  return `/* GENERATED — Oldschool → Tailwind CSS v3 preset.
+ * tailwind.config.js:  module.exports = { presets: [require('oldschool-no/dist/tailwind-preset.cjs')] }
+ * Also load dist/oldschool.css (it defines the variables these utilities point to). */
+module.exports = {
+  theme: {
+    screens: { sm: '40em', md: '60em', lg: '76em' },
+    extend: {
+      colors: ${obj([...colors, ...ramps, ...paletteRamps])},
+      fontFamily: {
+        sans: ['var(--os-font-body)'],
+        heading: ['var(--os-font-heading)'],
+        mono: ['var(--os-font-mono)'],
+      },
+      fontSize: ${obj(Object.keys(foundation.text).map((k) => [k, `var(--os-text-${k})`]))},
+      borderRadius: ${obj([['panel', 'var(--os-radius-panel)'], ['control', 'var(--os-radius-control)'], ['media', 'var(--os-radius-media)'], ['badge', 'var(--os-radius-badge)']])},
+      boxShadow: ${obj([['raised', 'var(--os-shadow-raised)'], ['overlay', 'var(--os-shadow-overlay)']])},
+      spacing: ${obj([['gutter', 'var(--os-gutter)'], ['gap', 'var(--os-gap)'], ['pad', 'var(--os-pad)']])},
+      maxWidth: ${obj([['page', 'var(--os-container-width)'], ['measure', 'var(--os-measure)']])},
+    },
+  },
+};
+`;
+}
+
+/* ---------------------------------------------------------------------------
+ * docs/tokens.md
+ * ------------------------------------------------------------------------ */
+
+export function tokensMarkdown(pal = buildPalette()) {
+  const light = resolveColors(pal, defaultTheme, 'light');
+  const dark = resolveColors(pal, defaultTheme, 'dark');
+  const roles = resolveRoles(pal, defaultTheme);
+  const prim = primitives();
+  const out = [];
+  out.push('<!-- GENERATED by scripts/build.mjs — edit tokens/*.mjs instead. -->');
+  out.push('# Token reference', '');
+  out.push('All tokens are CSS custom properties prefixed `--os-`. Components use **semantic colors** and **role tokens**;');
+  out.push('themes re-point those, so anything built from them follows `data-theme`, `data-mode` and `data-density`.');
+  out.push('Machine-readable, fully resolved values for every theme live in [`dist/tokens.json`](../dist/tokens.json).', '');
+  out.push('- [Semantic colors](#semantic-colors)', '- [Role tokens](#role-tokens)', '- [Primitive scales](#primitive-scales)', '- [Palette](#palette)', '- [Themes](#themes)', '');
+
+  out.push('## Semantic colors', '');
+  out.push(`Values shown for the default theme (\`${defaultTheme}\`). Reference = ramp step used in light / dark mode.`, '');
+  const colors = semanticColors();
+  let group = null;
+  for (const [name, c] of Object.entries(colors)) {
+    if (c.group !== group) {
+      group = c.group;
+      out.push('', `### ${group}`, '', '| Token | Light | Dark | Reference | Use |', '| --- | --- | --- | --- | --- |');
+    }
+    out.push(`| \`--os-color-${name}\` | \`${light[name]}\` | \`${dark[name]}\` | ${c.light} / ${c.dark} | ${c.description.replace(/\|/g, '\\|')} |`);
+  }
+
+  out.push('', '## Role tokens', '', 'Re-declared per theme and density. Values for the default theme, comfortable density.', '');
+  out.push('| Token | Value | Use |', '| --- | --- | --- |');
+  for (const [name, value, description] of foundation.roles) {
+    out.push(`| \`--os-${name}\` | \`${roles[name].replace(/\|/g, '\\|')}\` | ${description} |`);
+    void value;
+  }
+  out.push('', '### Density: compact', '', '`data-density="compact"` re-points:', '');
+  out.push('| Token | Compact |', '| --- | --- |');
+  for (const [k, v] of Object.entries(foundation.densities.compact.values)) out.push(`| \`--os-${k}\` | \`${v}\` |`);
+
+  out.push('', '## Primitive scales', '');
+  const groups = {};
+  for (const [k, v] of Object.entries(prim)) {
+    const g = k.split('-')[0];
+    (groups[g] ??= []).push([k, v]);
+  }
+  for (const [g, entries] of Object.entries(groups)) {
+    out.push(`### ${g}`, '', '| Token | Value |', '| --- | --- |');
+    for (const [k, v] of entries) out.push(`| \`--os-${k}\` | \`${v.replace(/\|/g, '\\|')}\` |`);
+    out.push('');
+  }
+  out.push('### Breakpoints', '', 'Not custom properties (they cannot be used in `@media`). Use these exact values:', '');
+  out.push('| Name | Min-width | Pixels |', '| --- | --- | --- |');
+  for (const [k, v] of Object.entries(foundation.breakpoints)) out.push(`| ${k} | \`${v}\` | ${parseFloat(v) * 16}px |`);
+
+  out.push('', '## Palette', '', 'Raw ramps generated in OKLCH (`tokens/palette.mjs`). Every ramp has identical lightness per step, so any accent ramp can replace any other.', '');
+  for (const [name, { description, ramp, fixed }] of Object.entries(pal)) {
+    out.push(`### ${kebab(name)}${fixed ? ' (hand-picked)' : ''}`, '', description, '');
+    out.push(`| ${Object.keys(ramp).join(' | ')} |`, `| ${Object.keys(ramp).map(() => '---').join(' | ')} |`);
+    out.push(`| ${Object.values(ramp).map((h) => `\`${h}\``).join(' | ')} |`, '');
+  }
+
+  out.push('## Themes', '', '| Theme | `data-theme` | Accent | Neutral | Notes |', '| --- | --- | --- | --- | --- |');
+  for (const [name, t] of Object.entries(themes)) {
+    out.push(`| ${t.label} | \`${name}\`${name === defaultTheme ? ' (default)' : ''} | ${t.accent} | ${t.neutral} | ${t.description} |`);
+  }
+  out.push('');
+  return out.join('\n');
+}
+
+/* ---------------------------------------------------------------------------
+ * docs/components.md — from the header comment of each component file
+ * ------------------------------------------------------------------------ */
+
+export function componentsMarkdown(cssDir) {
+  const entry = fs.readFileSync(path.join(cssDir, 'oldschool.css'), 'utf8');
+  const files = [...entry.matchAll(/@import "components\/([\w-]+)\.css";/g)].map((m) => m[1]);
+  const out = [
+    '<!-- GENERATED by scripts/build.mjs from the header comment of each src/css/components/*.css file. -->',
+    '# Component reference',
+    '',
+    'Every component is plain HTML with `os-` classes (BEM: `block__element--modifier`), styled only through tokens.',
+    'Live examples with copy-ready markup: `site/components.html`. Behaviors: [javascript.md](javascript.md).',
+    '',
+    files.map((f) => `[${f}](#${f})`).join(' · '),
+    '',
+  ];
+  for (const file of files) {
+    const css = fs.readFileSync(path.join(cssDir, 'components', `${file}.css`), 'utf8');
+    const comment = css.match(/^\/\*([\s\S]*?)\*\//);
+    const classes = [...new Set([...css.matchAll(/\.(os-[\w-]+)/g)].map((m) => m[1]))];
+    out.push(`## ${file}`, '');
+    if (comment) {
+      const lines = comment[1].split('\n').map((l) => l.replace(/^\s*\* ?/, '')).join('\n').trim().split('\n');
+      let inCode = false;
+      for (const line of lines) {
+        const isCode = /^ {2,}\S/.test(line) && /[<.:{]/.test(line);
+        if (isCode && !inCode) { out.push('```html'); inCode = true; }
+        if (!isCode && inCode && line.trim() !== '') {
+          let blank = 0;
+          while (out[out.length - 1] === '') { out.pop(); blank += 1; }
+          out.push('```', ...Array(blank).fill(''));
+          inCode = false;
+        }
+        out.push(isCode ? line.replace(/^ {2}/, '') : line);
+      }
+      if (inCode) out.push('```');
+    }
+    out.push('', `<sub>Classes: ${classes.map((c) => `\`${c}\``).join(' ')} · Source: [src/css/components/${file}.css](../src/css/components/${file}.css)</sub>`, '');
+  }
+  return `${out.join('\n').replace(/\n{3,}/g, '\n\n')}\n`;
+}

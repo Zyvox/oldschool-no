@@ -1,0 +1,109 @@
+/*
+ * Masthead — brand on the left, utility links on the right, on the canvas.
+ *
+ *   <header class="os-masthead">
+ *     <div class="os-container os-masthead__inner">
+ *       <a class="os-brand" href="/">…</a>
+ *       <button class="os-masthead__toggle os-button os-button--quiet" popovertarget="menu">…Meny</button>
+ *       <nav class="os-masthead__nav" id="menu" popover aria-label="…">
+ *         <ul class="os-utilnav" role="list">…</ul>
+ *       </nav>
+ *     </div>
+ *   </header>
+ *
+ * Below 60em the nav collapses into a popover menu opened by the toggle —
+ * no JavaScript needed. Browsers without popover support show the links inline.
+ */
+@layer os.components {
+  .os-masthead {
+    position: relative;
+    z-index: var(--os-z-header);
+    background-color: var(--os-color-masthead);
+  }
+
+  .os-masthead__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--os-space-3) var(--os-space-6);
+    min-height: 4rem;
+    padding-block: var(--os-space-2);
+  }
+
+  .os-masthead .os-masthead__toggle {
+    display: none;
+    flex: none;
+  }
+
+  .os-masthead__nav {
+    display: block;
+  }
+
+  @media (min-width: 60em) {
+    .os-masthead__inner {
+      min-height: 4.75rem;
+    }
+
+    /* Always inline on wide screens, even if opened as a popover earlier. */
+    .os-masthead__nav[popover] {
+      position: static;
+      inset: auto;
+      display: block;
+      width: auto;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      border: 0;
+      background: none;
+      color: inherit;
+    }
+  }
+
+  @media (max-width: 59.99em) {
+    .os-masthead .os-masthead__toggle {
+      display: inline-flex;
+    }
+
+    .os-masthead__nav[popover] {
+      position: fixed;
+      inset: 3.75rem var(--os-gutter) auto auto;
+      width: min(20rem, calc(100vw - 2 * var(--os-gutter)));
+      max-height: calc(100dvh - 5rem);
+      margin: 0;
+      padding: var(--os-space-2);
+      overflow: auto;
+      border: var(--os-border-width) solid var(--os-color-border);
+      border-radius: var(--os-radius-panel);
+      background-color: var(--os-color-surface-raised);
+      color: var(--os-color-text);
+      box-shadow: var(--os-shadow-overlay);
+    }
+
+    .os-masthead__nav[popover]:not(:popover-open) {
+      display: none;
+    }
+
+    .os-masthead__nav .os-utilnav {
+      flex-direction: column;
+      align-items: stretch;
+      font-size: var(--os-text-md);
+    }
+
+    .os-masthead__nav .os-utilnav > li + li::before {
+      display: none;
+    }
+
+    .os-masthead__nav .os-utilnav a,
+    .os-masthead__nav .os-utilnav button {
+      width: 100%;
+      padding: var(--os-space-3);
+      border-radius: var(--os-radius-control);
+    }
+
+    .os-masthead__nav .os-utilnav a:hover,
+    .os-masthead__nav .os-utilnav button:hover {
+      background-color: var(--os-color-surface-tint);
+    }
+  }
+}

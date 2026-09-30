@@ -1,0 +1,74 @@
+/*
+ * Segmented control — a small set of mutually exclusive options, built from
+ * real radio buttons (so it works without JavaScript and in forms).
+ *
+ *   <fieldset class="os-segmented">
+ *     <legend class="os-sr-only">Visning</legend>
+ *     <label><input type="radio" name="view" value="list" checked><span>Liste</span></label>
+ *     <label><input type="radio" name="view" value="grid"><span>Rutenett</span></label>
+ *   </fieldset>
+ */
+@layer os.components {
+  .os-segmented {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.125rem;
+    padding: 0.1875rem;
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: calc(var(--os-radius-control) + 0.1875rem);
+    background-color: var(--os-color-surface-muted);
+  }
+
+  .os-segmented > label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-1-5);
+    min-height: calc(var(--os-control-height-sm) - 0.375rem);
+    padding: var(--os-space-1) var(--os-space-3);
+    border-radius: var(--os-radius-control);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-medium);
+    white-space: nowrap;
+    transition: background-color var(--os-duration-fast) var(--os-ease-standard), color var(--os-duration-fast);
+  }
+
+  .os-segmented > label:hover {
+    color: var(--os-color-text-strong);
+  }
+
+  .os-segmented input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .os-segmented > label:has(:checked) {
+    background-color: var(--os-color-surface);
+    color: var(--os-color-text-strong);
+    box-shadow: 0 0 0 var(--os-border-width) var(--os-color-border), 0 1px 2px var(--os-color-shadow);
+  }
+
+  .os-segmented > label:has(:focus-visible) {
+    outline: var(--os-focus-width) solid var(--os-color-focus);
+    outline-offset: 1px;
+  }
+
+  .os-segmented .os-icon {
+    --os-icon-size: 1rem;
+  }
+
+  .os-segmented--block {
+    display: flex;
+  }
+
+  .os-segmented--block > label {
+    flex: 1 1 0;
+    justify-content: center;
+  }
+}

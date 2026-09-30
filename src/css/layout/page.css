@@ -1,0 +1,54 @@
+/*
+ * Page shell.
+ *
+ *   <body class="os-page">
+ *     <header class="os-masthead">…</header>
+ *     <div class="os-container">  crumb bar, layout …  </div>
+ *     <footer class="os-footer">…</footer>
+ *   </body>
+ */
+@layer os.layout {
+  .os-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .os-page__body {
+    flex: 1 0 auto;
+    padding-block-end: calc(var(--os-gap) * 2);
+  }
+
+  .os-container {
+    width: 100%;
+    max-width: calc(var(--os-container-width) + 2 * var(--os-gutter));
+    margin-inline: auto;
+    padding-inline: var(--os-gutter);
+  }
+
+  .os-container--sm {
+    --os-container-width: var(--os-container-sm);
+  }
+
+  .os-container--md {
+    --os-container-width: var(--os-container-md);
+  }
+
+  .os-container--xl {
+    --os-container-width: var(--os-container-xl);
+  }
+
+  /* Vertical rhythm between the big blocks of a page. */
+  .os-page-section {
+    margin-block-start: var(--os-gap);
+  }
+
+  /* Phones: .os-container--bleed turns panels into edge-to-edge sheets —
+     see components/bleed.css (it must out-rank component styles). */
+  @media (max-width: 39.99em) {
+    .os-container--bleed {
+      padding-inline: 0;
+    }
+  }
+}

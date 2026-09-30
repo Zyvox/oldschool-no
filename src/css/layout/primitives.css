@@ -1,0 +1,131 @@
+/*
+ * Layout primitives. Small, composable, and free of visual styling.
+ *
+ *   .os-stack     vertical rhythm between children
+ *   .os-cluster   inline items that wrap (tags, buttons, links)
+ *   .os-split     two ends pushed apart (title ↔ action)
+ *   .os-grid      responsive auto-fill grid
+ *   .os-frame     fixed aspect-ratio media box
+ *   .os-scroller  horizontal scroll-snap strip
+ */
+@layer os.layout {
+  /* Stack --------------------------------------------------------------- */
+  .os-stack > * {
+    margin-block: 0;
+  }
+
+  .os-stack > * + * {
+    margin-block-start: var(--os-stack-space, var(--os-space-4));
+  }
+
+  .os-stack--2xs { --os-stack-space: var(--os-space-1); }
+  .os-stack--xs { --os-stack-space: var(--os-space-2); }
+  .os-stack--sm { --os-stack-space: var(--os-space-3); }
+  .os-stack--md { --os-stack-space: var(--os-space-4); }
+  .os-stack--lg { --os-stack-space: var(--os-space-6); }
+  .os-stack--xl { --os-stack-space: var(--os-space-8); }
+  .os-stack--2xl { --os-stack-space: var(--os-space-12); }
+  .os-stack--gap { --os-stack-space: var(--os-gap); }
+
+  /* Cluster ------------------------------------------------------------- */
+  .os-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-cluster-space, var(--os-space-3));
+  }
+
+  .os-cluster--xs { --os-cluster-space: var(--os-space-1); }
+  .os-cluster--sm { --os-cluster-space: var(--os-space-2); }
+  .os-cluster--lg { --os-cluster-space: var(--os-space-6); }
+  .os-cluster--baseline { align-items: baseline; }
+  .os-cluster--start { align-items: flex-start; }
+  .os-cluster--end { justify-content: flex-end; }
+  .os-cluster--nowrap { flex-wrap: nowrap; }
+
+  /* Split --------------------------------------------------------------- */
+  .os-split {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--os-space-2) var(--os-space-4);
+  }
+
+  .os-split--baseline { align-items: baseline; }
+  .os-split--start { align-items: flex-start; }
+  .os-split--nowrap { flex-wrap: nowrap; }
+
+  /* Grid ---------------------------------------------------------------- */
+  .os-grid {
+    display: grid;
+    gap: var(--os-grid-gap, var(--os-gap));
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--os-grid-min, 15rem), 100%), 1fr));
+  }
+
+  .os-grid--sm { --os-grid-min: 10rem; }
+  .os-grid--lg { --os-grid-min: 20rem; }
+  .os-grid--fit { grid-template-columns: repeat(auto-fit, minmax(min(var(--os-grid-min, 15rem), 100%), 1fr)); }
+
+  @media (min-width: 40em) {
+    .os-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .os-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .os-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (min-width: 60em) {
+    .os-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .os-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+
+  /* Frame --------------------------------------------------------------- */
+  .os-frame {
+    position: relative;
+    aspect-ratio: var(--os-frame-ratio, 4 / 3);
+    overflow: hidden;
+    border-radius: var(--os-radius-media);
+    background-color: var(--os-color-surface-sunken);
+  }
+
+  .os-frame > :is(img, video, iframe, svg) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .os-frame--16x9 { --os-frame-ratio: 16 / 9; }
+  .os-frame--3x2 { --os-frame-ratio: 3 / 2; }
+  .os-frame--1x1 { --os-frame-ratio: 1; }
+
+  /* Scroller ------------------------------------------------------------ */
+  .os-scroller {
+    display: flex;
+    gap: var(--os-scroller-gap, var(--os-space-3));
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    padding-block-end: var(--os-space-2);
+  }
+
+  .os-scroller > * {
+    flex: 0 0 var(--os-scroller-item, auto);
+    scroll-snap-align: start;
+  }
+
+  /* Divider ------------------------------------------------------------- */
+  .os-divider {
+    border: 0;
+    border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
+    margin-block: var(--os-space-4);
+  }
+
+  .os-divider--flush {
+    margin-block: 0;
+  }
+
+  /* Pulls a child out to the panel edge (e.g. full-width media in a padded panel). */
+  .os-bleed {
+    margin-inline: calc(var(--os-pad) * -1);
+  }
+}

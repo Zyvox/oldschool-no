@@ -1,0 +1,179 @@
+/*
+ * Button — a real <button> for actions, an <a> for navigation; same looks.
+ *
+ *   <button class="os-button os-button--primary" type="button">Send e-post</button>
+ *   <a class="os-button" href="tel:…"><svg class="os-icon">…</svg>Ring 12 34 56 78</a>
+ *
+ * Looks:  (default) secondary · --primary · --tint · --quiet · --link · --danger
+ * Sizes:  --sm · (default 44px) · --lg
+ * Shape:  --block (full width) · --icon (square, needs aria-label)
+ * Label:  wrap text in .os-button__label if it should hide on tiny screens.
+ */
+@layer os.components {
+  .os-button {
+    --_bg: var(--os-color-surface);
+    --_fg: var(--os-color-text-strong);
+    --_border: var(--os-color-border-strong);
+    --_bg-hover: var(--os-color-surface-tint);
+    --_border-hover: var(--os-color-text-muted);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--os-space-2);
+    min-height: var(--os-control-height);
+    padding: var(--os-space-1) var(--os-control-pad-x);
+    border: var(--os-border-width) solid var(--_border);
+    border-radius: var(--os-radius-control);
+    background-color: var(--_bg);
+    color: var(--_fg);
+    font-size: var(--os-text-md);
+    font-weight: var(--os-weight-semibold);
+    line-height: var(--os-leading-tight);
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition:
+      background-color var(--os-duration-fast) var(--os-ease-standard),
+      border-color var(--os-duration-fast) var(--os-ease-standard),
+      color var(--os-duration-fast) var(--os-ease-standard),
+      transform var(--os-duration-instant) var(--os-ease-standard);
+  }
+
+  .os-button:hover {
+    border-color: var(--_border-hover);
+    background-color: var(--_bg-hover);
+    color: var(--_fg);
+    text-decoration: none;
+  }
+
+  .os-button:active:not(:disabled, [aria-disabled="true"]) {
+    transform: translateY(1px);
+  }
+
+  .os-button:disabled,
+  .os-button[aria-disabled="true"] {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .os-button .os-icon {
+    --os-icon-size: 1.15em;
+  }
+
+  /* Looks --------------------------------------------------------------- */
+  .os-button--primary {
+    --_bg: var(--os-color-accent);
+    --_fg: var(--os-color-text-on-accent);
+    --_border: var(--os-color-accent);
+    --_bg-hover: var(--os-color-accent-hover);
+    --_border-hover: var(--os-color-accent-hover);
+  }
+
+  .os-button--primary:active {
+    --_bg-hover: var(--os-color-accent-active);
+  }
+
+  .os-button--tint {
+    --_bg: var(--os-color-accent-subtle);
+    --_fg: var(--os-color-text-accent);
+    --_border: var(--os-color-border-tint);
+    --_bg-hover: var(--os-color-accent-muted);
+    --_border-hover: var(--os-color-border-tint);
+  }
+
+  .os-button--quiet {
+    --_bg: transparent;
+    --_fg: var(--os-color-link);
+    --_border: transparent;
+    --_bg-hover: var(--os-color-surface-tint);
+    --_border-hover: transparent;
+  }
+
+  .os-button--danger {
+    --_bg: var(--os-color-danger-fill);
+    --_fg: var(--os-color-text-on-accent);
+    --_border: var(--os-color-danger-fill);
+    --_bg-hover: var(--os-color-danger);
+    --_border-hover: var(--os-color-danger);
+  }
+
+  .os-button--link {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--os-color-link);
+    font-weight: var(--os-weight-medium);
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--os-link-underline-thickness);
+    text-decoration-color: color-mix(in srgb, currentColor var(--os-link-underline-mix), transparent);
+    text-underline-offset: var(--os-link-underline-offset);
+  }
+
+  .os-button--link:hover {
+    background: none;
+    color: var(--os-color-link-hover);
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+  }
+
+  /* Sizes --------------------------------------------------------------- */
+  .os-button--sm {
+    min-height: var(--os-control-height-sm);
+    padding-inline: calc(var(--os-control-pad-x) * 0.75);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-button--lg {
+    min-height: var(--os-control-height-lg);
+    padding-inline: calc(var(--os-control-pad-x) * 1.5);
+    font-size: var(--os-text-lg);
+  }
+
+  .os-button--block {
+    display: flex;
+    width: 100%;
+  }
+
+  .os-button--icon {
+    width: var(--os-control-height);
+    padding: 0;
+  }
+
+  .os-button--icon.os-button--sm {
+    width: var(--os-control-height-sm);
+  }
+
+  .os-button--icon.os-button--lg {
+    width: var(--os-control-height-lg);
+  }
+
+  .os-button--pill {
+    border-radius: var(--os-radius-full);
+  }
+
+  /* Group --------------------------------------------------------------- */
+  .os-button-group {
+    display: inline-flex;
+    isolation: isolate;
+  }
+
+  .os-button-group > .os-button:not(:first-child) {
+    margin-inline-start: calc(var(--os-border-width) * -1);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+
+  .os-button-group > .os-button:not(:last-child) {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .os-button-group > .os-button:hover,
+  .os-button-group > .os-button:focus-visible {
+    z-index: 1;
+  }
+}

@@ -1,0 +1,73 @@
+/*
+ * Utilities — single-purpose helpers. Keep their use rare: prefer components
+ * and layout primitives. Named os-<property>-<value>.
+ */
+@layer os.utilities {
+  /* Accessibility */
+  .os-sr-only,
+  .os-sr-only-focusable:not(:focus, :focus-within) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  /* Responsive visibility (breakpoints: sm 40em · md 60em · lg 76em) */
+  @media (max-width: 39.99em) { .os-hide-below-sm { display: none !important; } }
+  @media (max-width: 59.99em) { .os-hide-below-md { display: none !important; } }
+  @media (max-width: 75.99em) { .os-hide-below-lg { display: none !important; } }
+  @media (min-width: 40em) { .os-hide-from-sm { display: none !important; } }
+  @media (min-width: 60em) { .os-hide-from-md { display: none !important; } }
+  @media (min-width: 76em) { .os-hide-from-lg { display: none !important; } }
+
+  /* Text color */
+  .os-text-strong { color: var(--os-color-text-strong) !important; }
+  .os-text-muted { color: var(--os-color-text-muted) !important; }
+  .os-text-subtle { color: var(--os-color-text-subtle) !important; }
+  .os-text-accent { color: var(--os-color-text-accent) !important; }
+  .os-text-success { color: var(--os-color-success) !important; }
+  .os-text-warning { color: var(--os-color-warning) !important; }
+  .os-text-danger { color: var(--os-color-danger) !important; }
+
+  /* Text size */
+  .os-text-2xs { font-size: var(--os-text-2xs) !important; }
+  .os-text-xs { font-size: var(--os-text-xs) !important; }
+  .os-text-sm { font-size: var(--os-text-sm) !important; }
+  .os-text-md { font-size: var(--os-text-md) !important; }
+  .os-text-lg { font-size: var(--os-text-lg) !important; }
+  .os-text-xl { font-size: var(--os-text-xl) !important; }
+  .os-text-2xl { font-size: var(--os-text-2xl) !important; }
+
+  /* Weight */
+  .os-weight-regular { font-weight: var(--os-weight-regular) !important; }
+  .os-weight-medium { font-weight: var(--os-weight-medium) !important; }
+  .os-weight-semibold { font-weight: var(--os-weight-semibold) !important; }
+  .os-weight-bold { font-weight: var(--os-weight-bold) !important; }
+
+  /* Text behaviour */
+  .os-num { font-variant-numeric: tabular-nums; }
+  .os-nowrap { white-space: nowrap; }
+  .os-balance { text-wrap: balance; }
+  .os-align-end { text-align: end; }
+  .os-align-center { text-align: center; }
+  .os-caps { font-size: var(--os-text-xs); font-weight: var(--os-weight-semibold); letter-spacing: var(--os-tracking-caps); text-transform: uppercase; }
+  .os-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .os-measure { max-width: var(--os-measure); }
+
+  .os-link-quiet { color: inherit; text-decoration: none; }
+  .os-link-quiet:hover { color: var(--os-color-link-hover); text-decoration: underline; }
+
+  /* Box */
+  .os-w-full { width: 100%; }
+  .os-flush { margin: 0 !important; }
+  .os-mt-auto { margin-block-start: auto; }
+  .os-ml-auto { margin-inline-start: auto; }
+
+  /* Print */
+  .os-print-only { display: none !important; }
+}

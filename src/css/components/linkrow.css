@@ -1,0 +1,60 @@
+/*
+ * Link row — a few big, plain links to other views of the same thing
+ * ("Se fra lufta · Se i kart · Se bilder av nabolaget").
+ *
+ *   <ul class="os-linkrow" role="list">
+ *     <li><a href="#"><svg class="os-icon">…#os-map</svg>Se i kart</a></li>
+ *   </ul>
+ *
+ * In narrow containers it becomes a stacked list with chevrons.
+ */
+@layer os.components {
+  .os-linkrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--os-space-2) var(--os-space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--os-text-lg);
+    font-weight: var(--os-weight-medium);
+  }
+
+  .os-linkrow a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-2);
+    padding-block: var(--os-space-1);
+  }
+
+  .os-linkrow .os-icon {
+    color: var(--os-color-text-accent);
+  }
+
+  @container (max-width: 30rem) {
+    .os-linkrow {
+      flex-direction: column;
+      gap: 0;
+      font-size: var(--os-text-md);
+    }
+
+    .os-linkrow > li + li {
+      border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
+    }
+
+    .os-linkrow a {
+      display: flex;
+      width: 100%;
+      padding-block: var(--os-space-3);
+    }
+
+    .os-linkrow a::after {
+      content: "";
+      width: 1.1em;
+      height: 1.1em;
+      margin-inline-start: auto;
+      background-color: var(--os-color-text-subtle);
+      mask: var(--os-glyph-chevron-right) center / contain no-repeat;
+    }
+  }
+}

@@ -1,0 +1,74 @@
+/*
+ * Heading block — page title with optional eyebrow and subtitle.
+ *
+ *   <div class="os-heading">
+ *     <p class="os-heading__eyebrow">Bolig til leie</p>
+ *     <h1 class="os-heading__title">Lys og koselig 1-roms …</h1>
+ *     <p class="os-heading__subtitle">St. Hanshaugen – Ullevål, Oslo</p>
+ *   </div>
+ *
+ * Section head — a heading between panels with a "see all" link:
+ *
+ *   <div class="os-sectionhead"><h2>Lignende annonser</h2><a href="#">Se alle</a></div>
+ */
+@layer os.components {
+  .os-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--os-space-1-5);
+  }
+
+  .os-heading__eyebrow {
+    order: -1;
+    color: var(--os-color-text-accent);
+    font-size: var(--os-text-xs);
+    font-weight: var(--os-weight-semibold);
+    letter-spacing: var(--os-tracking-caps);
+    text-transform: uppercase;
+  }
+
+  .os-heading__title {
+    font-size: var(--os-text-3xl);
+    line-height: var(--os-leading-tight);
+    letter-spacing: var(--os-tracking-heading);
+  }
+
+  .os-heading__title--display {
+    font-size: var(--os-text-5xl);
+    letter-spacing: var(--os-tracking-tighter);
+  }
+
+  .os-heading__subtitle {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-space-1-5);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-md);
+  }
+
+  .os-heading__lead {
+    max-width: var(--os-measure);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-lg);
+    line-height: var(--os-leading-relaxed);
+  }
+
+  .os-sectionhead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--os-space-2) var(--os-space-4);
+    padding-inline: var(--os-space-1);
+  }
+
+  .os-sectionhead > :is(h2, h3) {
+    font-size: var(--os-text-xl);
+  }
+
+  .os-sectionhead > a {
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-medium);
+  }
+}

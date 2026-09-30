@@ -1,0 +1,42 @@
+/*
+ * Checklist — facilities and inclusions, scannable in columns.
+ *
+ *   <ul class="os-checklist" role="list">
+ *     <li><svg class="os-icon">…#os-check</svg>Balkong</li>
+ *     <li class="os-checklist__no"><svg class="os-icon">…#os-x</svg>Parkering</li>
+ *   </ul>
+ */
+@layer os.components {
+  .os-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr));
+    gap: var(--os-space-2) var(--os-space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .os-checklist > li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--os-space-2);
+  }
+
+  .os-checklist .os-icon {
+    --os-icon-size: 1.15rem;
+    margin-block-start: 0.15em;
+    color: var(--os-color-success);
+  }
+
+  .os-checklist__no {
+    color: var(--os-color-text-muted);
+  }
+
+  .os-checklist__no .os-icon {
+    color: var(--os-color-text-subtle);
+  }
+
+  .os-checklist--icons .os-icon {
+    color: var(--os-color-text-accent);
+  }
+}

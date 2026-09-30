@@ -1,0 +1,79 @@
+/*
+ * Navbar — a row of section links under the masthead (categories, product areas).
+ *
+ *   <nav class="os-navbar" aria-label="Kategorier">
+ *     <div class="os-container">
+ *       <ul class="os-navbar__list" role="list">
+ *         <li><a class="os-navbar__link" href="#" aria-current="page">Eiendom</a></li>
+ *       </ul>
+ *     </div>
+ *   </nav>
+ *
+ * Scrolls horizontally when it does not fit — never wraps into two rows.
+ */
+@layer os.components {
+  .os-navbar {
+    border-block: var(--os-border-width) solid var(--os-color-border);
+    background-color: var(--os-color-surface);
+  }
+
+  .os-navbar__list {
+    display: flex;
+    gap: var(--os-space-1);
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+    scrollbar-width: none;
+  }
+
+  .os-navbar__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .os-navbar__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-2);
+    min-height: 3rem;
+    padding-inline: var(--os-space-3);
+    color: var(--os-color-text);
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-medium);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .os-navbar__list > li:first-child .os-navbar__link {
+    padding-inline-start: 0;
+  }
+
+  .os-navbar__link:hover {
+    color: var(--os-color-text-strong);
+    text-decoration: underline;
+  }
+
+  .os-navbar__link[aria-current] {
+    color: var(--os-color-text-accent);
+    font-weight: var(--os-weight-semibold);
+  }
+
+  .os-navbar__link[aria-current]::after {
+    content: "";
+    position: absolute;
+    inset-inline: var(--os-space-3);
+    inset-block-end: calc(var(--os-border-width) * -1);
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background-color: var(--os-color-accent);
+  }
+
+  .os-navbar__list > li:first-child .os-navbar__link[aria-current]::after {
+    inset-inline-start: 0;
+  }
+
+  .os-navbar__link .os-icon {
+    color: var(--os-color-text-muted);
+  }
+}

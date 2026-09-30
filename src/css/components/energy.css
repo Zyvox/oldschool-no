@@ -1,0 +1,69 @@
+/*
+ * Energy label (energimerke) — the Norwegian A–G grade with the heating
+ * colour (grønn … rød). A domain example of a small, strict component.
+ *
+ *   <span class="os-energy" data-grade="C" data-heating="gul">
+ *     <span class="os-energy__grade">C</span><span class="os-energy__text">Gul</span>
+ *   </span>
+ *
+ * Grade colours are darkened so the white letter meets 4.5:1.
+ */
+@layer os.components {
+  .os-energy {
+    --_grade: var(--os-mose-600);
+    --_heat: var(--os-multe-300);
+    display: inline-flex;
+    align-items: stretch;
+    overflow: hidden;
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: var(--os-radius-badge);
+    font-size: var(--os-text-xs);
+    font-weight: var(--os-weight-semibold);
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .os-energy__grade {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.75rem;
+    padding: var(--os-space-1) var(--os-space-1-5);
+    background-color: var(--_grade);
+    color: #fff;
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-bold);
+    clip-path: polygon(0 0, 78% 0, 100% 50%, 78% 100%, 0 100%);
+    padding-inline-end: var(--os-space-2-5);
+  }
+
+  .os-energy__text {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-1-5);
+    padding: var(--os-space-1) var(--os-space-2);
+    color: var(--os-color-text);
+  }
+
+  .os-energy__text::before {
+    content: "";
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background-color: var(--_heat);
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.15);
+  }
+
+  .os-energy[data-grade="A"] { --_grade: #1b6e33; }
+  .os-energy[data-grade="B"] { --_grade: #3b7d22; }
+  .os-energy[data-grade="C"] { --_grade: #5f6e0c; }
+  .os-energy[data-grade="D"] { --_grade: #7f6000; }
+  .os-energy[data-grade="E"] { --_grade: #98500a; }
+  .os-energy[data-grade="F"] { --_grade: #a4431a; }
+  .os-energy[data-grade="G"] { --_grade: #a82626; }
+
+  .os-energy[data-heating="gronn"] { --_heat: #2e8b3e; }
+  .os-energy[data-heating="lysegronn"] { --_heat: #8cc152; }
+  .os-energy[data-heating="gul"] { --_heat: #f2c230; }
+  .os-energy[data-heating="oransje"] { --_heat: #ef8a26; }
+  .os-energy[data-heating="rod"] { --_heat: #d9412e; }
+}

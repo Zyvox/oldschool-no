@@ -1,0 +1,116 @@
+/*
+ * Actions — the row of icon + word links above a listing
+ * ("Lagre annonsen | Tips en venn | Del | Skriv ut").
+ *
+ *   <ul class="os-actions" role="list">
+ *     <li><button class="os-action" type="button" aria-pressed="false" data-os-toggle>
+ *       <svg class="os-icon">…#os-star</svg><span class="os-action__label">Lagre annonsen</span>
+ *     </button></li>
+ *     <li><a class="os-action" href="mailto:?…">…<span class="os-action__label">Tips en venn</span></a></li>
+ *   </ul>
+ *
+ * In a narrow container (phones) the words move to screen readers only and
+ * the actions become 44px icon buttons. Pressed toggles fill their icon.
+ */
+@layer os.components {
+  .os-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-space-1) 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--os-text-sm);
+  }
+
+  .os-actions > li {
+    display: flex;
+    align-items: center;
+  }
+
+  .os-actions > li + li::before {
+    content: "";
+    width: var(--os-border-width);
+    height: 1.1em;
+    margin-inline: var(--os-space-3);
+    background-color: var(--os-color-border);
+  }
+
+  .os-action {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-1-5);
+    padding: var(--os-space-1) 0;
+    border: 0;
+    background: none;
+    color: var(--os-color-link);
+    font-weight: var(--os-weight-medium);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .os-action .os-action__label {
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--os-link-underline-thickness);
+    text-decoration-color: color-mix(in srgb, currentColor var(--os-link-underline-mix), transparent);
+    text-underline-offset: var(--os-link-underline-offset);
+  }
+
+  .os-action:hover {
+    color: var(--os-color-link-hover);
+    text-decoration: none;
+  }
+
+  .os-action:hover .os-action__label {
+    text-decoration-color: currentColor;
+    text-decoration-thickness: max(2px, var(--os-link-underline-thickness));
+  }
+
+  .os-action .os-icon {
+    --os-icon-size: 1.15rem;
+  }
+
+  .os-action[aria-pressed="true"] .os-icon {
+    fill: var(--os-color-saved);
+    stroke: var(--os-color-saved);
+  }
+
+  .os-actions--end {
+    justify-content: flex-end;
+  }
+
+  @container (max-width: 30rem) {
+    .os-actions > li + li::before {
+      display: none;
+    }
+
+    .os-actions {
+      gap: var(--os-space-1);
+    }
+
+    .os-action {
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      padding: 0;
+      border: var(--os-border-width) solid var(--os-color-border);
+      border-radius: var(--os-radius-full);
+      background-color: var(--os-color-surface);
+      color: var(--os-color-text);
+    }
+
+    .os-action .os-icon {
+      --os-icon-size: 1.25rem;
+    }
+
+    .os-action .os-action__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+}

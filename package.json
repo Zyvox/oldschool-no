@@ -1,0 +1,46 @@
+{
+  "name": "oldschool-no",
+  "version": "0.1.0",
+  "description": "Oldschool — a practical Nordic design harness: the readability of early-2000s Scandinavian web, rebuilt with modern CSS. Tokens, swappable themes, ~40 components, mobile patterns and a showcase.",
+  "keywords": ["design-system", "css", "design-tokens", "themes", "nordic", "accessibility", "universell-utforming"],
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zyvox/oldschool-no.git"
+  },
+  "style": "dist/oldschool.css",
+  "main": "dist/esm/oldschool.js",
+  "exports": {
+    ".": "./dist/esm/oldschool.js",
+    "./css": "./dist/oldschool.css",
+    "./css/min": "./dist/oldschool.min.css",
+    "./js": "./dist/esm/oldschool.js",
+    "./js/*": "./dist/esm/*",
+    "./tokens.json": "./dist/tokens.json",
+    "./tailwind.css": "./dist/tailwind.css",
+    "./tailwind-preset": "./dist/tailwind-preset.cjs",
+    "./icons.svg": "./dist/icons.svg",
+    "./dist/*": "./dist/*",
+    "./src/*": "./src/*",
+    "./tokens/*": "./tokens/*",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "src", "tokens", "DESIGN.md", "docs"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node scripts/build.mjs --quiet && node scripts/check.mjs",
+    "a11y": "node scripts/a11y.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "^4.13.0",
+    "playwright": "1.56.1"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}

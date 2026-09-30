@@ -1,0 +1,86 @@
+/*
+ * Price — the important number is big.
+ *
+ *   <p class="os-price">
+ *     <span class="os-price__label">Leie pr. måned</span>
+ *     <span class="os-price__amount">7 500 kr</span>
+ *   </p>
+ *
+ * Variants: --inline (label and amount on one baseline), --split (label left,
+ * amount right, for summaries), --md / --lg sizes.
+ * Norwegian formatting: "7 500 kr" with a no-break space ( ) as thousands
+ * separator; Intl.NumberFormat('nb-NO') produces exactly this.
+ */
+@layer os.components {
+  .os-price {
+    display: flex;
+    flex-direction: column;
+    gap: var(--os-space-0-5);
+    margin: 0;
+  }
+
+  .os-price__label {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-price__amount {
+    color: var(--os-color-price);
+    font-size: var(--os-text-2xl);
+    font-weight: var(--os-weight-bold);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--os-leading-tight);
+    letter-spacing: var(--os-tracking-tight);
+    white-space: nowrap;
+  }
+
+  .os-price__unit {
+    color: var(--os-color-text-muted);
+    font-size: 0.6em;
+    font-weight: var(--os-weight-medium);
+    letter-spacing: 0;
+  }
+
+  .os-price__old {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+    text-decoration: line-through;
+  }
+
+  .os-price__note {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+  }
+
+  .os-price--lg .os-price__amount {
+    font-size: var(--os-text-3xl);
+  }
+
+  .os-price--xl .os-price__amount {
+    font-size: var(--os-text-4xl);
+  }
+
+  .os-price--md .os-price__amount {
+    font-size: var(--os-text-xl);
+  }
+
+  .os-price--inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: var(--os-space-4);
+  }
+
+  .os-price--inline .os-price__label {
+    font-size: var(--os-text-lg);
+    color: var(--os-color-text);
+  }
+
+  .os-price--split {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: var(--os-space-4);
+  }
+}

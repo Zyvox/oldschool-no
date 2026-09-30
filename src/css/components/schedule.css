@@ -1,0 +1,83 @@
+/*
+ * Schedule — upcoming dates (viewings, events) with a calendar tile.
+ *
+ *   <ul class="os-schedule" role="list">
+ *     <li class="os-schedule__item">
+ *       <time class="os-schedule__date" datetime="2026-10-12">
+ *         <span class="os-schedule__day">12</span><span class="os-schedule__month">okt</span>
+ *       </time>
+ *       <div class="os-schedule__body">
+ *         <p class="os-schedule__title">Søndag 12. oktober</p>
+ *         <p class="os-schedule__time">13:00–14:00 · Fellesvisning</p>
+ *       </div>
+ *       <a class="os-button os-button--sm" href="…">Legg i kalender</a>
+ *     </li>
+ *   </ul>
+ */
+@layer os.components {
+  .os-schedule {
+    display: grid;
+    gap: var(--os-space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .os-schedule__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-space-3);
+  }
+
+  .os-schedule__item + .os-schedule__item {
+    padding-block-start: var(--os-space-3);
+    border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  .os-schedule__date {
+    display: inline-flex;
+    flex: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border: var(--os-border-width) solid var(--os-color-border-tint);
+    border-radius: var(--os-radius-control);
+    background-color: var(--os-color-surface-tint);
+    line-height: 1;
+  }
+
+  .os-schedule__day {
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-xl);
+    font-weight: var(--os-weight-bold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .os-schedule__month {
+    margin-block-start: 0.15rem;
+    color: var(--os-color-text-accent);
+    font-size: var(--os-text-2xs);
+    font-weight: var(--os-weight-semibold);
+    letter-spacing: var(--os-tracking-caps);
+    text-transform: uppercase;
+  }
+
+  .os-schedule__body {
+    flex: 1 1 8rem;
+    min-width: 0;
+  }
+
+  .os-schedule__title {
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-semibold);
+  }
+
+  .os-schedule__time {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+    font-variant-numeric: tabular-nums;
+  }
+}

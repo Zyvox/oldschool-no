@@ -1,0 +1,178 @@
+/*
+ * Filters — the facet column of a search page. On wide screens a panel in
+ * the sidebar; below 60em the same element becomes a sheet (popover) opened
+ * by a "Filtrer" button. No JavaScript required.
+ *
+ *   <button class="os-button os-filters-toggle" popovertarget="filters">Filtrer (3)</button>
+ *   <aside class="os-filters" id="filters" popover aria-labelledby="filters-title">
+ *     <div class="os-filters__header">
+ *       <h2 id="filters-title" class="os-filters__title">Filtrer</h2>
+ *       <button class="os-button os-button--quiet os-button--icon os-filters__close"
+ *               popovertarget="filters" popovertargetaction="hide" aria-label="Lukk">…</button>
+ *     </div>
+ *     <div class="os-filters__body">
+ *       <details class="os-filter" open>
+ *         <summary class="os-filter__title">Boligtype</summary>
+ *         <div class="os-filter__content">…choices…</div>
+ *       </details>
+ *     </div>
+ *     <div class="os-filters__footer">…"Vis 1 284 treff"…</div>
+ *   </aside>
+ */
+@layer os.components {
+  .os-filters {
+    display: flex;
+    flex-direction: column;
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-radius: var(--os-radius-panel);
+    background-color: var(--os-color-surface);
+    color: var(--os-color-text);
+  }
+
+  .os-filters__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--os-space-3);
+    padding: calc(var(--os-pad) * 0.6) var(--os-pad);
+    border-block-end: var(--os-border-width) solid var(--os-color-panel-header-border);
+    border-start-start-radius: calc(var(--os-radius-panel) - var(--os-border-width));
+    border-start-end-radius: calc(var(--os-radius-panel) - var(--os-border-width));
+    background-color: var(--os-color-panel-header);
+  }
+
+  .os-filters__title {
+    font-size: var(--os-text-lg);
+  }
+
+  .os-filters__body {
+    flex: 1 1 auto;
+    padding-inline: var(--os-pad);
+  }
+
+  .os-filters__footer {
+    padding: var(--os-space-3) var(--os-pad);
+    border-block-start: var(--os-border-width) solid var(--os-color-border);
+  }
+
+  .os-filter {
+    padding-block: var(--os-space-1);
+  }
+
+  .os-filter + .os-filter {
+    border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  .os-filter__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--os-space-2);
+    padding-block: var(--os-space-3);
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-semibold);
+    list-style: none;
+  }
+
+  .os-filter__title::-webkit-details-marker {
+    display: none;
+  }
+
+  .os-filter__title::after {
+    content: "";
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    background-color: var(--os-color-text-muted);
+    mask: var(--os-glyph-chevron-down) center / contain no-repeat;
+    transition: rotate var(--os-duration-base) var(--os-ease-out);
+  }
+
+  .os-filter[open] > .os-filter__title::after {
+    rotate: 180deg;
+  }
+
+  .os-filter__content {
+    padding-block-end: var(--os-space-3);
+  }
+
+  .os-filter__content > * + * {
+    margin-block-start: var(--os-space-2);
+  }
+
+  .os-button.os-filters-toggle {
+    display: none;
+  }
+
+  @media (min-width: 60em) {
+    .os-filters[popover] {
+      position: static;
+      inset: auto;
+      display: flex;
+      width: auto;
+      height: auto;
+      max-height: none;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+
+    .os-filters__close,
+    .os-filters__footer {
+      display: none;
+    }
+  }
+
+  @media (max-width: 59.99em) {
+    .os-button.os-filters-toggle {
+      display: inline-flex;
+    }
+
+    .os-filters[popover] {
+      position: fixed;
+      inset: 0 0 0 auto;
+      width: min(26rem, 100%);
+      height: 100%;
+      max-height: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border-width: 0;
+      border-radius: 0;
+      box-shadow: var(--os-shadow-overlay);
+    }
+
+    .os-filters[popover]:not(:popover-open) {
+      display: none;
+    }
+
+    .os-filters__header {
+      border-radius: 0;
+    }
+
+    .os-filters__body {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .os-filters[popover]::backdrop {
+      background-color: var(--os-color-overlay);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .os-filters[popover] {
+        transition: translate var(--os-duration-base) var(--os-ease-out), display var(--os-duration-base) allow-discrete, overlay var(--os-duration-base) allow-discrete;
+      }
+
+      .os-filters[popover]:not(:popover-open) {
+        translate: 100% 0;
+      }
+
+      @starting-style {
+        .os-filters[popover]:popover-open {
+          translate: 100% 0;
+        }
+      }
+    }
+  }
+}

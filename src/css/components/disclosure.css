@@ -1,0 +1,92 @@
+/*
+ * Disclosure — native <details>/<summary>, styled. Group several in an
+ * .os-accordion for an FAQ or a long list of facts.
+ *
+ *   <details class="os-disclosure">
+ *     <summary>Hva er inkludert i leien?</summary>
+ *     <div class="os-disclosure__content">…</div>
+ *   </details>
+ */
+@layer os.components {
+  .os-disclosure > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--os-space-3);
+    padding-block: var(--os-space-3);
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-semibold);
+    list-style: none;
+  }
+
+  .os-disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .os-disclosure > summary::after {
+    content: "";
+    flex: none;
+    width: 1.15rem;
+    height: 1.15rem;
+    background-color: var(--os-color-text-muted);
+    mask: var(--os-glyph-chevron-down) center / contain no-repeat;
+    transition: rotate var(--os-duration-base) var(--os-ease-out);
+  }
+
+  .os-disclosure[open] > summary::after {
+    rotate: 180deg;
+  }
+
+  .os-disclosure > summary:hover {
+    color: var(--os-color-link-hover);
+  }
+
+  .os-disclosure__content {
+    padding-block-end: var(--os-space-4);
+  }
+
+  /* Animate open/close where supported (Chromium 131+). */
+  @media (prefers-reduced-motion: no-preference) {
+    .os-disclosure::details-content {
+      height: 0;
+      overflow: clip;
+      transition: height var(--os-duration-base) var(--os-ease-out), content-visibility var(--os-duration-base) allow-discrete;
+    }
+
+    .os-disclosure[open]::details-content {
+      height: auto;
+    }
+  }
+
+  .os-accordion > .os-disclosure {
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  .os-accordion > .os-disclosure:first-child {
+    border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  .os-panel__body > .os-accordion:first-child > .os-disclosure:first-child {
+    border-block-start: 0;
+  }
+
+  .os-panel__body > .os-accordion > .os-disclosure:first-child > summary {
+    padding-block-start: 0;
+  }
+
+  .os-panel__body > .os-accordion > .os-disclosure:last-child {
+    border-block-end: 0;
+  }
+
+  .os-panel__body > .os-accordion > .os-disclosure:last-child > summary {
+    padding-block-end: 0;
+  }
+
+  .os-panel__body > .os-accordion > .os-disclosure[open]:last-child > summary {
+    padding-block-end: var(--os-space-3);
+  }
+
+  .os-panel__body > .os-accordion > .os-disclosure:last-child .os-disclosure__content {
+    padding-block-end: 0;
+  }
+}

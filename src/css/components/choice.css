@@ -1,0 +1,173 @@
+/*
+ * Choices — checkbox, radio and switch with a full-size clickable label.
+ *
+ *   <label class="os-choice">
+ *     <input class="os-checkbox" type="checkbox" name="facilities" value="balcony">
+ *     <span class="os-choice__label">Balkong</span>
+ *     <span class="os-choice__count">128</span>
+ *   </label>
+ *
+ *   <input class="os-radio" type="radio" …>
+ *   <input class="os-switch" type="checkbox" role="switch" …>
+ *
+ * In forced-colors mode (Windows high contrast) the native controls return.
+ */
+@layer os.components {
+  .os-choice {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--os-space-2-5);
+    padding-block: var(--os-space-1);
+    color: var(--os-color-text);
+    line-height: var(--os-leading-snug);
+    cursor: pointer;
+  }
+
+  .os-choice:has(:disabled) {
+    color: var(--os-color-text-muted);
+    cursor: not-allowed;
+  }
+
+  .os-choice__label {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .os-choice__hint {
+    display: block;
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-choice__count {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .os-choices {
+    display: grid;
+    gap: var(--os-space-0-5);
+  }
+
+  .os-checkbox,
+  .os-radio {
+    display: inline-grid;
+    flex: none;
+    place-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0.0625rem 0 0;
+    border: var(--os-border-width) solid var(--os-color-border-strong);
+    border-radius: var(--os-radius-sm);
+    background-color: var(--os-color-surface);
+    appearance: none;
+    transition: background-color var(--os-duration-fast) var(--os-ease-standard), border-color var(--os-duration-fast) var(--os-ease-standard);
+  }
+
+  .os-radio {
+    border-radius: 50%;
+  }
+
+  .os-checkbox::before,
+  .os-radio::before {
+    content: "";
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: var(--os-color-text-on-accent);
+    mask: var(--os-glyph-check) center / contain no-repeat;
+    transform: scale(0);
+    transition: transform var(--os-duration-fast) var(--os-ease-out);
+  }
+
+  .os-radio::before {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    mask: none;
+  }
+
+  .os-checkbox:hover,
+  .os-radio:hover {
+    border-color: var(--os-color-text-muted);
+  }
+
+  .os-checkbox:checked,
+  .os-checkbox:indeterminate,
+  .os-radio:checked {
+    border-color: var(--os-color-accent);
+    background-color: var(--os-color-accent);
+  }
+
+  .os-checkbox:checked::before,
+  .os-radio:checked::before,
+  .os-checkbox:indeterminate::before {
+    transform: scale(1);
+  }
+
+  .os-checkbox:indeterminate::before {
+    mask-image: var(--os-glyph-dash);
+  }
+
+  .os-checkbox:disabled,
+  .os-radio:disabled {
+    border-color: var(--os-color-border);
+    background-color: var(--os-color-surface-muted);
+  }
+
+  .os-checkbox[aria-invalid="true"],
+  .os-radio[aria-invalid="true"] {
+    border-color: var(--os-color-danger-fill);
+  }
+
+  /* Switch -------------------------------------------------------------- */
+  .os-switch {
+    position: relative;
+    flex: none;
+    width: 2.5rem;
+    height: 1.5rem;
+    margin: 0;
+    border: var(--os-border-width) solid var(--os-color-border-strong);
+    border-radius: var(--os-radius-full);
+    background-color: var(--os-color-surface-muted);
+    appearance: none;
+    transition: background-color var(--os-duration-fast) var(--os-ease-standard), border-color var(--os-duration-fast);
+  }
+
+  .os-switch::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0.1875rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--os-color-text-muted);
+    translate: 0 -50%;
+    transition: translate var(--os-duration-base) var(--os-ease-out), background-color var(--os-duration-fast);
+  }
+
+  .os-switch:checked {
+    border-color: var(--os-color-accent);
+    background-color: var(--os-color-accent);
+  }
+
+  .os-switch:checked::before {
+    background-color: var(--os-color-text-on-accent);
+    translate: 1rem -50%;
+  }
+
+  @media (forced-colors: active) {
+    .os-checkbox,
+    .os-radio,
+    .os-switch {
+      appearance: auto;
+    }
+
+    .os-checkbox::before,
+    .os-radio::before,
+    .os-switch::before {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+/*
+ * Brand — logomark + wordmark + product name.
+ *
+ *   <a class="os-brand" href="/">
+ *     <svg class="os-brand__mark" viewBox="0 0 32 32" aria-hidden="true">…</svg>
+ *     <span class="os-brand__name">oldschool</span>
+ *     <span class="os-brand__product">eiendom</span>
+ *   </a>
+ *
+ * The mark is a four-pane window with an offset (Nordic) cross. It is drawn
+ * with currentColor inside .os-brand__mark so it follows the theme accent.
+ */
+@layer os.components {
+  .os-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-2);
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-xl);
+    font-weight: var(--os-weight-bold);
+    letter-spacing: -0.035em;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .os-brand:hover {
+    color: var(--os-color-text-strong);
+    text-decoration: none;
+  }
+
+  .os-brand__mark {
+    width: 1.625em;
+    height: 1.625em;
+    flex: none;
+    color: var(--os-color-accent);
+  }
+
+  .os-brand__name {
+    font-variation-settings: "opsz" 32;
+  }
+
+  .os-brand__product {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-inline-start: 0.1em;
+    color: var(--os-color-text-accent);
+    font-weight: var(--os-weight-regular);
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 60em) {
+    .os-brand {
+      font-size: 1.4375rem;
+    }
+  }
+}

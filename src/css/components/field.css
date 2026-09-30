@@ -1,0 +1,219 @@
+/*
+ * Fields — label above, hint under the label, error under the input.
+ * Labels are always visible (placeholders are hints, never labels).
+ *
+ *   <div class="os-field">
+ *     <label class="os-field__label" for="price-to">Pris til</label>
+ *     <p class="os-field__hint" id="price-to-hint">Leie pr. måned</p>
+ *     <div class="os-input-group">
+ *       <input class="os-input" id="price-to" inputmode="numeric" aria-describedby="price-to-hint">
+ *       <span class="os-input-group__addon">kr</span>
+ *     </div>
+ *     <p class="os-field__error" id="price-to-error">Skriv et tall.</p>
+ *   </div>
+ *
+ * Inputs: .os-input, .os-select, .os-textarea.  Invalid: aria-invalid="true".
+ */
+@layer os.components {
+  .os-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--os-space-1-5);
+    min-width: 0;
+  }
+
+  .os-field__label {
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-semibold);
+  }
+
+  .os-field__optional {
+    color: var(--os-color-text-muted);
+    font-weight: var(--os-weight-regular);
+  }
+
+  .os-field__hint {
+    margin-block-start: calc(var(--os-space-1) * -1);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-field__error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--os-space-1-5);
+    color: var(--os-color-danger);
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-medium);
+  }
+
+  .os-field__error::before {
+    content: "";
+    flex: none;
+    width: 1.1em;
+    height: 1.1em;
+    margin-block-start: 0.1em;
+    border-radius: 50%;
+    background-color: currentColor;
+    mask: var(--os-glyph-x) center / 70% no-repeat;
+  }
+
+  .os-fieldset {
+    display: grid;
+    gap: var(--os-space-3);
+  }
+
+  .os-fieldset > legend {
+    margin-block-end: var(--os-space-2);
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-semibold);
+  }
+
+  /* Inputs -------------------------------------------------------------- */
+  .os-input,
+  .os-select,
+  .os-textarea {
+    width: 100%;
+    min-height: var(--os-control-height);
+    padding: var(--os-space-2) var(--os-space-3);
+    border: var(--os-border-width) solid var(--os-color-border-strong);
+    border-radius: var(--os-radius-control);
+    background-color: var(--os-color-surface);
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-md);
+    line-height: var(--os-leading-snug);
+    transition: border-color var(--os-duration-fast) var(--os-ease-standard), box-shadow var(--os-duration-fast) var(--os-ease-standard);
+  }
+
+  .os-input::placeholder,
+  .os-textarea::placeholder {
+    color: var(--os-color-text-subtle);
+    opacity: 1;
+  }
+
+  .os-input:hover,
+  .os-select:hover,
+  .os-textarea:hover {
+    border-color: var(--os-color-text-muted);
+  }
+
+  .os-input:focus-visible,
+  .os-select:focus-visible,
+  .os-textarea:focus-visible {
+    border-color: var(--os-color-focus);
+    outline: var(--os-focus-width) solid var(--os-color-focus);
+    outline-offset: 0;
+  }
+
+  .os-input[aria-invalid="true"],
+  .os-select[aria-invalid="true"],
+  .os-textarea[aria-invalid="true"] {
+    border-color: var(--os-color-danger-fill);
+    box-shadow: inset 3px 0 0 var(--os-color-danger-fill);
+  }
+
+  .os-input:disabled,
+  .os-select:disabled,
+  .os-textarea:disabled {
+    border-color: var(--os-color-border);
+    background-color: var(--os-color-surface-muted);
+    color: var(--os-color-text-muted);
+  }
+
+  .os-input--sm,
+  .os-select--sm {
+    min-height: var(--os-control-height-sm);
+    padding-block: var(--os-space-1);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-input--lg {
+    min-height: var(--os-control-height-lg);
+    font-size: var(--os-text-lg);
+  }
+
+  .os-input--num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .os-textarea {
+    min-height: 7rem;
+  }
+
+  .os-select {
+    padding-inline-end: 2.5rem;
+    appearance: none;
+    background-image: var(--os-glyph-select);
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.1rem;
+  }
+
+  .os-select--inline {
+    width: auto;
+  }
+
+  /* Input group: addons like "kr" or "m²" --------------------------------- */
+  .os-input-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .os-input-group > .os-input {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .os-input-group__addon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    padding-inline: var(--os-space-3);
+    border: var(--os-border-width) solid var(--os-color-border-strong);
+    background-color: var(--os-color-surface-muted);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+    white-space: nowrap;
+  }
+
+  .os-input-group > :first-child {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .os-input-group > :last-child {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+
+  .os-input-group > :not(:first-child) {
+    margin-inline-start: calc(var(--os-border-width) * -1);
+  }
+
+  .os-input-group > .os-input-group__addon:first-child {
+    border-radius: var(--os-radius-control) 0 0 var(--os-radius-control);
+  }
+
+  .os-input-group > .os-input-group__addon:last-child {
+    border-radius: 0 var(--os-radius-control) var(--os-radius-control) 0;
+  }
+
+  .os-input-group > .os-input:focus-visible {
+    z-index: 1;
+  }
+
+  /* Range: "fra – til" pair ------------------------------------------------ */
+  .os-range {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--os-space-2);
+  }
+
+  .os-range__sep {
+    color: var(--os-color-text-muted);
+  }
+}

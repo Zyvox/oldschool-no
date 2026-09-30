@@ -1,0 +1,50 @@
+/*
+ * Prose — long-form text (descriptions, articles, help pages).
+ * Comfortable measure, relaxed leading, visited links, sensible rhythm.
+ *
+ *   <div class="os-prose"><h3>Om boligen</h3><p>…</p><ul>…</ul></div>
+ */
+@layer os.components {
+  .os-prose {
+    max-width: var(--os-measure);
+    line-height: var(--os-leading-relaxed);
+  }
+
+  .os-prose > * + * {
+    margin-block-start: 1em;
+  }
+
+  .os-prose > :is(h2, h3, h4) {
+    margin-block-start: 1.6em;
+    line-height: var(--os-leading-snug);
+  }
+
+  .os-prose > :is(h2, h3, h4):first-child {
+    margin-block-start: 0;
+  }
+
+  .os-prose > :is(h2, h3, h4) + * {
+    margin-block-start: 0.5em;
+  }
+
+  .os-prose h2 { font-size: var(--os-text-xl); }
+  .os-prose h3 { font-size: var(--os-text-lg); }
+  .os-prose h4 { font-size: var(--os-text-md); }
+
+  .os-prose li + li {
+    margin-block-start: 0.35em;
+  }
+
+  .os-prose a:visited {
+    color: var(--os-color-link-visited);
+  }
+
+  .os-prose--lead > p:first-child {
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-lg);
+  }
+
+  .os-prose--wide {
+    max-width: none;
+  }
+}

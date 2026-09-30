@@ -1,0 +1,82 @@
+/*
+ * Menu — a floating list of actions or links (dropdowns, overflow menus).
+ * Works well as a popover:
+ *
+ *   <button class="os-button" popovertarget="more">Mer</button>
+ *   <div class="os-menu" id="more" popover>
+ *     <a class="os-menu__item" href="#">…</a>
+ *     <hr class="os-menu__sep">
+ *     <button class="os-menu__item" type="button">…</button>
+ *   </div>
+ */
+@layer os.components {
+  .os-menu {
+    min-width: 13rem;
+    padding: var(--os-space-1-5);
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: var(--os-radius-panel);
+    background-color: var(--os-color-surface-raised);
+    color: var(--os-color-text);
+    box-shadow: var(--os-shadow-raised);
+  }
+
+  .os-menu[popover] {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+  }
+
+  .os-menu__item {
+    display: flex;
+    align-items: center;
+    gap: var(--os-space-2-5);
+    width: 100%;
+    padding: var(--os-space-2) var(--os-space-3);
+    border: 0;
+    border-radius: var(--os-radius-control);
+    background: none;
+    color: var(--os-color-text);
+    font-size: var(--os-text-sm);
+    text-align: start;
+    text-decoration: none;
+  }
+
+  .os-menu__item:hover,
+  .os-menu__item:focus-visible {
+    background-color: var(--os-color-surface-tint);
+    color: var(--os-color-text-strong);
+    text-decoration: none;
+  }
+
+  .os-menu__item[aria-current],
+  .os-menu__item[aria-checked="true"] {
+    color: var(--os-color-text-accent);
+    font-weight: var(--os-weight-semibold);
+  }
+
+  .os-menu__item .os-icon {
+    color: var(--os-color-text-muted);
+  }
+
+  .os-menu__label {
+    padding: var(--os-space-2) var(--os-space-3) var(--os-space-1);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+    font-weight: var(--os-weight-semibold);
+  }
+
+  .os-menu__sep {
+    margin: var(--os-space-1-5) calc(var(--os-space-1-5) * -1);
+    border: 0;
+    border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  /* Anchor the menu to its button where anchor positioning is supported. */
+  @supports (position-anchor: --a) {
+    .os-menu[popover] {
+      position-area: bottom span-left;
+      margin-block-start: var(--os-space-1);
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+  }
+}

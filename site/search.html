@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bolig til leie i Oslo – 1 284 treff – oldschool eiendom</title>
+  <meta name="description" content="Demo: søkeresultater med filtre, bygget med Oldschool.">
+  <meta name="color-scheme" content="light dark">
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='comfortable')d.dataset.density=p.density}catch(e){}})()</script>
+  <link rel="preload" href="../dist/fonts/inter/inter-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../dist/oldschool.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script src="assets/generated/themes.js" defer></script>
+  <script src="assets/site.js" defer></script>
+  <script src="../dist/oldschool.js" defer></script>
+</head>
+<body class="os-page">
+  <a class="os-skiplink" href="#main">Hopp til søkeresultatene</a>
+
+  <header class="os-masthead">
+    <div class="os-container os-masthead__inner">
+      <a class="os-brand" href="listing.html" aria-label="oldschool eiendom – forsiden">
+        <svg class="os-brand__mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><rect x="2" y="2" width="9" height="11" rx="2.5"/><rect x="14" y="2" width="16" height="11" rx="2.5"/><rect x="2" y="16" width="9" height="14" rx="2.5"/><rect x="14" y="16" width="16" height="14" rx="2.5"/></g></svg>
+        <span class="os-brand__name">oldschool</span>
+        <span class="os-brand__product">eiendom</span>
+      </a>
+      <button class="os-button os-button--quiet os-masthead__toggle" type="button" popovertarget="site-menu">
+        <svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-menu"></use></svg>Meny
+      </button>
+      <nav class="os-masthead__nav" id="site-menu" popover aria-label="Snarveier">
+        <ul class="os-utilnav" role="list">
+          <li><a href="#">Kundeservice</a></li>
+          <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-plus"></use></svg>Ny annonse</a></li>
+          <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-user"></use></svg>Logg inn</a></li>
+        </ul>
+      </nav>
+    </div>
+    <nav class="os-navbar" aria-label="Kategorier">
+      <div class="os-container">
+        <ul class="os-navbar__list" role="list">
+          <li><a class="os-navbar__link" href="#" aria-current="page"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-house"></use></svg>Eiendom</a></li>
+          <li><a class="os-navbar__link" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-sofa"></use></svg>Torget</a></li>
+          <li><a class="os-navbar__link" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-car"></use></svg>Bil og båt</a></li>
+          <li><a class="os-navbar__link" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-briefcase"></use></svg>Jobb</a></li>
+          <li><a class="os-navbar__link" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-mountain-snow"></use></svg>Hytter og reise</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="os-page__body">
+    <div class="os-container os-container--bleed">
+      <div class="os-crumbbar" style="margin-block-start: var(--os-gap)">
+        <nav aria-label="Brødsmulesti">
+          <ol class="os-breadcrumbs">
+            <li><a href="index.html">Forsiden</a></li>
+            <li><a href="#">Eiendom</a></li>
+            <li><a href="#">Bolig til leie</a></li>
+            <li><span aria-current="page">Oslo</span></li>
+          </ol>
+        </nav>
+        <button class="os-button os-button--sm os-button--quiet" type="button" aria-pressed="false" data-os-toggle data-os-label-pressed="Søket er lagret" data-os-toast-pressed="Du får varsel om nye treff">
+          <svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-bell"></use></svg><span class="os-button__label">Lagre søk</span>
+        </button>
+      </div>
+
+      <section class="os-panel" aria-label="Søk">
+        <div class="os-panel__body os-stack os-stack--sm">
+          <h1 class="os-heading__title">Bolig til leie i Oslo</h1>
+          <form class="os-search" role="search" action="#">
+            <label class="os-sr-only" for="q">Søk i bolig til leie</label>
+            <div class="os-search__field">
+              <svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-search"></use></svg>
+              <input class="os-search__input" id="q" name="q" type="search" placeholder="Område, adresse eller stikkord" value="St. Hanshaugen">
+            </div>
+            <button class="os-button os-button--primary os-button--lg" type="submit"><svg class="os-icon os-hide-from-sm" aria-hidden="true"><use href="../dist/icons.svg#os-search"></use></svg><span class="os-button__label">Søk</span></button>
+          </form>
+        </div>
+      </section>
+
+      <div class="os-layout os-layout--start os-page-section">
+        <aside class="os-filters" id="filtre" popover aria-labelledby="filtre-tittel">
+          <div class="os-filters__header">
+            <h2 class="os-filters__title" id="filtre-tittel">Filtrer</h2>
+            <button class="os-button os-button--quiet os-button--icon os-button--sm os-filters__close" type="button" popovertarget="filtre" popovertargetaction="hide" aria-label="Lukk filtre"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-x"></use></svg></button>
+          </div>
+          <form class="os-filters__body" action="#">
+            <details class="os-filter" open>
+              <summary class="os-filter__title">Område</summary>
+              <div class="os-filter__content os-choices">
+                <label class="os-choice"><input class="os-checkbox" type="checkbox" checked><span class="os-choice__label">St. Hanshaugen</span><span class="os-choice__count">86</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Frogner</span><span class="os-choice__count">212</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Grünerløkka</span><span class="os-choice__count">174</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Gamle Oslo</span><span class="os-choice__count">131</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Sagene</span><span class="os-choice__count">97</span></label>
+              </div>
+            </details>
+            <details class="os-filter" open>
+              <summary class="os-filter__title">Leie pr. måned (kr)</summary>
+              <div class="os-filter__content">
+                <div class="os-range">
+                  <div class="os-field">
+                    <label class="os-sr-only" for="pris-fra">Fra</label>
+                    <input class="os-input os-input--sm os-input--num" id="pris-fra" inputmode="numeric" placeholder="Fra">
+                  </div>
+                  <span class="os-range__sep" aria-hidden="true">–</span>
+                  <div class="os-field">
+                    <label class="os-sr-only" for="pris-til">Til</label>
+                    <input class="os-input os-input--sm os-input--num" id="pris-til" inputmode="numeric" value="12 000">
+                  </div>
+                </div>
+              </div>
+            </details>
+            <details class="os-filter" open>
+              <summary class="os-filter__title">Boligtype</summary>
+              <div class="os-filter__content os-choices">
+                <label class="os-choice"><input class="os-checkbox" type="checkbox" checked><span class="os-choice__label">Leilighet</span><span class="os-choice__count">1 012</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Hybel</span><span class="os-choice__count">148</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Rekkehus</span><span class="os-choice__count">61</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Enebolig</span><span class="os-choice__count">63</span></label>
+              </div>
+            </details>
+            <details class="os-filter" open>
+              <summary class="os-filter__title">Soverom</summary>
+              <div class="os-filter__content">
+                <fieldset class="os-segmented os-segmented--block">
+                  <legend class="os-sr-only">Minst antall soverom</legend>
+                  <label><input type="radio" name="soverom" value="0" checked><span>Alle</span></label>
+                  <label><input type="radio" name="soverom" value="1"><span>1+</span></label>
+                  <label><input type="radio" name="soverom" value="2"><span>2+</span></label>
+                  <label><input type="radio" name="soverom" value="3"><span>3+</span></label>
+                </fieldset>
+              </div>
+            </details>
+            <details class="os-filter">
+              <summary class="os-filter__title">Fasiliteter</summary>
+              <div class="os-filter__content os-choices">
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Balkong/terrasse</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Heis</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Parkering</span></label>
+                <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Dyr tillatt</span></label>
+              </div>
+            </details>
+            <details class="os-filter" open>
+              <summary class="os-filter__title">Publisert</summary>
+              <div class="os-filter__content os-choices">
+                <label class="os-choice"><input class="os-radio" type="radio" name="publisert" checked><span class="os-choice__label">Når som helst</span></label>
+                <label class="os-choice"><input class="os-radio" type="radio" name="publisert"><span class="os-choice__label">Siste døgn</span></label>
+                <label class="os-choice"><input class="os-radio" type="radio" name="publisert"><span class="os-choice__label">Siste uke</span></label>
+              </div>
+            </details>
+            <div class="os-filter">
+              <label class="os-choice" style="padding-block: var(--os-space-3)"><span class="os-choice__label">Kun med visning</span><input class="os-switch" type="checkbox" role="switch"></label>
+            </div>
+          </form>
+          <div class="os-filters__footer">
+            <button class="os-button os-button--primary os-button--block" type="button" popovertarget="filtre" popovertargetaction="hide">Vis 86 treff</button>
+          </div>
+        </aside>
+
+        <main class="os-layout__main" id="main">
+          <div class="os-split">
+            <p class="os-text-muted" role="status"><strong class="os-text-strong">86 treff</strong> i St. Hanshaugen</p>
+            <div class="os-cluster os-cluster--sm">
+              <button class="os-button os-button--sm os-filters-toggle" type="button" popovertarget="filtre"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-sliders-horizontal"></use></svg>Filtrer (3)</button>
+              <label class="os-sr-only" for="sort">Sorter</label>
+              <select class="os-select os-select--sm os-select--inline" id="sort">
+                <option>Mest relevant</option>
+                <option>Publisert (nyeste)</option>
+                <option>Pris (lav–høy)</option>
+                <option>Pris (høy–lav)</option>
+                <option>Størrelse</option>
+              </select>
+              <fieldset class="os-segmented" data-os-view="#resultater">
+                <legend class="os-sr-only">Visning</legend>
+                <label><input type="radio" name="view" value="list" checked><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-layout-list"></use></svg><span class="os-sr-only">Liste</span></label>
+                <label><input type="radio" name="view" value="grid"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-layout-grid"></use></svg><span class="os-sr-only">Rutenett</span></label>
+              </fieldset>
+            </div>
+          </div>
+
+          <ul class="os-chips" role="list" aria-label="Aktive filtre">
+            <li><button class="os-chip os-chip--remove" type="button">St. Hanshaugen<span class="os-sr-only">, fjern filter</span></button></li>
+            <li><button class="os-chip os-chip--remove" type="button">Leilighet<span class="os-sr-only">, fjern filter</span></button></li>
+            <li><button class="os-chip os-chip--remove" type="button">Maks 12 000 kr<span class="os-sr-only">, fjern filter</span></button></li>
+            <li><button class="os-button os-button--link os-button--sm" type="button">Nullstill alle</button></li>
+          </ul>
+
+          <ol class="os-results" id="resultater" role="list">
+            <li>
+              <article class="os-result">
+                <div class="os-result__media"><img src="assets/img/facade.svg" alt="" width="1200" height="900"></div>
+                <div class="os-result__body">
+                  <p class="os-result__eyebrow">Fjellveien 6 C, St. Hanshaugen</p>
+                  <h2 class="os-result__title"><a href="listing.html">Lys og koselig 1-roms med flott beliggenhet</a></h2>
+                  <p class="os-result__facts"><span>29 m²</span><span>1 soverom</span><span>Leilighet</span></p>
+                  <p class="os-result__price">7 500 kr <span>/mnd</span></p>
+                  <p class="os-result__meta"><span class="os-badge os-badge--info os-badge--dot">Visning søn. 11.10</span><span>Lunde &amp; Berg · 2 t siden</span></p>
+                </div>
+                <button class="os-result__save" type="button" aria-pressed="false" data-os-toggle data-os-persist="saved:281592780" aria-label="Lagre «Lys og koselig 1-roms»"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-heart"></use></svg></button>
+              </article>
+            </li>
+            <li>
+              <article class="os-result">
+                <div class="os-result__media"><img src="assets/img/facade-green.svg" alt="" width="1200" height="900"><span class="os-badge os-badge--solid os-badge--success">Ny</span></div>
+                <div class="os-result__body">
+                  <p class="os-result__eyebrow">Ullevålsveien, St. Hanshaugen</p>
+                  <h2 class="os-result__title"><a href="listing.html">Nyoppusset 2-roms med balkong mot bakgård</a></h2>
+                  <p class="os-result__facts"><span>48 m²</span><span>1 soverom</span><span>Leilighet</span></p>
+                  <p class="os-result__price">11 900 kr <span>/mnd</span></p>
+                  <p class="os-result__meta"><span>Privat utleier · 40 min siden</span></p>
+                </div>
+                <button class="os-result__save" type="button" aria-pressed="false" data-os-toggle aria-label="Lagre «Nyoppusset 2-roms med balkong»"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-heart"></use></svg></button>
+              </article>
+            </li>
+            <li>
+              <article class="os-result">
+                <div class="os-result__media"><img src="assets/img/living.svg" alt="" width="1200" height="900"></div>
+                <div class="os-result__body">
+                  <p class="os-result__eyebrow">Bislett, St. Hanshaugen</p>
+                  <h2 class="os-result__title"><a href="listing.html">Møblert hybel med egen inngang</a></h2>
+                  <p class="os-result__facts"><span>21 m²</span><span>Hybel</span><span>Møblert</span></p>
+                  <p class="os-result__price">7 200 kr <span>/mnd</span></p>
+                  <p class="os-result__meta"><span>Privat utleier · i går</span></p>
+                </div>
+                <button class="os-result__save" type="button" aria-pressed="false" data-os-toggle aria-label="Lagre «Møblert hybel med egen inngang»"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-heart"></use></svg></button>
+              </article>
+            </li>
+            <li>
+              <article class="os-result">
+                <div class="os-result__media"><img src="assets/img/facade-blue.svg" alt="" width="1200" height="900"></div>
+                <div class="os-result__body">
+                  <p class="os-result__eyebrow">Colletts gate, St. Hanshaugen</p>
+                  <h2 class="os-result__title"><a href="listing.html">Stor 3-roms i klassisk bygård, høyt under taket</a></h2>
+                  <p class="os-result__facts"><span>74 m²</span><span>2 soverom</span><span>Leilighet</span></p>
+                  <p class="os-result__price"><del class="os-price__old">12 500 kr</del> 11 900 kr <span>/mnd</span></p>
+                  <p class="os-result__meta"><span class="os-badge os-badge--warning">Prisen er satt ned</span><span>Byhjem Utleie · 3 dager siden</span></p>
+                </div>
+                <button class="os-result__save" type="button" aria-pressed="false" data-os-toggle aria-label="Lagre «Stor 3-roms i klassisk bygård»"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-heart"></use></svg></button>
+              </article>
+            </li>
+            <li>
+              <article class="os-result os-result--muted">
+                <div class="os-result__media"><img src="assets/img/townhouses.svg" alt="" width="1200" height="900"><span class="os-badge os-badge--solid">Utleid</span></div>
+                <div class="os-result__body">
+                  <p class="os-result__eyebrow">Fagerborg, St. Hanshaugen</p>
+                  <h2 class="os-result__title"><a href="listing.html">Rekkehus med liten hage, barnevennlig</a></h2>
+                  <p class="os-result__facts"><span>96 m²</span><span>3 soverom</span><span>Rekkehus</span></p>
+                  <p class="os-result__price">21 000 kr <span>/mnd</span></p>
+                  <p class="os-result__meta"><span>Lunde &amp; Berg · 1 uke siden</span></p>
+                </div>
+                <button class="os-result__save" type="button" aria-pressed="false" data-os-toggle aria-label="Lagre «Rekkehus med liten hage»"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-heart"></use></svg></button>
+              </article>
+            </li>
+            <li>
+              <article class="os-result">
+                <div class="os-result__media"><img src="assets/img/kitchen.svg" alt="" width="1200" height="900"></div>
+                <div class="os-result__body">
+                  <p class="os-result__eyebrow">Adamstuen, St. Hanshaugen</p>
+                  <h2 class="os-result__title"><a href="listing.html">Nytt kjøkken og bad – 2-roms nær Adamstuen</a></h2>
+                  <p class="os-result__facts"><span>52 m²</span><span>1 soverom</span><span>Leilighet</span></p>
+                  <p class="os-result__price">12 000 kr <span>/mnd</span></p>
+                  <p class="os-result__meta"><span class="os-badge os-badge--info os-badge--dot">Visning tir. 13.10</span><span>Nordvik Utleie · 4 dager siden</span></p>
+                </div>
+                <button class="os-result__save" type="button" aria-pressed="false" data-os-toggle aria-label="Lagre «Nytt kjøkken og bad»"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-heart"></use></svg></button>
+              </article>
+            </li>
+          </ol>
+
+          <nav class="os-pagination" aria-label="Sider">
+            <ul role="list">
+              <li><a class="os-pagination__link" href="#" rel="prev"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-chevron-left"></use></svg>Forrige</a></li>
+              <li><a class="os-pagination__link" href="#">1</a></li>
+              <li><a class="os-pagination__link" href="#" aria-current="page">2</a></li>
+              <li><a class="os-pagination__link" href="#">3</a></li>
+              <li><span class="os-pagination__gap">…</span></li>
+              <li><a class="os-pagination__link" href="#">15</a></li>
+              <li class="os-pagination__status" aria-hidden="true">Side 2 av 15</li>
+              <li><a class="os-pagination__link" href="#" rel="next">Neste<svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-chevron-right"></use></svg></a></li>
+            </ul>
+          </nav>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <footer class="os-footer">
+    <div class="os-container">
+      <div class="os-footer__bottom" style="margin: 0; padding: 0; border: 0">
+        <p>© 2026 Oldschool (demo) — annonsene er oppdiktet.</p>
+        <ul class="os-seplist" role="list">
+          <li><a href="#">Tilgjengelighetserklæring</a></li>
+          <li><a href="#">Personvern</a></li>
+          <li><a href="#">Informasjonskapsler</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+/*
+ * Breadcrumbs — the path from the front page down to this page.
+ *
+ *   <ol class="os-breadcrumbs">
+ *     <li><a href="/">Forsiden</a></li>
+ *     <li><a href="/eiendom">Eiendom</a></li>
+ *     <li><a href="/eiendom/oslo">Oslo</a></li>
+ *   </ol>
+ *
+ * On phones only the last link is shown, as a "back to …" link.
+ * Add .os-breadcrumbs--full to always show every step.
+ */
+@layer os.components {
+  .os-breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-space-1) var(--os-space-1-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--os-text-sm);
+  }
+
+  .os-breadcrumbs > li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-1-5);
+    min-width: 0;
+  }
+
+  .os-breadcrumbs > li + li::before {
+    content: "/";
+    color: var(--os-color-text-subtle);
+    font-weight: var(--os-weight-regular);
+  }
+
+  .os-breadcrumbs a {
+    font-weight: var(--os-weight-medium);
+  }
+
+  .os-breadcrumbs [aria-current] {
+    color: var(--os-color-text-muted);
+  }
+
+  @media (max-width: 39.99em) {
+    .os-breadcrumbs:not(.os-breadcrumbs--full) > li {
+      display: none;
+    }
+
+    /* Keep the last item that is a link — i.e. the closest parent. */
+    .os-breadcrumbs:not(.os-breadcrumbs--full) > li:has(> a):not(:has(~ li > a)) {
+      display: inline-flex;
+    }
+
+    .os-breadcrumbs:not(.os-breadcrumbs--full) > li:has(> a):not(:has(~ li > a))::before {
+      content: "";
+      width: 1.1em;
+      height: 1.1em;
+      background-color: var(--os-color-link);
+      mask: var(--os-glyph-chevron-left) center / contain no-repeat;
+    }
+
+    .os-breadcrumbs:not(.os-breadcrumbs--full) a {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+/*
+ * Skip link — the first focusable element on every page.
+ *   <a class="os-skiplink" href="#main">Hopp til hovedinnhold</a>
+ */
+@layer os.components {
+  .os-skiplink {
+    position: fixed;
+    inset-block-start: var(--os-space-3);
+    inset-inline-start: var(--os-space-3);
+    z-index: var(--os-z-toast);
+    padding: var(--os-space-3) var(--os-space-4);
+    border-radius: var(--os-radius-control);
+    background-color: var(--os-color-surface-raised);
+    box-shadow: var(--os-shadow-overlay);
+    font-weight: var(--os-weight-semibold);
+    transform: translateY(calc(-100% - var(--os-space-6)));
+    transition: transform var(--os-duration-fast) var(--os-ease-out);
+  }
+
+  .os-skiplink:focus {
+    transform: none;
+  }
+}

@@ -1,0 +1,58 @@
+/*
+ * Utility navigation — the small links in the top-right corner, divided by
+ * hairlines exactly like the original ("Kundeservice | Sett inn annonse | Logg inn").
+ *
+ *   <ul class="os-utilnav" role="list">
+ *     <li><a href="#">Kundeservice</a></li>
+ *     <li><a href="#"><svg class="os-icon">…</svg>Logg inn</a></li>
+ *   </ul>
+ */
+@layer os.components {
+  .os-utilnav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--os-text-sm);
+  }
+
+  .os-utilnav > li {
+    display: flex;
+    align-items: center;
+  }
+
+  .os-utilnav > li + li::before {
+    content: "";
+    width: var(--os-border-width);
+    height: 1.1em;
+    margin-inline: var(--os-space-3);
+    background-color: var(--os-color-border-strong);
+    opacity: 0.6;
+  }
+
+  .os-utilnav a,
+  .os-utilnav button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-1-5);
+    padding-block: var(--os-space-2);
+    border: 0;
+    background: none;
+    color: var(--os-color-text);
+    font-weight: var(--os-weight-medium);
+    text-decoration: none;
+  }
+
+  .os-utilnav a:hover,
+  .os-utilnav button:hover {
+    color: var(--os-color-link-hover);
+    text-decoration: underline;
+    text-decoration-thickness: max(2px, var(--os-link-underline-thickness));
+  }
+
+  .os-utilnav .os-icon {
+    color: var(--os-color-text-accent);
+  }
+}

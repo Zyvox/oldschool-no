@@ -1,0 +1,34 @@
+/*
+ * Summary — the aside's first panel: price + the two or three facts that
+ * matter, repeated from the main column so they are always in view.
+ *
+ *   <section class="os-panel os-summary" aria-label="Nøkkelinfo">
+ *     <div class="os-panel__body">
+ *       <p class="os-price os-price--split">…</p>
+ *       <dl class="os-kv os-kv--end">…</dl>
+ *       <p class="os-summary__links">…</p>
+ *     </div>
+ *   </section>
+ */
+@layer os.components {
+  .os-summary .os-panel__body > * + * {
+    margin-block-start: var(--os-space-3);
+  }
+
+  .os-summary .os-price {
+    padding-block-end: var(--os-space-3);
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  .os-summary .os-kv > div:first-child {
+    padding-block-start: 0;
+  }
+
+  .os-summary__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--os-space-1) var(--os-space-4);
+    font-size: var(--os-text-sm);
+  }
+}

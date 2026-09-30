@@ -1,0 +1,50 @@
+/*
+ * Stat — a key figure with a label and an optional change.
+ *
+ *   <div class="os-stat">
+ *     <p class="os-stat__label">Snittpris i området</p>
+ *     <p class="os-stat__value">14 200 kr</p>
+ *     <p class="os-stat__delta os-stat__delta--up">+3,1 % siste år</p>
+ *   </div>
+ */
+@layer os.components {
+  .os-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--os-space-0-5);
+  }
+
+  .os-stat__label {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-stat__value {
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-2xl);
+    font-weight: var(--os-weight-bold);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--os-tracking-tight);
+    line-height: var(--os-leading-tight);
+  }
+
+  .os-stat__delta {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+    font-weight: var(--os-weight-medium);
+  }
+
+  .os-stat__delta--up { color: var(--os-color-success); }
+  .os-stat__delta--down { color: var(--os-color-danger); }
+
+  .os-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
+    gap: var(--os-space-4);
+  }
+
+  .os-stats > .os-stat + .os-stat {
+    padding-inline-start: var(--os-space-4);
+    border-inline-start: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+}

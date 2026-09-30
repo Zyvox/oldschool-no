@@ -1,0 +1,33 @@
+/*
+ * Icon — SVG sprite symbols (Lucide, 24px grid, drawn with a lighter stroke).
+ *
+ *   <svg class="os-icon" aria-hidden="true"><use href="/path/to/icons.svg#os-star"></use></svg>
+ *
+ * Icons scale with the surrounding font size (1.25em). Always pair an icon
+ * with visible text, or give its button an aria-label.
+ */
+@layer os.components {
+  .os-icon {
+    display: inline-block;
+    flex-shrink: 0;
+    width: var(--os-icon-size, 1.25em);
+    height: var(--os-icon-size, 1.25em);
+    vertical-align: -0.25em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: var(--os-icon-stroke);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    overflow: visible;
+  }
+
+  .os-icon--xs { --os-icon-size: var(--os-icon-xs); }
+  .os-icon--sm { --os-icon-size: var(--os-icon-sm); }
+  .os-icon--md { --os-icon-size: var(--os-icon-md); }
+  .os-icon--lg { --os-icon-size: var(--os-icon-lg); }
+  .os-icon--xl { --os-icon-size: var(--os-icon-xl); }
+  .os-icon--bold { --os-icon-stroke: 2.25; }
+  .os-icon--filled { fill: currentColor; }
+  .os-icon--muted { color: var(--os-color-text-muted); }
+  .os-icon--accent { color: var(--os-color-text-accent); }
+}

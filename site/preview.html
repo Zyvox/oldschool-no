@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Devices – Oldschool</title>
+  <meta name="description" content="The Oldschool demo pages on desktop, tablet and phone, side by side.">
+  <meta name="color-scheme" content="light dark">
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='comfortable')d.dataset.density=p.density}catch(e){}})()</script>
+  <link rel="stylesheet" href="../dist/oldschool.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script src="assets/generated/themes.js" defer></script>
+  <script src="assets/site.js" defer></script>
+  <script src="../dist/oldschool.js" defer></script>
+</head>
+<body class="os-page">
+  <a class="os-skiplink" href="#main">Skip to content</a>
+  <div class="os-page__body">
+    <main class="hx-devices-page" id="main">
+      <div class="hx-devices-bar os-container os-container--xl">
+        <div>
+          <h1 class="os-text-xl">Desktop, tablet and phone</h1>
+          <p class="os-text-sm os-text-muted">One responsive codebase. Themes you pick in the bar above apply to all three frames live.</p>
+        </div>
+        <fieldset class="os-segmented" id="device-page">
+          <legend class="os-sr-only">Page</legend>
+          <label><input type="radio" name="page" value="listing.html" checked><span>Listing</span></label>
+          <label><input type="radio" name="page" value="search.html"><span>Search</span></label>
+          <label><input type="radio" name="page" value="components.html"><span>Components</span></label>
+        </fieldset>
+      </div>
+      <div class="hx-devices">
+        <figure class="hx-device hx-device--desktop" style="--w: 1280; --h: 820">
+          <div class="hx-device__screen"><iframe src="listing.html" title="Desktop, 1280 pixels wide" loading="lazy"></iframe></div>
+          <figcaption>Desktop · 1280 × 820</figcaption>
+        </figure>
+        <figure class="hx-device hx-device--tablet" style="--w: 820; --h: 1180">
+          <div class="hx-device__screen"><iframe src="listing.html" title="Tablet, 820 pixels wide" loading="lazy"></iframe></div>
+          <figcaption>Tablet · 820 × 1180</figcaption>
+        </figure>
+        <figure class="hx-device hx-device--phone" style="--w: 390; --h: 844">
+          <div class="hx-device__screen"><iframe src="listing.html" title="Phone, 390 pixels wide" loading="lazy"></iframe></div>
+          <figcaption>Phone · 390 × 844</figcaption>
+        </figure>
+      </div>
+    </main>
+  </div>
+  <script>
+    (function () {
+      var frames = Array.prototype.slice.call(document.querySelectorAll('.hx-device'));
+      function fit() {
+        frames.forEach(function (f) {
+          var screen = f.querySelector('.hx-device__screen');
+          var w = +getComputedStyle(f).getPropertyValue('--w');
+          f.style.setProperty('--scale', String(screen.clientWidth / w));
+        });
+      }
+      window.addEventListener('resize', fit);
+      fit();
+      document.getElementById('device-page').addEventListener('change', function (e) {
+        document.querySelectorAll('.hx-device iframe').forEach(function (i) { i.src = e.target.value; });
+      });
+    })();
+  </script>
+</body>
+</html>

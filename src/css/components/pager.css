@@ -1,0 +1,77 @@
+/*
+ * Pager — step through a result list from a detail page:
+ * "‹ Forrige · Resultat 3 av 128 · Neste ›".
+ *
+ *   <nav class="os-pager" aria-label="Bla i søkeresultatet">
+ *     <a class="os-pager__link" href="#" rel="prev"><svg class="os-icon">…</svg><span class="os-pager__label">Forrige</span></a>
+ *     <a class="os-pager__position" href="/sok">Resultat 3 av 128</a>
+ *     <a class="os-pager__link" href="#" rel="next"><span class="os-pager__label">Neste</span><svg class="os-icon">…</svg></a>
+ *   </nav>
+ *
+ * On phones the labels become icon buttons (labels stay for screen readers).
+ */
+@layer os.components {
+  .os-pager {
+    display: flex;
+    align-items: center;
+    gap: var(--os-space-1);
+    font-size: var(--os-text-sm);
+    white-space: nowrap;
+  }
+
+  .os-pager__link,
+  .os-pager__position {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-1);
+    padding: var(--os-space-1) var(--os-space-2);
+    border-radius: var(--os-radius-control);
+  }
+
+  .os-pager__link {
+    font-weight: var(--os-weight-medium);
+  }
+
+  .os-pager__position {
+    color: var(--os-color-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  a.os-pager__position {
+    color: var(--os-color-link);
+  }
+
+  .os-pager__link[aria-disabled="true"] {
+    color: var(--os-color-text-subtle);
+    text-decoration: none;
+    pointer-events: none;
+  }
+
+  @media (max-width: 39.99em) {
+    .os-pager__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .os-pager__link {
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0;
+      border: var(--os-border-width) solid var(--os-color-border);
+      background-color: var(--os-color-surface);
+    }
+
+    .os-pager__link .os-icon {
+      --os-icon-size: 1.25rem;
+    }
+
+    .os-pager__position {
+      padding-inline: var(--os-space-1);
+    }
+  }
+}

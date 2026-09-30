@@ -1,0 +1,55 @@
+/* Document defaults: canvas, text, focus, selection. */
+@layer os.base {
+  html {
+    background-color: var(--os-color-canvas);
+    color: var(--os-color-text);
+    font-family: var(--os-font-body);
+    font-size: 100%; /* respect the user's browser setting: 1rem = their choice */
+    line-height: var(--os-leading-body);
+    font-optical-sizing: auto;
+    font-kerning: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    accent-color: var(--os-color-accent);
+    tab-size: 4;
+    scroll-padding-block-start: var(--os-space-4);
+  }
+
+  body {
+    font-size: var(--os-text-body);
+    line-height: var(--os-leading-body);
+  }
+
+  /* A themed or mode-scoped island re-resolves text and canvas colors, so
+     <section data-mode="dark"> is a dark section, not just dark variables. */
+  :where([data-theme], [data-mode], [data-density]):not(:root) {
+    color: var(--os-color-text);
+    font-family: var(--os-font-body);
+    font-size: var(--os-text-body);
+    line-height: var(--os-leading-body);
+  }
+
+  :where([data-theme], [data-mode]):not(:root) {
+    background-color: var(--os-color-canvas);
+  }
+
+  ::selection {
+    background-color: var(--os-color-selection);
+    color: var(--os-color-text-strong);
+  }
+
+  :focus-visible {
+    outline: var(--os-focus-width) solid var(--os-color-focus);
+    outline-offset: var(--os-focus-offset);
+  }
+
+  [tabindex="-1"]:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
+}

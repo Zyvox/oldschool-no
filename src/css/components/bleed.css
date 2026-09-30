@@ -1,0 +1,22 @@
+/*
+ * Bleed — on phones, .os-container--bleed removes the side gutter so panels
+ * become edge-to-edge sheets (no radius, no side borders): more room for
+ * content, still separated by the canvas. Loose content between the sheets
+ * (toolbars, chips, section heads) keeps the gutter.
+ */
+@layer os.components {
+  @media (max-width: 39.99em) {
+    .os-container--bleed :is(.os-panel, .os-crumbbar, .os-result, .os-filters:not(:popover-open)) {
+      border-inline-width: 0;
+      border-radius: 0;
+    }
+
+    .os-container--bleed :is(.os-panel, .os-crumbbar) > :is(.os-panel__header, .os-contact__brand, .os-filters__header) {
+      border-radius: 0;
+    }
+
+    .os-container--bleed :is(.os-layout__main, .os-layout__aside, .os-page-section) > :is(.os-split, .os-cluster, .os-chips, .os-sectionhead, .os-pagination, p, h2) {
+      padding-inline: var(--os-gutter);
+    }
+  }
+}

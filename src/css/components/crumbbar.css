@@ -1,0 +1,47 @@
+/*
+ * Crumb bar — the band between masthead and content: where am I (breadcrumbs)
+ * and where can I go next (pager through the result list).
+ *
+ *   <div class="os-crumbbar">
+ *     <nav aria-label="Brødsmulesti"><ol class="os-breadcrumbs">…</ol></nav>
+ *     <nav class="os-pager" aria-label="Bla i søkeresultatet">…</nav>
+ *   </div>
+ */
+@layer os.components {
+  .os-crumbbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--os-space-1) var(--os-space-4);
+    min-height: 3rem;
+    margin-block-end: var(--os-gap);
+    padding: var(--os-space-1-5) var(--os-pad);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-radius: var(--os-radius-panel);
+    background-color: var(--os-color-crumbbar);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-crumbbar--flat {
+    padding-inline: 0;
+    border-color: transparent;
+    background: none;
+  }
+
+  .os-crumbbar > :first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .os-crumbbar > .os-pager {
+    flex: none;
+  }
+
+  @media (max-width: 39.99em) {
+    .os-crumbbar {
+      flex-wrap: nowrap;
+      margin-block-end: calc(var(--os-gap) * 0.75);
+    }
+  }
+}

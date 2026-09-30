@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Themes – Oldschool</title>
+  <meta name="description" content="Eight color schemes, light and dark, from the same markup — plus a generator for your own.">
+  <meta name="color-scheme" content="light dark">
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='comfortable')d.dataset.density=p.density}catch(e){}})()</script>
+  <link rel="stylesheet" href="../dist/oldschool.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script src="assets/generated/themes.js" defer></script>
+  <script src="assets/generated/tokens.js" defer></script>
+  <script src="assets/site.js" defer></script>
+  <script src="../dist/oldschool.js" defer></script>
+  <script type="module" src="assets/themes-page.js"></script>
+</head>
+<body class="os-page">
+  <a class="os-skiplink" href="#main">Skip to content</a>
+  <header class="os-masthead">
+    <div class="os-container os-masthead__inner">
+      <a class="os-brand" href="index.html">
+        <svg class="os-brand__mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><rect x="2" y="2" width="9" height="11" rx="2.5"/><rect x="14" y="2" width="16" height="11" rx="2.5"/><rect x="2" y="16" width="9" height="14" rx="2.5"/><rect x="14" y="16" width="16" height="14" rx="2.5"/></g></svg>
+        <span class="os-brand__name">oldschool</span>
+        <span class="os-brand__product">themes</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="os-page__body">
+    <main class="os-container os-stack os-stack--gap" id="main">
+      <section class="os-panel">
+        <div class="os-panel__body os-stack os-stack--sm">
+          <h1>Themes</h1>
+          <p class="os-heading__lead">A theme is two ramps — an <strong>accent</strong> and a <strong>neutral</strong> — plus optional overrides. Light and dark are not separate themes: every theme gets both through <code>light-dark()</code> and the inherited <code>color-scheme</code>. And because tokens re-resolve on any element with <code>data-theme</code>, themes can be scoped to a single box, as every card below is.</p>
+          <pre tabindex="0"><code>&lt;html data-theme="furu" data-mode="dark" data-density="compact"&gt;
+&lt;section data-theme="retro"&gt; … one retro island … &lt;/section&gt;</code></pre>
+        </div>
+      </section>
+
+      <h2 class="hx-page-h2">All themes, same markup</h2>
+      <div class="os-stack os-stack--xl" id="theme-gallery"></div>
+
+      <h2 class="hx-page-h2" id="generator-title">Make your own</h2>
+      <p class="hx-lede">Pick a hue and a chroma; the ramps are generated in OKLCH with the same lightness curve as the built-in themes, so contrast stays predictable. The checks below re-run as you drag.</p>
+      <section class="os-panel" aria-labelledby="generator-title">
+        <div class="os-panel__body hx-generator">
+          <form id="generator" class="os-stack os-stack--md" action="#" onsubmit="return false">
+            <div class="os-field">
+              <label class="os-field__label" for="g-name">Name</label>
+              <div class="os-cluster os-cluster--sm os-cluster--nowrap">
+                <span class="hx-gen-swatch" id="gen-swatch" aria-hidden="true"></span>
+                <input class="os-input" id="g-name" name="name" value="Havgap">
+              </div>
+            </div>
+            <fieldset class="os-fieldset">
+              <legend>Accent</legend>
+              <label class="hx-range"><span>Hue</span><input type="range" id="g-hue" name="hue" min="0" max="360" value="222"><output for="g-hue"></output></label>
+              <label class="hx-range"><span>Chroma</span><input type="range" id="g-chroma" name="chroma" min="0.02" max="0.22" step="0.005" value="0.12"><output for="g-chroma"></output></label>
+              <label class="hx-range"><span>Hue shift</span><input type="range" id="g-shift" name="shift" min="-30" max="30" value="-8"><output for="g-shift"></output></label>
+            </fieldset>
+            <fieldset class="os-fieldset">
+              <legend>Neutral</legend>
+              <label class="hx-range"><span>Tint hue</span><input type="range" id="g-nhue" name="nhue" min="0" max="360" value="230"><output for="g-nhue"></output></label>
+              <label class="hx-range"><span>Tint chroma</span><input type="range" id="g-nchroma" name="nchroma" min="0" max="0.03" step="0.001" value="0.012"><output for="g-nchroma"></output></label>
+            </fieldset>
+            <div>
+              <p class="os-field__label">Presets</p>
+              <div class="os-cluster os-cluster--sm">
+                <button class="os-chip" type="button" data-preset="222,0.12,230,0.012,Havgap">Havgap</button>
+                <button class="os-chip" type="button" data-preset="95,0.11,85,0.014,Mose">Mose</button>
+                <button class="os-chip" type="button" data-preset="45,0.14,60,0.012,Rust">Rust</button>
+                <button class="os-chip" type="button" data-preset="285,0.12,280,0.01,Skumring">Skumring</button>
+                <button class="os-chip" type="button" data-preset="175,0.07,200,0.008,Isbre">Isbre</button>
+              </div>
+            </div>
+            <ul class="hx-checks" id="gen-checks" role="list" aria-live="polite"></ul>
+          </form>
+          <div class="os-stack os-stack--md">
+            <div id="gen-preview"></div>
+            <div class="hx-gen-output">
+              <div class="os-split"><p class="os-field__label">Export</p><button class="os-button os-button--sm" type="button" id="gen-copy"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-copy"></use></svg>Copy</button></div>
+              <pre tabindex="0" aria-label="Exported theme code"><code id="gen-output"></code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

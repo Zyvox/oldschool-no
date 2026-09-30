@@ -1,0 +1,84 @@
+/*
+ * Media — an image with an optional caption, inside a panel.
+ *
+ *   <figure class="os-media">
+ *     <a href="#"><img src="…" alt="…"></a>
+ *     <figcaption>Frognerparken, 6 min å gå</figcaption>
+ *   </figure>
+ *
+ * Map — an address, a map image and links to other map views.
+ *
+ *   <div class="os-map">
+ *     <address class="os-map__address">Fjellveien 6 C<br>0360 Oslo</address>
+ *     <a class="os-map__frame" href="#"><img src="map.svg" alt="Kart over …"></a>
+ *     <ul class="os-seplist" role="list">…Kart · Flyfoto · Gatebilde…</ul>
+ *   </div>
+ */
+@layer os.components {
+  .os-media {
+    margin: 0;
+  }
+
+  .os-media img {
+    width: 100%;
+    aspect-ratio: var(--os-media-ratio, 3 / 2);
+    object-fit: cover;
+    border-radius: var(--os-radius-media);
+    background-color: var(--os-color-surface-sunken);
+  }
+
+  .os-media figcaption {
+    margin-block-start: var(--os-space-2);
+  }
+
+  .os-media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(9rem, 100%), 1fr));
+    gap: var(--os-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .os-media-grid img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--os-radius-media);
+  }
+
+  .os-map > * + * {
+    margin-block-start: var(--os-space-3);
+  }
+
+  .os-map__address {
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-lg);
+    font-style: normal;
+    font-weight: var(--os-weight-semibold);
+    line-height: var(--os-leading-snug);
+  }
+
+  .os-map__frame {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border: var(--os-border-width) solid var(--os-color-border-subtle);
+    border-radius: var(--os-radius-media);
+  }
+
+  .os-map__frame img {
+    width: 100%;
+    aspect-ratio: var(--os-map-ratio, 4 / 3);
+    object-fit: cover;
+    transition: transform var(--os-duration-slow) var(--os-ease-out);
+  }
+
+  .os-map__frame:hover img {
+    transform: scale(1.02);
+  }
+
+  .os-map__links {
+    font-size: var(--os-text-sm);
+  }
+}

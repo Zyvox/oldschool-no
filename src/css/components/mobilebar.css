@@ -1,0 +1,79 @@
+/*
+ * Mobile bar — sticky bottom bar on phones and tablets with the one number
+ * and the one action that matter ("7 500 kr/mnd · Ring · Send e-post").
+ * Hidden from 60em, where the aside shows the same information.
+ *
+ *   <div class="os-mobilebar" role="region" aria-label="Kontakt">
+ *     <div class="os-mobilebar__info">
+ *       <span class="os-mobilebar__label">Leie pr. mnd.</span>
+ *       <span class="os-mobilebar__value">7 500 kr</span>
+ *     </div>
+ *     <a class="os-button" href="tel:…">Ring</a>
+ *     <a class="os-button os-button--primary" href="mailto:…">Send e-post</a>
+ *   </div>
+ */
+@layer os.components {
+  .os-mobilebar {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: var(--os-z-sticky);
+    display: flex;
+    align-items: center;
+    gap: var(--os-space-2);
+    padding: var(--os-space-2-5) var(--os-gutter) calc(var(--os-space-2-5) + env(safe-area-inset-bottom, 0px));
+    border-block-start: var(--os-border-width) solid var(--os-color-border);
+    background-color: var(--os-color-surface-raised);
+    box-shadow: 0 -6px 20px -12px var(--os-color-shadow-strong);
+  }
+
+  .os-mobilebar__info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    line-height: var(--os-leading-tight);
+  }
+
+  .os-mobilebar__label {
+    overflow: hidden;
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .os-mobilebar__value {
+    color: var(--os-color-price);
+    font-size: var(--os-text-lg);
+    font-weight: var(--os-weight-bold);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .os-mobilebar .os-button {
+    flex: none;
+  }
+
+  @media (max-width: 59.99em) {
+    body:has(> .os-mobilebar) {
+      padding-block-end: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  @media (max-width: 23.99em) {
+    .os-mobilebar .os-button__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+  }
+
+  @media (min-width: 60em) {
+    .os-mobilebar {
+      display: none;
+    }
+  }
+}

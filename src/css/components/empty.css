@@ -1,0 +1,39 @@
+/*
+ * Empty state — when there is nothing to show, say why and what to do next.
+ *
+ *   <div class="os-empty">
+ *     <svg class="os-icon os-empty__icon">…#os-search</svg>
+ *     <h2 class="os-empty__title">Ingen treff</h2>
+ *     <p>Prøv et større område eller fjern noen filtre.</p>
+ *     <a class="os-button" href="#">Nullstill filtre</a>
+ *   </div>
+ */
+@layer os.components {
+  .os-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--os-space-3);
+    padding: var(--os-space-12) var(--os-pad);
+    color: var(--os-color-text-muted);
+    text-align: center;
+  }
+
+  .os-empty__icon {
+    --os-icon-size: 2.5rem;
+    padding: var(--os-space-3);
+    border-radius: 50%;
+    background-color: var(--os-color-surface-tint);
+    color: var(--os-color-text-accent);
+    box-sizing: content-box;
+  }
+
+  .os-empty__title {
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-xl);
+  }
+
+  .os-empty p {
+    max-width: 40ch;
+  }
+}

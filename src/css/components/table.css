@@ -1,0 +1,104 @@
+/*
+ * Table — for data that has two dimensions. Numbers right-aligned and tabular.
+ *
+ *   <div class="os-table-wrap" tabindex="0" role="region" aria-label="Prishistorikk">
+ *     <table class="os-table">
+ *       <caption>…</caption>
+ *       <thead><tr><th scope="col">Dato</th><th scope="col" class="os-num">Pris</th></tr></thead>
+ *       <tbody><tr><td>…</td><td class="os-num">7 500 kr</td></tr></tbody>
+ *     </table>
+ *   </div>
+ *
+ * Variants: --striped · --compact · --hover · --lined (vertical rules too)
+ */
+@layer os.components {
+  .os-table-wrap {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .os-table-wrap:focus-visible {
+    outline-offset: 2px;
+  }
+
+  .os-table {
+    width: 100%;
+    font-size: var(--os-text-sm);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .os-table caption {
+    padding-block-end: var(--os-space-2);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+    text-align: start;
+  }
+
+  .os-table :is(th, td) {
+    padding: var(--os-space-2-5) var(--os-space-3);
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  .os-table :is(th, td):first-child {
+    padding-inline-start: 0;
+  }
+
+  .os-table :is(th, td):last-child {
+    padding-inline-end: 0;
+  }
+
+  .os-table thead th {
+    border-block-end: var(--os-border-width) solid var(--os-color-border-strong);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+    font-weight: var(--os-weight-semibold);
+    white-space: nowrap;
+  }
+
+  .os-table tbody th {
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-medium);
+  }
+
+  .os-table tfoot td,
+  .os-table tfoot th {
+    border-block-end: 0;
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-semibold);
+  }
+
+  .os-table .os-num,
+  .os-table [data-type="number"] {
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  .os-table--compact :is(th, td) {
+    padding-block: var(--os-space-1-5);
+  }
+
+  .os-table--striped tbody tr:nth-child(odd) {
+    background-color: var(--os-color-surface-muted);
+  }
+
+  .os-table--striped :is(th, td):first-child,
+  .os-table--hover :is(th, td):first-child {
+    padding-inline-start: var(--os-space-3);
+  }
+
+  .os-table--striped :is(th, td):last-child,
+  .os-table--hover :is(th, td):last-child {
+    padding-inline-end: var(--os-space-3);
+  }
+
+  .os-table--hover tbody tr:hover {
+    background-color: var(--os-color-surface-tint);
+  }
+
+  .os-table--lined :is(th, td) + :is(th, td) {
+    border-inline-start: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+}

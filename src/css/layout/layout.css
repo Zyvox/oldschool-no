@@ -1,0 +1,48 @@
+/*
+ * Two-column layout: the heart of the original design.
+ *
+ *   .os-layout            main + aside (aside on the right, 22.5rem)
+ *   .os-layout--start     sidebar on the left (filters, docs navigation);
+ *                         put the aside first in source order
+ *   .os-layout--single    one column, e.g. landing pages
+ *
+ * Below 60em (960px) both columns stack; the aside follows the main content.
+ * Repeat what matters (price, contact) in the main column or in
+ * .os-mobilebar rather than reordering content with CSS.
+ */
+@layer os.layout {
+  .os-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--os-gap);
+    align-items: start;
+  }
+
+  .os-layout__main,
+  .os-layout__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--os-gap);
+    min-width: 0;
+  }
+
+  @media (min-width: 60em) {
+    .os-layout {
+      grid-template-columns: minmax(0, 1fr) var(--os-aside-width);
+    }
+
+    .os-layout--start {
+      grid-template-columns: var(--os-sidebar-width) minmax(0, 1fr);
+    }
+
+    .os-layout--single {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .os-layout__aside--sticky,
+    .os-layout__sticky {
+      position: sticky;
+      top: var(--os-gap);
+    }
+  }
+}
