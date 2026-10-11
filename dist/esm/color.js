@@ -1,8 +1,8 @@
 /**
  * Oldschool — color engine
  *
- * Pure functions (no DOM) shared by the Node build and the in-browser theme
- * generator: OKLCH ⇄ sRGB conversion, sRGB gamut mapping, ramp generation and
+ * Pure functions (no DOM) shared by the Node build and the accent playground
+ * on the themes page: OKLCH ⇄ sRGB conversion, sRGB gamut mapping, ramp generation and
  * WCAG 2.x contrast.
  *
  * Why OKLCH: lightness in OKLCH is perceptually even, so a ramp generated from
@@ -20,13 +20,13 @@ export const ACCENT_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 95
 
 /** OKLCH lightness per accent step. Tuned for WCAG contrast margins. */
 export const ACCENT_LIGHTNESS = {
-  50: 0.972, 100: 0.94, 200: 0.88, 300: 0.8, 400: 0.71, 500: 0.62,
+  50: 0.972, 100: 0.93, 200: 0.87, 300: 0.8, 400: 0.71, 500: 0.62,
   600: 0.535, 700: 0.46, 800: 0.39, 900: 0.32, 950: 0.255,
 };
 
 /** Chroma per accent step, relative to the ramp's peak chroma. */
 export const ACCENT_CHROMA = {
-  50: 0.14, 100: 0.26, 200: 0.46, 300: 0.68, 400: 0.86, 500: 1,
+  50: 0.1, 100: 0.2, 200: 0.36, 300: 0.68, 400: 0.86, 500: 1,
   600: 1, 700: 0.9, 800: 0.78, 900: 0.64, 950: 0.5,
 };
 
@@ -176,4 +176,41 @@ export function neutralRamp({ hue, chroma }) {
     ramp[step] = oklchToHex(NEUTRAL_LIGHTNESS[step], chroma * NEUTRAL_CHROMA[step], hue);
   });
   return ramp;
+}
+
+/* ---------------------------------------------------------------------------
+ * Seeds → scheme (shared by the build and the accent playground)
+ * ------------------------------------------------------------------------ */
+
+/**
+ * Normalise a seed to an accent-ramp spec. A hex seed keeps its hue; its
+ * chroma is scaled up to the ramp's peak from the step whose lightness is
+ * nearest, so a pale tint and a strong mid-tone of one colour give one ramp.
+ * @param {string | {hue:number, chroma:number, hueShift?:number}} seed
+ */
+export function seedSpec(seed) {
+  if (typeof seed !== 'string') return { hueShift: 0, ...seed };
+  const [L, C, h] = hexToOklch(seed);
+  let nearest = 500;
+  for (const step of ACCENT_STEPS) {
+    if (Math.abs(ACCENT_LIGHTNESS[step] - L) < Math.abs(ACCENT_LIGHTNESS[nearest] - L)) nearest = step;
+  }
+  const chroma = Math.min(0.3, C / ACCENT_CHROMA[nearest]);
+  return { hue: Math.round(h * 10) / 10, chroma: Math.round(chroma * 1000) / 1000, hueShift: 0 };
+}
+
+/**
+ * Every ramp of a colour scheme from its seeds (see tokens/palette.mjs).
+ * @returns {{accent, neutral, link?, visited, success, warning, danger, info, note}} name → {step → hex}
+ */
+export function schemeFromSeeds({ accent, neutral = { chroma: 0.008 }, link = null, visited, status = {} }) {
+  const a = seedSpec(accent);
+  const out = {
+    accent: accentRamp(a),
+    neutral: neutralRamp({ hue: neutral.hue ?? a.hue, chroma: neutral.chroma ?? 0.008 }),
+  };
+  if (link) out.link = accentRamp(seedSpec(link));
+  if (visited) out.visited = accentRamp(seedSpec(visited));
+  for (const [name, seed] of Object.entries(status)) out[name] = accentRamp(seedSpec(seed));
+  return out;
 }

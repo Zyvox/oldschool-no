@@ -43,30 +43,14 @@ export const store = {
 
 const STRINGS = {
   en: {
-    gallery: 'Image gallery',
-    prev: 'Previous image',
-    next: 'Next image',
-    close: 'Close',
-    open: 'Show full screen',
-    imageOf: 'Image {i} of {n}',
     copied: 'Copied to the clipboard',
     linkCopied: 'Link copied',
     copyFailed: 'Could not copy',
-    saved: 'Saved',
-    removed: 'Removed',
   },
   nb: {
-    gallery: 'Bildegalleri',
-    prev: 'Forrige bilde',
-    next: 'Neste bilde',
-    close: 'Lukk',
-    open: 'Vis i fullskjerm',
-    imageOf: 'Bilde {i} av {n}',
-    copied: 'Kopiert til utklippstavlen',
+    copied: 'Kopiert',
     linkCopied: 'Lenken er kopiert',
     copyFailed: 'Kunne ikke kopiere',
-    saved: 'Lagret',
-    removed: 'Fjernet',
   },
 };
 

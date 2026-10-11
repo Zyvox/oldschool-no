@@ -1,20 +1,18 @@
 /*
- * Pagination — numbered pages at the bottom of a result list.
+ * Pagination — "« Forrige  1 2 3 … 43  Neste »".
  *
  *   <nav class="os-pagination" aria-label="Sider">
  *     <ul role="list">
- *       <li><a class="os-pagination__link" href="?page=2" rel="prev">…Forrige</a></li>
- *       <li><a class="os-pagination__link" href="?page=1">1</a></li>
- *       <li><a class="os-pagination__link" href="?page=3" aria-current="page">3</a></li>
+ *       <li><a href="?side=1" rel="prev">« Forrige</a></li>
+ *       <li><a href="?side=1">1</a></li>
+ *       <li><span aria-current="page">2</span></li>
  *       <li><span class="os-pagination__gap">…</span></li>
- *       <li><a class="os-pagination__link" href="?page=4" rel="next">Neste…</a></li>
+ *       <li><a href="?side=3" rel="next">Neste »</a></li>
  *     </ul>
  *   </nav>
- *
- * On phones only prev · current · next remain, plus "Side 3 av 43".
  */
 @layer os.components {
-  .os-pagination > ul {
+  .os-pagination ul {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -23,51 +21,35 @@
     margin: 0;
     padding: 0;
     list-style: none;
-  }
-
-  .os-pagination__link,
-  .os-pagination__gap {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--os-space-1);
-    min-width: 2.75rem;
-    height: 2.75rem;
-    padding-inline: var(--os-space-3);
-    border-radius: var(--os-radius-control);
     font-variant-numeric: tabular-nums;
   }
 
-  .os-pagination__link {
-    border: var(--os-border-width) solid transparent;
-    color: var(--os-color-link);
-    font-weight: var(--os-weight-medium);
-    text-decoration: none;
+  .os-pagination :is(a, [aria-current]) {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+    padding-inline: var(--os-space-1);
   }
 
-  .os-pagination__link:hover {
-    border-color: var(--os-color-border);
+  .os-pagination [aria-current] {
+    border: var(--os-border-width) solid var(--os-color-panel-border);
     background-color: var(--os-color-surface);
-    text-decoration: underline;
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-bold);
   }
 
-  .os-pagination__link[aria-current="page"] {
-    border-color: var(--os-color-accent);
-    background-color: var(--os-color-accent);
-    color: var(--os-color-text-on-accent);
-    text-decoration: none;
+  .os-pagination [rel] {
+    font-weight: var(--os-weight-bold);
   }
 
   .os-pagination__gap {
-    min-width: 1.5rem;
-    padding-inline: 0;
     color: var(--os-color-text-muted);
   }
 
   .os-pagination__status {
     display: none;
     color: var(--os-color-text-muted);
-    font-size: var(--os-text-sm);
   }
 
   @media (max-width: 39.99em) {
@@ -75,22 +57,12 @@
       display: none;
     }
 
-    .os-pagination li:has([aria-current]) {
-      display: none;
-    }
-
     .os-pagination__status {
-      display: inline-block;
-      padding-inline: var(--os-space-2);
+      display: block;
     }
 
-    .os-pagination > ul {
+    .os-pagination ul {
       justify-content: space-between;
-    }
-
-    .os-pagination__link[rel] {
-      border-color: var(--os-color-border);
-      background-color: var(--os-color-surface);
     }
   }
 }

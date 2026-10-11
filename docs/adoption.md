@@ -2,28 +2,41 @@
 
 Pick the lightest option that fits.
 
-## 1. Copy the built files (any stack)
+## 1. Your own colours first
+
+If your brand is not portal blue, make a clone (or fork) and change the seed
+before anything else:
+
+```bash
+git clone https://github.com/Zyvox/oldschool-no.git && cd oldschool-no
+# edit tokens/palette.mjs → export const accent = '#2f6b3f';
+npm run build && npm test
+```
+
+The build regenerates `dist/` with your ramps; the test fails if the colour
+breaks a contrast pair. Then use *your* `dist/` with any option below. See
+[theming.md](theming.md#changing-the-colours).
+
+## 2. Copy the built files (any stack)
 
 Copy `dist/` (or the pieces you need) into your static assets:
 
 ```
-dist/oldschool.css      all tokens, themes and components (or .min.css)
-dist/oldschool.js       optional behaviors (classic script)
-dist/icons.svg          icon sprite — reference as icons.svg#os-<name>
-dist/fonts/inter/       Inter; paths are relative to oldschool.css
+dist/oldschool.min.css  tokens, both themes, all components (14 kB gzip; .css is the readable twin)
+dist/oldschool.min.js   optional behaviors, classic script (4.5 kB gzip)
+dist/icons.svg          optional icon sprite — reference as icons.svg#os-<name>
 ```
 
-Keep `oldschool.css` and `fonts/` in the same relative position, or override
-`--os-font-body` to use a different font.
+No fonts or images to copy: Verdana and Arial come from the system.
 
-## 2. Install from Git
+## 3. Install from Git
 
 ```bash
-npm install github:Zyvox/oldschool-no
+npm install github:Zyvox/oldschool-no        # or your fork with your colours
 ```
 
 ```js
-import 'oldschool-no/css';                  // dist/oldschool.css
+import 'oldschool-no/css/min';               // dist/oldschool.min.css
 import { toast, theme } from 'oldschool-no'; // dist/esm (auto-initialises on import)
 import tokens from 'oldschool-no/tokens.json' with { type: 'json' };
 ```
@@ -31,7 +44,7 @@ import tokens from 'oldschool-no/tokens.json' with { type: 'json' };
 `src/css/*` is importable too if you want only some layers, e.g. tokens + base
 + panel + kv.
 
-## 3. Tailwind
+## 4. Tailwind
 
 **v4** — CSS-first:
 
@@ -44,8 +57,8 @@ import tokens from 'oldschool-no/tokens.json' with { type: 'json' };
 ```html
 <div class="bg-surface border border-line rounded-panel p-pad text-fg">
   <p class="text-fg-muted text-sm">Leie pr. mnd.</p>
-  <p class="text-price text-3xl font-bold tabular-nums">7 500 kr</p>
-  <a class="text-link underline">Forbrukslån</a>
+  <p class="text-price text-3xl font-bold tabular-nums">7 500,-</p>
+  <a class="text-link underline">Se alle priser</a>
 </div>
 ```
 
@@ -56,7 +69,7 @@ CSS variables.
 
 **v3** — `presets: [require('oldschool-no/dist/tailwind-preset.cjs')]`.
 
-## 4. Component frameworks
+## 5. Component frameworks
 
 Components are HTML + classes, so wrappers are thin. React example:
 
@@ -86,23 +99,25 @@ export const Icon = ({ name }) => (
 ```
 
 With a client-side framework, call `Oldschool.init(el)` in an effect for
-components that need behaviors (gallery, tabs), or re-implement them — the
+components that need behaviors (tabs, sortable tables), or re-implement them — the
 markup contract is documented in each CSS file's header comment.
 
-## 5. Other platforms
+## 6. Other platforms
 
 `dist/tokens.json` contains every theme × mode fully resolved:
 
 ```json
 {
+  "seeds": { "accent": "#2a5aa8", "neutral": { "chroma": 0.008 }, … },
+  "palette": { "accent": { "50": "#f1f6ff", …, "950": "#0a2146" }, "neutral": { "0": "#ffffff", … } },
   "themes": {
-    "fjord": {
-      "roles": { "radius-panel": "8px", "pad": "clamp(…)", … },
-      "light": { "canvas": "#eaeff4", "surface": "#ffffff", "link": "#1e56a1", … },
-      "dark":  { "canvas": "#0f1317", … }
-    }
+    "retro": {
+      "roles": { "radius-panel": "0", "pad": "0.625rem", "font-body": "Verdana, …", … },
+      "light": { "canvas": "#c0d6f9", "surface": "#ffffff", "link": "#2555a2", … },
+      "dark":  { "canvas": "#111315", … }
+    },
+    "standard": { … }
   },
-  "palette": { "fjord": { "50": "#f0f7ff", … } },
   "primitives": { "space": { "4": "1rem" }, … }
 }
 ```
@@ -110,22 +125,23 @@ markup contract is documented in each CSS file's header comment.
 Feed it to Style Dictionary, Figma Tokens Studio, SwiftUI/Compose generators,
 or email templates (use the `light` values inline).
 
-## 6. With an AI coding agent
+## 7. With an AI coding agent
 
 Tell it:
 
 > Follow the design system in `oldschool-no`: read `DESIGN.md` for the rules
 > and `site/components.html` / `src/css/components/*.css` headers for markup.
 > Use only `--os-*` tokens; no raw colors or pixel font sizes. Every content
-> block is an `.os-panel`. Run the contrast rules in DESIGN.md §9.
+> block is an `.os-panel`. Colours come from the accent seed in `tokens/palette.mjs`.
 
 `AGENTS.md` in this repo has the same instructions in more detail.
 
 ## Checklist for a new page
 
-- [ ] `<html lang>` and optionally `data-theme`
+- [ ] `<html lang>`; `data-theme="standard"` if you want the tidier look
 - [ ] `.os-page` body, skip link, masthead, footer with accessibility statement
 - [ ] every content group in an `.os-panel` with a real heading
 - [ ] facts in `.os-kv`, prices in `.os-price`, actions as icon + word
 - [ ] detail pages: crumb bar with pager; phones: `.os-container--bleed` + `.os-mobilebar`
+- [ ] wide tables: `.os-table--stack`, and `.os-container--wide` or `.os-layout--late`
 - [ ] no hard-coded colors, sizes or shadows

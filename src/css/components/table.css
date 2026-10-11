@@ -1,25 +1,43 @@
 /*
- * Table — for data that has two dimensions. Numbers right-aligned and tabular.
+ * Table — header band, zebra rows, thin rules; numbers right-aligned.
+ * Add data-os-sort to make headers clickable (oldschool.js).
  *
- *   <div class="os-table-wrap" tabindex="0" role="region" aria-label="Prishistorikk">
- *     <table class="os-table">
+ *   <div class="os-table-wrap" tabindex="0" role="region" aria-label="Billettpriser">
+ *     <table class="os-table" data-os-sort>
  *       <caption>…</caption>
- *       <thead><tr><th scope="col">Dato</th><th scope="col" class="os-num">Pris</th></tr></thead>
- *       <tbody><tr><td>…</td><td class="os-num">7 500 kr</td></tr></tbody>
+ *       <thead><tr><th scope="col">Billett</th><th scope="col" class="os-num">Pris</th></tr></thead>
+ *       <tbody><tr><td>Voksen</td><td class="os-num">250,-</td></tr></tbody>
  *     </table>
  *   </div>
  *
- * Variants: --striped · --compact · --hover · --lined (vertical rules too)
+ * Cells are vertically centred, so one-line cells line up with a wrapped
+ * neighbour. Give a column .os-num for numbers, .os-table__actions for the
+ * buttons at the end of a row (kept on one line), .os-table__title for the
+ * row's name.
+ *
+ * Variants: --plain (no zebra) · --compact · --grid (rules between cells too)
+ *           --top (align cells to the top — for long running text)
+ *           --stack (narrow containers: every row becomes a small box of
+ *             label/value lines instead of scrolling sideways; labels come
+ *             from data-label on each cell, filled in from the header by
+ *             oldschool.js when missing)
+ *
+ *   <div class="os-table-wrap" tabindex="0" role="region" aria-label="Jobber">
+ *     <table class="os-table os-table--stack">
+ *       <thead><tr><th scope="col">Navn</th><th scope="col" class="os-num">Nye</th><th scope="col"><span class="os-sr-only">Handlinger</span></th></tr></thead>
+ *       <tbody><tr>
+ *         <td class="os-table__title" data-label="Navn"><a href="#">Fjelltur mars</a></td>
+ *         <td class="os-num" data-label="Nye">3</td>
+ *         <td class="os-table__actions"><button class="os-button os-button--sm">Kjør nå</button></td>
+ *       </tr></tbody>
+ *     </table>
+ *   </div>
  */
 @layer os.components {
   .os-table-wrap {
+    container-type: inline-size;
     max-width: 100%;
     overflow-x: auto;
-    overscroll-behavior-x: contain;
-  }
-
-  .os-table-wrap:focus-visible {
-    outline-offset: 2px;
   }
 
   .os-table {
@@ -29,45 +47,42 @@
   }
 
   .os-table caption {
-    padding-block-end: var(--os-space-2);
+    padding-block-end: var(--os-space-1);
     color: var(--os-color-text-muted);
-    font-size: var(--os-text-sm);
+    font-size: var(--os-text-xs);
     text-align: start;
   }
 
   .os-table :is(th, td) {
-    padding: var(--os-space-2-5) var(--os-space-3);
+    padding: var(--os-row-pad) var(--os-space-2);
     border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
     text-align: start;
+    vertical-align: middle;
+  }
+
+  .os-table--top :is(th, td) {
     vertical-align: top;
   }
 
-  .os-table :is(th, td):first-child {
-    padding-inline-start: 0;
-  }
-
-  .os-table :is(th, td):last-child {
-    padding-inline-end: 0;
-  }
-
   .os-table thead th {
-    border-block-end: var(--os-border-width) solid var(--os-color-border-strong);
-    color: var(--os-color-text-muted);
-    font-size: var(--os-text-xs);
-    font-weight: var(--os-weight-semibold);
+    border-block: var(--os-border-width) solid var(--os-color-panel-header-border);
+    background-color: var(--os-color-panel-header);
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-bold);
     white-space: nowrap;
   }
 
-  .os-table tbody th {
-    color: var(--os-color-text-strong);
-    font-weight: var(--os-weight-medium);
+  .os-table tbody tr:nth-child(even) {
+    background-color: var(--os-color-zebra);
   }
 
-  .os-table tfoot td,
-  .os-table tfoot th {
+  .os-table tbody tr:hover {
+    background-color: var(--os-color-surface-tint-strong);
+  }
+
+  .os-table tfoot :is(th, td) {
     border-block-end: 0;
-    color: var(--os-color-text-strong);
-    font-weight: var(--os-weight-semibold);
+    font-weight: var(--os-weight-bold);
   }
 
   .os-table .os-num,
@@ -76,29 +91,130 @@
     white-space: nowrap;
   }
 
+  .os-table__title {
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-table__actions {
+    width: 1%;
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  .os-table__actions > * + * {
+    margin-inline-start: var(--os-space-1);
+  }
+
+  .os-table--plain tbody tr:nth-child(even) {
+    background-color: transparent;
+  }
+
   .os-table--compact :is(th, td) {
-    padding-block: var(--os-space-1-5);
+    padding-block: var(--os-space-0-5);
   }
 
-  .os-table--striped tbody tr:nth-child(odd) {
-    background-color: var(--os-color-surface-muted);
-  }
-
-  .os-table--striped :is(th, td):first-child,
-  .os-table--hover :is(th, td):first-child {
-    padding-inline-start: var(--os-space-3);
-  }
-
-  .os-table--striped :is(th, td):last-child,
-  .os-table--hover :is(th, td):last-child {
-    padding-inline-end: var(--os-space-3);
-  }
-
-  .os-table--hover tbody tr:hover {
-    background-color: var(--os-color-surface-tint);
-  }
-
-  .os-table--lined :is(th, td) + :is(th, td) {
+  .os-table--grid :is(th, td) + :is(th, td) {
     border-inline-start: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  /* Sortable headers (buttons injected by oldschool.js) */
+  .os-table__sort {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-1);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--os-color-link);
+    font: inherit;
+    text-align: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .os-table__sort::after {
+    content: "↕";
+    color: var(--os-color-text-muted);
+    font-size: 0.85em;
+  }
+
+  [aria-sort="ascending"] > .os-table__sort::after { content: "▲"; color: var(--os-color-text-strong); }
+  [aria-sort="descending"] > .os-table__sort::after { content: "▼"; color: var(--os-color-text-strong); }
+
+  .os-num .os-table__sort {
+    flex-direction: row-reverse;
+  }
+
+  /* Stacked rows on narrow containers (phones, or a table in a side column). */
+  @container (max-width: 36em) {
+    .os-table--stack,
+    .os-table--stack :is(tbody, tr, td) {
+      display: block;
+    }
+
+    .os-table--stack thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .os-table--stack tbody tr {
+      border: var(--os-border-width) solid var(--os-color-border);
+      background-color: var(--os-color-surface);
+    }
+
+    .os-table--stack tbody tr + tr {
+      margin-block-start: var(--os-space-2);
+    }
+
+    .os-table--stack tbody tr:nth-child(even),
+    .os-table--stack tbody tr:hover {
+      background-color: var(--os-color-surface);
+    }
+
+    .os-table--stack td,
+    .os-table--stack .os-num {
+      display: grid;
+      grid-template-columns: minmax(6em, 35%) minmax(0, 1fr);
+      gap: var(--os-space-2);
+      align-items: baseline;
+      text-align: start;
+      white-space: normal;
+    }
+
+    .os-table--stack td::before {
+      content: attr(data-label);
+      color: var(--os-color-text-muted);
+      font-weight: var(--os-weight-regular);
+    }
+
+    .os-table--stack td:last-child {
+      border-block-end: 0;
+    }
+
+    .os-table--stack .os-table__title {
+      display: block;
+      background-color: var(--os-color-panel-header);
+      font-size: var(--os-text-body);
+    }
+
+    .os-table--stack :is(.os-table__title, .os-table__actions, [data-label=""])::before {
+      content: none;
+    }
+
+    .os-table--stack .os-table__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--os-space-1);
+      width: auto;
+      background-color: var(--os-color-surface-muted);
+    }
+
+    .os-table--stack .os-table__actions > * + * {
+      margin-inline-start: 0;
+    }
   }
 }

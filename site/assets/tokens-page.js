@@ -35,6 +35,15 @@
     return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
   }
 
+  function toPx(value) {
+    return parseFloat(value) * (/rem$/.test(value) ? 16 : 1) || 0;
+  }
+
+  function px(value) {
+    var m = /^([\d.]+)rem$/.exec(value);
+    return m ? value + ' = ' + parseFloat(m[1]) * 16 + 'px' : value;
+  }
+
   function luminance(hex) {
     var n = parseInt(hex.slice(1, 7), 16);
     return [n >> 16 & 255, n >> 8 & 255, n & 255].map(function (c) {
@@ -48,28 +57,27 @@
     return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
   }
 
-  /* Semantic colors ---------------------------------------------------- */
+  /* Semantic colours --------------------------------------------------- */
   function renderSemantic() {
     var host = document.getElementById('semantic');
     if (!host) return;
     host.innerHTML = '';
     var surface = computedColor('--os-color-surface');
     meta.colors.forEach(function (group) {
-      var panel = el('section', { class: 'os-panel', 'aria-label': group.group });
-      panel.innerHTML = '<header class="os-panel__header"><h3 class="os-panel__title">' + group.group + '</h3></header>';
-      var body = el('div', { class: 'os-panel__body' });
-      var table = '<div class="os-table-wrap" tabindex="0" role="region" aria-label="' + group.group + ' colors"><table class="os-table hx-token-table"><thead><tr><th scope="col">Token</th><th scope="col">Now</th><th scope="col">Light / dark</th><th scope="col">Use</th></tr></thead><tbody>';
+      var id = 'sem-' + group.group.toLowerCase().replace(/[^a-z]+/g, '-');
+      var html = '<h3 class="os-text-md" id="' + id + '">' + group.group + '</h3>' +
+        '<div class="os-table-wrap" tabindex="0" role="region" aria-labelledby="' + id + '"><table class="os-table os-table--compact hx-token-table"><thead><tr><th scope="col">Token</th><th scope="col">Now</th><th scope="col">Light / dark</th><th scope="col">Use</th></tr></thead><tbody>';
       group.colors.forEach(function (c) {
         var name = '--os-color-' + c.name;
         var value = computedColor(name);
-        var ratio = value.length === 7 && surface.length === 7 ? contrast(value, surface) : null;
-        table += '<tr><th scope="row"><span class="hx-swatch" style="background:var(' + name + ')"></span><code>' + name + '</code></th>' +
-          '<td class="os-nowrap"><code>' + value + '</code>' + (ratio && c.name.indexOf('text') === 0 || ratio && c.name.indexOf('link') === 0 ? ' <span class="os-badge">' + ratio.toFixed(1) + ':1</span>' : '') + '</td>' +
+        var textual = /^(text|link)/.test(c.name);
+        var ratio = textual && !/inverse|on-/.test(c.name) && value.length === 7 && surface.length === 7 ? contrast(value, surface) : null;
+        html += '<tr><th scope="row"><span class="hx-swatch" style="background:var(' + name + ')"></span><code>' + name + '</code></th>' +
+          '<td class="os-nowrap"><code>' + value + '</code>' + (ratio ? ' <span class="os-badge' + (ratio >= 4.5 ? '' : ' os-badge--warning') + '">' + ratio.toFixed(1) + ':1</span>' : '') + '</td>' +
           '<td class="os-nowrap os-text-muted">' + c.light + ' / ' + c.dark + '</td><td>' + c.description.replace(/</g, '&lt;') + '</td></tr>';
       });
-      body.innerHTML = table + '</tbody></table></div>';
-      panel.append(body);
-      host.append(panel);
+      var section = el('div', { class: 'os-stack os-stack--xs' }, html + '</tbody></table></div>');
+      host.append(section);
     });
   }
 
@@ -77,18 +85,18 @@
   function renderPalette() {
     var host = document.getElementById('palette');
     if (!host) return;
+    host.innerHTML = '';
+    var ramps = T.resolved.palette;
     Object.keys(meta.palette).forEach(function (name) {
       var p = meta.palette[name];
-      var row = el('div', { class: 'hx-ramp' });
-      var html = '<div class="hx-ramp__meta"><h3>' + name + '</h3><p>' + p.description + (p.fixed ? ' <span class="os-badge">hand-picked</span>' : '') + '</p></div><ol class="hx-ramp__steps" role="list">';
-      p.steps.forEach(function (step) {
-        var v = '--os-' + name + '-' + step;
-        var hex = computedValue(v);
-        var dark = luminance(hex) < 0.2;
-        html += '<li style="background:var(' + v + ');color:' + (dark ? '#fff' : '#111') + '"><span>' + step + '</span><code>' + hex + '</code></li>';
+      var seed = typeof p.seed === 'string' ? p.seed : JSON.stringify(p.seed).replace(/"/g, '');
+      var html = '<h3 class="os-text-md">' + name + ' <span class="os-text-muted os-text-sm">— ' + p.description + ' Seed: <code>' + seed + '</code></span></h3><ol class="hx-ramp" role="list">';
+      Object.keys(ramps[name]).forEach(function (step) {
+        var hex = ramps[name][step];
+        var dark = contrast(hex, '#ffffff') > contrast(hex, '#111111');
+        html += '<li style="background:' + hex + ';color:' + (dark ? '#fff' : '#111') + '"><strong>' + step + '</strong><br><code>' + hex + '</code></li>';
       });
-      row.innerHTML = html + '</ol>';
-      host.append(row);
+      host.append(el('div', { class: 'hx-ramp-group' }, html + '</ol>'));
     });
   }
 
@@ -99,16 +107,16 @@
       meta.primitives.text.slice().reverse().forEach(function (k) {
         var v = '--os-text-' + k;
         var row = el('div', { class: 'hx-type-row' });
-        row.innerHTML = '<code>' + v + '<br><span class="os-text-muted">' + computedValue(v) + '</span></code><p style="font-size:var(' + v + ')">Lys og koselig 1-roms · 7 500 kr</p>';
+        row.innerHTML = '<div><code>' + v + '</code><br><span class="os-text-muted os-text-xs">' + px(computedValue(v)) + '</span></div><p style="font-size:var(' + v + ')">Høstjazz i Botanisk hage · 250,-</p>';
         type.append(row);
       });
     }
     var space = document.getElementById('space');
     if (space) {
-      meta.primitives.space.forEach(function (k) {
+      meta.primitives.space.slice().sort(function (a, b) { return toPx(computedValue('--os-space-' + a)) - toPx(computedValue('--os-space-' + b)); }).forEach(function (k) {
         var v = '--os-space-' + k;
         var row = el('div', { class: 'hx-bar-row' });
-        row.innerHTML = '<code>' + v + '</code><span class="hx-bar-row__bar" style="width:var(' + v + ')"></span><span class="os-text-muted os-text-sm">' + computedValue(v) + '</span>';
+        row.innerHTML = '<code>' + v + '</code><span style="width:var(' + v + ')"></span><span class="os-text-muted">' + px(computedValue(v)) + '</span>';
         space.append(row);
       });
     }
@@ -124,7 +132,7 @@
     }
     var roles = document.getElementById('roles');
     if (roles) {
-      var html = '<div class="os-table-wrap" tabindex="0" role="region" aria-label="Role token values"><table class="os-table hx-token-table"><thead><tr><th scope="col">Token</th><th scope="col">Now</th><th scope="col">Use</th></tr></thead><tbody>';
+      var html = '<div class="os-table-wrap" tabindex="0" role="region" aria-label="Role token values"><table class="os-table os-table--compact hx-token-table"><thead><tr><th scope="col">Token</th><th scope="col">Now</th><th scope="col">Use</th></tr></thead><tbody>';
       meta.roles.forEach(function (r) {
         html += '<tr><th scope="row"><code>--os-' + r.name + '</code></th><td><code class="hx-value">' + computedValue('--os-' + r.name).replace(/</g, '&lt;') + '</code></td><td>' + r.description + '</td></tr>';
       });

@@ -1,34 +1,29 @@
 /*
- * Summary — the aside's first panel: price + the two or three facts that
- * matter, repeated from the main column so they are always in view.
+ * Summary — the first box of the sidebar: the key figure and the two or
+ * three facts that matter, repeated from the main column.
  *
- *   <section class="os-panel os-summary" aria-label="Nøkkelinfo">
+ *   <section class="os-panel os-summary" aria-label="Kort fortalt">
  *     <div class="os-panel__body">
  *       <p class="os-price os-price--split">…</p>
  *       <dl class="os-kv os-kv--end">…</dl>
- *       <p class="os-summary__links">…</p>
+ *       <p class="os-summary__links"><a href="#">…</a></p>
  *     </div>
  *   </section>
  */
 @layer os.components {
   .os-summary .os-panel__body > * + * {
-    margin-block-start: var(--os-space-3);
+    margin-block-start: var(--os-space-2);
   }
 
   .os-summary .os-price {
-    padding-block-end: var(--os-space-3);
-    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
-  }
-
-  .os-summary .os-kv > div:first-child {
-    padding-block-start: 0;
+    padding-block-end: var(--os-space-1);
   }
 
   .os-summary__links {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: var(--os-space-1) var(--os-space-4);
-    font-size: var(--os-text-sm);
+    gap: 0 var(--os-space-3);
+    font-size: var(--os-text-xs);
   }
 }

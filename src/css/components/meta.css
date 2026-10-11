@@ -1,40 +1,34 @@
 /*
- * Meta — small secondary facts, separated by dots.
+ * Meta — small grey facts about the page ("Sist endret: 26. april 20:18").
  *
- *   <p class="os-meta"><span>Sist endret <time datetime="…">26. april 2026 20:18</time></span><span>…</span></p>
+ *   <p class="os-meta"><span>Sist endret: <time datetime="…">26.09.2026 20:18</time></span><span>Vist 1 204 ganger</span></p>
  *
- * Reference code — the listing number people read out on the phone.
+ * Reference code — the big grey number people read out on the phone
+ * ("Finnkode: 28159278").
  *
- *   <p class="os-refcode"><span class="os-refcode__label">Annonsenr.</span> <span class="os-refcode__value">281592780</span></p>
+ *   <p class="os-refcode"><span class="os-refcode__label">Kode:</span> <span class="os-refcode__value">28159278</span></p>
  *
- * Separated list — any inline list with dot, pipe or slash separators.
+ * Separated list — any inline list with pipes, dots or slashes.
  *
- *   <ul class="os-seplist os-seplist--pipe" role="list"><li>…</li><li>…</li></ul>
+ *   <ul class="os-seplist" role="list"><li>…</li><li>…</li></ul>        (pipes)
+ *   .os-seplist--dot · .os-seplist--slash
  */
 @layer os.components {
   .os-meta {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--os-space-1) var(--os-space-2);
+    gap: 0 var(--os-space-3);
     color: var(--os-color-text-muted);
     font-size: var(--os-text-xs);
-    line-height: var(--os-leading-snug);
-  }
-
-  .os-meta > * + *::before {
-    content: "·";
-    margin-inline-end: var(--os-space-2);
-    color: var(--os-color-text-subtle);
   }
 
   .os-refcode {
     display: inline-flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: var(--os-space-1-5);
+    gap: var(--os-space-1);
     color: var(--os-color-text-muted);
-    font-size: var(--os-text-sm);
+    font-size: var(--os-text-xl);
   }
 
   .os-refcode__label {
@@ -42,46 +36,31 @@
   }
 
   .os-refcode__value {
-    color: var(--os-color-text);
-    font-size: var(--os-text-lg);
-    font-weight: var(--os-weight-medium);
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
-  }
-
-  .os-refcode .os-button {
-    align-self: center;
   }
 
   .os-seplist {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: var(--os-space-1) var(--os-space-2);
+    gap: 0;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  /* 24px minimum target (WCAG 2.5.8), even when the list wraps on phones. */
+  .os-seplist > li + li::before {
+    content: "|";
+    margin-inline: var(--os-space-2);
+    color: var(--os-color-border-strong);
+  }
+
+  .os-seplist--dot > li + li::before { content: "·"; }
+  .os-seplist--slash > li + li::before { content: "/"; }
+
   .os-seplist > li > :is(a, button) {
     display: inline-block;
     min-height: 1.5rem;
     padding-block: 0.125rem;
-  }
-
-  .os-seplist > li + li::before {
-    content: "·";
-    margin-inline-end: var(--os-space-2);
-    color: var(--os-color-text-subtle);
-  }
-
-  .os-seplist--pipe > li + li::before {
-    content: "|";
-    color: var(--os-color-border-strong);
-  }
-
-  .os-seplist--slash > li + li::before {
-    content: "/";
   }
 }

@@ -1,11 +1,9 @@
 /**
- * Toasts — short confirmations in a polite live region.
+ * Toasts — the yellow "Lagret!" note at the top of the window, in a polite
+ * live region.
  *
- *   Oldschool.toast('Annonsen er lagret');
- *   Oldschool.toast('Kunne ikke kopiere', { icon: 'circle-alert' });
+ *   Oldschool.toast('Arrangementet er lagret');
  */
-import { icon } from './core.js';
-
 let region = null;
 
 function ensureRegion() {
@@ -18,12 +16,11 @@ function ensureRegion() {
   return region;
 }
 
-export function toast(message, { icon: iconName = 'circle-check', duration = 3200 } = {}) {
+export function toast(message, { duration = 3200 } = {}) {
   const host = ensureRegion();
   const el = document.createElement('div');
   el.className = 'os-toast';
-  el.innerHTML = `${icon(iconName)}<span></span>`;
-  el.querySelector('span').textContent = message;
+  el.textContent = message;
   host.append(el);
 
   const remove = () => el.remove();

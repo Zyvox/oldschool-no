@@ -1,0 +1,42 @@
+/*
+ * Sub navigation — the white strip of section links under the tab bar.
+ *
+ *   <nav class="os-subnav" aria-label="Nyheter">
+ *     <ul role="list">
+ *       <li><a href="#" aria-current="page">Siste</a></li>
+ *       <li><a href="#">Innenriks</a></li>
+ *     </ul>
+ *   </nav>
+ */
+@layer os.components {
+  .os-subnav {
+    margin-block-end: var(--os-gap);
+    padding: var(--os-space-1-5) var(--os-pad);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-radius: var(--os-radius-panel);
+    background-color: var(--os-color-surface);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-subnav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-space-1) 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .os-subnav li + li::before {
+    content: "|";
+    margin-inline: var(--os-space-2);
+    color: var(--os-color-border-strong);
+  }
+
+  .os-subnav a[aria-current] {
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-bold);
+    text-decoration: none;
+  }
+}

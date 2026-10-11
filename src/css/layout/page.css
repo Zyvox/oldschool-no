@@ -1,23 +1,29 @@
 /*
- * Page shell.
+ * Page shell — the frame.
  *
  *   <body class="os-page">
- *     <header class="os-masthead">…</header>
- *     <div class="os-container">  crumb bar, layout …  </div>
- *     <footer class="os-footer">…</footer>
+ *     <div class="os-container">
+ *       <header class="os-masthead">…</header>
+ *       <nav class="os-tabbar">…</nav>          (optional)
+ *       <div class="os-crumbbar">…</div>        (optional)
+ *       <main class="os-layout">…</main>
+ *       <footer class="os-footer">…</footer>
+ *     </div>
  *   </body>
+ *
+ * Everything sits in one centred ~1000px column on the tinted frame, the way
+ * portals were laid out in 2008. The frame is the page background.
+ *
+ * Widths: .os-container--wide (1200px) gives tables and dashboards room on
+ * 16:9 screens and still floats centred on the frame; data-width="wide" on
+ * <html> does the same for every page. .os-container--md (768px) suits forms
+ * and articles.
  */
 @layer os.layout {
   .os-page {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
     min-height: 100dvh;
-  }
-
-  .os-page__body {
-    flex: 1 0 auto;
-    padding-block-end: calc(var(--os-gap) * 2);
+    padding-block-end: var(--os-space-4);
   }
 
   .os-container {
@@ -27,25 +33,16 @@
     padding-inline: var(--os-gutter);
   }
 
-  .os-container--sm {
-    --os-container-width: var(--os-container-sm);
-  }
+  .os-container--md { --os-container-width: var(--os-container-md); }
+  .os-container--wide,
+  [data-width="wide"] { --os-container-width: var(--os-container-xl); }
 
-  .os-container--md {
-    --os-container-width: var(--os-container-md);
-  }
-
-  .os-container--xl {
-    --os-container-width: var(--os-container-xl);
-  }
-
-  /* Vertical rhythm between the big blocks of a page. */
+  /* Vertical space between the big blocks of a page. */
   .os-page-section {
     margin-block-start: var(--os-gap);
   }
 
-  /* Phones: .os-container--bleed turns panels into edge-to-edge sheets —
-     see components/bleed.css (it must out-rank component styles). */
+  /* Phones: .os-container--bleed lets boxes run edge to edge — see components/bleed.css. */
   @media (max-width: 39.99em) {
     .os-container--bleed {
       padding-inline: 0;

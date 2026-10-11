@@ -1,12 +1,12 @@
 /*
- * Toast — brief confirmation of something the user just did ("Annonsen er lagret").
+ * Toast — the yellow "Lagret!" message that fades in at the top and goes away.
  * Created by Oldschool.toast('…'); lives in a polite live region.
  */
 @layer os.components {
   .os-toaster {
     position: fixed;
     inset-inline: 0;
-    inset-block-end: calc(var(--os-space-6) + env(safe-area-inset-bottom, 0px));
+    inset-block-start: var(--os-space-3);
     z-index: var(--os-z-toast);
     display: flex;
     flex-direction: column;
@@ -16,41 +16,20 @@
     pointer-events: none;
   }
 
-  @media (max-width: 59.99em) {
-    body:has(> .os-mobilebar) .os-toaster {
-      inset-block-end: calc(5.5rem + env(safe-area-inset-bottom, 0px));
-    }
-  }
-
   .os-toast {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--os-space-2-5);
-    max-width: 30rem;
-    padding: var(--os-space-3) var(--os-space-4);
+    max-width: 28rem;
+    padding: var(--os-space-2) var(--os-space-4);
+    border: var(--os-border-width) solid var(--os-color-warning-border);
     border-radius: var(--os-radius-control);
-    background-color: var(--os-color-surface-inverse);
-    color: var(--os-color-text-inverse);
-    box-shadow: var(--os-shadow-overlay);
-    font-size: var(--os-text-sm);
-    font-weight: var(--os-weight-medium);
+    background-color: var(--os-color-warning-subtle);
+    box-shadow: var(--os-shadow-raised);
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-bold);
     pointer-events: auto;
-    transition: opacity var(--os-duration-base) var(--os-ease-standard), translate var(--os-duration-base) var(--os-ease-out);
-  }
-
-  .os-toast .os-icon {
-    --os-icon-size: 1.15rem;
+    transition: opacity var(--os-duration-base) var(--os-ease-standard);
   }
 
   .os-toast[data-state="hidden"] {
     opacity: 0;
-    translate: 0 0.5rem;
-  }
-
-  @starting-style {
-    .os-toast {
-      opacity: 0;
-      translate: 0 0.5rem;
-    }
   }
 }

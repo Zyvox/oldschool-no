@@ -1,0 +1,75 @@
+/*
+ * Teasers — text-only article or news listings: date, headline, a line of
+ * text and "Les mer »". No thumbnails needed.
+ *
+ *   <ul class="os-teasers" role="list">
+ *     <li class="os-teaser">
+ *       <p class="os-teaser__meta"><time datetime="2026-09-29">29.09.2026</time> · Kultur</p>
+ *       <h3 class="os-teaser__title"><a href="#">Nytt bibliotek åpner i Bjørvika</a></h3>
+ *       <p class="os-teaser__text">Det nye hovedbiblioteket …</p>
+ *     </li>
+ *   </ul>
+ *
+ * Variants: --compact (headline + date on one line), --lead (first item larger).
+ */
+@layer os.components {
+  .os-teasers {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .os-teaser {
+    display: grid;
+    min-block-size: 1.5rem;
+    gap: var(--os-space-0-5);
+    padding-block: var(--os-space-2-5);
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  .os-teaser:first-child {
+    padding-block-start: 0;
+  }
+
+  .os-teaser:last-child {
+    padding-block-end: 0;
+    border-block-end: 0;
+  }
+
+  .os-teaser__meta {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+  }
+
+  .os-teaser__title {
+    font-size: var(--os-text-lg);
+    line-height: var(--os-leading-snug);
+  }
+
+  .os-teaser__text {
+    color: var(--os-color-text);
+  }
+
+  .os-teasers--lead > .os-teaser:first-child .os-teaser__title {
+    font-size: var(--os-text-3xl);
+    line-height: var(--os-leading-tight);
+  }
+
+  .os-teasers--lead > .os-teaser:first-child .os-teaser__text {
+    font-size: var(--os-text-lg);
+  }
+
+  .os-teasers--compact .os-teaser {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 var(--os-space-2);
+    padding-block: var(--os-row-pad);
+  }
+
+  .os-teasers--compact .os-teaser__title {
+    order: -1;
+    font-size: var(--os-text-md);
+  }
+}

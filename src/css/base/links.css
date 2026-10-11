@@ -1,39 +1,33 @@
 /*
- * Links look like links: colored and underlined, everywhere in content.
- * The underline is a soft tint of the link color and firms up on hover.
- * Navigation regions (masthead, tabs, menus) may drop the underline at rest
- * but must show it on hover and focus.
+ * Links look like links: blue and underlined, everywhere in content —
+ * the most important thing the old web got right. Hover darkens the link;
+ * visited links turn purple in content, lists and results.
+ * Navigation regions (tabs, side menus) may drop the underline at rest.
  */
 @layer os.base {
   a {
     color: var(--os-color-link);
     text-decoration-line: underline;
     text-decoration-thickness: var(--os-link-underline-thickness);
-    text-decoration-color: color-mix(in srgb, currentColor var(--os-link-underline-mix), transparent);
     text-underline-offset: var(--os-link-underline-offset);
-    text-decoration-skip-ink: auto;
-    transition:
-      color var(--os-duration-fast) var(--os-ease-standard),
-      text-decoration-color var(--os-duration-fast) var(--os-ease-standard);
   }
 
   a:hover {
     color: var(--os-color-link-hover);
-    text-decoration-color: currentColor;
     text-decoration-thickness: max(2px, var(--os-link-underline-thickness));
   }
 
-  a:focus-visible {
-    border-radius: var(--os-radius-xs);
-  }
-
-  /* Visited state where it helps: running text and result lists. */
-  :where(.os-prose, .os-visited) a:visited,
+  :where(.os-prose, .os-linklist, .os-teasers, .os-results, .os-visited) a:visited,
   a.os-link--visited:visited {
     color: var(--os-color-link-visited);
   }
 
   a[href^="tel:"] {
     white-space: nowrap;
+  }
+
+  /* "Les mer »" style links */
+  .os-more::after {
+    content: "\00a0»";
   }
 }

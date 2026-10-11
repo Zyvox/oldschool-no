@@ -1,92 +1,57 @@
 /*
- * Disclosure — native <details>/<summary>, styled. Group several in an
- * .os-accordion for an FAQ or a long list of facts.
+ * Disclosure — "[+] Vis mer" on native <details>. Group them in
+ * .os-accordion for FAQs.
  *
  *   <details class="os-disclosure">
- *     <summary>Hva er inkludert i leien?</summary>
+ *     <summary>Hvordan kjøper jeg billett?</summary>
  *     <div class="os-disclosure__content">…</div>
  *   </details>
  */
 @layer os.components {
   .os-disclosure > summary {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--os-space-3);
-    padding-block: var(--os-space-3);
-    color: var(--os-color-text-strong);
-    font-weight: var(--os-weight-semibold);
+    align-items: baseline;
+    gap: var(--os-space-1-5);
+    padding-block: var(--os-space-1);
+    color: var(--os-color-link);
+    font-weight: var(--os-weight-bold);
     list-style: none;
+    cursor: pointer;
   }
 
   .os-disclosure > summary::-webkit-details-marker {
     display: none;
   }
 
-  .os-disclosure > summary::after {
-    content: "";
+  .os-disclosure > summary::before {
+    content: "+";
+    display: inline-grid;
     flex: none;
-    width: 1.15rem;
-    height: 1.15rem;
-    background-color: var(--os-color-text-muted);
-    mask: var(--os-glyph-chevron-down) center / contain no-repeat;
-    transition: rotate var(--os-duration-base) var(--os-ease-out);
+    place-items: center;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: var(--os-border-width) solid var(--os-color-border-strong);
+    background-color: var(--os-color-surface);
+    color: var(--os-color-text-strong);
+    font-family: var(--os-font-mono);
+    font-size: 0.8rem;
+    line-height: 1;
   }
 
-  .os-disclosure[open] > summary::after {
-    rotate: 180deg;
+  .os-disclosure[open] > summary::before {
+    content: "−";
   }
 
   .os-disclosure > summary:hover {
     color: var(--os-color-link-hover);
+    text-decoration: underline;
   }
 
   .os-disclosure__content {
-    padding-block-end: var(--os-space-4);
+    padding: var(--os-space-1) 0 var(--os-space-2) 1.35rem;
   }
 
-  /* Animate open/close where supported (Chromium 131+). */
-  @media (prefers-reduced-motion: no-preference) {
-    .os-disclosure::details-content {
-      height: 0;
-      overflow: clip;
-      transition: height var(--os-duration-base) var(--os-ease-out), content-visibility var(--os-duration-base) allow-discrete;
-    }
-
-    .os-disclosure[open]::details-content {
-      height: auto;
-    }
-  }
-
-  .os-accordion > .os-disclosure {
-    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
-  }
-
-  .os-accordion > .os-disclosure:first-child {
+  .os-accordion > .os-disclosure + .os-disclosure {
     border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
-  }
-
-  .os-panel__body > .os-accordion:first-child > .os-disclosure:first-child {
-    border-block-start: 0;
-  }
-
-  .os-panel__body > .os-accordion > .os-disclosure:first-child > summary {
-    padding-block-start: 0;
-  }
-
-  .os-panel__body > .os-accordion > .os-disclosure:last-child {
-    border-block-end: 0;
-  }
-
-  .os-panel__body > .os-accordion > .os-disclosure:last-child > summary {
-    padding-block-end: 0;
-  }
-
-  .os-panel__body > .os-accordion > .os-disclosure[open]:last-child > summary {
-    padding-block-end: var(--os-space-3);
-  }
-
-  .os-panel__body > .os-accordion > .os-disclosure:last-child .os-disclosure__content {
-    padding-block-end: 0;
   }
 }

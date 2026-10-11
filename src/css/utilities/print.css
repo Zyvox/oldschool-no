@@ -1,18 +1,18 @@
 /*
- * Print — the original had a "Skriv ut" link for a reason: people printed
- * listings and brought them to viewings. Keep that working.
+ * Print — "Skriv ut" was on every page in 2008 for a reason. Boxes print as
+ * boxes, navigation disappears, the sidebar follows the content.
  */
 @layer os.utilities {
   @media print {
     @page {
-      margin: 16mm 14mm;
+      margin: 15mm;
     }
 
     html {
       color-scheme: light;
       background: #fff !important;
       color: #000 !important;
-      font-size: 11pt;
+      font-size: 10pt;
     }
 
     body {
@@ -25,22 +25,26 @@
     .os-skiplink,
     .os-masthead__nav,
     .os-masthead__toggle,
-    .os-navbar,
+    .os-tabbar,
+    .os-subnav,
     .os-pager,
     .os-actions,
     .os-mobilebar,
     .os-toaster,
-    .os-gallery__thumbs,
-    .os-gallery__nav,
-    .os-gallery__expand,
-    .os-gallery__counter,
     .os-filters,
     .os-filters-toggle,
-    .os-result__save,
-    .os-footer__grid,
+    .os-sidenav,
+    .os-pagination,
+    .os-search,
     .os-button,
+    .os-footer__grid,
     [data-os-print-hide] {
       display: none !important;
+    }
+
+    .os-container {
+      max-width: none;
+      padding: 0;
     }
 
     .os-layout {
@@ -48,40 +52,23 @@
     }
 
     .os-layout__aside {
-      margin-block-start: 8mm;
+      margin-block-start: 5mm;
     }
 
     .os-panel,
     .os-crumbbar {
       break-inside: avoid;
       border-color: #999 !important;
-      box-shadow: none !important;
     }
 
-    .os-panel + .os-panel,
     .os-layout__main > * + *,
     .os-layout__aside > * + * {
-      margin-block-start: 5mm;
+      margin-block-start: 4mm;
     }
 
     .os-panel__header {
       background: #eee !important;
-    }
-
-    .os-gallery__track {
-      overflow: visible !important;
-    }
-
-    .os-gallery__slide:not(:first-child) {
-      display: none;
-    }
-
-    .os-gallery__grid {
-      display: block !important;
-    }
-
-    .os-gallery__slide img {
-      max-height: 90mm;
+      box-shadow: none !important;
     }
 
     a {
@@ -91,10 +78,6 @@
     .os-prose a[href^="http"]::after {
       content: " (" attr(href) ")";
       font-size: 0.85em;
-    }
-
-    .os-footer {
-      border-top: 1px solid #999;
     }
   }
 }

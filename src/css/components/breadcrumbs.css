@@ -1,42 +1,40 @@
 /*
- * Breadcrumbs — the path from the front page down to this page.
+ * Breadcrumbs — bold links separated by slashes, as in the original.
  *
  *   <ol class="os-breadcrumbs">
  *     <li><a href="/">Forsiden</a></li>
  *     <li><a href="/eiendom">Eiendom</a></li>
- *     <li><a href="/eiendom/oslo">Oslo</a></li>
+ *     <li><span aria-current="page">Oslo</span></li>
  *   </ol>
  *
- * On phones only the last link is shown, as a "back to …" link.
- * Add .os-breadcrumbs--full to always show every step.
+ * On phones only the closest parent link is shown, as "‹ Parent".
+ * Add .os-breadcrumbs--full to always show the whole trail.
  */
 @layer os.components {
   .os-breadcrumbs {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--os-space-1) var(--os-space-1-5);
+    gap: 0 var(--os-space-1);
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: var(--os-text-sm);
   }
 
   .os-breadcrumbs > li {
     display: inline-flex;
     align-items: center;
-    gap: var(--os-space-1-5);
+    gap: var(--os-space-1);
     min-width: 0;
   }
 
   .os-breadcrumbs > li + li::before {
     content: "/";
-    color: var(--os-color-text-subtle);
-    font-weight: var(--os-weight-regular);
+    color: var(--os-color-text-muted);
   }
 
   .os-breadcrumbs a {
-    font-weight: var(--os-weight-medium);
+    font-weight: var(--os-weight-bold);
   }
 
   .os-breadcrumbs [aria-current] {
@@ -48,17 +46,14 @@
       display: none;
     }
 
-    /* Keep the last item that is a link — i.e. the closest parent. */
     .os-breadcrumbs:not(.os-breadcrumbs--full) > li:has(> a):not(:has(~ li > a)) {
       display: inline-flex;
     }
 
     .os-breadcrumbs:not(.os-breadcrumbs--full) > li:has(> a):not(:has(~ li > a))::before {
-      content: "";
-      width: 1.1em;
-      height: 1.1em;
-      background-color: var(--os-color-link);
-      mask: var(--os-glyph-chevron-left) center / contain no-repeat;
+      content: "‹";
+      color: var(--os-color-link);
+      font-weight: var(--os-weight-bold);
     }
 
     .os-breadcrumbs:not(.os-breadcrumbs--full) a {

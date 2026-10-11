@@ -1,234 +1,80 @@
 /*
- * Result — one item in a search result list. The whole card is clickable
- * (stretched title link), the save button stays independently clickable,
- * and visited results change color — practical, old-school.
+ * Search results — text-only rows: title link, a line of text, and a green
+ * address/meta line, as search engines showed them.
  *
  *   <ol class="os-results" role="list">
- *     <li>
- *       <article class="os-result">
- *         <div class="os-result__media"><img src="…" alt=""></div>
- *         <div class="os-result__body">
- *           <p class="os-result__eyebrow">St. Hanshaugen, Oslo</p>
- *           <h2 class="os-result__title"><a href="…">Lys og koselig 1-roms</a></h2>
- *           <p class="os-result__facts"><span>29 m²</span><span>1 soverom</span></p>
- *           <p class="os-result__price">7 500 kr <span>/mnd</span></p>
- *           <p class="os-result__meta">Lunde &amp; Berg · 2 t siden</p>
- *         </div>
- *         <button class="os-result__save" type="button" aria-pressed="false" aria-label="Lagre …">…heart…</button>
- *       </article>
+ *     <li class="os-result">
+ *       <h2 class="os-result__title"><a href="#">Søknad om barnehageplass</a></h2>
+ *       <p class="os-result__text">Hovedopptaket har søknadsfrist 1. mars …</p>
+ *       <p class="os-result__meta"><span class="os-result__url">oldschool.no/barnehage/soknad</span> · Oppdatert 12.09.2026</p>
  *     </li>
  *   </ol>
  *
- * .os-results--grid lays the same markup out as cards.
+ * A trailing figure or action can sit in .os-result__aside (right column).
  */
 @layer os.components {
   .os-results {
-    container: os-results / inline-size;
     display: grid;
-    gap: var(--os-space-3);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .os-result {
-    position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--os-space-3);
-    height: 100%;
-    padding: var(--os-space-3);
-    border: var(--os-border-width) solid var(--os-color-panel-border);
-    border-radius: var(--os-radius-panel);
-    background-color: var(--os-color-surface);
-    transition: border-color var(--os-duration-fast) var(--os-ease-standard), box-shadow var(--os-duration-fast);
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--os-space-0-5) var(--os-space-3);
+    padding-block: var(--os-space-2-5);
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
   }
 
-  .os-result:hover {
-    border-color: var(--os-color-border-strong);
+  .os-result:last-child {
+    border-block-end: 0;
   }
 
-  .os-result:has(.os-result__title a:focus-visible) {
-    outline: var(--os-focus-width) solid var(--os-color-focus);
-    outline-offset: var(--os-focus-offset);
+  .os-result > :not(.os-result__aside) {
+    grid-column: 1;
   }
 
-  .os-result__media {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-    border-radius: var(--os-radius-media);
-    background-color: var(--os-color-surface-sunken);
-  }
-
-  .os-result__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--os-duration-slow) var(--os-ease-out);
-  }
-
-  .os-result:hover .os-result__media img {
-    transform: scale(1.03);
-  }
-
-  .os-result__media .os-badge {
-    position: absolute;
-    inset-block-start: var(--os-space-2);
-    inset-inline-start: var(--os-space-2);
-  }
-
-  .os-result__body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--os-space-1);
-    min-width: 0;
-  }
-
-  .os-result__eyebrow {
-    color: var(--os-color-text-muted);
-    font-size: var(--os-text-xs);
+  .os-result__aside {
+    grid-row: 1 / span 3;
+    grid-column: 2;
+    text-align: end;
   }
 
   .os-result__title {
     font-size: var(--os-text-lg);
-    font-weight: var(--os-weight-semibold);
     line-height: var(--os-leading-snug);
-    letter-spacing: -0.01em;
   }
 
-  .os-result__title a {
-    color: var(--os-color-link);
-    text-decoration: none;
+  .os-result__text {
+    max-width: var(--os-measure);
   }
 
-  .os-result__title a::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: var(--os-radius-panel);
-  }
-
-  .os-result__title a:focus-visible {
-    outline: none;
-  }
-
-  .os-result__title a:hover {
-    color: var(--os-color-link-hover);
-    text-decoration: underline;
-  }
-
-  .os-result__title a:visited {
-    color: var(--os-color-link-visited);
-  }
-
-  .os-result__facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 var(--os-space-2);
-    color: var(--os-color-text);
-    font-size: var(--os-text-sm);
-  }
-
-  .os-result__facts > * + *::before {
-    content: "·";
-    margin-inline-end: var(--os-space-2);
-    color: var(--os-color-text-subtle);
-  }
-
-  .os-result__price {
-    margin-block-start: var(--os-space-1);
-    color: var(--os-color-price);
-    font-size: var(--os-text-lg);
+  .os-result mark {
+    background: none;
+    color: inherit;
     font-weight: var(--os-weight-bold);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .os-result__price span {
-    color: var(--os-color-text-muted);
-    font-size: var(--os-text-sm);
-    font-weight: var(--os-weight-regular);
   }
 
   .os-result__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--os-space-1) var(--os-space-2);
-    margin-block-start: auto;
-    padding-block-start: var(--os-space-1);
     color: var(--os-color-text-muted);
     font-size: var(--os-text-xs);
   }
 
-  .os-result__save {
-    position: absolute;
-    inset-block-start: calc(var(--os-space-3) + var(--os-space-2));
-    inset-inline-end: calc(var(--os-space-3) + var(--os-space-2));
-    z-index: 1;
-    display: inline-grid;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    padding: 0;
-    border: 0;
-    border-radius: var(--os-radius-full);
-    background-color: rgb(255 255 255 / 0.92);
-    color: #1b2027;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  .os-result__url {
+    color: var(--os-color-success);
   }
 
-  .os-result__save:hover {
-    background-color: #fff;
+  .os-result__figure {
+    color: var(--os-color-price);
+    font-size: var(--os-text-lg);
+    font-weight: var(--os-weight-bold);
+    white-space: nowrap;
   }
 
-  .os-result__save[aria-pressed="true"] .os-icon {
-    fill: var(--os-color-saved);
-    stroke: var(--os-color-saved);
-  }
-
-  .os-result--muted .os-result__media img {
-    filter: grayscale(0.85);
-    opacity: 0.75;
-  }
-
-  /* Row layout when the list is wide enough */
-  @container os-results (min-width: 34rem) {
-    .os-results:not(.os-results--grid) .os-result {
-      grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
-      gap: var(--os-space-4);
-    }
-
-    .os-results:not(.os-results--grid) .os-result__save {
-      inset-block-start: var(--os-space-3);
-      inset-inline-end: var(--os-space-3);
-      background-color: transparent;
-      color: var(--os-color-text-muted);
-      box-shadow: none;
-    }
-
-    .os-results:not(.os-results--grid) .os-result__save:hover {
-      background-color: var(--os-color-surface-tint);
-      color: var(--os-color-text-strong);
-    }
-
-    .os-results:not(.os-results--grid) .os-result__body {
-      padding-inline-end: var(--os-space-10);
-    }
-
-    .os-results:not(.os-results--grid) .os-result__price {
-      font-size: var(--os-text-xl);
-    }
-  }
-
-  @container os-results (min-width: 46rem) {
-    .os-results:not(.os-results--grid) .os-result {
-      grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
-    }
-  }
-
-  .os-results--grid {
-    grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
-    gap: var(--os-gap);
+  .os-results-summary {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
   }
 }

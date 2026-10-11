@@ -1,5 +1,5 @@
 /*
- * Oldschool — a practical, Nordic design harness.
+ * Oldschool — the 2008 Scandinavian web, brought back.
  *
  * Entry point. Import this file (or dist/oldschool.css, its bundled twin).
  *
@@ -25,7 +25,6 @@
 
 /* Base */
 @import "base/glyphs.css";
-@import "base/fonts.css";
 @import "base/reset.css";
 @import "base/document.css";
 @import "base/typography.css";
@@ -43,10 +42,13 @@
 @import "components/brand.css";
 @import "components/utilnav.css";
 @import "components/menu.css";
-@import "components/navbar.css";
+@import "components/tabbar.css";
+@import "components/subnav.css";
 @import "components/crumbbar.css";
 @import "components/breadcrumbs.css";
 @import "components/pager.css";
+@import "components/sidenav.css";
+@import "components/alphabet.css";
 @import "components/footer.css";
 @import "components/mobilebar.css";
 
@@ -55,19 +57,28 @@
 @import "components/heading.css";
 @import "components/meta.css";
 @import "components/actions.css";
-@import "components/gallery.css";
 @import "components/linkrow.css";
 @import "components/kv.css";
 @import "components/price.css";
-@import "components/keyfacts.css";
 @import "components/summary.css";
 @import "components/contact.css";
-@import "components/avatar.css";
-@import "components/media.css";
+@import "components/linklist.css";
+@import "components/teaser.css";
+@import "components/tags.css";
 @import "components/checklist.css";
 @import "components/schedule.css";
 @import "components/prose.css";
-@import "components/energy.css";
+@import "components/stat.css";
+@import "components/progress.css";
+@import "components/steps.css";
+@import "components/table.css";
+@import "components/toolbar.css";
+@import "components/bars.css";
+@import "components/calendar.css";
+@import "components/log.css";
+@import "components/thread.css";
+@import "components/files.css";
+@import "components/empty.css";
 
 /* Components — controls & feedback */
 @import "components/button.css";
@@ -78,17 +89,15 @@
 @import "components/filters.css";
 @import "components/chip.css";
 @import "components/badge.css";
+@import "components/status.css";
 @import "components/alert.css";
+@import "components/errorsummary.css";
 @import "components/toast.css";
 @import "components/tabs.css";
 @import "components/disclosure.css";
-@import "components/table.css";
 @import "components/pagination.css";
 @import "components/result.css";
 @import "components/dialog.css";
-@import "components/skeleton.css";
-@import "components/stat.css";
-@import "components/empty.css";
 @import "components/bleed.css";
 
 /* Utilities (last) */

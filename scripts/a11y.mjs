@@ -21,14 +21,16 @@ const quick = process.argv.includes('--quick');
 
 const pages = fs.readdirSync(path.join(root, 'site')).filter((f) => f.endsWith('.html'));
 const variants = quick
-  ? [{ theme: 'fjord', mode: 'light', width: 1280 }]
+  ? [{ theme: 'retro', mode: 'light', width: 1280 }]
   : [
-    { theme: 'fjord', mode: 'light', width: 1280 },
-    { theme: 'fjord', mode: 'dark', width: 1280 },
-    { theme: 'fjord', mode: 'light', width: 390 },
-    { theme: 'kontrast', mode: 'light', width: 1280 },
     { theme: 'retro', mode: 'light', width: 1280 },
-    { theme: 'tyttebaer', mode: 'dark', width: 390 },
+    { theme: 'retro', mode: 'dark', width: 1280 },
+    { theme: 'retro', mode: 'light', width: 390 },
+    { theme: 'retro', mode: 'light', width: 1280, density: 'compact' },
+    { theme: 'standard', mode: 'light', width: 1280 },
+    { theme: 'standard', mode: 'dark', width: 390 },
+    { theme: 'standard', mode: 'light', width: 1280, density: 'comfortable', width_: 'wide' },
+    { theme: 'retro', mode: 'light', width: 1280, contrast: true },
   ];
 
 const { server, url } = await startServer(root);
@@ -36,8 +38,8 @@ const browser = await chromium.launch();
 let problems = 0;
 
 for (const variant of variants) {
-  const context = await browser.newContext({ viewport: { width: variant.width, height: 900 }, reducedMotion: 'reduce' });
-  await context.addInitScript((prefs) => localStorage.setItem('os-prefs', JSON.stringify(prefs)), { theme: variant.theme, mode: variant.mode });
+  const context = await browser.newContext({ viewport: { width: variant.width, height: 900 }, reducedMotion: 'reduce', contrast: variant.contrast ? 'more' : 'no-preference' });
+  await context.addInitScript((prefs) => localStorage.setItem('os-prefs', JSON.stringify(prefs)), { theme: variant.theme, mode: variant.mode, density: variant.density ?? 'standard', width: variant.width_ ?? 'classic' });
   for (const file of pages) {
     const page = await context.newPage();
     const errors = [];
@@ -50,7 +52,7 @@ for (const variant of variants) {
       runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'] },
       rules: { region: { enabled: false } },
     }));
-    const label = `${file} [${variant.theme}/${variant.mode} @${variant.width}]`;
+    const label = `${file} [${variant.theme}/${variant.mode}${variant.density ? `/${variant.density}` : ''}${variant.width_ ? `/${variant.width_}` : ''}${variant.contrast ? '/more-contrast' : ''} @${variant.width}]`;
     if (!result.violations.length && !errors.length) {
       console.log(`  ✓ ${label}`);
     } else {

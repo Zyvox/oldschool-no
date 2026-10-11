@@ -6,788 +6,901 @@
   <title>Components – Oldschool</title>
   <meta name="description" content="Every Oldschool component with a live example and copy-ready markup.">
   <meta name="color-scheme" content="light dark">
-  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='comfortable')d.dataset.density=p.density}catch(e){}})()</script>
-  <link rel="preload" href="../dist/fonts/inter/inter-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../dist/oldschool.css">
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='standard')d.dataset.density=p.density;if(p.width&&p.width!=='classic')d.dataset.width=p.width}catch(e){}})()</script>
+  <link rel="stylesheet" href="../dist/oldschool.min.css">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <script src="assets/generated/themes.js" defer></script>
   <script src="assets/site.js" defer></script>
-  <script src="../dist/oldschool.js" defer></script>
+  <script src="../dist/oldschool.min.js" defer></script>
 </head>
 <body class="os-page">
   <a class="os-skiplink" href="#main">Skip to content</a>
 
-  <header class="os-masthead">
-    <div class="os-container os-masthead__inner">
+  <div class="os-container">
+    <header class="os-masthead">
       <a class="os-brand" href="index.html">
-        <svg class="os-brand__mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><rect x="2" y="2" width="9" height="11" rx="2.5"/><rect x="14" y="2" width="16" height="11" rx="2.5"/><rect x="2" y="16" width="9" height="14" rx="2.5"/><rect x="14" y="16" width="16" height="14" rx="2.5"/></g></svg>
+        <svg class="os-brand__mark" viewBox="0 0 40 28" aria-hidden="true"><rect x="0" y="4" width="22" height="22" rx="6" fill="currentColor" opacity=".45"/><rect x="12" y="1" width="28" height="26" rx="7" fill="currentColor"/></svg>
         <span class="os-brand__name">oldschool</span>
         <span class="os-brand__product">components</span>
       </a>
-      <p class="os-text-sm os-text-muted os-hide-below-md">Live examples · copy-ready markup · every theme</p>
-    </div>
-  </header>
+      <ul class="os-utilnav" role="list">
+        <li><a href="tokens.html">Tokens</a></li>
+        <li><a href="themes.html">Themes</a></li>
+        <li><a href="https://github.com/Zyvox/oldschool-no">Source</a></li>
+      </ul>
+    </header>
 
-  <div class="os-page__body">
-    <div class="os-container">
-      <div class="os-layout os-layout--start">
-        <aside class="os-layout__aside">
-          <nav class="os-panel os-layout__sticky hx-toc" aria-label="Components">
-            <div class="os-panel__body">
-              <p class="hx-toc__title">Page chrome</p>
+    <div class="os-crumbbar">
+      <nav aria-label="Breadcrumb">
+        <ol class="os-breadcrumbs">
+          <li><a href="index.html">Oldschool</a></li>
+          <li><span aria-current="page">Components</span></li>
+        </ol>
+      </nav>
+      <span>59 components · live examples · both themes</span>
+    </div>
+
+    <div class="os-layout os-layout--start">
+      <div class="os-layout__nav">
+        <nav class="os-sidenav os-layout__sticky" aria-labelledby="toc">
+          <h2 class="os-sidenav__title" id="toc">Components</h2>
+          <ul class="os-sidenav__list" role="list">
+            <li><a href="#chrome">Page chrome</a>
               <ul role="list">
-                <li><a href="#masthead">Masthead &amp; brand</a></li>
+                <li><a href="#masthead">Masthead</a></li>
+                <li><a href="#tabbar">Tab bar &amp; sub nav</a></li>
                 <li><a href="#crumbbar">Crumb bar &amp; pager</a></li>
-                <li><a href="#navbar">Navbar</a></li>
+                <li><a href="#sidenav">Side menu</a></li>
+                <li><a href="#alphabet">A–Å index</a></li>
+                <li><a href="#footer">Footer</a></li>
                 <li><a href="#mobilebar">Mobile bar</a></li>
               </ul>
-              <p class="hx-toc__title">Content</p>
+            </li>
+            <li><a href="#content">Content</a>
               <ul role="list">
-                <li><a href="#panel">Panel</a></li>
+                <li><a href="#panel">Box</a></li>
                 <li><a href="#heading">Heading &amp; meta</a></li>
-                <li><a href="#actions">Actions</a></li>
-                <li><a href="#kv">Key/value</a></li>
-                <li><a href="#price">Price &amp; key facts</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#linkrow">Link row</a></li>
-                <li><a href="#contact">Contact card</a></li>
-                <li><a href="#schedule">Schedule</a></li>
-                <li><a href="#checklist">Checklist</a></li>
-                <li><a href="#result">Result</a></li>
-                <li><a href="#table">Table</a></li>
-                <li><a href="#stat">Stats</a></li>
+                <li><a href="#actions">Action row</a></li>
+                <li><a href="#kv">Facts</a></li>
+                <li><a href="#price">Key figure</a></li>
+                <li><a href="#contact">Contact box</a></li>
+                <li><a href="#linklist">Link lists</a></li>
+                <li><a href="#teasers">Teasers</a></li>
+                <li><a href="#tags">Tags</a></li>
+                <li><a href="#schedule">Schedule &amp; checklist</a></li>
+                <li><a href="#table">Table &amp; toolbar</a></li>
+                <li><a href="#stats">Stats &amp; progress</a></li>
+                <li><a href="#bars">Bars (poll)</a></li>
+                <li><a href="#calendar">Calendar</a></li>
+                <li><a href="#log">Log</a></li>
+                <li><a href="#thread">Thread</a></li>
+                <li><a href="#files">Files</a></li>
               </ul>
-              <p class="hx-toc__title">Controls</p>
+            </li>
+            <li><a href="#controls">Controls</a>
               <ul role="list">
                 <li><a href="#button">Buttons</a></li>
-                <li><a href="#field">Fields</a></li>
-                <li><a href="#choice">Choices</a></li>
-                <li><a href="#segmented">Segmented</a></li>
-                <li><a href="#search">Search</a></li>
-                <li><a href="#chip">Chips</a></li>
+                <li><a href="#form">Forms</a></li>
+                <li><a href="#steps">Steps</a></li>
+                <li><a href="#search">Search &amp; results</a></li>
                 <li><a href="#tabs">Tabs</a></li>
                 <li><a href="#disclosure">Disclosure</a></li>
                 <li><a href="#pagination">Pagination</a></li>
               </ul>
-              <p class="hx-toc__title">Feedback</p>
+            </li>
+            <li><a href="#feedback">Feedback</a>
               <ul role="list">
-                <li><a href="#badge">Badges</a></li>
-                <li><a href="#alert">Alerts &amp; notes</a></li>
-                <li><a href="#toast">Toast</a></li>
-                <li><a href="#dialog">Dialog</a></li>
-                <li><a href="#empty">Empty &amp; loading</a></li>
+                <li><a href="#alert">Notices &amp; badges</a></li>
+                <li><a href="#status">Status</a></li>
+                <li><a href="#errorsummary">Error summary</a></li>
+                <li><a href="#dialog">Dialog &amp; toast</a></li>
               </ul>
-            </div>
-          </nav>
-        </aside>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-        <main class="os-layout__main hx-docs" id="main">
-          <section class="os-panel">
-            <div class="os-panel__body os-stack os-stack--sm">
-              <h1>Components</h1>
-              <p class="os-heading__lead">Each component is plain HTML with <code>os-</code> classes, styled only through tokens — so every example below follows the theme, mode and density you pick in the bar above. Open <em>Code</em> under any example for the exact markup.</p>
-            </div>
-          </section>
+      <main class="os-layout__main" id="main">
+        <section class="os-panel">
+          <header class="os-panel__header"><h1 class="os-panel__title">Components</h1></header>
+          <div class="os-panel__body os-stack os-stack--xs">
+            <p>Each component is plain HTML with <code>os-</code> classes, styled only through tokens — every example follows the theme, mode and density you pick in the toolbar. Open <strong>Show markup</strong> under an example to copy it. The same notes live at the top of each file in <code>src/css/components/</code>.</p>
+          </div>
+        </section>
 
-          <!-- ================================================================ MASTHEAD -->
-          <section class="hx-section" id="masthead" aria-labelledby="h-masthead">
-            <h2 id="h-masthead">Masthead &amp; brand <code>.os-masthead</code></h2>
-            <p>Brand on the left, utility links divided by hairlines on the right — exactly the 2000s arrangement. Below 60em the links fold into a popover menu (no JavaScript).</p>
-            <div class="hx-demo hx-demo--flush" data-demo>
+        <h2 class="os-sectionhead" id="chrome">Page chrome</h2>
+
+        <section class="os-panel hx-section" id="masthead" aria-labelledby="h-masthead">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-masthead">Masthead</h3><code>.os-masthead .os-brand .os-utilnav</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Logo on the left, small utility links top right, on the frame. Below 40em the links fold into a popover menu — no JavaScript.</p>
+            <div class="hx-demo" data-demo>
               <header class="os-masthead">
-                <div class="os-container os-masthead__inner">
-                  <a class="os-brand" href="#">
-                    <svg class="os-brand__mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><rect x="2" y="2" width="9" height="11" rx="2.5"/><rect x="14" y="2" width="16" height="11" rx="2.5"/><rect x="2" y="16" width="9" height="14" rx="2.5"/><rect x="14" y="16" width="16" height="14" rx="2.5"/></g></svg>
-                    <span class="os-brand__name">oldschool</span>
-                    <span class="os-brand__product">eiendom</span>
-                  </a>
-                  <button class="os-button os-button--quiet os-masthead__toggle" type="button" popovertarget="demo-menu">
-                    <svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-menu"></use></svg>Menu
-                  </button>
-                  <nav class="os-masthead__nav" id="demo-menu" popover aria-label="Shortcuts">
-                    <ul class="os-utilnav" role="list">
-                      <li><a href="#">Customer service</a></li>
-                      <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-plus"></use></svg>New listing</a></li>
-                      <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-user"></use></svg>Log in</a></li>
-                    </ul>
-                  </nav>
-                </div>
+                <a class="os-brand" href="#">
+                  <svg class="os-brand__mark" viewBox="0 0 40 28" aria-hidden="true"><rect x="0" y="4" width="22" height="22" rx="6" fill="currentColor" opacity=".45"/><rect x="12" y="1" width="28" height="26" rx="7" fill="currentColor"/></svg>
+                  <span class="os-brand__name">oldschool</span>
+                  <span class="os-brand__product">kultur</span>
+                </a>
+                <button class="os-button os-button--sm os-masthead__toggle" type="button" popovertarget="demo-menu">Menu</button>
+                <nav class="os-masthead__nav" id="demo-menu" popover aria-label="Shortcuts">
+                  <ul class="os-utilnav" role="list">
+                    <li><a href="#">Customer service</a></li>
+                    <li><a href="#">Submit an event</a></li>
+                    <li><a href="#">Log in</a></li>
+                  </ul>
+                </nav>
               </header>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ CRUMBBAR -->
-          <section class="hx-section" id="crumbbar" aria-labelledby="h-crumbbar">
-            <h2 id="h-crumbbar">Crumb bar &amp; pager <code>.os-crumbbar</code></h2>
-            <p>Where am I, and where can I go next. On phones the breadcrumbs collapse to a single “back to …” link and the pager becomes icon buttons.</p>
+        <section class="os-panel hx-section" id="tabbar" aria-labelledby="h-tabbar">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-tabbar">Tab bar &amp; sub navigation</h3><code>.os-tabbar .os-subnav</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Main sections as folder tabs; the current tab joins the white strip of section links below it. The bar scrolls sideways on narrow screens instead of wrapping.</p>
+            <div class="hx-demo" data-demo>
+              <nav class="os-tabbar" aria-label="Main">
+                <ul class="os-tabbar__list" role="list">
+                  <li><a class="os-tabbar__tab" href="#">Home</a></li>
+                  <li><a class="os-tabbar__tab" href="#" aria-current="page">News</a></li>
+                  <li><a class="os-tabbar__tab" href="#">Culture</a></li>
+                  <li><a class="os-tabbar__tab" href="#">Services</a></li>
+                </ul>
+              </nav>
+              <nav class="os-subnav" aria-label="News">
+                <ul role="list">
+                  <li><a href="#" aria-current="page">Latest</a></li>
+                  <li><a href="#">Politics</a></li>
+                  <li><a href="#">Schools</a></li>
+                  <li><a href="#">Archive</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="crumbbar" aria-labelledby="h-crumbbar">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-crumbbar">Crumb bar &amp; pager</h3><code>.os-crumbbar .os-breadcrumbs .os-pager</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Where am I (bold, slash-separated breadcrumbs), and where can I go next (&lt; Previous · Result 3 of 128 · Next &gt;). On phones the breadcrumbs collapse to "‹ parent".</p>
             <div class="hx-demo" data-demo>
               <div class="os-crumbbar">
-                <nav aria-label="Breadcrumb">
+                <nav aria-label="Breadcrumb (example)">
                   <ol class="os-breadcrumbs">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Property</a></li>
-                    <li><a href="#">To rent</a></li>
-                    <li><a href="#">Oslo</a></li>
+                    <li><a href="#">Culture</a></li>
+                    <li><a href="#">Concerts</a></li>
                   </ol>
                 </nav>
                 <nav class="os-pager" aria-label="Browse results">
-                  <a class="os-pager__link" href="#" rel="prev"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-chevron-left"></use></svg><span class="os-pager__label">Previous</span></a>
+                  <a class="os-pager__link" href="#" rel="prev">&lt; <span class="os-pager__label">Previous</span></a>
                   <a class="os-pager__position" href="#"><span class="os-pager__label">Result </span>3 of 128</a>
-                  <a class="os-pager__link" href="#" rel="next"><span class="os-pager__label">Next</span><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-chevron-right"></use></svg></a>
+                  <a class="os-pager__link" href="#" rel="next"><span class="os-pager__label">Next</span> &gt;</a>
                 </nav>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ NAVBAR -->
-          <section class="hx-section" id="navbar" aria-labelledby="h-navbar">
-            <h2 id="h-navbar">Navbar <code>.os-navbar</code></h2>
-            <p>Section links under the masthead. Scrolls sideways rather than wrapping.</p>
-            <div class="hx-demo hx-demo--flush" data-demo>
-              <nav class="os-navbar" aria-label="Categories">
-                <div class="os-container">
-                  <ul class="os-navbar__list" role="list">
-                    <li><a class="os-navbar__link" href="#" aria-current="page"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-house"></use></svg>Property</a></li>
-                    <li><a class="os-navbar__link" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-sofa"></use></svg>Marketplace</a></li>
-                    <li><a class="os-navbar__link" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-car"></use></svg>Cars</a></li>
-                    <li><a class="os-navbar__link" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-briefcase"></use></svg>Jobs</a></li>
-                  </ul>
-                </div>
+        <section class="os-panel hx-section" id="sidenav" aria-labelledby="h-sidenav">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-sidenav">Side menu</h3><code>.os-sidenav</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>The left-hand menu of an intranet or self-service area, one level of nesting. The current page gets an accent bar.</p>
+            <div class="hx-demo" data-demo>
+              <nav class="os-sidenav" aria-labelledby="sn-title" style="max-width: 14rem">
+                <h4 class="os-sidenav__title" id="sn-title">My page</h4>
+                <ul class="os-sidenav__list" role="list">
+                  <li><a href="#">Overview</a></li>
+                  <li><a href="#">Messages <span class="os-sidenav__count">(2)</span></a></li>
+                  <li><a href="#">Applications</a>
+                    <ul role="list"><li><a href="#" aria-current="page">Kindergarten</a></li><li><a href="#">Parking permit</a></li></ul>
+                  </li>
+                  <li><a href="#">Settings</a></li>
+                </ul>
               </nav>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ MOBILEBAR -->
-          <section class="hx-section" id="mobilebar" aria-labelledby="h-mobilebar">
-            <h2 id="h-mobilebar">Mobile bar <code>.os-mobilebar</code></h2>
-            <p>Fixed to the bottom of the screen below 60em: the one number and the one action that matter. It is shown statically here; on a page it is a direct child of <code>&lt;body&gt;</code>, which then reserves space for it automatically.</p>
-            <div class="hx-demo hx-demo--flush hx-mobilebar-demo" data-demo>
-              <div class="os-mobilebar" role="region" aria-label="Contact">
-                <div class="os-mobilebar__info">
-                  <span class="os-mobilebar__label">Rent per month</span>
-                  <span class="os-mobilebar__value">7 500 kr</span>
-                </div>
-                <a class="os-button" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-phone"></use></svg><span class="os-button__label">Call</span></a>
-                <a class="os-button os-button--primary" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-mail"></use></svg><span class="os-button__label">Email</span></a>
-              </div>
+        <section class="os-panel hx-section" id="alphabet" aria-labelledby="h-alphabet">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-alphabet">A–Å index</h3><code>.os-alphabet</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>"Services A–Å": one link per letter, empty letters greyed out but kept in place so the row never jumps.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <nav class="os-alphabet" aria-label="Services A–Å">
+                <ul role="list"><li><a href="#">A</a></li><li><a href="#">B</a></li><li><a href="#">C</a></li><li><a href="#">D</a></li><li><a href="#">E</a></li><li><a href="#">F</a></li><li><a href="#">G</a></li><li><a href="#">H</a></li><li><a href="#">I</a></li><li><a href="#">J</a></li><li><a href="#" aria-current="true">K</a></li><li><a href="#">L</a></li><li><a href="#">M</a></li><li><a href="#">N</a></li><li><a href="#">O</a></li><li><a href="#">P</a></li><li><span aria-disabled="true">Q</span></li><li><a href="#">R</a></li><li><a href="#">S</a></li><li><a href="#">T</a></li><li><a href="#">U</a></li><li><a href="#">V</a></li><li><span aria-disabled="true">W</span></li><li><span aria-disabled="true">X</span></li><li><a href="#">Y</a></li><li><span aria-disabled="true">Z</span></li><li><span aria-disabled="true">Æ</span></li><li><a href="#">Ø</a></li><li><a href="#">Å</a></li></ul>
+              </nav>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ PANEL -->
-          <section class="hx-section" id="panel" aria-labelledby="h-panel">
-            <h2 id="h-panel">Panel <code>.os-panel</code></h2>
-            <p>The white box on the canvas, with the tinted header band that defined the original. Panels are container-query containers: what is inside adapts to the panel’s width, not the screen’s.</p>
+        <section class="os-panel hx-section" id="footer" aria-labelledby="h-footer">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-footer">Footer</h3><code>.os-footer</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>On the frame after the last box: optional link columns, then one centred line. Include an accessibility statement link.</p>
             <div class="hx-demo" data-demo>
-              <div class="os-grid os-grid--2">
-                <section class="os-panel" aria-labelledby="p1">
-                  <header class="os-panel__header">
-                    <h3 class="os-panel__title" id="p1">Price information</h3>
-                    <a class="os-panel__action" href="#">Edit</a>
-                  </header>
-                  <div class="os-panel__body">Default: tinted header band, padded body.</div>
-                  <footer class="os-panel__footer"><a href="#">Consumer loan</a></footer>
+              <footer class="os-footer">
+                <div class="os-footer__bottom">
+                  <ul class="os-seplist" role="list">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Accessibility statement</a></li>
+                  </ul>
+                  <p>© 2026 Example</p>
+                </div>
+              </footer>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="mobilebar" aria-labelledby="h-mobilebar">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-mobilebar">Mobile bar</h3><code>.os-mobilebar</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Fixed to the bottom of phones and tablets (below 60em) with the one number and action that matter. Put it as a direct child of <code>&lt;body&gt;</code>; the page reserves space for it. Shown statically here.</p>
+            <div class="hx-demo hx-mobilebar-demo" data-demo>
+              <div class="os-mobilebar" role="region" aria-label="Tickets" style="position: static; display: flex">
+                <div class="os-mobilebar__info"><span class="os-mobilebar__label">Ticket price</span><span class="os-mobilebar__value">250,-</span></div>
+                <a class="os-button os-button--primary" href="#">Buy ticket</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <h2 class="os-sectionhead" id="content">Content</h2>
+
+        <section class="os-panel hx-section" id="panel" aria-labelledby="h-panel">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-panel">Box</h3><code>.os-panel</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>The white box on the frame with the tinted header band. Boxes are size containers — what is inside responds to the box's width.</p>
+            <div class="hx-demo" data-demo>
+              <div class="os-columns">
+                <section class="os-panel" aria-labelledby="bx1">
+                  <header class="os-panel__header"><h4 class="os-panel__title" id="bx1">Price information</h4><a class="os-panel__action" href="#">Edit</a></header>
+                  <div class="os-panel__body">Default: tinted band, padded body.</div>
+                  <footer class="os-panel__footer"><a class="os-more" href="#">More</a></footer>
                 </section>
-                <section class="os-panel os-panel--plain" aria-labelledby="p2">
-                  <header class="os-panel__header"><h3 class="os-panel__title" id="p2">Plain</h3></header>
-                  <div class="os-panel__body">No band — for secondary boxes.</div>
+                <section class="os-panel os-panel--plain" aria-labelledby="bx2">
+                  <header class="os-panel__header"><h4 class="os-panel__title" id="bx2">Plain</h4></header>
+                  <div class="os-panel__body">No band, for secondary boxes.</div>
                 </section>
-                <section class="os-panel os-panel--accent" aria-labelledby="p3">
-                  <header class="os-panel__header"><h3 class="os-panel__title" id="p3">Accent</h3></header>
-                  <div class="os-panel__body">Header band in the accent color.</div>
+                <section class="os-panel os-panel--accent" aria-labelledby="bx3">
+                  <header class="os-panel__header"><h4 class="os-panel__title" id="bx3">Important</h4></header>
+                  <div class="os-panel__body">Accent band for the one thing that matters.</div>
                 </section>
-                <section class="os-panel os-panel--tint" aria-labelledby="p4">
-                  <header class="os-panel__header"><h3 class="os-panel__title" id="p4">Tint</h3></header>
-                  <div class="os-panel__body">Tinted body for highlighted summaries.</div>
+                <section class="os-panel os-panel--note" aria-labelledby="bx4">
+                  <header class="os-panel__header"><h4 class="os-panel__title" id="bx4">Note</h4></header>
+                  <div class="os-panel__body">The yellow sticky note.</div>
                 </section>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ HEADING -->
-          <section class="hx-section" id="heading" aria-labelledby="h-heading">
-            <h2 id="h-heading">Heading &amp; meta <code>.os-heading</code> <code>.os-meta</code> <code>.os-refcode</code></h2>
-            <p>Title with eyebrow and subtitle; small dot-separated metadata; and the big reference code people read out on the phone.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-stack os-stack--md">
-                <div class="os-split os-split--baseline">
-                  <p class="os-meta"><span>Updated <time datetime="2026-09-26T20:18">26 September 2026, 20:18</time></span><span>1 204 views</span></p>
-                  <p class="os-refcode"><span class="os-refcode__label">Listing code</span><span class="os-refcode__value">281592780</span></p>
+        <section class="os-panel hx-section" id="heading" aria-labelledby="h-heading">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-heading">Heading &amp; meta</h3><code>.os-heading .os-meta .os-refcode</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Page title with kicker and subtitle; small grey metadata; the big grey reference code people read out on the phone.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-stack os-stack--xs">
+                <div class="os-split os-split--start">
+                  <p class="os-meta"><span>Last changed: <time datetime="2026-09-26T20:18">26 September 2026 20:18</time></span><span>Viewed 1 204 times</span></p>
+                  <p class="os-refcode"><span class="os-refcode__label">Code:</span> <span class="os-refcode__value">28159278</span></p>
                 </div>
                 <div class="os-heading">
-                  <h3 class="os-heading__title">Bright and cosy studio with a great location</h3>
-                  <p class="os-heading__eyebrow">For rent</p>
-                  <p class="os-heading__subtitle"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-map-pin"></use></svg>Fjellveien 6 C, 0360 Oslo</p>
+                  <h4 class="os-heading__title">Autumn jazz in the Botanical Garden</h4>
+                  <p class="os-heading__kicker">Concert</p>
+                  <p class="os-heading__subtitle">Saturday 11 October 2026, 19:00 · Tøyen, Oslo</p>
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ ACTIONS -->
-          <section class="hx-section" id="actions" aria-labelledby="h-actions">
-            <h2 id="h-actions">Actions <code>.os-actions</code></h2>
-            <p>Icon + word, divided by hairlines. In a narrow container they become round icon buttons (words stay for screen readers). Toggles use <code>aria-pressed</code>; try the star.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <ul class="os-actions" role="list">
-                <li><button class="os-action" type="button" aria-pressed="false" data-os-toggle data-os-label-pressed="Saved" data-os-toast-pressed="Listing saved"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-star"></use></svg><span class="os-action__label">Save listing</span></button></li>
-                <li><a class="os-action" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-mail"></use></svg><span class="os-action__label">Tell a friend</span></a></li>
-                <li><button class="os-action" type="button" data-os-share><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-share-2"></use></svg><span class="os-action__label">Share</span></button></li>
-                <li><button class="os-action" type="button" data-os-print><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-printer"></use></svg><span class="os-action__label">Print</span></button></li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- ================================================================ KV -->
-          <section class="hx-section" id="kv" aria-labelledby="h-kv">
-            <h2 id="h-kv">Key/value <code>.os-kv</code></h2>
-            <p>Quiet labels, strong values, hairline rhythm, tabular numbers. <code>--cols</code> flows into as many columns as fit; <code>--end</code> right-aligns values for summaries.</p>
-            <div class="hx-demo" data-demo>
-              <div class="os-grid" style="--os-grid-min: 18rem">
-                <section class="os-panel" aria-label="Facts">
-                  <div class="os-panel__body">
-                    <dl class="os-kv">
-                      <div><dt>Type</dt><dd>Apartment</dd></div>
-                      <div><dt>Bedrooms</dt><dd>1</dd></div>
-                      <div><dt>Usable area</dt><dd>29 m²</dd></div>
-                      <div><dt>Built</dt><dd>1912</dd></div>
-                    </dl>
-                  </div>
-                </section>
-                <section class="os-panel" aria-label="Summary">
-                  <div class="os-panel__body">
-                    <dl class="os-kv os-kv--end">
-                      <div><dt>Rent</dt><dd>7 500 kr</dd></div>
-                      <div><dt>Deposit</dt><dd>30 000 kr</dd></div>
-                      <div><dt>Available</dt><dd>1 Nov 2026</dd></div>
-                    </dl>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </section>
-
-          <!-- ================================================================ PRICE -->
-          <section class="hx-section" id="price" aria-labelledby="h-price">
-            <h2 id="h-price">Price &amp; key facts <code>.os-price</code> <code>.os-keyfacts</code></h2>
-            <p>The important number is big. Use a no-break space as thousands separator (<code>7&amp;nbsp;500 kr</code>) — <code>Intl.NumberFormat('nb-NO')</code> does it for you.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-stack os-stack--lg">
-                <div class="os-cluster os-cluster--lg os-cluster--start">
-                  <p class="os-price os-price--lg"><span class="os-price__label">Rent per month</span><span class="os-price__amount">7 500 kr</span></p>
-                  <p class="os-price"><span class="os-price__label">Asking price</span><span class="os-price__amount">4 250 000 kr</span><span class="os-price__note">Total incl. costs 4 363 820 kr</span></p>
-                  <p class="os-price os-price--md"><span class="os-price__old">12 500 kr</span><span class="os-price__amount">11 900 kr <span class="os-price__unit">/mo</span></span></p>
-                </div>
-                <p class="os-price os-price--inline os-price--lg"><span class="os-price__label">Rent per month</span><span class="os-price__amount">7 500 kr</span></p>
-                <ul class="os-keyfacts" role="list">
-                  <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-ruler"></use></svg><span><strong>29 m²</strong> usable</span></li>
-                  <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-bed-double"></use></svg><span><strong>1</strong> bedroom</span></li>
-                  <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-calendar"></use></svg><span>From <strong>1 November</strong></span></li>
+        <section class="os-panel hx-section" id="actions" aria-labelledby="h-actions">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-actions">Action row &amp; link row</h3><code>.os-actions .os-linkrow</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Small icon + word links divided by pipes, and a few big plain links to other views. Toggles use <code>aria-pressed</code> — try the star.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-stack os-stack--sm">
+                <ul class="os-actions" role="list">
+                  <li><button class="os-action" type="button" aria-pressed="false" data-os-toggle data-os-label-pressed="Saved" data-os-toast-pressed="Saved!"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-star"></use></svg><span class="os-action__label">Save</span></button></li>
+                  <li><a class="os-action" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-mail"></use></svg><span class="os-action__label">Tell a friend</span></a></li>
+                  <li><button class="os-action" type="button" data-os-print><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-printer"></use></svg><span class="os-action__label">Print</span></button></li>
                 </ul>
-                <ul class="os-keyfacts os-keyfacts--tiles" role="list">
-                  <li><strong>29 m²</strong>Usable area</li>
-                  <li><strong>1</strong>Bedroom</li>
-                  <li><strong>3rd</strong>Floor</li>
-                  <li><strong>1912</strong>Built</li>
+                <ul class="os-linkrow" role="list">
+                  <li><a href="#">Programme</a></li>
+                  <li><a href="#">Directions</a></li>
+                  <li><a href="#">Previous concerts</a></li>
                 </ul>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ GALLERY -->
-          <section class="hx-section" id="gallery" aria-labelledby="h-gallery">
-            <h2 id="h-gallery">Gallery <code>.os-gallery</code></h2>
-            <p>Picture plus a 2×2 grid of thumbnails when there is room; a swipeable carousel with a counter when there is not. Arrow keys work on the picture; click it for the lightbox.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <figure class="os-gallery" data-os-gallery aria-label="Photos of the flat">
-                <div class="os-gallery__grid">
-                  <div class="os-gallery__stage">
-                    <ul class="os-gallery__track" role="list">
-                      <li class="os-gallery__slide" id="g-1"><img src="assets/img/living.svg" alt="Living room with a large window" width="1200" height="900"></li>
-                      <li class="os-gallery__slide" id="g-2"><img src="assets/img/kitchen.svg" alt="Kitchen with green fronts" width="1200" height="900" loading="lazy"></li>
-                      <li class="os-gallery__slide" id="g-3"><img src="assets/img/bedroom.svg" alt="Bedroom with double bed" width="1200" height="900" loading="lazy"></li>
-                      <li class="os-gallery__slide" id="g-4"><img src="assets/img/bath.svg" alt="Tiled bathroom" width="1200" height="900" loading="lazy"></li>
-                    </ul>
-                    <p class="os-gallery__counter" aria-hidden="true"><span data-os-gallery-current>1</span> / 4</p>
-                  </div>
-                  <ul class="os-gallery__thumbs" role="list">
-                    <li><a class="os-gallery__thumb" href="#g-1" aria-current="true"><img src="assets/img/living.svg" alt=""><span class="os-sr-only">Photo 1</span></a></li>
-                    <li><a class="os-gallery__thumb" href="#g-2"><img src="assets/img/kitchen.svg" alt=""><span class="os-sr-only">Photo 2</span></a></li>
-                    <li><a class="os-gallery__thumb" href="#g-3"><img src="assets/img/bedroom.svg" alt=""><span class="os-sr-only">Photo 3</span></a></li>
-                    <li><a class="os-gallery__thumb" href="#g-4"><img src="assets/img/bath.svg" alt=""><span class="os-sr-only">Photo 4</span></a></li>
-                  </ul>
-                </div>
-                <figcaption class="os-gallery__caption"><span>Showing 4 of 4 photos</span><span aria-hidden="true">·</span><button type="button" data-os-gallery-open>View large photos</button></figcaption>
-              </figure>
+        <section class="os-panel hx-section" id="kv" aria-labelledby="h-kv">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-kv">Facts</h3><code>.os-kv</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Label : value rows with a thin rule; values bold and tabular. <code>--cols</code> flows into columns when the box is wide; <code>--end</code> right-aligns values.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <dl class="os-kv os-kv--cols">
+                <div><dt>Type</dt><dd>Concert</dd></div>
+                <div><dt>Doors open</dt><dd>18:30</dd></div>
+                <div><dt>Duration</dt><dd>2 h</dd></div>
+                <div><dt>Seats</dt><dd>320</dd></div>
+                <div><dt>Age limit</dt><dd>None</dd></div>
+                <div><dt>Code</dt><dd>28159278</dd></div>
+              </dl>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ LINKROW -->
-          <section class="hx-section" id="linkrow" aria-labelledby="h-linkrow">
-            <h2 id="h-linkrow">Link row <code>.os-linkrow</code></h2>
-            <p>A few big plain links to other views. In a narrow container it becomes a list with chevrons.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <ul class="os-linkrow" role="list">
-                <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-plane"></use></svg>View from above</a></li>
-                <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-map"></use></svg>View on map</a></li>
-                <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-images"></use></svg>Neighbourhood photos</a></li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- ================================================================ CONTACT -->
-          <section class="hx-section" id="contact" aria-labelledby="h-contact">
-            <h2 id="h-contact">Contact card <code>.os-contact</code> <code>.os-avatar</code></h2>
-            <p>Who to call and every way to reach them. The brand band takes the agency’s own colors through two local custom properties.</p>
+        <section class="os-panel hx-section" id="price" aria-labelledby="h-price">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-price">Key figure</h3><code>.os-price .os-summary</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>The one big number. <code>--split</code> for sidebars. Norwegian style: <code>7&amp;nbsp;500,-</code>.</p>
             <div class="hx-demo" data-demo>
-              <div class="hx-narrow">
-                <section class="os-panel os-contact" aria-labelledby="c-name" style="--os-contact-brand-bg: #1f3b33; --os-contact-brand-fg: #f1ede3;">
-                  <div class="os-contact__brand"><span class="os-contact__logo">Lunde &amp; Berg</span><span>lettings</span></div>
+              <div class="os-columns">
+                <div class="os-panel"><div class="os-panel__body"><p class="os-price"><span class="os-price__label">Ticket price</span><span class="os-price__amount">250,-</span></p></div></div>
+                <section class="os-panel os-summary" aria-label="Summary">
                   <div class="os-panel__body">
-                    <div class="os-contact__person">
-                      <span class="os-avatar" aria-hidden="true">IH</span>
-                      <div><h3 class="os-contact__name" id="c-name">Ingrid Haugen</h3><p class="os-contact__role">Letting agent</p></div>
-                    </div>
-                    <div class="os-contact__buttons">
-                      <a class="os-button os-button--primary" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-phone"></use></svg>Call 12 34 56 78</a>
-                      <a class="os-button" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-mail"></use></svg>Send email</a>
-                    </div>
-                    <ul class="os-contact__links" role="list">
-                      <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-globe"></use></svg>Website</a></li>
-                      <li><a href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-file-down"></use></svg>Download prospectus</a></li>
-                    </ul>
-                    <p class="os-contact__meta">Reference 6308</p>
+                    <p class="os-price os-price--split"><span class="os-price__label">Ticket price</span><span class="os-price__amount">250,-</span></p>
+                    <dl class="os-kv os-kv--end"><div><dt>Student</dt><dd>150,-</dd></div><div><dt>Family (2 + 2)</dt><dd>500,-</dd></div></dl>
+                    <p class="os-summary__links"><a href="#">Group booking</a><a href="#">Gift card</a></p>
                   </div>
                 </section>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ SCHEDULE -->
-          <section class="hx-section" id="schedule" aria-labelledby="h-schedule">
-            <h2 id="h-schedule">Schedule <code>.os-schedule</code></h2>
-            <p>Upcoming dates with a small calendar tile.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <ul class="os-schedule" role="list">
-                <li class="os-schedule__item">
-                  <time class="os-schedule__date" datetime="2026-10-11"><span class="os-schedule__day">11</span><span class="os-schedule__month">Oct</span></time>
-                  <div class="os-schedule__body"><p class="os-schedule__title">Sunday 11 October</p><p class="os-schedule__time">13:00–14:00 · Open viewing</p></div>
-                  <a class="os-button os-button--sm" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-calendar-plus"></use></svg>Add to calendar</a>
+        <section class="os-panel hx-section" id="contact" aria-labelledby="h-contact">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-contact">Contact box</h3><code>.os-contact</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Organisation, person and every way to reach them. The organisation strip takes its own colours through <code>--os-contact-org-bg</code> / <code>-fg</code>.</p>
+            <div class="hx-demo" data-demo>
+              <section class="os-panel os-contact" aria-labelledby="c-name" style="max-width: 19rem; --os-contact-org-bg: #1f3a6e; --os-contact-org-fg: #fff">
+                <div class="os-contact__org">Tøyen kulturforening</div>
+                <div class="os-panel__body">
+                  <h4 class="os-contact__name" id="c-name">Ingrid Haugen</h4>
+                  <p class="os-contact__role">Event organiser</p>
+                  <dl class="os-contact__lines"><div><dt>Phone</dt><dd><a href="#">12 34 56 78</a></dd></div></dl>
+                  <ul class="os-contact__links" role="list"><li><a href="#">Send email</a></li><li><a href="#">Website</a></li><li><a href="#">More from this organiser</a></li></ul>
+                  <p class="os-note">Reference 6308</p>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="linklist" aria-labelledby="h-linklist">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-linklist">Link lists</h3><code>.os-linklist</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>» bullets for related links, numbers for "Most read", rules between items, or columns.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-columns">
+                <ul class="os-linklist os-linklist--ruled" role="list">
+                  <li><a href="#">How to apply for kindergarten</a> <span class="os-linklist__meta">(12.09)</span></li>
+                  <li><a href="#">Parking permits for residents</a></li>
+                  <li><a href="#">Waste collection calendar</a></li>
+                </ul>
+                <ol class="os-linklist os-linklist--numbered" role="list">
+                  <li><a href="#">New cycle lanes open in October</a></li>
+                  <li><a href="#">What's open in the autumn holiday</a></li>
+                  <li><a href="#">Library opening hours extended</a></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="teasers" aria-labelledby="h-teasers">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-teasers">Teasers</h3><code>.os-teasers</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Text-only news listings: date, headline, a line of text, "Read more »". <code>--lead</code> enlarges the first; <code>--compact</code> puts each on one line.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <ul class="os-teasers os-teasers--lead" role="list">
+                <li class="os-teaser">
+                  <p class="os-teaser__meta"><time datetime="2026-09-30">30.09.2026</time> · Transport</p>
+                  <h4 class="os-teaser__title"><a href="#">New cycle lanes along Ring 2 open in October</a></h4>
+                  <p class="os-teaser__text">4.3 kilometres of continuous cycle lane are ready. <a class="os-more" href="#">Read more</a></p>
                 </li>
-                <li class="os-schedule__item">
-                  <time class="os-schedule__date" datetime="2026-10-13"><span class="os-schedule__day">13</span><span class="os-schedule__month">Oct</span></time>
-                  <div class="os-schedule__body"><p class="os-schedule__title">Tuesday 13 October</p><p class="os-schedule__time">17:30–18:00 · By appointment</p></div>
-                  <a class="os-button os-button--sm" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-calendar-plus"></use></svg>Add to calendar</a>
+                <li class="os-teaser">
+                  <p class="os-teaser__meta"><time datetime="2026-09-29">29.09.2026</time> · Schools</p>
+                  <h4 class="os-teaser__title"><a href="#">Autumn holiday: this is open</a> <span class="os-badge os-badge--new">New</span></h4>
                 </li>
               </ul>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ CHECKLIST -->
-          <section class="hx-section" id="checklist" aria-labelledby="h-checklist">
-            <h2 id="h-checklist">Checklist <code>.os-checklist</code> <code>.os-energy</code></h2>
-            <p>Facilities and inclusions in auto columns. Plus a domain example: the Norwegian energy label.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-stack os-stack--lg">
+        <section class="os-panel hx-section" id="tags" aria-labelledby="h-tags">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-tags">Tags</h3><code>.os-tags</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>A proper tag cloud (<code>data-size</code> 1–5), or <code>--boxed</code> labels.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-stack os-stack--sm">
+                <ul class="os-tags" role="list">
+                  <li><a href="#" data-size="3">kindergarten</a></li>
+                  <li><a href="#" data-size="1">library</a></li>
+                  <li><a href="#" data-size="5">parking</a></li>
+                  <li><a href="#" data-size="2">schools</a></li>
+                  <li><a href="#" data-size="4">recycling</a></li>
+                </ul>
+                <ul class="os-tags os-tags--boxed" role="list">
+                  <li><a href="#">cycling</a></li>
+                  <li><a href="#">traffic</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="schedule" aria-labelledby="h-schedule">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-schedule">Schedule &amp; checklist</h3><code>.os-schedule .os-checklist</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-columns">
+                <ul class="os-schedule" role="list">
+                  <li class="os-schedule__item">
+                    <time class="os-schedule__date" datetime="2026-10-11"><span class="os-schedule__month">Oct</span><span class="os-schedule__day">11</span></time>
+                    <div class="os-schedule__body"><p class="os-schedule__title"><a href="#">Sunday 11 October</a></p><p class="os-schedule__time">13:00–15:00 · Main stage</p></div>
+                  </li>
+                  <li class="os-schedule__item">
+                    <time class="os-schedule__date" datetime="2026-10-18"><span class="os-schedule__month">Oct</span><span class="os-schedule__day">18</span></time>
+                    <div class="os-schedule__body"><p class="os-schedule__title"><a href="#">Sunday 18 October</a></p><p class="os-schedule__time">13:00–15:00</p></div>
+                  </li>
+                </ul>
                 <ul class="os-checklist" role="list">
-                  <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-check"></use></svg>Heating</li>
-                  <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-check"></use></svg>Hot water</li>
-                  <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-check"></use></svg>Broadband</li>
-                  <li class="os-checklist__no"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-x"></use></svg>Electricity <span class="os-sr-only">(not included)</span></li>
+                  <li>Wheelchair access</li>
+                  <li>Cloakroom</li>
+                  <li>Café open</li>
+                  <li class="os-checklist__no">Parking <span class="os-sr-only">(not included)</span></li>
                 </ul>
-                <div class="os-cluster">
-                  <span class="os-energy" data-grade="A" data-heating="gronn"><span class="os-energy__grade">A</span><span class="os-energy__text">Green</span></span>
-                  <span class="os-energy" data-grade="C" data-heating="lysegronn"><span class="os-energy__grade">C</span><span class="os-energy__text">Light green</span></span>
-                  <span class="os-energy" data-grade="D" data-heating="gul"><span class="os-energy__grade">D</span><span class="os-energy__text">Yellow</span></span>
-                  <span class="os-energy" data-grade="F" data-heating="oransje"><span class="os-energy__grade">F</span><span class="os-energy__text">Orange</span></span>
-                  <span class="os-energy" data-grade="G" data-heating="rod"><span class="os-energy__grade">G</span><span class="os-energy__text">Red</span></span>
-                </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ RESULT -->
-          <section class="hx-section" id="result" aria-labelledby="h-result">
-            <h2 id="h-result">Result <code>.os-results</code> <code>.os-result</code></h2>
-            <p>Whole card clickable via a stretched title link, independent save button, visited titles change color. Rows when the list is wide, cards when it is narrow or <code>--grid</code>.</p>
-            <div class="hx-demo" data-demo>
-              <ol class="os-results" role="list">
-                <li>
-                  <article class="os-result">
-                    <div class="os-result__media"><img src="assets/img/house-red.svg" alt="" loading="lazy"><span class="os-badge os-badge--solid os-badge--success">New</span></div>
-                    <div class="os-result__body">
-                      <p class="os-result__eyebrow">Nordstrand, Oslo</p>
-                      <h3 class="os-result__title"><a href="listing.html">Red wooden house with a large garden</a></h3>
-                      <p class="os-result__facts"><span>142 m²</span><span>4 bedrooms</span><span>Detached</span></p>
-                      <p class="os-result__price">29 500 kr <span>/mo</span></p>
-                      <p class="os-result__meta"><span class="os-badge os-badge--info os-badge--dot">Viewing Sun 11/10</span><span>Private landlord · 2 h ago</span></p>
-                    </div>
-                    <button class="os-result__save" type="button" aria-pressed="false" data-os-toggle aria-label="Save “Red wooden house”"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-heart"></use></svg></button>
-                  </article>
-                </li>
-                <li>
-                  <article class="os-result">
-                    <div class="os-result__media"><img src="assets/img/cabin.svg" alt="" loading="lazy"></div>
-                    <div class="os-result__body">
-                      <p class="os-result__eyebrow">Hemsedal, Buskerud</p>
-                      <h3 class="os-result__title"><a href="listing.html">Timber cabin, ski-in/ski-out</a></h3>
-                      <p class="os-result__facts"><span>86 m²</span><span>3 bedrooms</span><span>Cabin</span></p>
-                      <p class="os-result__price">3 900 kr <span>/night</span></p>
-                      <p class="os-result__meta"><span>Fjellhytter AS · yesterday</span></p>
-                    </div>
-                    <button class="os-result__save" type="button" aria-pressed="true" data-os-toggle aria-label="Save “Timber cabin”"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-heart"></use></svg></button>
-                  </article>
-                </li>
-              </ol>
-            </div>
-          </section>
-
-          <!-- ================================================================ TABLE -->
-          <section class="hx-section" id="table" aria-labelledby="h-table">
-            <h2 id="h-table">Table <code>.os-table</code></h2>
-            <p>For genuinely two-dimensional data. Numbers right-aligned and tabular; the wrapper scrolls on small screens and is keyboard-focusable.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-table-wrap" tabindex="0" role="region" aria-label="Rent history">
-                <table class="os-table os-table--hover">
-                  <caption>Average rent, one-room flats, St. Hanshaugen</caption>
-                  <thead><tr><th scope="col">Quarter</th><th scope="col" class="os-num">Listings</th><th scope="col" class="os-num">Average rent</th><th scope="col" class="os-num">Change</th></tr></thead>
+        <section class="os-panel hx-section" id="table" aria-labelledby="h-table">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-table">Table &amp; toolbar</h3><code>.os-table .os-toolbar .os-status</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Header band, zebra rows, numbers right-aligned. <code>data-os-sort</code> makes the headers sort (numbers like "7 500,-" and dates like 12.09.2026 sort correctly).</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-table-wrap" tabindex="0" role="region" aria-label="Ticket prices">
+                <table class="os-table" data-os-sort>
+                  <caption>Ticket prices, autumn 2026</caption>
+                  <thead><tr><th scope="col">Ticket</th><th scope="col">On sale</th><th scope="col" class="os-num">Price</th></tr></thead>
                   <tbody>
-                    <tr><th scope="row">Q3 2026</th><td class="os-num">86</td><td class="os-num">8 140 kr</td><td class="os-num os-text-danger">+2,1 %</td></tr>
-                    <tr><th scope="row">Q2 2026</th><td class="os-num">102</td><td class="os-num">7 970 kr</td><td class="os-num os-text-danger">+1,4 %</td></tr>
-                    <tr><th scope="row">Q1 2026</th><td class="os-num">74</td><td class="os-num">7 860 kr</td><td class="os-num os-text-success">−0,6 %</td></tr>
+                    <tr><td>Adult</td><td>01.09.2026</td><td class="os-num">250,-</td></tr>
+                    <tr><td>Senior / student</td><td>01.09.2026</td><td class="os-num">150,-</td></tr>
+                    <tr><td>Family (2 + 2)</td><td>15.09.2026</td><td class="os-num">500,-</td></tr>
+                    <tr><td>Child under 12</td><td>01.09.2026</td><td class="os-num">0,-</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
-          </section>
-
-          <!-- ================================================================ STAT -->
-          <section class="hx-section" id="stat" aria-labelledby="h-stat">
-            <h2 id="h-stat">Stats <code>.os-stats</code> <code>.os-stat</code></h2>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-stats">
-                <div class="os-stat"><p class="os-stat__label">Average rent</p><p class="os-stat__value">8 140 kr</p><p class="os-stat__delta os-stat__delta--down">+2,1 % last quarter</p></div>
-                <div class="os-stat"><p class="os-stat__label">Days on market</p><p class="os-stat__value">9</p><p class="os-stat__delta os-stat__delta--up">−3 days</p></div>
-                <div class="os-stat"><p class="os-stat__label">New this week</p><p class="os-stat__value">31</p><p class="os-stat__delta">Same as last week</p></div>
+            <p>App tables: <code>.os-table__title</code> for the row's name, <code>.os-status</code> for state, <code>.os-table__actions</code> for the buttons (kept on one line), <code>.os-toolbar</code> above. Add <code>.os-table--stack</code> and the rows turn into small label/value boxes when the table's container is narrower than 36em — no sideways scrolling on phones. The second copy below is squeezed to show it.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-toolbar">
+                <div class="os-toolbar__group">
+                  <button class="os-button os-button--sm" type="button">Run all</button>
+                  <button class="os-button os-button--sm" type="button">Pause</button>
+                </div>
+                <p class="os-toolbar__count">3 jobs · 1 running</p>
+                <div class="os-toolbar__group os-toolbar__end">
+                  <label class="os-sr-only" for="demo-jobsort">Sort jobs</label>
+                  <select class="os-select os-select--sm" id="demo-jobsort"><option>Last run</option><option>Name</option></select>
+                </div>
+              </div>
+              <div class="os-table-wrap" tabindex="0" role="region" aria-label="Jobs">
+                <table class="os-table os-table--stack">
+                  <thead><tr><th scope="col">Name</th><th scope="col">Type</th><th scope="col" class="os-num">New</th><th scope="col">Status</th><th scope="col"><span class="os-sr-only">Actions</span></th></tr></thead>
+                  <tbody>
+                    <tr><td class="os-table__title"><a href="#">Mountain cabins, March</a></td><td>Holiday rentals (weekly price watch)</td><td class="os-num"><a href="#">3</a></td><td><span class="os-status os-status--running">Running</span></td><td class="os-table__actions"><button class="os-button os-button--sm" type="button">Find new</button> <button class="os-button os-button--sm" type="button">Update list</button></td></tr>
+                    <tr><td class="os-table__title"><a href="#">Used bikes</a></td><td>Classifieds</td><td class="os-num"><a href="#">12</a></td><td><span class="os-status os-status--success">Done</span></td><td class="os-table__actions"><button class="os-button os-button--sm" type="button">Find new</button> <button class="os-button os-button--sm" type="button">Update list</button></td></tr>
+                    <tr><td class="os-table__title"><a href="#">Flats, Grünerløkka</a></td><td>Property</td><td class="os-num">0</td><td><span class="os-status os-status--danger">Failed</span></td><td class="os-table__actions"><button class="os-button os-button--sm" type="button">Retry</button></td></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-          </section>
+            <div class="hx-demo hx-demo--white hx-demo--narrow" data-demo>
+              <div class="os-table-wrap" tabindex="0" role="region" aria-label="Jobs (narrow)">
+                <table class="os-table os-table--stack">
+                  <thead><tr><th scope="col">Name</th><th scope="col">Type</th><th scope="col" class="os-num">New</th><th scope="col">Status</th><th scope="col"><span class="os-sr-only">Actions</span></th></tr></thead>
+                  <tbody>
+                    <tr><td class="os-table__title"><a href="#">Mountain cabins, March</a></td><td>Holiday rentals (weekly price watch)</td><td class="os-num"><a href="#">3</a></td><td><span class="os-status os-status--running">Running</span></td><td class="os-table__actions"><button class="os-button os-button--sm" type="button">Find new</button> <button class="os-button os-button--sm" type="button">Update list</button></td></tr>
+                    <tr><td class="os-table__title"><a href="#">Used bikes</a></td><td>Classifieds</td><td class="os-num"><a href="#">12</a></td><td><span class="os-status os-status--success">Done</span></td><td class="os-table__actions"><button class="os-button os-button--sm" type="button">Find new</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <!-- ================================================================ BUTTON -->
-          <section class="hx-section" id="button" aria-labelledby="h-button">
-            <h2 id="h-button">Buttons <code>.os-button</code></h2>
-            <p><code>&lt;button&gt;</code> for actions, <code>&lt;a&gt;</code> for navigation, same looks. 44px tall by default (touch target). One primary per view.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
+        <section class="os-panel hx-section" id="stats" aria-labelledby="h-stats">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-stats">Stats &amp; progress</h3><code>.os-stats .os-progress</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <div class="hx-demo hx-demo--white" data-demo>
               <div class="os-stack os-stack--md">
-                <div class="os-cluster">
-                  <button class="os-button os-button--primary" type="button">Primary</button>
-                  <button class="os-button" type="button">Secondary</button>
-                  <button class="os-button os-button--tint" type="button">Tint</button>
-                  <button class="os-button os-button--quiet" type="button">Quiet</button>
-                  <button class="os-button os-button--link" type="button">Link</button>
-                  <button class="os-button os-button--danger" type="button">Delete</button>
-                  <button class="os-button" type="button" disabled>Disabled</button>
+                <div class="os-stats">
+                  <div class="os-stat"><p class="os-stat__label">Visits today</p><p class="os-stat__value">1 284</p><p class="os-stat__delta os-stat__delta--up">+12 %</p></div>
+                  <div class="os-stat"><p class="os-stat__label">Open cases</p><p class="os-stat__value">37</p><p class="os-stat__delta os-stat__delta--down">+5 since Monday</p></div>
+                  <div class="os-stat"><p class="os-stat__label">Response time</p><p class="os-stat__value">2,4 d</p><p class="os-stat__delta">Target 3 days</p></div>
                 </div>
-                <div class="os-cluster">
-                  <button class="os-button os-button--primary os-button--sm" type="button">Small</button>
-                  <button class="os-button os-button--primary" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-phone"></use></svg>With icon</button>
-                  <button class="os-button os-button--primary os-button--lg" type="button">Large</button>
-                  <button class="os-button os-button--icon" type="button" aria-label="Share"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-share-2"></use></svg></button>
-                  <div class="os-button-group" role="group" aria-label="Zoom">
-                    <button class="os-button" type="button" aria-label="Zoom out"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-minus"></use></svg></button>
-                    <button class="os-button" type="button" aria-label="Zoom in"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-plus"></use></svg></button>
+                <div class="os-progress"><div class="os-progress__label"><span>Storage</span><span>62 %</span></div><progress class="os-progress__bar" max="100" value="62">62 %</progress></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="bars" aria-labelledby="h-bars">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-bars">Bars (poll)</h3><code>.os-bars</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>The poll box of every 2008 front page, and a plain bar chart for shares of a total. The number is always printed; the bar only illustrates it.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <p class="os-text-strong">Should the library open on Sundays?</p>
+              <ol class="os-bars" role="list">
+                <li class="os-bars__item os-bars__item--lead"><span class="os-bars__label">Yes</span><span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 62%"></span></span><span class="os-bars__value">62 %</span></li>
+                <li class="os-bars__item"><span class="os-bars__label">No</span><span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 29%"></span></span><span class="os-bars__value">29 %</span></li>
+                <li class="os-bars__item"><span class="os-bars__label">Don't know</span><span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 9%"></span></span><span class="os-bars__value">9 %</span></li>
+              </ol>
+              <p class="os-note">1 482 votes. Not a scientific survey.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="calendar" aria-labelledby="h-calendar">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-calendar">Calendar</h3><code>.os-calendar</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>A month at a glance for the sidebar: a real table with week numbers, Monday first, linked days for events and <code>aria-current="date"</code> for today.</p>
+            <div class="hx-demo hx-demo--white hx-demo--narrow" data-demo>
+              <table class="os-calendar">
+                <caption>October 2026</caption>
+                <thead><tr><th scope="col"><abbr title="Week">Wk</abbr></th><th scope="col"><abbr title="Monday">Mo</abbr></th><th scope="col"><abbr title="Tuesday">Tu</abbr></th><th scope="col"><abbr title="Wednesday">We</abbr></th><th scope="col"><abbr title="Thursday">Th</abbr></th><th scope="col"><abbr title="Friday">Fr</abbr></th><th scope="col"><abbr title="Saturday">Sa</abbr></th><th scope="col"><abbr title="Sunday">Su</abbr></th></tr></thead>
+                <tbody>
+                    <tr><th scope="row">40</th><td class="os-calendar__other">28</td><td class="os-calendar__other">29</td><td class="os-calendar__other">30</td><td>1</td><td>2</td><td><a href="#" aria-label="Saturday 3 October: 1 event">3</a></td><td>4</td></tr>
+                    <tr><th scope="row">41</th><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td><a href="#" aria-label="Saturday 10 October: 2 events">10</a></td><td aria-current="date">11</td></tr>
+                    <tr><th scope="row">42</th><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td><a href="#" aria-label="Saturday 17 October: 1 event">17</a></td><td>18</td></tr>
+                    <tr><th scope="row">43</th><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td><a href="#" aria-label="Saturday 24 October: 3 events">24</a></td><td>25</td></tr>
+                    <tr><th scope="row">44</th><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td class="os-calendar__other">1</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="log" aria-labelledby="h-log">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-log">Log</h3><code>.os-log</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Case history, price changes, job runs — newest first, with a coloured dot for the outcome.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <ol class="os-log" role="list">
+                <li class="os-log__item os-log__item--success"><time class="os-log__time" datetime="2026-10-11T08:00">11.10. 08:00</time><p class="os-log__text"><strong>Run finished</strong> — 3 new matches</p></li>
+                <li class="os-log__item os-log__item--accent"><time class="os-log__time" datetime="2026-10-10T14:21">10.10. 14:21</time><p class="os-log__text">Price changed from 4 900,- to <strong>4 500,-</strong></p></li>
+                <li class="os-log__item os-log__item--danger"><time class="os-log__time" datetime="2026-10-09T08:00">09.10. 08:00</time><p class="os-log__text"><strong>Run failed</strong> — the site did not answer. <a href="#">Details</a></p></li>
+                <li class="os-log__item"><time class="os-log__time" datetime="2026-10-01T10:02">01.10. 10:02</time><p class="os-log__text">Job created by Kari Nordmann</p></li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="thread" aria-labelledby="h-thread">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-thread">Thread</h3><code>.os-thread</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Forum posts and comments, guestbook style: author column on the left, post on the right; stacks when narrow.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <ol class="os-thread" role="list">
+                <li class="os-thread__post os-thread__post--op" id="post-1">
+                  <div class="os-thread__author"><strong>Kari N.</strong><span>212 posts</span><span>Member since 2004</span></div>
+                  <div class="os-thread__body">
+                    <p class="os-thread__meta"><time datetime="2026-10-11T09:12">11.10.2026 at 09:12</time> · <a href="#post-1">#1</a></p>
+                    <p>Does anyone know if the autumn jazz concert is still on if it rains? The programme only says "outdoors".</p>
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ================================================================ FIELD -->
-          <section class="hx-section" id="field" aria-labelledby="h-field">
-            <h2 id="h-field">Fields <code>.os-field</code> <code>.os-input</code> <code>.os-select</code></h2>
-            <p>Labels always visible above the input; hints under the label; errors under the input, linked with <code>aria-describedby</code>.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <form class="os-grid os-grid--2" style="--os-grid-gap: var(--os-space-5)" action="#">
-                <div class="os-field">
-                  <label class="os-field__label" for="f-name">Full name</label>
-                  <input class="os-input" id="f-name" autocomplete="name" placeholder="Kari Nordmann">
-                </div>
-                <div class="os-field">
-                  <label class="os-field__label" for="f-rent">Maximum rent</label>
-                  <p class="os-field__hint" id="f-rent-hint">Per month, including utilities</p>
-                  <div class="os-input-group">
-                    <input class="os-input os-input--num" id="f-rent" inputmode="numeric" value="12 000" aria-describedby="f-rent-hint">
-                    <span class="os-input-group__addon">kr</span>
+                </li>
+                <li class="os-thread__post" id="post-2">
+                  <div class="os-thread__author"><strong>Ola</strong><span>18 posts</span></div>
+                  <div class="os-thread__body">
+                    <p class="os-thread__meta"><time datetime="2026-10-11T09:40">11.10.2026 at 09:40</time> · <a href="#post-2">#2</a></p>
+                    <blockquote class="os-thread__quote"><p><strong>Kari N. wrote:</strong> is it still on if it rains?</p></blockquote>
+                    <p>Yes — they move into the greenhouse. Bring a blanket anyway!</p>
                   </div>
-                </div>
-                <div class="os-field">
-                  <label class="os-field__label" for="f-type">Property type</label>
-                  <select class="os-select" id="f-type"><option>Apartment</option><option>Bedsit</option><option>Townhouse</option></select>
-                </div>
-                <div class="os-field">
-                  <label class="os-field__label" for="f-email">Email</label>
-                  <input class="os-input" id="f-email" type="email" value="kari@" aria-invalid="true" aria-describedby="f-email-error">
-                  <p class="os-field__error" id="f-email-error">Enter an email address like name@example.com</p>
-                </div>
-                <div class="os-field" style="grid-column: 1 / -1">
-                  <label class="os-field__label" for="f-msg">Message <span class="os-field__optional">(optional)</span></label>
-                  <textarea class="os-textarea" id="f-msg" rows="3"></textarea>
-                </div>
-              </form>
+                </li>
+              </ol>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ CHOICE -->
-          <section class="hx-section" id="choice" aria-labelledby="h-choice">
-            <h2 id="h-choice">Choices <code>.os-checkbox</code> <code>.os-radio</code> <code>.os-switch</code></h2>
-            <p>Real inputs with custom drawing; native controls return in forced-colors mode.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-grid" style="--os-grid-min: 12rem">
-                <fieldset class="os-fieldset">
-                  <legend>Facilities</legend>
-                  <label class="os-choice"><input class="os-checkbox" type="checkbox" checked><span class="os-choice__label">Balcony</span><span class="os-choice__count">128</span></label>
-                  <label class="os-choice"><input class="os-checkbox" type="checkbox"><span class="os-choice__label">Lift</span><span class="os-choice__count">64</span></label>
-                  <label class="os-choice"><input class="os-checkbox" type="checkbox" disabled><span class="os-choice__label">Parking</span><span class="os-choice__count">0</span></label>
-                </fieldset>
-                <fieldset class="os-fieldset">
-                  <legend>Published</legend>
-                  <label class="os-choice"><input class="os-radio" type="radio" name="c-pub" checked><span class="os-choice__label">Any time</span></label>
-                  <label class="os-choice"><input class="os-radio" type="radio" name="c-pub"><span class="os-choice__label">Last 24 hours</span></label>
-                  <label class="os-choice"><input class="os-radio" type="radio" name="c-pub"><span class="os-choice__label">Last week</span></label>
-                </fieldset>
-                <fieldset class="os-fieldset">
-                  <legend>Notifications</legend>
-                  <label class="os-choice"><input class="os-switch" type="checkbox" role="switch" checked><span class="os-choice__label">New matches</span></label>
-                  <label class="os-choice"><input class="os-switch" type="checkbox" role="switch"><span class="os-choice__label">Price drops<span class="os-choice__hint">At most once a day</span></span></label>
-                </fieldset>
-              </div>
-            </div>
-          </section>
-
-          <!-- ================================================================ SEGMENTED -->
-          <section class="hx-section" id="segmented" aria-labelledby="h-segmented">
-            <h2 id="h-segmented">Segmented <code>.os-segmented</code></h2>
-            <p>Mutually exclusive options from real radios — works in forms and without JavaScript.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-cluster os-cluster--lg">
-                <fieldset class="os-segmented">
-                  <legend class="os-sr-only">Bedrooms</legend>
-                  <label><input type="radio" name="s-bed" checked><span>Any</span></label>
-                  <label><input type="radio" name="s-bed"><span>1+</span></label>
-                  <label><input type="radio" name="s-bed"><span>2+</span></label>
-                  <label><input type="radio" name="s-bed"><span>3+</span></label>
-                </fieldset>
-                <fieldset class="os-segmented">
-                  <legend class="os-sr-only">View</legend>
-                  <label><input type="radio" name="s-view" checked><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-layout-list"></use></svg><span>List</span></label>
-                  <label><input type="radio" name="s-view"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-layout-grid"></use></svg><span>Grid</span></label>
-                  <label><input type="radio" name="s-view"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-map"></use></svg><span>Map</span></label>
-                </fieldset>
-              </div>
-            </div>
-          </section>
-
-          <!-- ================================================================ SEARCH -->
-          <section class="hx-section" id="search" aria-labelledby="h-search">
-            <h2 id="h-search">Search <code>.os-search</code></h2>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <form class="os-search" role="search" action="#">
-                <label class="os-sr-only" for="c-q">Search</label>
-                <div class="os-search__field">
-                  <svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-search"></use></svg>
-                  <input class="os-search__input" id="c-q" type="search" placeholder="Area, address or keyword">
-                </div>
-                <button class="os-button os-button--primary os-button--lg" type="submit">Search</button>
-              </form>
-            </div>
-          </section>
-
-          <!-- ================================================================ CHIP -->
-          <section class="hx-section" id="chip" aria-labelledby="h-chip">
-            <h2 id="h-chip">Chips <code>.os-chip</code></h2>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <ul class="os-chips" role="list">
-                <li><button class="os-chip os-chip--remove" type="button">Oslo<span class="os-sr-only">, remove filter</span></button></li>
-                <li><button class="os-chip os-chip--remove" type="button">Apartment<span class="os-sr-only">, remove filter</span></button></li>
-                <li><button class="os-chip" type="button" aria-pressed="true" data-os-toggle>Balcony</button></li>
-                <li><button class="os-chip" type="button" aria-pressed="false" data-os-toggle>Pets allowed</button></li>
+        <section class="os-panel hx-section" id="files" aria-labelledby="h-files">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-files">Files</h3><code>.os-files</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Attachments and downloads with type and size.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <ul class="os-files" role="list">
+                <li class="os-files__item"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-file-text"></use></svg><a href="#">Decision on kindergarten place</a><span class="os-files__meta">PDF, 212 kB</span></li>
+                <li class="os-files__item"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-file-text"></use></svg><a href="#">Price list 2027</a><span class="os-files__meta">PDF, 88 kB</span></li>
+                <li class="os-files__item"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-file-down"></use></svg><a href="#">All invoices this year</a><span class="os-files__meta">CSV, 4 kB</span></li>
               </ul>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ TABS -->
-          <section class="hx-section" id="tabs" aria-labelledby="h-tabs">
-            <h2 id="h-tabs">Tabs <code>.os-tabs</code></h2>
-            <p>WAI-ARIA tabs with arrow keys. Without JavaScript each panel is shown in turn under its own heading.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-tabs" data-os-tabs>
-                <div class="os-tabs__list" role="tablist" aria-label="About the property">
-                  <button class="os-tabs__tab" role="tab" aria-controls="t-1" aria-selected="true">Description</button>
-                  <button class="os-tabs__tab" role="tab" aria-controls="t-2">Facilities <span class="os-tabs__count">8</span></button>
-                  <button class="os-tabs__tab" role="tab" aria-controls="t-3">Neighbourhood</button>
+        <h2 class="os-sectionhead" id="controls">Controls</h2>
+
+        <section class="os-panel hx-section" id="button" aria-labelledby="h-button">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-button">Buttons</h3><code>.os-button</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>The 2008 button, flattened just enough: faint gradient, one-pixel highlight, bold label. 30px tall; 40px on touch screens. One primary per view.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-stack os-stack--sm">
+                <div class="os-buttons">
+                  <button class="os-button os-button--primary" type="button">Send</button>
+                  <button class="os-button" type="button">Cancel</button>
+                  <button class="os-button os-button--danger" type="button">Delete</button>
+                  <button class="os-button os-button--link" type="button">Link button</button>
+                  <button class="os-button" type="button" disabled>Disabled</button>
                 </div>
-                <section class="os-tabs__panel" id="t-1"><h3 class="os-tabs__heading">Description</h3><p>Bright studio on the third floor of a 1912 apartment building.</p></section>
-                <section class="os-tabs__panel" id="t-2"><h3 class="os-tabs__heading">Facilities</h3><p>Balcony, fibre broadband, shared laundry, bike storage.</p></section>
-                <section class="os-tabs__panel" id="t-3"><h3 class="os-tabs__heading">Neighbourhood</h3><p>Quiet street, four minutes to the park, five to the metro.</p></section>
+                <div class="os-buttons">
+                  <button class="os-button os-button--sm" type="button">Small</button>
+                  <button class="os-button os-button--primary os-button--lg" type="button">Large</button>
+                  <div class="os-button-group" role="group" aria-label="Pages">
+                    <button class="os-button" type="button">« Previous</button>
+                    <button class="os-button" type="button">Next »</button>
+                  </div>
+                  <fieldset class="os-segmented">
+                    <legend class="os-sr-only">View</legend>
+                    <label><input type="radio" name="seg" checked><span>List</span></label>
+                    <label><input type="radio" name="seg"><span>Table</span></label>
+                  </fieldset>
+                </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ DISCLOSURE -->
-          <section class="hx-section" id="disclosure" aria-labelledby="h-disclosure">
-            <h2 id="h-disclosure">Disclosure <code>.os-disclosure</code> <code>.os-accordion</code></h2>
-            <p>Native <code>&lt;details&gt;</code>, animated where the browser supports it.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-accordion">
-                <details class="os-disclosure" open>
-                  <summary>What is included in the rent?</summary>
-                  <div class="os-disclosure__content">Heating, hot water and broadband. Electricity is billed separately.</div>
-                </details>
-                <details class="os-disclosure">
-                  <summary>How much is the deposit?</summary>
-                  <div class="os-disclosure__content">Four months’ rent, held in a separate deposit account.</div>
-                </details>
-                <details class="os-disclosure">
-                  <summary>Are pets allowed?</summary>
-                  <div class="os-disclosure__content">By agreement with the landlord.</div>
-                </details>
+        <section class="os-panel hx-section" id="form" aria-labelledby="h-form">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-form">Forms</h3><code>.os-form .os-input .os-select .os-choice</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>A right-aligned label column when the box is wide, labels on top when narrow. Required marks, hints and errors linked with <code>aria-describedby</code>. Native checkboxes and radios, tinted with the accent.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <form class="os-form" action="#">
+                <div class="os-form__row">
+                  <label class="os-form__label" for="f-name">Name <span class="os-form__req" aria-hidden="true">*</span></label>
+                  <div class="os-form__control"><input class="os-input os-input--medium" id="f-name" autocomplete="name" required></div>
+                </div>
+                <div class="os-form__row">
+                  <label class="os-form__label" for="f-email">Email <span class="os-form__req" aria-hidden="true">*</span></label>
+                  <div class="os-form__control">
+                    <input class="os-input os-input--medium" id="f-email" type="email" value="kari@" aria-invalid="true" aria-describedby="f-email-error" required>
+                    <p class="os-form__error" id="f-email-error">Enter an email address like name@example.com</p>
+                  </div>
+                </div>
+                <div class="os-form__row">
+                  <label class="os-form__label" for="f-type">Subject</label>
+                  <div class="os-form__control"><select class="os-select" id="f-type" style="--os-input-width: 18rem"><option>General question</option><option>Complaint</option></select></div>
+                </div>
+                <div class="os-form__row">
+                  <label class="os-form__label" for="f-amount">Amount</label>
+                  <div class="os-form__control">
+                    <div class="os-input-group" style="--os-input-width: 12rem"><input class="os-input" id="f-amount" inputmode="numeric" aria-describedby="f-amount-hint"><span class="os-input-group__addon">kr</span></div>
+                    <p class="os-form__hint" id="f-amount-hint">Whole kroner, no spaces.</p>
+                  </div>
+                </div>
+                <div class="os-form__row">
+                  <span class="os-form__label" id="f-contact">Contact me by</span>
+                  <div class="os-form__control">
+                    <div class="os-choices os-choices--inline" role="radiogroup" aria-labelledby="f-contact">
+                      <label class="os-choice"><input type="radio" name="f-c" checked> <span>Email</span></label>
+                      <label class="os-choice"><input type="radio" name="f-c"> <span>Phone</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="os-form__row">
+                  <span class="os-form__label"></span>
+                  <div class="os-form__control"><label class="os-choice"><input type="checkbox"> <span>Send me the newsletter</span></label></div>
+                </div>
+                <div class="os-form__row os-form__row--actions">
+                  <div class="os-form__control os-buttons"><button class="os-button os-button--primary" type="submit">Send</button><button class="os-button" type="reset">Clear</button></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="steps" aria-labelledby="h-steps">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-steps">Steps</h3><code>.os-steps</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Where you are in a multi-page form. Done steps are links back.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <ol class="os-steps" aria-label="Application steps">
+                <li class="os-steps__item os-steps__item--done"><a href="#">Child</a></li>
+                <li class="os-steps__item os-steps__item--done"><a href="#">Guardians</a></li>
+                <li class="os-steps__item" aria-current="step">Preferences</li>
+                <li class="os-steps__item">Confirm</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="search" aria-labelledby="h-search">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-search">Search &amp; results</h3><code>.os-search .os-results .os-chips</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>A field and a "Search" button; text-only results with a green address line; active filters as small removable boxes.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-stack os-stack--md">
+                <form class="os-search" role="search" action="#" style="--os-search-width: 30rem">
+                  <label class="os-sr-only" for="c-q">Search</label>
+                  <input class="os-input os-search__input" id="c-q" type="search" value="parking">
+                  <button class="os-button os-button--primary" type="submit">Search</button>
+                </form>
+                <ul class="os-chips" role="list"><li><a class="os-chip" href="#">Services <span aria-hidden="true">×</span><span class="os-sr-only">, remove</span></a></li></ul>
+                <ol class="os-results" role="list">
+                  <li class="os-result">
+                    <h4 class="os-result__title"><a href="#">Resident parking – application and prices</a></h4>
+                    <p class="os-result__text">If you live in a resident zone you can apply for one car. <mark>Parking</mark> costs 3 900,- a year …</p>
+                    <p class="os-result__meta"><span class="os-result__url">example.no/parking/resident</span> · Updated 12.09.2026</p>
+                  </li>
+                </ol>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ PAGINATION -->
-          <section class="hx-section" id="pagination" aria-labelledby="h-pagination">
-            <h2 id="h-pagination">Pagination <code>.os-pagination</code></h2>
+        <section class="os-panel hx-section" id="tabs" aria-labelledby="h-tabs">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-tabs">Tabs</h3><code>.os-tabs</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Folder tabs over a box, with ARIA roles and arrow keys from oldschool.js. Without JavaScript each panel is shown under its own heading.</p>
             <div class="hx-demo" data-demo>
+              <div class="os-tabs" data-os-tabs>
+                <div class="os-tabs__list" role="tablist" aria-label="Event">
+                  <button class="os-tabs__tab" role="tab" aria-controls="tb-1" aria-selected="true">Programme</button>
+                  <button class="os-tabs__tab" role="tab" aria-controls="tb-2">Practical info</button>
+                  <button class="os-tabs__tab" role="tab" aria-controls="tb-3">Accessibility</button>
+                </div>
+                <section class="os-tabs__panel" id="tb-1"><h4 class="os-tabs__heading">Programme</h4><p>13:00 first set · 13:50 break · 14:10 second set.</p></section>
+                <section class="os-tabs__panel" id="tb-2"><h4 class="os-tabs__heading">Practical info</h4><p>Bring a blanket. Moves indoors if it rains.</p></section>
+                <section class="os-tabs__panel" id="tb-3"><h4 class="os-tabs__heading">Accessibility</h4><p>Step-free access from the south gate.</p></section>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="disclosure" aria-labelledby="h-disclosure">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-disclosure">Disclosure</h3><code>.os-disclosure .os-accordion</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>"[+] Show more" on native <code>&lt;details&gt;</code>.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-accordion">
+                <details class="os-disclosure" open><summary>How do I buy a ticket?</summary><div class="os-disclosure__content">Online, or at the door while seats last.</div></details>
+                <details class="os-disclosure"><summary>Can I bring children?</summary><div class="os-disclosure__content">Yes — children under 12 go free.</div></details>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="pagination" aria-labelledby="h-pagination">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-pagination">Pagination</h3><code>.os-pagination</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <div class="hx-demo hx-demo--white" data-demo>
               <nav class="os-pagination" aria-label="Pages">
                 <ul role="list">
-                  <li><a class="os-pagination__link" href="#" rel="prev"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-chevron-left"></use></svg>Previous</a></li>
-                  <li><a class="os-pagination__link" href="#">1</a></li>
-                  <li><a class="os-pagination__link" href="#" aria-current="page">2</a></li>
-                  <li><a class="os-pagination__link" href="#">3</a></li>
+                  <li><a href="#" rel="prev">« Previous</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><span aria-current="page">2</span></li>
+                  <li><a href="#">3</a></li>
                   <li><span class="os-pagination__gap">…</span></li>
-                  <li><a class="os-pagination__link" href="#">15</a></li>
-                  <li class="os-pagination__status" aria-hidden="true">Page 2 of 15</li>
-                  <li><a class="os-pagination__link" href="#" rel="next">Next<svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-chevron-right"></use></svg></a></li>
+                  <li><a href="#">13</a></li>
+                  <li class="os-pagination__status" aria-hidden="true">Page 2 of 13</li>
+                  <li><a href="#" rel="next">Next »</a></li>
                 </ul>
               </nav>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ BADGE -->
-          <section class="hx-section" id="badge" aria-labelledby="h-badge">
-            <h2 id="h-badge">Badges <code>.os-badge</code></h2>
-            <div class="hx-demo hx-demo--surface" data-demo>
+        <h2 class="os-sectionhead" id="feedback">Feedback</h2>
+
+        <section class="os-panel hx-section" id="alert" aria-labelledby="h-alert">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-alert">Notices &amp; badges</h3><code>.os-alert .os-note .os-badge</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <div class="hx-demo hx-demo--white" data-demo>
               <div class="os-stack os-stack--sm">
-                <div class="os-badges">
-                  <span class="os-badge">Neutral</span>
-                  <span class="os-badge os-badge--accent">Accent</span>
-                  <span class="os-badge os-badge--success">Success</span>
-                  <span class="os-badge os-badge--warning">Warning</span>
-                  <span class="os-badge os-badge--danger">Danger</span>
-                  <span class="os-badge os-badge--info os-badge--dot">Viewing Sunday</span>
-                </div>
-                <div class="os-badges">
-                  <span class="os-badge os-badge--solid">Let</span>
-                  <span class="os-badge os-badge--solid os-badge--success">New</span>
-                  <span class="os-badge os-badge--solid os-badge--warning">Price cut</span>
-                  <span class="os-badge os-badge--solid os-badge--danger">Removed</span>
-                  <span class="os-badge os-badge--solid os-badge--info os-badge--lg">Open viewing</span>
-                </div>
+                <div class="os-alert os-alert--warning" role="status"><p class="os-alert__title">Please note!</p><p>Ticket sales close at noon on the day.</p></div>
+                <div class="os-alert os-alert--info" role="status"><p class="os-alert__title">Your answers are saved as you go</p></div>
+                <div class="os-alert os-alert--success" role="status"><p class="os-alert__title">Thank you — your application has been received.</p></div>
+                <div class="os-alert os-alert--danger" role="alert"><p class="os-alert__title">This event is sold out.</p></div>
+                <p class="os-note">Bring a blanket — the garden gets cold after sunset.</p>
+                <p>
+                  <span class="os-badge os-badge--new">New</span>
+                  <span class="os-badge os-badge--success">Approved</span>
+                  <span class="os-badge os-badge--warning">Pending</span>
+                  <span class="os-badge os-badge--danger">Rejected</span>
+                  <span class="os-badge os-badge--accent">Reply</span>
+                  <span class="os-badge">Closed</span>
+                </p>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ ALERT -->
-          <section class="hx-section" id="alert" aria-labelledby="h-alert">
-            <h2 id="h-alert">Alerts &amp; notes <code>.os-alert</code> <code>.os-note</code></h2>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <div class="os-stack os-stack--sm">
-                <div class="os-alert os-alert--info" role="status"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-info"></use></svg><div class="os-alert__body"><p class="os-alert__title">Viewing by appointment</p><p>Contact the agent to agree a time.</p></div></div>
-                <div class="os-alert os-alert--success" role="status"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-circle-check"></use></svg><div class="os-alert__body"><p class="os-alert__title">Your listing is published</p></div><button class="os-button os-button--quiet os-button--icon os-button--sm os-alert__close" type="button" aria-label="Dismiss"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-x"></use></svg></button></div>
-                <div class="os-alert os-alert--warning" role="status"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-triangle-alert"></use></svg><div class="os-alert__body"><p class="os-alert__title">Never pay a deposit before viewing</p><p><a href="#">How to rent safely</a></p></div></div>
-                <div class="os-alert os-alert--danger" role="alert"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-circle-x"></use></svg><div class="os-alert__body"><p class="os-alert__title">This listing has been removed</p></div></div>
-                <p class="os-note">Viewing can be arranged with the responsible agent.</p>
+        <section class="os-panel hx-section" id="status" aria-labelledby="h-status">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-status">Status</h3><code>.os-status</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>A dot and a word for the state of a job, a case or a service. Quieter than a badge, made for table cells. The word carries the meaning.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <p class="os-buttons">
+                <span class="os-status">Idle</span>
+                <span class="os-status os-status--running">Running</span>
+                <span class="os-status os-status--success">Done</span>
+                <span class="os-status os-status--warning">Slow</span>
+                <span class="os-status os-status--danger">Failed</span>
+              </p>
+              <p class="os-buttons">
+                <span class="os-status os-status--pill os-status--running">Running</span>
+                <span class="os-status os-status--pill os-status--success">Done</span>
+                <span class="os-status os-status--pill os-status--danger">Failed</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="errorsummary" aria-labelledby="h-errorsummary">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-errorsummary">Error summary</h3><code>.os-errorsummary</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>At the top of a form that failed: what went wrong, with a link to each field. Move focus to it after submit.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-errorsummary" role="alert" tabindex="-1" aria-labelledby="demo-err">
+                <h4 class="os-errorsummary__title" id="demo-err">The form has 2 errors</h4>
+                <ul class="os-errorsummary__list">
+                  <li><a href="#f-email">Enter an email address like name@example.no</a></li>
+                  <li><a href="#f-type">Choose a subject</a></li>
+                </ul>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- ================================================================ TOAST -->
-          <section class="hx-section" id="toast" aria-labelledby="h-toast">
-            <h2 id="h-toast">Toast <code>Oldschool.toast()</code></h2>
-            <p>A brief confirmation in a polite live region. Created from JavaScript, or declaratively via <code>data-os-toast-pressed</code> on toggles.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <button class="os-button" type="button" onclick="Oldschool.toast('Listing saved to your favourites')">Show a toast</button>
-            </div>
-          </section>
-
-          <!-- ================================================================ DIALOG -->
-          <section class="hx-section" id="dialog" aria-labelledby="h-dialog">
-            <h2 id="h-dialog">Dialog <code>.os-dialog</code></h2>
-            <p>Native <code>&lt;dialog&gt;</code> opened with <code>data-os-dialog=&quot;id&quot;</code>. Escape and the close button both work; focus returns to the trigger.</p>
-            <div class="hx-demo hx-demo--surface" data-demo>
-              <button class="os-button os-button--primary" type="button" data-os-dialog="demo-dialog">Open dialog</button>
+        <section class="os-panel hx-section" id="dialog" aria-labelledby="h-dialog">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-dialog">Dialog &amp; toast</h3><code>.os-dialog Oldschool.toast()</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>A native <code>&lt;dialog&gt;</code> styled as an old window with an accent title bar; the yellow "Saved!" toast.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-buttons">
+                <button class="os-button os-button--primary" type="button" data-os-dialog="demo-dialog">Open dialog</button>
+                <button class="os-button" type="button" onclick="Oldschool.toast('Saved!')">Show toast</button>
+              </div>
               <dialog class="os-dialog" id="demo-dialog" aria-labelledby="demo-dialog-title">
                 <form method="dialog" class="os-dialog__header">
-                  <h2 class="os-dialog__title" id="demo-dialog-title">Report this listing</h2>
-                  <button class="os-button os-button--quiet os-button--icon" value="cancel" aria-label="Close"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-x"></use></svg></button>
+                  <h4 class="os-dialog__title" id="demo-dialog-title">Report this page</h4>
+                  <button class="os-dialog__close" value="cancel" aria-label="Close">×</button>
                 </form>
-                <div class="os-dialog__body os-stack os-stack--sm">
-                  <p>Tell us what is wrong. We read every report.</p>
-                  <fieldset class="os-fieldset">
-                    <legend>Reason</legend>
-                    <label class="os-choice"><input class="os-radio" type="radio" name="r" checked><span class="os-choice__label">Looks like fraud</span></label>
-                    <label class="os-choice"><input class="os-radio" type="radio" name="r"><span class="os-choice__label">Already let</span></label>
-                    <label class="os-choice"><input class="os-radio" type="radio" name="r"><span class="os-choice__label">Wrong information</span></label>
-                  </fieldset>
+                <div class="os-dialog__body">
+                  <div class="os-choices">
+                    <label class="os-choice"><input type="radio" name="r" checked> <span>Wrong information</span></label>
+                    <label class="os-choice"><input type="radio" name="r"> <span>Broken link</span></label>
+                  </div>
                 </div>
                 <form method="dialog" class="os-dialog__footer">
                   <button class="os-button" value="cancel">Cancel</button>
-                  <button class="os-button os-button--primary" value="send">Send report</button>
+                  <button class="os-button os-button--primary" value="send">Send</button>
                 </form>
               </dialog>
             </div>
-          </section>
-
-          <!-- ================================================================ EMPTY -->
-          <section class="hx-section" id="empty" aria-labelledby="h-empty">
-            <h2 id="h-empty">Empty &amp; loading <code>.os-empty</code> <code>.os-skeleton</code></h2>
-            <div class="hx-demo" data-demo>
-              <div class="os-grid os-grid--2">
-                <section class="os-panel" aria-label="No results">
-                  <div class="os-empty">
-                    <svg class="os-icon os-empty__icon" aria-hidden="true"><use href="../dist/icons.svg#os-search"></use></svg>
-                    <h3 class="os-empty__title">No matches</h3>
-                    <p>Try a larger area or remove some filters.</p>
-                    <button class="os-button" type="button">Clear filters</button>
-                  </div>
-                </section>
-                <section class="os-panel" aria-busy="true" aria-label="Loading">
-                  <div class="os-panel__body os-stack os-stack--sm" aria-hidden="true">
-                    <div class="os-skeleton os-skeleton--media"></div>
-                    <div class="os-skeleton os-skeleton--title"></div>
-                    <div class="os-skeleton os-skeleton--text"></div>
-                    <div class="os-skeleton os-skeleton--text" style="--os-skeleton-width: 60%"></div>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </section>
-        </main>
-      </div>
+          </div>
+        </section>
+      </main>
     </div>
-  </div>
 
-  <footer class="os-footer">
-    <div class="os-container">
-      <div class="os-footer__bottom" style="margin: 0; padding: 0; border: 0">
-        <p>Oldschool · MIT licensed · Inter (OFL) · Lucide icons (ISC)</p>
+    <footer class="os-footer">
+      <div class="os-footer__bottom">
         <ul class="os-seplist" role="list">
           <li><a href="index.html">Overview</a></li>
           <li><a href="tokens.html">Tokens</a></li>
           <li><a href="themes.html">Themes</a></li>
         </ul>
+        <p>Oldschool · MIT · icons: Lucide (ISC)</p>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 </body>
 </html>

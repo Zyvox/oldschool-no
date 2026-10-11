@@ -1,18 +1,14 @@
-/* Document defaults: canvas, text, focus, selection. */
+/* Document defaults: the frame, text, focus, selection. */
 @layer os.base {
   html {
     background-color: var(--os-color-canvas);
     color: var(--os-color-text);
     font-family: var(--os-font-body);
-    font-size: 100%; /* respect the user's browser setting: 1rem = their choice */
+    font-size: 100%; /* 1rem = the user's setting; the 14px body is 0.875rem of it */
     line-height: var(--os-leading-body);
-    font-optical-sizing: auto;
-    font-kerning: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     accent-color: var(--os-color-accent);
     tab-size: 4;
-    scroll-padding-block-start: var(--os-space-4);
+    -webkit-font-smoothing: auto;
   }
 
   body {
@@ -20,8 +16,7 @@
     line-height: var(--os-leading-body);
   }
 
-  /* A themed or mode-scoped island re-resolves text and canvas colors, so
-     <section data-mode="dark"> is a dark section, not just dark variables. */
+  /* A themed or mode-scoped island re-resolves text and frame colors. */
   :where([data-theme], [data-mode], [data-density]):not(:root) {
     color: var(--os-color-text);
     font-family: var(--os-font-body);
@@ -47,9 +42,15 @@
     outline: none;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    html:focus-within {
-      scroll-behavior: smooth;
+  /* Touch screens get at least 40px controls without changing the desktop
+     look: controls use max(var(--os-control-height), var(--os-touch-min)). */
+  :root {
+    --os-touch-min: 0px;
+  }
+
+  @media (pointer: coarse) {
+    :root {
+      --os-touch-min: 2.5rem;
     }
   }
 }

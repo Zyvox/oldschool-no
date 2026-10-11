@@ -1,42 +1,40 @@
 /*
- * Checklist — facilities and inclusions, scannable in columns.
+ * Checklist — inclusions and features, in columns when there is room.
  *
  *   <ul class="os-checklist" role="list">
- *     <li><svg class="os-icon">…#os-check</svg>Balkong</li>
- *     <li class="os-checklist__no"><svg class="os-icon">…#os-x</svg>Parkering</li>
+ *     <li>Garderobe</li>
+ *     <li class="os-checklist__no">Servering <span class="os-sr-only">(ikke inkludert)</span></li>
  *   </ul>
  */
 @layer os.components {
   .os-checklist {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr));
-    gap: var(--os-space-2) var(--os-space-6);
+    grid-template-columns: repeat(auto-fill, minmax(min(11rem, 100%), 1fr));
+    gap: var(--os-space-1) var(--os-space-4);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .os-checklist > li {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--os-space-2);
+    position: relative;
+    padding-inline-start: 1.3em;
   }
 
-  .os-checklist .os-icon {
-    --os-icon-size: 1.15rem;
-    margin-block-start: 0.15em;
+  .os-checklist > li::before {
+    content: "✓";
+    position: absolute;
+    inset-inline-start: 0;
     color: var(--os-color-success);
+    font-weight: var(--os-weight-bold);
   }
 
-  .os-checklist__no {
+  .os-checklist > .os-checklist__no {
     color: var(--os-color-text-muted);
   }
 
-  .os-checklist__no .os-icon {
-    color: var(--os-color-text-subtle);
-  }
-
-  .os-checklist--icons .os-icon {
-    color: var(--os-color-text-accent);
+  .os-checklist > .os-checklist__no::before {
+    content: "✗";
+    color: var(--os-color-text-muted);
   }
 }

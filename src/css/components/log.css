@@ -1,0 +1,76 @@
+/*
+ * Log — what happened, newest first: case history, price changes, job runs.
+ * A time column and a line of text, joined by a thin rail.
+ *
+ *   <ol class="os-log" role="list">
+ *     <li class="os-log__item os-log__item--success">
+ *       <time class="os-log__time" datetime="2026-10-11T08:00">11.10. 08:00</time>
+ *       <p class="os-log__text"><strong>Kjøring ferdig</strong> — 3 nye treff</p>
+ *     </li>
+ *   </ol>
+ *
+ * Item tones mark the dot: --success · --warning · --danger · --accent.
+ */
+@layer os.components {
+  .os-log {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--os-text-sm);
+  }
+
+  .os-log__item {
+    --_dot: var(--os-color-border-strong);
+
+    position: relative;
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: var(--os-space-3);
+    padding-block: var(--os-space-1);
+  }
+
+  .os-log__item::before,
+  .os-log__item::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: calc(6.5rem + var(--os-space-1-5) - 1px);
+  }
+
+  .os-log__item::before {
+    inset-block: 0;
+    width: 2px;
+    background-color: var(--os-color-border);
+  }
+
+  .os-log__item:first-child::before { inset-block-start: calc(var(--os-space-1) + 0.7em); }
+  .os-log__item:last-child::before { inset-block-end: calc(100% - var(--os-space-1) - 0.7em); }
+
+  .os-log__item::after {
+    inset-block-start: calc(var(--os-space-1) + 0.7em - 0.375rem);
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-inline-start: calc(1px - 0.25rem);
+    border: 2px solid var(--os-color-surface);
+    border-radius: 50%;
+    background-color: var(--_dot);
+    box-sizing: content-box;
+    translate: -2px 0;
+  }
+
+  .os-log__time {
+    color: var(--os-color-text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .os-log__text {
+    margin: 0;
+    padding-inline-start: var(--os-space-3);
+  }
+
+  .os-log__item--accent { --_dot: var(--os-color-accent); }
+  .os-log__item--success { --_dot: var(--os-color-success-fill); }
+  .os-log__item--warning { --_dot: var(--os-color-warning-fill); }
+  .os-log__item--danger { --_dot: var(--os-color-danger-fill); }
+}

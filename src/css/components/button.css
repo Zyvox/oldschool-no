@@ -1,56 +1,54 @@
 /*
- * Button — a real <button> for actions, an <a> for navigation; same looks.
+ * Button — <button> for actions, <a> for navigation; same looks.
+ * A faint top-to-bottom gradient and a one-pixel highlight: the 2008 button,
+ * flattened just enough.
  *
- *   <button class="os-button os-button--primary" type="button">Send e-post</button>
- *   <a class="os-button" href="tel:…"><svg class="os-icon">…</svg>Ring 12 34 56 78</a>
+ *   <button class="os-button" type="button">Avbryt</button>
+ *   <button class="os-button os-button--primary" type="submit">Send</button>
  *
- * Looks:  (default) secondary · --primary · --tint · --quiet · --link · --danger
- * Sizes:  --sm · (default 44px) · --lg
- * Shape:  --block (full width) · --icon (square, needs aria-label)
- * Label:  wrap text in .os-button__label if it should hide on tiny screens.
+ * Looks:  (default) · --primary · --danger · --link
+ * Sizes:  --sm · (default 30px, 40px on touch screens) · --lg
+ * Other:  --block (full width) · --icon (square; needs aria-label)
  */
 @layer os.components {
   .os-button {
-    --_bg: var(--os-color-surface);
+    --_top: var(--os-color-surface);
+    --_bottom: var(--os-color-button);
     --_fg: var(--os-color-text-strong);
     --_border: var(--os-color-border-strong);
-    --_bg-hover: var(--os-color-surface-tint);
-    --_border-hover: var(--os-color-text-muted);
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--os-space-2);
-    min-height: var(--os-control-height);
+    gap: var(--os-space-1-5);
+    min-height: max(var(--os-control-height), var(--os-touch-min));
     padding: var(--os-space-1) var(--os-control-pad-x);
     border: var(--os-border-width) solid var(--_border);
     border-radius: var(--os-radius-control);
-    background-color: var(--_bg);
+    background-color: var(--_bottom);
+    background-image: linear-gradient(var(--_top), var(--_bottom));
+    box-shadow: var(--os-bevel);
     color: var(--_fg);
-    font-size: var(--os-text-md);
-    font-weight: var(--os-weight-semibold);
+    font-family: var(--os-font-body);
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-bold);
     line-height: var(--os-leading-tight);
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    transition:
-      background-color var(--os-duration-fast) var(--os-ease-standard),
-      border-color var(--os-duration-fast) var(--os-ease-standard),
-      color var(--os-duration-fast) var(--os-ease-standard),
-      transform var(--os-duration-instant) var(--os-ease-standard);
+    white-space: nowrap;
   }
 
   .os-button:hover {
-    border-color: var(--_border-hover);
-    background-color: var(--_bg-hover);
+    --_top: var(--os-color-surface);
+    --_bottom: var(--os-color-button-hover);
     color: var(--_fg);
     text-decoration: none;
   }
 
-  .os-button:active:not(:disabled, [aria-disabled="true"]) {
-    transform: translateY(1px);
+  .os-button:active {
+    background-image: linear-gradient(var(--_bottom), var(--_top));
+    box-shadow: inset 0 1px 2px var(--os-color-shadow);
   }
 
   .os-button:disabled,
@@ -60,44 +58,31 @@
   }
 
   .os-button .os-icon {
-    --os-icon-size: 1.15em;
+    --os-icon-size: 1.1em;
   }
 
-  /* Looks --------------------------------------------------------------- */
   .os-button--primary {
-    --_bg: var(--os-color-accent);
+    --_top: color-mix(in srgb, var(--os-color-accent) 82%, white);
+    --_bottom: var(--os-color-accent);
     --_fg: var(--os-color-text-on-accent);
-    --_border: var(--os-color-accent);
-    --_bg-hover: var(--os-color-accent-hover);
-    --_border-hover: var(--os-color-accent-hover);
+    --_border: var(--os-color-accent-active);
   }
 
-  .os-button--primary:active {
-    --_bg-hover: var(--os-color-accent-active);
-  }
-
-  .os-button--tint {
-    --_bg: var(--os-color-accent-subtle);
-    --_fg: var(--os-color-text-accent);
-    --_border: var(--os-color-border-tint);
-    --_bg-hover: var(--os-color-accent-muted);
-    --_border-hover: var(--os-color-border-tint);
-  }
-
-  .os-button--quiet {
-    --_bg: transparent;
-    --_fg: var(--os-color-link);
-    --_border: transparent;
-    --_bg-hover: var(--os-color-surface-tint);
-    --_border-hover: transparent;
+  .os-button--primary:hover {
+    --_top: var(--os-color-accent);
+    --_bottom: var(--os-color-accent-hover);
   }
 
   .os-button--danger {
-    --_bg: var(--os-color-danger-fill);
+    --_top: color-mix(in srgb, var(--os-color-danger-fill) 85%, white);
+    --_bottom: var(--os-color-danger-fill);
     --_fg: var(--os-color-text-on-accent);
-    --_border: var(--os-color-danger-fill);
-    --_bg-hover: var(--os-color-danger);
-    --_border-hover: var(--os-color-danger);
+    --_border: var(--os-color-danger);
+  }
+
+  .os-button--danger:hover {
+    --_top: var(--os-color-danger-fill);
+    --_bottom: var(--os-color-danger);
   }
 
   .os-button--link {
@@ -105,32 +90,31 @@
     padding: 0;
     border: 0;
     background: none;
+    box-shadow: none;
     color: var(--os-color-link);
-    font-weight: var(--os-weight-medium);
-    text-decoration-line: underline;
-    text-decoration-thickness: var(--os-link-underline-thickness);
-    text-decoration-color: color-mix(in srgb, currentColor var(--os-link-underline-mix), transparent);
+    font-weight: var(--os-weight-regular);
+    text-decoration: underline;
     text-underline-offset: var(--os-link-underline-offset);
   }
 
-  .os-button--link:hover {
+  .os-button--link:hover,
+  .os-button--link:active {
     background: none;
+    box-shadow: none;
     color: var(--os-color-link-hover);
-    text-decoration-line: underline;
-    text-decoration-color: currentColor;
+    text-decoration: underline;
   }
 
-  /* Sizes --------------------------------------------------------------- */
   .os-button--sm {
-    min-height: var(--os-control-height-sm);
-    padding-inline: calc(var(--os-control-pad-x) * 0.75);
-    font-size: var(--os-text-sm);
+    min-height: max(var(--os-control-height-sm), var(--os-touch-min));
+    padding-inline: var(--os-space-2);
+    font-size: var(--os-text-xs);
   }
 
   .os-button--lg {
     min-height: var(--os-control-height-lg);
-    padding-inline: calc(var(--os-control-pad-x) * 1.5);
-    font-size: var(--os-text-lg);
+    padding-inline: var(--os-space-4);
+    font-size: var(--os-text-md);
   }
 
   .os-button--block {
@@ -139,26 +123,12 @@
   }
 
   .os-button--icon {
-    width: var(--os-control-height);
-    padding: 0;
+    min-width: max(var(--os-control-height), var(--os-touch-min));
+    padding-inline: 0;
   }
 
-  .os-button--icon.os-button--sm {
-    width: var(--os-control-height-sm);
-  }
-
-  .os-button--icon.os-button--lg {
-    width: var(--os-control-height-lg);
-  }
-
-  .os-button--pill {
-    border-radius: var(--os-radius-full);
-  }
-
-  /* Group --------------------------------------------------------------- */
   .os-button-group {
     display: inline-flex;
-    isolation: isolate;
   }
 
   .os-button-group > .os-button:not(:first-child) {
@@ -172,8 +142,16 @@
     border-end-end-radius: 0;
   }
 
-  .os-button-group > .os-button:hover,
   .os-button-group > .os-button:focus-visible {
+    position: relative;
     z-index: 1;
+  }
+
+  /* Button row at the end of a form: primary first in source, shown last. */
+  .os-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-space-2);
   }
 }

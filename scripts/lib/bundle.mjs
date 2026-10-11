@@ -44,18 +44,54 @@ export function bundleCss(entry, outFile) {
   return visit(entry);
 }
 
-/** Conservative minifier: comments, whitespace, redundant semicolons. */
+/**
+ * Small, safe minifier for our own CSS: strips comments and whitespace,
+ * shortens `0.5` to `.5`, and merges consecutive top-level blocks of the same
+ * cascade layer (every component file opens its own `@layer os.components`).
+ * Strings (data URIs, `content`) are protected throughout.
+ */
 export function minifyCss(css) {
   const keep = [];
-  return css
-    .replace(/\/\*![\s\S]*?\*\//g, (m) => `\u0000${keep.push(m) - 1}\u0000`)
+  const stash = (m) => `\u0000${keep.push(m) - 1}\u0000`;
+  let out = css
+    .replace(/\/\*![\s\S]*?\*\//g, (m) => stash(`${m}\n`))
+    .replace(/"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'/g, stash)
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/\s+/g, ' ')
     .replace(/\s*([{};,])\s*/g, '$1')
     .replace(/\s*>\s*(?=[^{}]*\{)/g, '>')
+    .replace(/([{;(]--?[\w-]+|[{;]\s*[a-z-]+|\((?:min|max)-[a-z-]+|\([a-z-]+):\s+/g, '$1:')
+    .replace(/([\s:,(/])(-?)0\.(\d)/g, '$1$2.$3')
     .replace(/;}/g, '}')
-    .replace(/\u0000(\d+)\u0000/g, (_, i) => `${keep[Number(i)]}\n`)
     .trim();
+  out = mergeLayers(out);
+  return out.replace(/\u0000(\d+)\u0000/g, (_, i) => keep[Number(i)]);
+}
+
+/** Merge adjacent top-level `@layer x{…}` blocks with the same name. */
+function mergeLayers(css) {
+  const chunks = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < css.length; i += 1) {
+    const c = css[i];
+    if (c === '{') depth += 1;
+    else if (c === '}') {
+      depth -= 1;
+      if (depth === 0) { chunks.push(css.slice(start, i + 1)); start = i + 1; }
+    } else if (c === ';' && depth === 0) { chunks.push(css.slice(start, i + 1)); start = i + 1; }
+  }
+  if (start < css.length) chunks.push(css.slice(start));
+  const merged = [];
+  for (const chunk of chunks) {
+    const head = chunk.match(/^\s*(@layer [\w.-]+)\{/);
+    const prev = merged[merged.length - 1];
+    const prevHead = prev?.match(/^\s*(@layer [\w.-]+)\{/);
+    if (head && prevHead && head[1] === prevHead[1]) {
+      merged[merged.length - 1] = prev.slice(0, -1) + chunk.slice(head[0].length);
+    } else merged.push(chunk);
+  }
+  return merged.join('');
 }
 
 /* ---------------------------------------------------------------------------
@@ -122,6 +158,28 @@ ${order.map((id) => modules.get(id).code).join('\n\n')}
 window.${globalName} = __require(${JSON.stringify(entryId)});
 })();
 `;
+}
+
+/**
+ * Conservative JS minifier for the bundled output: strips comments, indentation
+ * and blank lines, keeps line breaks (so automatic semicolon insertion is never
+ * relied on differently). Strings and template literals are protected; src/js
+ * must not contain regex literals with quotes or comment markers in them.
+ */
+export function minifyJs(js) {
+  const keep = [];
+  const stash = (m) => `\u0000${keep.push(m) - 1}\u0000`;
+  return js
+    .replace(/\/\*![\s\S]*?\*\//g, (m) => stash(`${m}\n`))
+    .replace(/`(?:[^`\\]|\\.)*`|"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'/g, stash)
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/(^|[\s;{}(),])\/\/.*$/gm, '$1')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .join('\n')
+    .replace(/[ \t]*([=:,;{}()[\]<>+\-*/?|&!])[ \t]*/g, '$1')
+    .replace(/\u0000(\d+)\u0000/g, (_, i) => keep[Number(i)]);
 }
 
 /* ---------------------------------------------------------------------------

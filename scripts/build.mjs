@@ -9,19 +9,19 @@
  *                 ├─► docs/tokens.md         (reference tables)
  *                 └─► site/assets/generated/tokens.js (data for the docs site)
  *   src/css/oldschool.css ─► dist/oldschool.css + .min.css
- *   src/js/*.js           ─► dist/oldschool.js (classic script) + dist/esm/ (modules)
+ *   src/js/*.js           ─► dist/oldschool.js + .min.js (classic script) + dist/esm/ (modules)
  *   src/icons/*.svg       ─► dist/icons.svg (sprite, ids prefixed "os-")
- *   src/fonts/            ─► dist/fonts/
  *
  * Usage: node scripts/build.mjs [--quiet]
  */
 import fs from 'node:fs';
+import zlib from 'node:zlib';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   buildPalette, cssPalette, cssFoundation, cssSemantic, cssThemes, cssDensity, tokensJson, tokenMeta,
 } from './lib/tokens.mjs';
-import { bundleCss, minifyCss, bundleJs, buildSprite, write, copyDir } from './lib/bundle.mjs';
+import { bundleCss, minifyCss, minifyJs, bundleJs, buildSprite, write, copyDir } from './lib/bundle.mjs';
 import { tailwindV3, tailwindV4, tokensMarkdown, componentsMarkdown } from './lib/outputs.mjs';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -40,7 +40,7 @@ export function build({ quiet = false } = {}) {
   const pal = buildPalette();
   out('src/css/tokens/palette.css', cssPalette(pal));
   out('src/css/tokens/foundation.css', cssFoundation());
-  out('src/css/tokens/semantic.css', cssSemantic());
+  out('src/css/tokens/semantic.css', cssSemantic(pal));
   out('src/css/tokens/themes.css', cssThemes(pal));
   out('src/css/tokens/density.css', cssDensity());
 
@@ -49,15 +49,18 @@ export function build({ quiet = false } = {}) {
   out('dist/oldschool.css', banner + css);
   out('dist/oldschool.min.css', `${minifyCss(banner + css)}\n`);
 
-  // 3 · Fonts
-  copyDir(r('src/fonts'), r('dist/fonts'));
-
   // 4 · Icons
   const sprite = buildSprite(r('src/icons'), 'os-', 'Icons from Lucide (ISC License) — https://lucide.dev — see src/icons/LICENSE-lucide.txt');
   out('dist/icons.svg', sprite.svg);
 
   // 5 · JavaScript
-  out('dist/oldschool.js', bundleJs(r('src/js'), 'oldschool.js', { banner, globalName: 'Oldschool' }));
+  const js = bundleJs(r('src/js'), 'oldschool.js', { banner, globalName: 'Oldschool' });
+  out('dist/oldschool.js', js);
+  out('dist/oldschool.min.js', `${minifyJs(js)}\n`);
+  const esm = new Set(fs.readdirSync(r('src/js')).filter((f) => f.endsWith('.js')));
+  if (fs.existsSync(r('dist/esm'))) {
+    for (const f of fs.readdirSync(r('dist/esm'))) if (!esm.has(f)) fs.rmSync(r('dist/esm', f));
+  }
   copyDir(r('src/js'), r('dist/esm'), (f) => f.endsWith('.js'));
 
   // 6 · Token exports
@@ -77,7 +80,8 @@ export function build({ quiet = false } = {}) {
     console.log(`✓ built in ${ms}ms — ${changed.length ? `${changed.length} file(s) changed` : 'no changes'}`);
     changed.forEach((f) => console.log(`  · ${f}`));
     const size = (f) => `${(fs.statSync(r(f)).size / 1024).toFixed(1)} kB`;
-    console.log(`  oldschool.css ${size('dist/oldschool.css')} · min ${size('dist/oldschool.min.css')} · oldschool.js ${size('dist/oldschool.js')} · icons.svg ${size('dist/icons.svg')} (${sprite.names.length} icons)`);
+    const gz = (f) => `${(zlib.gzipSync(fs.readFileSync(r(f)), { level: 9 }).length / 1024).toFixed(1)} kB`;
+    console.log(`  oldschool.min.css ${size('dist/oldschool.min.css')} (gzip ${gz('dist/oldschool.min.css')}) · oldschool.min.js ${size('dist/oldschool.min.js')} (gzip ${gz('dist/oldschool.min.js')}) · icons.svg ${size('dist/icons.svg')} (${sprite.names.length} icons)`);
   }
   return changed;
 }

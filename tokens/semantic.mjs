@@ -12,6 +12,7 @@
  * Reference syntax:
  *   'accent.700'           step 700 of the theme's accent ramp
  *   'neutral.0'            neutral ramps run 0 (white) … 1000 (near-black)
+ *   'link.700'             ramp used for links (defaults to the accent ramp)
  *   'visited.700'          ramp used for visited links (theme-selectable)
  *   'success.600' …        status ramps: success, warning, danger, info
  *   'mix(neutral.1000 8%)' that color at 8% opacity
@@ -30,7 +31,7 @@ export const colorGroups = [
   {
     group: 'Surface',
     colors: [
-      { name: 'canvas', light: 'neutral.100', dark: 'neutral.1000', description: 'Page background — the calm frame that panels sit on.' },
+      { name: 'canvas', light: 'accent.100', dark: 'neutral.1000', description: 'The frame: tinted page background that the white boxes sit on.' },
       { name: 'surface', light: 'neutral.0', dark: 'neutral.950', description: 'Panels, cards and form fields.' },
       { name: 'surface-raised', light: 'neutral.0', dark: 'neutral.900', description: 'Menus, popovers, dialogs and sticky bars.' },
       { name: 'surface-sunken', light: 'neutral.50', dark: 'neutral.1000', description: 'Wells and code blocks inside panels.' },
@@ -55,8 +56,8 @@ export const colorGroups = [
   {
     group: 'Link',
     colors: [
-      { name: 'link', light: 'accent.700', dark: 'accent.300', description: 'Links. Underlined wherever they sit in content.' },
-      { name: 'link-hover', light: 'accent.800', dark: 'accent.200', description: 'Hovered links.' },
+      { name: 'link', light: 'link.700', dark: 'link.300', description: 'Links. Underlined wherever they sit in content.' },
+      { name: 'link-hover', light: 'link.800', dark: 'link.200', description: 'Hovered links.' },
       { name: 'link-visited', light: 'visited.700', dark: 'visited.300', description: 'Visited links in content and result lists.' },
     ],
   },
@@ -82,13 +83,18 @@ export const colorGroups = [
     ],
   },
   { group: 'Success', colors: status('success', 'Success') },
-  { group: 'Warning', colors: status('warning', 'Warning') },
+  {
+    group: 'Warning',
+    colors: status('warning', 'Warning').map((c) =>
+      c.name === 'warning-subtle' ? { ...c, light: 'note.50', dark: 'note.950', description: 'Notice backgrounds — classic pale yellow.' }
+        : c.name === 'warning-border' ? { ...c, light: 'note.200', dark: 'note.800', description: 'Notice borders.' } : c),
+  },
   { group: 'Danger', colors: status('danger', 'Danger') },
   { group: 'Info', colors: status('info', 'Info') },
   {
     group: 'Misc',
     colors: [
-      { name: 'highlight', light: 'warning.100', dark: 'warning.900', description: '<mark> and matched search terms.' },
+      { name: 'highlight', light: 'note.100', dark: 'note.900', description: '<mark> and matched search terms.' },
       { name: 'saved', light: 'danger.600', dark: 'danger.400', description: 'Filled heart/star on saved items.' },
       { name: 'overlay', light: 'mix(neutral.1000 45%)', dark: 'mix(neutral.1000 72%)', description: 'Backdrop behind dialogs and sheets.' },
       { name: 'shadow', light: 'mix(neutral.1000 8%)', dark: 'mix(neutral.1000 50%)', description: 'Soft shadow color.' },
@@ -98,11 +104,15 @@ export const colorGroups = [
   {
     group: 'Component',
     colors: [
-      { name: 'masthead', light: 'transparent', dark: 'transparent', description: 'Masthead background (sits on the canvas by default).' },
-      { name: 'crumbbar', light: '=surface', dark: '=surface', description: 'Crumb bar (breadcrumbs + pager) background.' },
-      { name: 'panel-border', light: '=border', dark: '=border', description: 'Panel outline.' },
-      { name: 'panel-header', light: '=surface-tint', dark: '=surface-tint', description: 'Panel header band.' },
-      { name: 'panel-header-border', light: '=border-subtle', dark: '=border', description: 'Line under the panel header band.' },
+      { name: 'masthead', light: 'transparent', dark: 'transparent', description: 'Masthead background (sits on the frame by default).' },
+      { name: 'crumbbar', light: 'accent.50', dark: 'accent.950', description: 'Crumb bar (breadcrumbs + pager) band.' },
+      { name: 'panel-border', light: 'accent.200', dark: 'neutral.800', description: 'Box outline — a hairline one step darker than the frame.' },
+      { name: 'panel-header', light: 'accent.100', dark: 'accent.950', description: 'Box header band.' },
+      { name: 'panel-header-border', light: 'accent.200', dark: 'neutral.800', description: 'Line under the box header band.' },
+      { name: 'tab', light: 'accent.50', dark: 'neutral.900', description: 'Inactive folder tab.' },
+      { name: 'zebra', light: 'accent.50', dark: 'neutral.900', description: 'Alternate table and list rows.' },
+      { name: 'button', light: 'neutral.100', dark: 'neutral.850', description: 'Bottom of the secondary button gradient (top is surface).' },
+      { name: 'button-hover', light: 'neutral.150', dark: 'neutral.800', description: 'Hovered secondary button.' },
       { name: 'price', light: '=text-strong', dark: '=text-strong', description: 'Prices and key figures.' },
     ],
   },
@@ -127,6 +137,15 @@ export const contrastPairs = [
   ['link', 'canvas', 4.5],
   ['link', 'surface-tint', 4.5],
   ['link', 'surface-muted', 4.5],
+  ['link', 'crumbbar', 4.5],
+  ['link', 'panel-header', 4.5],
+  ['link', 'zebra', 4.5],
+  ['text-muted', 'panel-header', 4.5],
+  ['text-muted', 'crumbbar', 4.5],
+  ['text', 'tab', 4.5],
+  ['text-strong', 'button', 4.5],
+  ['text-strong', 'button-hover', 4.5],
+  ['text-on-accent', 'accent-active', 4.5],
   ['link-hover', 'surface', 4.5],
   ['link-visited', 'surface', 4.5],
   ['text-on-accent', 'accent', 4.5],

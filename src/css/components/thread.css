@@ -1,0 +1,96 @@
+/*
+ * Thread — forum posts and comments, guestbook style: who and when in a
+ * narrow column on the left, the post on the right. Stacks on narrow
+ * containers.
+ *
+ *   <ol class="os-thread" role="list">
+ *     <li class="os-thread__post" id="innlegg-1">
+ *       <div class="os-thread__author">
+ *         <strong>Kari N.</strong>
+ *         <span>212 innlegg</span>
+ *       </div>
+ *       <div class="os-thread__body">
+ *         <p class="os-thread__meta"><time datetime="2026-10-11T09:12">11.10.2026 kl. 09:12</time> · <a href="#innlegg-1">#1</a></p>
+ *         <blockquote class="os-thread__quote"><p><strong>Ola skrev:</strong> …</p></blockquote>
+ *         <p>Innlegget …</p>
+ *       </div>
+ *     </li>
+ *   </ol>
+ *
+ * .os-thread__post--op marks the opening post (tinted author column).
+ */
+@layer os.components {
+  .os-thread {
+    container-type: inline-size;
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: var(--os-border-width) solid var(--os-color-border);
+  }
+
+  .os-thread__post {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .os-thread__post + .os-thread__post {
+    border-block-start: var(--os-border-width) solid var(--os-color-border);
+  }
+
+  .os-thread__author {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--os-space-2);
+    padding: var(--os-space-1-5) var(--os-space-2);
+    background-color: var(--os-color-surface-muted);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+  }
+
+  .os-thread__author strong {
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-thread__post--op .os-thread__author {
+    background-color: var(--os-color-surface-tint);
+  }
+
+  .os-thread__body {
+    display: grid;
+    gap: var(--os-space-2);
+    min-width: 0;
+    padding: var(--os-space-2);
+  }
+
+  .os-thread__body > * {
+    margin: 0;
+  }
+
+  .os-thread__meta {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+  }
+
+  .os-thread__quote {
+    margin: 0;
+    padding: var(--os-space-1-5) var(--os-space-2);
+    border-inline-start: 3px solid var(--os-color-border-strong);
+    background-color: var(--os-color-surface-sunken);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+  }
+
+  @container (min-width: 32rem) {
+    .os-thread__post {
+      grid-template-columns: 9rem minmax(0, 1fr);
+    }
+
+    .os-thread__author {
+      flex-direction: column;
+      align-content: start;
+      border-inline-end: var(--os-border-width) solid var(--os-color-border-subtle);
+    }
+  }
+}

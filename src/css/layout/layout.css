@@ -1,14 +1,23 @@
 /*
- * Two-column layout: the heart of the original design.
+ * Column layouts — the heart of the original design.
  *
- *   .os-layout            main + aside (aside on the right, 22.5rem)
- *   .os-layout--start     sidebar on the left (filters, docs navigation);
- *                         put the aside first in source order
- *   .os-layout--single    one column, e.g. landing pages
+ *   .os-layout          main + aside on the right (300px)       detail pages
+ *   .os-layout--start   menu on the left (200px) + main         search, settings
+ *   .os-layout--three   menu (200px) + main + aside (300px)     portal front pages
+ *   .os-layout--single  one column
+ *   .os-layout--late    like .os-layout, but the aside only moves up beside
+ *                       main from 76em — for wide tables, which get the full
+ *                       width on laptops and tablets
  *
- * Below 60em (960px) both columns stack; the aside follows the main content.
- * Repeat what matters (price, contact) in the main column or in
- * .os-mobilebar rather than reordering content with CSS.
+ *   <main class="os-layout">
+ *     <div class="os-layout__main">…boxes…</div>
+ *     <aside class="os-layout__aside">…boxes…</aside>
+ *   </main>
+ *
+ * For --start and --three, put the left column first in source and give it
+ * .os-layout__nav. Below 60em every column stacks: nav, main, aside.
+ * Repeat what matters (price, contact) in the main column or .os-mobilebar
+ * instead of reordering content with CSS.
  */
 @layer os.layout {
   .os-layout {
@@ -19,7 +28,8 @@
   }
 
   .os-layout__main,
-  .os-layout__aside {
+  .os-layout__aside,
+  .os-layout__nav {
     display: flex;
     flex-direction: column;
     gap: var(--os-gap);
@@ -35,14 +45,27 @@
       grid-template-columns: var(--os-sidebar-width) minmax(0, 1fr);
     }
 
+    .os-layout--three {
+      grid-template-columns: var(--os-sidebar-width) minmax(0, 1fr) var(--os-aside-width);
+    }
+
     .os-layout--single {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .os-layout__aside--sticky,
+    .os-layout--late {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
     .os-layout__sticky {
       position: sticky;
       top: var(--os-gap);
+    }
+  }
+
+  @media (min-width: 76em) {
+    .os-layout--late {
+      grid-template-columns: minmax(0, 1fr) var(--os-aside-width);
     }
   }
 }

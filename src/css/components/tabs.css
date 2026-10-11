@@ -1,33 +1,28 @@
 /*
- * Tabs — switch between views of the same subject. Enhanced by oldschool.js
- * (roles, arrow keys, roving tabindex). Without JavaScript every panel is
- * shown in turn, each with its own heading.
+ * Tabs — folder tabs on top of a box. Enhanced by oldschool.js (roles, arrow
+ * keys). Without JavaScript every panel is shown in turn under its heading.
  *
  *   <div class="os-tabs" data-os-tabs>
- *     <div class="os-tabs__list" role="tablist" aria-label="Om boligen">
- *       <button class="os-tabs__tab" role="tab" aria-controls="t-desc" aria-selected="true">Beskrivelse</button>
- *       <button class="os-tabs__tab" role="tab" aria-controls="t-fac">Fasiliteter</button>
+ *     <div class="os-tabs__list" role="tablist" aria-label="Arrangement">
+ *       <button class="os-tabs__tab" role="tab" aria-controls="t1" aria-selected="true">Program</button>
+ *       <button class="os-tabs__tab" role="tab" aria-controls="t2">Praktisk info</button>
  *     </div>
- *     <section class="os-tabs__panel" id="t-desc" role="tabpanel"><h3 class="os-tabs__heading">Beskrivelse</h3>…</section>
- *     <section class="os-tabs__panel" id="t-fac" role="tabpanel"><h3 class="os-tabs__heading">Fasiliteter</h3>…</section>
+ *     <section class="os-tabs__panel" id="t1"><h3 class="os-tabs__heading">Program</h3>…</section>
+ *     <section class="os-tabs__panel" id="t2"><h3 class="os-tabs__heading">Praktisk info</h3>…</section>
  *   </div>
  */
 @layer os.components {
   .os-tabs__list {
     display: flex;
     gap: var(--os-space-1);
-    margin-block-end: var(--os-space-4);
+    padding-inline: var(--os-space-2);
     overflow-x: auto;
-    border-block-end: var(--os-border-width) solid var(--os-color-border);
+    border-block-end: var(--os-border-width) solid var(--os-color-panel-border);
     scrollbar-width: none;
   }
 
   .os-tabs:not([data-ready]) > .os-tabs__list {
     display: none;
-  }
-
-  .os-tabs:not([data-ready]) > .os-tabs__panel + .os-tabs__panel {
-    margin-block-start: var(--os-space-6);
   }
 
   .os-tabs[data-ready] .os-tabs__heading {
@@ -39,59 +34,52 @@
   }
 
   .os-tabs__heading {
-    margin-block-end: var(--os-space-3);
+    margin-block-end: var(--os-space-2);
     font-size: var(--os-text-lg);
   }
 
   .os-tabs__tab {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--os-space-2);
-    min-height: 2.75rem;
-    padding: var(--os-space-2) var(--os-space-3);
-    border: 0;
-    background: none;
-    color: var(--os-color-text-muted);
+    margin-block-end: calc(var(--os-border-width) * -1);
+    padding: var(--os-space-1) var(--os-space-3);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-end-color: transparent;
+    border-start-start-radius: var(--os-radius-tab);
+    border-start-end-radius: var(--os-radius-tab);
+    background-color: var(--os-color-tab);
+    box-shadow: var(--os-bevel);
+    color: var(--os-color-link);
+    font-family: var(--os-font-body);
     font-size: var(--os-text-sm);
-    font-weight: var(--os-weight-semibold);
+    font-weight: var(--os-weight-bold);
+    text-decoration: underline;
+    text-underline-offset: var(--os-link-underline-offset);
     white-space: nowrap;
   }
 
-  .os-tabs__tab:hover {
-    color: var(--os-color-text-strong);
-  }
-
   .os-tabs__tab[aria-selected="true"] {
-    color: var(--os-color-text-accent);
-  }
-
-  .os-tabs__tab[aria-selected="true"]::after {
-    content: "";
-    position: absolute;
-    inset-inline: var(--os-space-2);
-    inset-block-end: calc(var(--os-border-width) * -1);
-    height: 3px;
-    border-radius: 3px 3px 0 0;
-    background-color: var(--os-color-accent);
+    border-block-end-color: var(--os-color-surface);
+    background-color: var(--os-color-surface);
+    box-shadow: none;
+    color: var(--os-color-text-strong);
+    text-decoration: none;
   }
 
   .os-tabs__tab:focus-visible {
-    outline-offset: -2px;
+    outline-offset: -3px;
   }
 
-  .os-tabs__count {
-    min-width: 1.35rem;
-    padding: 0 var(--os-space-1-5);
-    border-radius: var(--os-radius-full);
-    background-color: var(--os-color-surface-muted);
-    color: var(--os-color-text-muted);
-    font-size: var(--os-text-2xs);
-    line-height: 1.35rem;
-    text-align: center;
+  .os-tabs__panel {
+    padding: var(--os-pad);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-start: 0;
+    background-color: var(--os-color-surface);
   }
 
-  .os-tabs__panel:focus-visible {
-    outline-offset: 4px;
+  .os-tabs:not([data-ready]) > .os-tabs__panel {
+    border-block-start: var(--os-border-width) solid var(--os-color-panel-border);
+  }
+
+  .os-tabs:not([data-ready]) > .os-tabs__panel + .os-tabs__panel {
+    margin-block-start: var(--os-gap);
   }
 }

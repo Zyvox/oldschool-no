@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jobber – oldschool prisvakt</title>
+  <meta name="description" content="Demo: en app-side med bred ramme, jobbtabell som stables på mobil, statusprikker, verktøylinje og hendelseslogg, bygget med Oldschool.">
+  <meta name="color-scheme" content="light dark">
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='standard')d.dataset.density=p.density;if(p.width&&p.width!=='classic')d.dataset.width=p.width}catch(e){}})()</script>
+  <link rel="stylesheet" href="../dist/oldschool.min.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script src="assets/generated/themes.js" defer></script>
+  <script src="assets/site.js" defer></script>
+  <script src="../dist/oldschool.min.js" defer></script>
+</head>
+<body class="os-page">
+  <a class="os-skiplink" href="#main">Hopp til hovedinnhold</a>
+
+  <div class="os-container os-container--wide os-container--bleed">
+    <header class="os-masthead">
+      <a class="os-brand" href="jobs.html" aria-label="oldschool prisvakt – til jobbene">
+        <svg class="os-brand__mark" viewBox="0 0 40 28" aria-hidden="true"><rect x="0" y="4" width="22" height="22" rx="6" fill="currentColor" opacity=".45"/><rect x="12" y="1" width="28" height="26" rx="7" fill="currentColor"/></svg>
+        <span class="os-brand__name">oldschool</span>
+        <span class="os-brand__product">prisvakt</span>
+      </a>
+      <button class="os-button os-button--sm os-masthead__toggle" type="button" popovertarget="site-menu">Meny</button>
+      <nav class="os-masthead__nav" id="site-menu" popover aria-label="Konto">
+        <ul class="os-utilnav" role="list">
+          <li><a href="jobs.html" aria-current="page">Jobber</a></li>
+          <li><a href="#">Innstillinger</a></li>
+          <li><a href="portal.html">Logg ut</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="os-crumbbar">
+      <nav aria-label="Brødsmulesti">
+        <ol class="os-breadcrumbs">
+          <li><a href="jobs.html">Prisvakt</a></li>
+          <li><span aria-current="page">Jobber</span></li>
+        </ol>
+      </nav>
+      <p class="os-text-xs">Neste kjøring: 11.10.2026 kl. 12:00</p>
+    </div>
+
+    <main class="os-layout os-layout--late" id="main">
+      <div class="os-layout__main">
+        <section class="os-panel" aria-labelledby="h-jobs">
+          <header class="os-panel__header">
+            <h1 class="os-panel__title" id="h-jobs">Jobber</h1>
+            <a class="os-panel__action" href="#">Eksporter (CSV)</a>
+          </header>
+          <div class="os-panel__body">
+            <div class="os-toolbar">
+              <div class="os-toolbar__group">
+                <button class="os-button os-button--sm" type="button">Kjør alle nå</button>
+                <button class="os-button os-button--sm" type="button">Sett alle på pause</button>
+              </div>
+              <p class="os-toolbar__count">5 jobber · 1 kjører · 1 feilet</p>
+              <div class="os-toolbar__group os-toolbar__end">
+                <label for="jobsort">Sorter</label>
+                <select class="os-select os-select--sm" id="jobsort">
+                  <option>Sist kjørt</option>
+                  <option>Navn</option>
+                  <option>Flest nye</option>
+                </select>
+              </div>
+            </div>
+            <div class="os-table-wrap" tabindex="0" role="region" aria-label="Jobbtabell">
+              <table class="os-table os-table--stack" data-os-sort>
+                <thead>
+                  <tr>
+                    <th scope="col">Navn</th>
+                    <th scope="col">Type</th>
+                    <th scope="col" class="os-num">Nye</th>
+                    <th scope="col" class="os-num">Overvåkes</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Sist kjørt</th>
+                    <th scope="col" data-os-nosort><span class="os-sr-only">Handlinger</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td class="os-table__title"><a href="#">Skiferie januar</a></td>
+                      <td>Pakkereiser (fly + hotell)</td>
+                      <td class="os-num"><a href="#" aria-label="3 nye i Skiferie januar">3</a></td>
+                      <td class="os-num">41</td>
+                      <td><span class="os-status os-status--running">Kjører</span></td>
+                      <td>11.10. 08:00</td>
+                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Finn nye</button> <button class="os-button os-button--sm" type="button">Oppdater liste</button></td>
+                    </tr>
+                    <tr>
+                      <td class="os-table__title"><a href="#">Hytte i Valdres</a></td>
+                      <td>Fritidsbolig til salgs</td>
+                      <td class="os-num"><a href="#" aria-label="12 nye i Hytte i Valdres">12</a></td>
+                      <td class="os-num">87</td>
+                      <td><span class="os-status os-status--success">Ferdig</span></td>
+                      <td>11.10. 07:30</td>
+                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Finn nye</button> <button class="os-button os-button--sm" type="button">Oppdater liste</button></td>
+                    </tr>
+                    <tr>
+                      <td class="os-table__title"><a href="#">Brukt sykkel</a></td>
+                      <td>Torget, Oslo</td>
+                      <td class="os-num">0</td>
+                      <td class="os-num">9</td>
+                      <td><span class="os-status os-status--success">Ferdig</span></td>
+                      <td>10.10. 22:00</td>
+                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Finn nye</button> <button class="os-button os-button--sm" type="button">Oppdater liste</button></td>
+                    </tr>
+                    <tr>
+                      <td class="os-table__title"><a href="#">Leilighet Tøyen</a></td>
+                      <td>Bolig til leie</td>
+                      <td class="os-num">0</td>
+                      <td class="os-num">0</td>
+                      <td><span class="os-status os-status--danger">Feilet</span></td>
+                      <td>09.10. 08:00</td>
+                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Prøv igjen</button></td>
+                    </tr>
+                    <tr>
+                      <td class="os-table__title"><a href="#">Konsertbilletter</a></td>
+                      <td>Arrangementer</td>
+                      <td class="os-num">0</td>
+                      <td class="os-num">14</td>
+                      <td><span class="os-status os-status">Satt på pause</span></td>
+                      <td>01.10. 10:02</td>
+                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Fortsett</button></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <div class="os-columns">
+          <section class="os-panel" aria-labelledby="h-log">
+            <header class="os-panel__header"><h2 class="os-panel__title" id="h-log">Siste hendelser</h2></header>
+            <div class="os-panel__body">
+              <ol class="os-log" role="list">
+                <li class="os-log__item os-log__item--accent"><time class="os-log__time" datetime="2026-10-11T08:00">11.10. 08:00</time><p class="os-log__text"><strong>Skiferie januar</strong> kjører — 3 nye så langt</p></li>
+                <li class="os-log__item os-log__item--success"><time class="os-log__time" datetime="2026-10-11T07:30">11.10. 07:30</time><p class="os-log__text"><strong>Hytte i Valdres</strong>: 12 nye annonser</p></li>
+                <li class="os-log__item"><time class="os-log__time" datetime="2026-10-10T14:21">10.10. 14:21</time><p class="os-log__text">Prisen på <a href="#">Gamlestølen 4</a> ble satt ned fra 2 950 000,- til <strong>2 790 000,-</strong></p></li>
+                <li class="os-log__item os-log__item--danger"><time class="os-log__time" datetime="2026-10-09T08:00">09.10. 08:00</time><p class="os-log__text"><strong>Leilighet Tøyen</strong> feilet — nettstedet svarte ikke. <a href="#">Se feilmeldingen</a></p></li>
+              </ol>
+            </div>
+          </section>
+
+          <section class="os-panel" aria-labelledby="h-week">
+            <header class="os-panel__header"><h2 class="os-panel__title" id="h-week">Nye treff denne uken</h2></header>
+            <div class="os-panel__body">
+              <ol class="os-bars" role="list">
+                <li class="os-bars__item os-bars__item--lead"><span class="os-bars__label">Hytte i Valdres</span><span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 100%"></span></span><span class="os-bars__value">31</span></li>
+                <li class="os-bars__item"><span class="os-bars__label">Skiferie januar</span><span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 52%"></span></span><span class="os-bars__value">16</span></li>
+                <li class="os-bars__item"><span class="os-bars__label">Brukt sykkel</span><span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 23%"></span></span><span class="os-bars__value">7</span></li>
+                <li class="os-bars__item"><span class="os-bars__label">Konsertbilletter</span><span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 0%"></span></span><span class="os-bars__value">0</span></li>
+              </ol>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <aside class="os-layout__aside" aria-label="Ny jobb og hjelp">
+        <section class="os-panel" aria-labelledby="h-new">
+          <header class="os-panel__header"><h2 class="os-panel__title" id="h-new">Ny jobb</h2></header>
+          <div class="os-panel__body">
+            <form class="os-form" action="#">
+              <div class="os-field">
+                <label class="os-field__label" for="type">Type</label>
+                <select class="os-select" id="type" aria-describedby="type-hint">
+                  <option>Bolig til salgs</option>
+                  <option>Fritidsbolig til salgs</option>
+                  <option>Pakkereiser (fly + hotell)</option>
+                  <option>Torget</option>
+                </select>
+              </div>
+              <div class="os-field">
+                <label class="os-field__label" for="jobname">Navn</label>
+                <input class="os-input" id="jobname" placeholder="F.eks. Hytte i Valdres">
+              </div>
+              <div class="os-buttons">
+                <button class="os-button os-button--primary" type="submit">Fortsett »</button>
+              </div>
+            </form>
+          </div>
+          <div class="os-panel__body os-stack os-stack--sm os-text-sm" id="type-hint">
+            <p><strong>Bolig og fritidsbolig</strong> — følger de lagrede søkene dine, henter hver annonse og varsler når pris eller status endres.</p>
+            <p><strong>Pakkereiser</strong> — én jobb er én avreisemåned. Prisene spores per dato og antall reisende.</p>
+          </div>
+        </section>
+
+        <section class="os-panel os-panel--note" aria-labelledby="h-help">
+          <header class="os-panel__header"><h2 class="os-panel__title" id="h-help">Tips</h2></header>
+          <div class="os-panel__body">
+            <ul class="os-linklist" role="list">
+              <li><a href="#">Slik setter du opp et lagret søk</a></li>
+              <li><a href="#">Hvor ofte kjøres jobbene?</a></li>
+              <li><a href="#">Varsler på e-post</a></li>
+            </ul>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="os-footer">
+      <div class="os-footer__bottom">
+        <ul class="os-seplist" role="list">
+          <li><a href="#">Hjelp</a></li>
+          <li><a href="#">Personvern</a></li>
+          <li><a href="#">Tilgjengelighetserklæring</a></li>
+        </ul>
+        <p>© 2026 oldschool prisvakt — demoside. Jobbene og annonsene er oppdiktet.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

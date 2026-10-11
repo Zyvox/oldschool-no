@@ -1,85 +1,52 @@
 /**
- * Palette — the raw material.
+ * Palette — every colour in Oldschool grows from the seeds in this file.
  *
- * Every chromatic ramp is generated from an OKLCH hue + peak chroma (see
- * src/js/color.js for the lightness/chroma curves). Names are Norwegian
- * nature words; each ramp has the same lightness per step, so ramps are
- * interchangeable inside themes.
+ * To re-brand a clone, change `accent` and run `npm run build`. The build
+ * turns each seed into a ramp (steps 50–950) with fixed OKLCH lightness per
+ * step, so contrast holds whatever colour you pick: step 700 is always safe
+ * for links on white, step 600 always carries white button text, and so on.
+ * `npm test` re-checks every contrast pair and fails if a seed breaks one.
  *
- * To add a ramp: add an entry below and run `npm run build`.
- * To preview ramps: open site/tokens.html.
+ * A seed is either
+ *   '#2a5aa8'                                any CSS hex colour — its hue and
+ *                                            colourfulness are kept, lightness
+ *                                            is set per step; or
+ *   { hue: 260, chroma: 0.15, hueShift: -4 } OKLCH hue (0–360), peak chroma
+ *                                            (≈0.04 muted … 0.2 vivid) and an
+ *                                            optional hue drift from light to dark.
+ *
+ * Pick a mid-tone (a button colour, not a background tint) as the seed.
+ * Recipes for other brands are in docs/theming.md.
  */
 
-/** Chromatic ramps (steps 50–950). */
-export const accents = {
-  fjord: {
-    hue: 256, chroma: 0.15, hueShift: -6,
-    description: 'Deep fjord blue. The default accent and the info color.',
-  },
-  blekk: {
-    hue: 262, chroma: 0.075, hueShift: 0,
-    description: 'Blekk (ink). A quiet navy for print-like, low-color themes.',
-  },
-  nordlys: {
-    hue: 196, chroma: 0.1, hueShift: 10,
-    description: 'Nordlys (aurora). Cold teal.',
-  },
-  furu: {
-    hue: 158, chroma: 0.1, hueShift: 8,
-    description: 'Furu (pine). Dark forest green.',
-  },
-  mose: {
-    hue: 142, chroma: 0.13, hueShift: 6,
-    description: 'Mose (moss). Success.',
-  },
-  multe: {
-    hue: 68, chroma: 0.15, hueShift: 14,
-    description: 'Multe (cloudberry). Warning and highlights.',
-  },
-  tyttebaer: {
-    hue: 24, chroma: 0.17, hueShift: 4,
-    description: 'Tyttebær (lingonberry). Danger, and a warm accent.',
-  },
-  lyng: {
-    hue: 322, chroma: 0.13, hueShift: -6,
-    description: 'Lyng (heather). Visited links, and an accent.',
-  },
-};
-
-/** Neutral ramps (steps 0–1000). Low-chroma greys with a temperature. */
-export const neutrals = {
-  is: {
-    hue: 248, chroma: 0.014,
-    description: 'Is (ice). Cool, slightly blue grey.',
-  },
-  granitt: {
-    hue: 260, chroma: 0.004,
-    description: 'Granitt (granite). Almost pure grey.',
-  },
-  sand: {
-    hue: 78, chroma: 0.012,
-    description: 'Sand. Warm, paper-like grey.',
-  },
-};
+/** The one brand colour: frame, header bands, buttons, links, focus. */
+export const accent = '#2a5aa8';
 
 /**
- * Hand-picked ramps that are *not* generated. `retro` recreates the look of
- * mid-2000s Norwegian classifieds (link blue, pale-blue frame, plain greys).
+ * Greys for text, surfaces and rules. They borrow the accent hue at this
+ * chroma, so a new accent re-tints them too. 0 = pure grey; 0.012 = clearly
+ * tinted. Give `hue` to tint towards something other than the accent.
  */
-export const fixed = {
-  retroBlue: {
-    description: 'Mid-2000s link blue and pale frame blue.',
-    ramp: {
-      50: '#eef4fb', 100: '#dce8f6', 200: '#c6daf0', 300: '#a2c1e6', 400: '#6f9bd4',
-      500: '#3f74c2', 600: '#1f55ad', 700: '#123f94', 800: '#0d3077', 900: '#0a2459', 950: '#061838',
-    },
-  },
-  retroGray: {
-    description: 'Plain greys, no tint.',
-    ramp: {
-      0: '#ffffff', 25: '#fbfbfb', 50: '#f6f6f6', 100: '#efefef', 150: '#e6e6e6', 200: '#dddddd',
-      300: '#cccccc', 400: '#8f8f8f', 500: '#737373', 600: '#5e5e5e', 700: '#4d4d4d',
-      800: '#383838', 850: '#2c2c2c', 900: '#222222', 950: '#1a1a1a', 1000: '#111111',
-    },
-  },
+export const neutral = { chroma: 0.008 };
+
+/**
+ * Link colour. null = use the accent ramp (the default). Set a seed when the
+ * brand colour is not a good link colour — e.g. a green or orange brand with
+ * the classic blue links of the era: link = '#2a5aa8'.
+ */
+export const link = null;
+
+/** Visited links: the classic purple. */
+export const visited = { hue: 305, chroma: 0.12, hueShift: -6 };
+
+/**
+ * Status colours. Keep them recognisable whatever the accent is.
+ * `note` is the pale post-it yellow behind notices and <mark>.
+ */
+export const status = {
+  success: { hue: 140, chroma: 0.13, hueShift: 6 },
+  warning: { hue: 62, chroma: 0.13, hueShift: 12 },
+  danger: { hue: 26, chroma: 0.17, hueShift: 4 },
+  info: { hue: 254, chroma: 0.13, hueShift: -4 },
+  note: { hue: 100, chroma: 0.3, hueShift: -12 },
 };

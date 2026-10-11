@@ -1,5 +1,5 @@
 /*
- * Typography. Hierarchy comes from size and weight — never from color alone.
+ * Typography — Arial, bold headings, one size step between levels.
  * Margins are zero; spacing between blocks comes from .os-stack / .os-prose.
  */
 @layer os.base {
@@ -14,42 +14,15 @@
     color: var(--os-color-text-strong);
     line-height: var(--os-leading-snug);
     letter-spacing: var(--os-tracking-heading);
-    text-wrap: balance;
   }
 
-  h1 {
-    font-size: var(--os-text-3xl);
-    line-height: var(--os-leading-tight);
-  }
+  h1 { font-size: var(--os-text-3xl); line-height: var(--os-leading-tight); }
+  h2 { font-size: var(--os-text-2xl); line-height: var(--os-leading-tight); }
+  h3 { font-size: var(--os-text-lg); }
+  h4 { font-size: var(--os-text-md); }
+  h5, h6 { font-size: var(--os-text-sm); }
 
-  h2 {
-    font-size: var(--os-text-2xl);
-    line-height: var(--os-leading-tight);
-  }
-
-  h3 {
-    font-size: var(--os-text-xl);
-  }
-
-  h4 {
-    font-size: var(--os-text-lg);
-  }
-
-  h5 {
-    font-size: var(--os-text-md);
-  }
-
-  h6 {
-    font-size: var(--os-text-sm);
-  }
-
-  p {
-    text-wrap: pretty;
-  }
-
-  small {
-    font-size: var(--os-text-sm);
-  }
+  small { font-size: var(--os-text-xs); }
 
   strong,
   b {
@@ -57,34 +30,26 @@
     color: var(--os-color-text-strong);
   }
 
-  em,
-  i,
-  cite {
-    font-style: italic;
-  }
-
   code,
   kbd,
   samp,
   pre {
     font-family: var(--os-font-mono);
-    font-size: 0.875em;
+    font-size: 0.95em;
   }
 
   code {
-    padding: 0.1em 0.35em;
-    border-radius: var(--os-radius-xs);
+    padding: 0 0.2em;
     background-color: var(--os-color-surface-sunken);
     border: var(--os-border-width) solid var(--os-color-border-subtle);
-    overflow-wrap: anywhere;
+    border-radius: var(--os-radius-xs);
   }
 
   pre {
     overflow-x: auto;
-    padding: var(--os-space-4);
-    border-radius: var(--os-radius-control);
+    padding: var(--os-space-2) var(--os-space-3);
     background-color: var(--os-color-surface-sunken);
-    border: var(--os-border-width) solid var(--os-color-border-subtle);
+    border: var(--os-border-width) solid var(--os-color-border);
     line-height: var(--os-leading-snug);
   }
 
@@ -93,29 +58,24 @@
     border: 0;
     background: none;
     font-size: inherit;
-    overflow-wrap: normal;
   }
 
   kbd {
-    display: inline-block;
-    padding: 0.05em 0.4em;
+    padding: 0 0.3em;
     border: var(--os-border-width) solid var(--os-color-border-strong);
     border-bottom-width: 2px;
-    border-radius: var(--os-radius-sm);
+    border-radius: var(--os-radius-xs);
     background-color: var(--os-color-surface);
-    line-height: 1.4;
   }
 
   mark {
     padding-inline: 0.1em;
-    border-radius: var(--os-radius-xs);
     background-color: var(--os-color-highlight);
-    color: inherit;
+    color: var(--os-color-text);
   }
 
   abbr[title] {
     text-decoration: underline dotted;
-    text-underline-offset: 0.2em;
     cursor: help;
   }
 
@@ -127,13 +87,8 @@
     vertical-align: baseline;
   }
 
-  sup {
-    top: -0.5em;
-  }
-
-  sub {
-    bottom: -0.25em;
-  }
+  sup { top: -0.5em; }
+  sub { bottom: -0.25em; }
 
   hr {
     border: 0;
@@ -141,29 +96,25 @@
   }
 
   blockquote {
-    padding-inline-start: var(--os-space-4);
-    border-inline-start: 3px solid var(--os-color-border-strong);
+    padding-inline-start: var(--os-space-3);
+    border-inline-start: 3px solid var(--os-color-panel-border);
     color: var(--os-color-text-muted);
+    font-style: italic;
   }
 
   :where(ul, ol):not([role="list"]) {
-    padding-inline-start: 1.25em;
-  }
-
-  li::marker {
-    color: var(--os-color-text-muted);
+    padding-inline-start: 1.4em;
   }
 
   figcaption {
-    font-size: var(--os-text-sm);
     color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
   }
 
   address {
     font-style: normal;
   }
 
-  /* Numbers that should line up: prices, facts, tables. */
   data,
   time,
   output {

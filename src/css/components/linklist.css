@@ -1,0 +1,80 @@
+/*
+ * Link list — lists of links with » bullets; the backbone of every 2008
+ * sidebar ("Relaterte artikler", "Nyttige lenker"). Numbered variant for
+ * "Mest lest".
+ *
+ *   <ul class="os-linklist" role="list">
+ *     <li><a href="#">Slik søker du barnehageplass</a> <span class="os-linklist__meta">(12.09)</span></li>
+ *   </ul>
+ *
+ *   <ol class="os-linklist os-linklist--numbered" role="list">…</ol>
+ *
+ * Variants: --ruled (rule between items), --numbered, --columns (2 columns when wide).
+ */
+@layer os.components {
+  .os-linklist {
+    display: grid;
+    gap: var(--os-space-1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: os-linklist;
+  }
+
+  .os-linklist > li {
+    position: relative;
+    min-block-size: 1.25rem; /* + the 4px gap: links sit 24px apart (WCAG 2.5.8) */
+    padding-inline-start: 0.9em;
+  }
+
+  .os-linklist > li::before {
+    content: "»";
+    position: absolute;
+    inset-inline-start: 0;
+    color: var(--os-color-text-accent);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-linklist__meta {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+    white-space: nowrap;
+  }
+
+  .os-linklist--ruled {
+    gap: 0;
+  }
+
+  .os-linklist--ruled > li {
+    min-block-size: 1.5rem;
+    padding-block: var(--os-row-pad);
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  .os-linklist--ruled > li::before {
+    inset-block-start: var(--os-row-pad);
+  }
+
+  .os-linklist--ruled > li:last-child {
+    border-block-end: 0;
+  }
+
+  .os-linklist--numbered > li {
+    padding-inline-start: 1.9em;
+    counter-increment: os-linklist;
+  }
+
+  .os-linklist--numbered > li::before {
+    content: counter(os-linklist) ".";
+    min-width: 1.5em;
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-lg);
+    line-height: 1.2;
+    text-align: end;
+  }
+
+  .os-linklist--columns {
+    grid-template-columns: repeat(auto-fill, minmax(min(13rem, 100%), 1fr));
+    column-gap: var(--os-space-5);
+  }
+}

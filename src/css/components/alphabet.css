@@ -1,0 +1,54 @@
+/*
+ * Alphabet — the A–Å index ("Tjenester A–Å"): one link per letter, letters
+ * with nothing behind them greyed out but kept in place.
+ *
+ *   <nav class="os-alphabet" aria-label="Tjenester A–Å">
+ *     <ul role="list">
+ *       <li><a href="#A">A</a></li>
+ *       <li><span aria-disabled="true">Q</span></li>
+ *       …
+ *     </ul>
+ *   </nav>
+ */
+@layer os.components {
+  .os-alphabet ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--os-space-0-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .os-alphabet :is(a, span) {
+    display: grid;
+    place-items: center;
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: var(--os-radius-control);
+    background-color: var(--os-color-surface);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-alphabet a {
+    text-decoration: none;
+  }
+
+  .os-alphabet a:hover {
+    background-color: var(--os-color-accent-subtle);
+    text-decoration: underline;
+  }
+
+  .os-alphabet a[aria-current] {
+    border-color: var(--os-color-accent);
+    background-color: var(--os-color-accent);
+    color: var(--os-color-text-on-accent);
+  }
+
+  .os-alphabet span {
+    background-color: var(--os-color-surface-muted);
+    color: var(--os-color-text-subtle);
+    font-weight: var(--os-weight-regular);
+  }
+}

@@ -3,187 +3,234 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Oldschool — a practical Nordic design harness</title>
-  <meta name="description" content="The readability of early-2000s Scandinavian web pages, rebuilt with modern CSS: tokens, swappable themes, components, mobile patterns.">
+  <title>Oldschool – the 2008 Nordic portal, brought back</title>
+  <meta name="description" content="Oldschool is a design harness for the practical Norwegian web of 2008: framed boxes, underlined links, label : value facts. Same design, refined palette and spacing.">
   <meta name="color-scheme" content="light dark">
-  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='comfortable')d.dataset.density=p.density}catch(e){}})()</script>
-  <link rel="preload" href="../dist/fonts/inter/inter-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../dist/oldschool.css">
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='standard')d.dataset.density=p.density;if(p.width&&p.width!=='classic')d.dataset.width=p.width}catch(e){}})()</script>
+  <link rel="stylesheet" href="../dist/oldschool.min.css">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <script src="assets/generated/themes.js" defer></script>
   <script src="assets/site.js" defer></script>
-  <script src="../dist/oldschool.js" defer></script>
+  <script src="../dist/oldschool.min.js" defer></script>
 </head>
 <body class="os-page">
   <a class="os-skiplink" href="#main">Skip to content</a>
 
-  <header class="os-masthead">
-    <div class="os-container os-masthead__inner">
+  <div class="os-container">
+    <header class="os-masthead">
       <a class="os-brand" href="index.html">
-        <svg class="os-brand__mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><rect x="2" y="2" width="9" height="11" rx="2.5"/><rect x="14" y="2" width="16" height="11" rx="2.5"/><rect x="2" y="16" width="9" height="14" rx="2.5"/><rect x="14" y="16" width="16" height="14" rx="2.5"/></g></svg>
+        <svg class="os-brand__mark" viewBox="0 0 40 28" aria-hidden="true"><rect x="0" y="4" width="22" height="22" rx="6" fill="currentColor" opacity=".45"/><rect x="12" y="1" width="28" height="26" rx="7" fill="currentColor"/></svg>
         <span class="os-brand__name">oldschool</span>
         <span class="os-brand__product">design harness</span>
       </a>
-      <button class="os-button os-button--quiet os-masthead__toggle" type="button" popovertarget="site-menu">
-        <svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-menu"></use></svg>Menu
-      </button>
-      <nav class="os-masthead__nav" id="site-menu" popover aria-label="Main">
-        <ul class="os-utilnav" role="list">
+      <ul class="os-utilnav" role="list">
+        <li><a href="../DESIGN.md">Design spec</a></li>
+        <li><a href="../README.md">Read me</a></li>
+        <li><a href="https://github.com/Zyvox/oldschool-no">Source</a></li>
+      </ul>
+    </header>
+
+    <nav class="os-tabbar" aria-label="Harness">
+      <ul class="os-tabbar__list" role="list">
+        <li><a class="os-tabbar__tab" href="index.html" aria-current="page">Overview</a></li>
+        <li><a class="os-tabbar__tab" href="components.html">Components</a></li>
+        <li><a class="os-tabbar__tab" href="tokens.html">Tokens</a></li>
+        <li><a class="os-tabbar__tab" href="themes.html">Themes</a></li>
+        <li><a class="os-tabbar__tab" href="preview.html">Devices</a></li>
+      </ul>
+    </nav>
+    <nav class="os-subnav" aria-label="Demo pages">
+      <ul role="list">
+        <li><strong>Demo pages:</strong></li>
+        <li><a href="portal.html">Front page</a></li>
+        <li><a href="article.html">Article</a></li>
+        <li><a href="detail.html">Detail page</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li><a href="app.html">Self-service</a></li>
+        <li><a href="jobs.html">App</a></li>
+      </ul>
+    </nav>
+
+    <main class="os-layout" id="main">
+      <div class="os-layout__main">
+        <section class="os-panel" aria-labelledby="intro">
+          <div class="os-panel__body os-stack os-stack--sm">
+            <div class="os-heading">
+              <h1 class="os-heading__title" id="intro">The 2008 Nordic portal, brought back</h1>
+              <p class="os-heading__subtitle">Same design. A calmer palette, accessible sizes, modern CSS underneath.</p>
+            </div>
+            <p class="os-prose__ingress os-measure">Oldschool is a reference harness for the practical Norwegian web of the late 2000s — the classifieds, municipalities and newspapers that put a tinted frame around white boxes, underlined every link and listed facts as <em>label : value</em>. It keeps that design exactly — Verdana, the blue frame, square boxes — and fixes only what dates it: the palette, the contrast, the target sizes and the code underneath.</p>
+            <p class="os-buttons"><a class="os-button os-button--primary" href="detail.html">See a detail page</a><a class="os-button" href="components.html">Browse components</a></p>
+          </div>
+        </section>
+
+        <section class="os-panel" aria-labelledby="h-kept">
+          <header class="os-panel__header"><h2 class="os-panel__title" id="h-kept">What stays exactly the same</h2></header>
+          <div class="os-panel__body">
+            <div class="os-columns">
+              <ul class="os-checklist" role="list">
+                <li>Tinted frame, white boxes with a header band</li>
+                <li>Logo top left, small utility links top right</li>
+                <li>Folder tabs with a strip of section links</li>
+                <li>Bold breadcrumbs and a result pager</li>
+                <li>Blue, underlined links; purple once visited</li>
+              </ul>
+              <ul class="os-checklist" role="list">
+                <li>Facts as <em>label : value</em> rows</li>
+                <li>One big price in a side box</li>
+                <li>Grey buttons, one blue one</li>
+                <li>Verdana, fixed pixel sizes, bold headings</li>
+                <li>Link lists with » and a yellow note</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel" aria-labelledby="h-changed">
+          <header class="os-panel__header"><h2 class="os-panel__title" id="h-changed">What changes, and why</h2></header>
+          <div class="os-panel__body">
+            <div class="os-table-wrap" tabindex="0" role="region" aria-label="Then and now">
+              <table class="os-table">
+                <thead><tr><th scope="col">Then</th><th scope="col">Now</th><th scope="col">Why</th></tr></thead>
+                <tbody>
+                  <tr><td>Saturated sky-blue frame, hand-picked colours</td><td>The same frame, every shade grown from one accent seed</td><td>Re-brand with one line; contrast stays guaranteed</td></tr>
+                  <tr><td>Verdana 11px</td><td>Verdana 12px — or Arial 14px in the standard theme</td><td>Readable on today's screens without zooming</td></tr>
+                  <tr><td>16–18px buttons and links</td><td>24px minimum targets</td><td>WCAG 2.2 target size</td></tr>
+                  <tr><td>Table layout, image sprites</td><td>Grid, container queries, SVG icons; tables stack on phones</td><td>Works from 320px phones to wide screens</td></tr>
+                  <tr><td>A fixed 1000px page</td><td>1000px, or 1200px with <code>.os-container--wide</code></td><td>Room for tables on 16:9 screens, still centred</td></tr>
+                  <tr><td>Light only</td><td>Dark mode, 2 themes, 3 densities</td><td>Follow the visitor's settings without touching markup</td></tr>
+                  <tr><td>Contrast by luck</td><td>WCAG 2.2 AA checked on every build</td><td>Universell utforming is the law</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="os-text-sm os-text-muted hx-after-table">Prefer it tidier? Choose <strong>Standard</strong> in the grey bar — Arial 14px, a paler frame, 3px corners — or compare both on the <a href="themes.html#h-compare">themes page</a>.</p>
+          </div>
+        </section>
+
+        <section class="os-panel" aria-labelledby="h-pages">
+          <header class="os-panel__header"><h2 class="os-panel__title" id="h-pages">Demo pages</h2></header>
+          <div class="os-panel__body">
+            <ul class="os-teasers" role="list">
+              <li class="os-teaser">
+                <h3 class="os-teaser__title"><a href="portal.html">Front page</a></h3>
+                <p class="os-teaser__text">A municipal portal: three columns, service index A–Å, news teasers, tag cloud, a poll and a yellow "tips us" note.</p>
+              </li>
+              <li class="os-teaser">
+                <h3 class="os-teaser__title"><a href="detail.html">Detail page</a></h3>
+                <p class="os-teaser__text">The classic listing layout — breadcrumbs and pager, big heading, facts, price box, contact box and a mobile action bar — used for a concert.</p>
+              </li>
+              <li class="os-teaser">
+                <h3 class="os-teaser__title"><a href="article.html">Article</a></h3>
+                <p class="os-teaser__text">A news story with ingress, fact box, related links, comments and a comment form.</p>
+              </li>
+              <li class="os-teaser">
+                <h3 class="os-teaser__title"><a href="search.html">Search</a></h3>
+                <p class="os-teaser__text">Text-only results with filters in the side column (a sheet on phones), chips and numbered pages.</p>
+              </li>
+              <li class="os-teaser">
+                <h3 class="os-teaser__title"><a href="app.html">Self-service</a></h3>
+                <p class="os-teaser__text">"Min side": side menu, steps, a long form with hints and errors, tabs, sortable tables and progress bars.</p>
+              </li>
+              <li class="os-teaser">
+                <h3 class="os-teaser__title"><a href="jobs.html">App</a></h3>
+                <p class="os-teaser__text">A price-watch dashboard on the wide frame: toolbar, a jobs table with status and actions that stacks into boxes on phones, an event log and a bar chart.</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="os-panel" aria-labelledby="h-start">
+          <header class="os-panel__header"><h2 class="os-panel__title" id="h-start">Quick start</h2></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Two files, no dependencies. Everything works without the script; it only adds tabs, sorting, dialogs and the theme switch.</p>
+            <pre tabindex="0"><code>&lt;html lang="nb"&gt;   &lt;!-- retro by default; data-theme="standard" for the tidier look --&gt;
+&lt;link rel="stylesheet" href="oldschool/dist/oldschool.min.css"&gt;
+&lt;script src="oldschool/dist/oldschool.min.js" defer&gt;&lt;/script&gt;
+
+&lt;body class="os-page"&gt;
+  &lt;div class="os-container"&gt;
+    &lt;header class="os-masthead"&gt;…&lt;/header&gt;
+    &lt;main class="os-layout"&gt;
+      &lt;div class="os-layout__main"&gt;
+        &lt;section class="os-panel"&gt;
+          &lt;header class="os-panel__header"&gt;&lt;h2 class="os-panel__title"&gt;Fakta&lt;/h2&gt;&lt;/header&gt;
+          &lt;div class="os-panel__body"&gt;
+            &lt;dl class="os-kv"&gt;&lt;div&gt;&lt;dt&gt;Dato&lt;/dt&gt;&lt;dd&gt;11.10.2026&lt;/dd&gt;&lt;/div&gt;&lt;/dl&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+      &lt;aside class="os-layout__aside"&gt;…&lt;/aside&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+            <p class="os-text-sm">Building something else — React, email, a native app? Take the values from <a href="../dist/tokens.json">dist/tokens.json</a> and the rules from <a href="../DESIGN.md">DESIGN.md</a>.</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="os-layout__aside">
+        <section class="os-panel os-panel--note" aria-labelledby="h-rules">
+          <header class="os-panel__header"><h2 class="os-panel__title os-panel__title--sm" id="h-rules">The rules</h2></header>
+          <div class="os-panel__body">
+            <ol class="os-linklist os-linklist--numbered" role="list">
+              <li>Every group of content is a box on the frame.</li>
+              <li>Links look like links: coloured and underlined.</li>
+              <li>Facts are label : value, never prose.</li>
+              <li>One big number and one blue button per page.</li>
+              <li>Always show where you are and where to go next.</li>
+              <li>Text first. No image is ever required.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="os-panel" aria-labelledby="h-numbers">
+          <header class="os-panel__header"><h2 class="os-panel__title os-panel__title--sm" id="h-numbers">In the box</h2></header>
+          <div class="os-panel__body">
+            <dl class="os-kv os-kv--end">
+              <div><dt>Components</dt><dd>59</dd></div>
+              <div><dt>Themes</dt><dd>2</dd></div>
+              <div><dt>Accent seeds</dt><dd>1</dd></div>
+              <div><dt>Densities</dt><dd>3</dd></div>
+              <div><dt>Icons</dt><dd>123</dd></div>
+              <div><dt>CSS (min + gzip)</dt><dd>≈ 14 kB</dd></div>
+              <div><dt>JS (min + gzip)</dt><dd>≈ 4.5 kB</dd></div>
+              <div><dt>JavaScript</dt><dd>optional</dd></div>
+              <div><dt>Dependencies</dt><dd>0</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="os-panel" aria-labelledby="h-docs">
+          <header class="os-panel__header"><h2 class="os-panel__title os-panel__title--sm" id="h-docs">Documentation</h2></header>
+          <div class="os-panel__body">
+            <ul class="os-linklist os-linklist--ruled" role="list">
+              <li><a href="../DESIGN.md">DESIGN.md — the spec</a></li>
+              <li><a href="../docs/components.md">Component markup</a></li>
+              <li><a href="../docs/tokens.md">Token reference</a></li>
+              <li><a href="../docs/theming.md">Theming</a></li>
+              <li><a href="../docs/layout.md">Layout and mobile</a></li>
+              <li><a href="../docs/javascript.md">JavaScript</a></li>
+              <li><a href="../docs/accessibility.md">Accessibility</a></li>
+              <li><a href="../docs/adoption.md">Using it in another repo</a></li>
+              <li><a href="../AGENTS.md">Notes for AI agents</a></li>
+            </ul>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="os-footer">
+      <div class="os-footer__bottom">
+        <ul class="os-seplist" role="list">
           <li><a href="components.html">Components</a></li>
           <li><a href="tokens.html">Tokens</a></li>
           <li><a href="themes.html">Themes</a></li>
-          <li><a href="https://github.com/Zyvox/oldschool-no"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-code"></use></svg>Source</a></li>
+          <li><a href="preview.html">Devices</a></li>
         </ul>
-      </nav>
-    </div>
-  </header>
-
-  <div class="os-page__body">
-    <main class="os-container os-stack os-stack--gap" id="main">
-
-      <section class="os-panel hx-hero">
-        <div class="os-panel__body">
-          <div class="hx-hero__grid">
-            <div class="os-stack os-stack--md">
-              <p class="os-heading__eyebrow">Design harness · v0.1</p>
-              <h1 class="os-heading__title os-heading__title--display">Practical by design.<br>Nordic by nature.</h1>
-              <p class="os-heading__lead">Oldschool brings back what the Scandinavian web got right in the 2000s — information first, boxes on a calm canvas, real underlined links, facts you can scan — and rebuilds it with modern CSS, design tokens and Nordic restraint.</p>
-              <div class="os-cluster">
-                <a class="os-button os-button--primary os-button--lg" href="listing.html">See the listing demo<svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-arrow-right"></use></svg></a>
-                <a class="os-button os-button--lg" href="components.html">Browse components</a>
-              </div>
-              <ul class="os-keyfacts" role="list">
-                <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-palette"></use></svg><span><strong>8</strong> themes × light/dark</span></li>
-                <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-layout-grid"></use></svg><span><strong>45+</strong> components</span></li>
-                <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-accessibility"></use></svg><span>WCAG 2.2 AA, checked</span></li>
-                <li><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-zap"></use></svg><span><strong>~20 kB</strong> CSS gzipped, zero deps</span></li>
-              </ul>
-            </div>
-            <figure class="hx-hero__art">
-              <img src="assets/img/facade.svg" alt="Illustration of an Oslo apartment building" width="1200" height="900">
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="os-stack os-stack--sm" aria-labelledby="h-compare">
-        <div class="os-sectionhead"><h2 id="h-compare">Same markup, twenty years apart</h2><a href="themes.html">All themes</a></div>
-        <p class="hx-lede">Both boxes below are the identical HTML. The left is scoped to <code>data-theme="retro"</code>, which reconstructs the 2011 original — Arial, 13px text, square corners, a pale-blue frame. The right is the default modern theme. Structure survives; only tokens change.</p>
-        <div class="hx-compare">
-          <figure class="hx-compare__item">
-            <div data-theme="retro" data-mode="light" class="hx-compare__frame" id="compare-source">
-              <section class="os-panel">
-                <div class="os-panel__body os-stack os-stack--sm">
-                  <ul class="os-actions" role="list">
-                    <li><a class="os-action" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-star"></use></svg><span class="os-action__label">Lagre annonsen</span></a></li>
-                    <li><a class="os-action" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-mail"></use></svg><span class="os-action__label">Tips en venn</span></a></li>
-                    <li><a class="os-action" href="#"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-printer"></use></svg><span class="os-action__label">Skriv ut</span></a></li>
-                  </ul>
-                  <h3 class="os-heading__title">Lys og koselig 1-roms med flott beliggenhet</h3>
-                  <ul class="os-linkrow" role="list">
-                    <li><a href="#">Se fra lufta</a></li>
-                    <li><a href="#">Se i kart</a></li>
-                  </ul>
-                </div>
-              </section>
-              <section class="os-panel">
-                <header class="os-panel__header"><h3 class="os-panel__title">Prisinformasjon</h3></header>
-                <div class="os-panel__body os-stack os-stack--sm">
-                  <p class="os-price os-price--inline"><span class="os-price__label">Leie pr. måned</span><span class="os-price__amount">7 500 kr</span></p>
-                  <dl class="os-kv">
-                    <div><dt>Depositum</dt><dd>30 000 kr</dd></div>
-                    <div><dt>Leie inkluderer</dt><dd>fyring, varmtvann</dd></div>
-                  </dl>
-                </div>
-              </section>
-            </div>
-            <figcaption><strong>2011</strong> · <code>data-theme="retro"</code></figcaption>
-          </figure>
-          <figure class="hx-compare__item">
-            <div data-theme="fjord" class="hx-compare__frame" id="compare-modern"></div>
-            <figcaption><strong>2026</strong> · <code>data-theme="fjord"</code></figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="os-stack os-stack--sm" aria-labelledby="h-principles">
-        <h2 id="h-principles" class="hx-page-h2">Principles</h2>
-        <p class="hx-lede">Read from the 2011 page, then held to today’s standards. The full rationale lives in <a href="https://github.com/Zyvox/oldschool-no/blob/main/DESIGN.md">DESIGN.md</a>.</p>
-        <ol class="hx-principles" role="list">
-          <li class="os-panel"><div class="os-panel__body"><h3><span>01</span>Content first, chrome last</h3><p>The page is a document. Decoration never competes with information.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>02</span>Boxes on a calm canvas</h3><p>Related facts live together in panels with a tinted header band; the canvas does the separating.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>03</span>Links look like links</h3><p>Colored and underlined in content. Visited links are marked in result lists.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>04</span>Label : value</h3><p>Facts in quiet-label, strong-value lists with hairline rhythm and tabular numbers.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>05</span>The important number is big</h3><p>Price and key figures get display size. Everything else stays calm.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>06</span>Always know where you are</h3><p>Breadcrumbs, “result 3 of 128”, previous and next — on every detail page.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>07</span>Actions are words</h3><p>Icon plus text. Icon-only only where space forces it, and then with a label for assistive tech.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>08</span>Say the essentials twice</h3><p>Price and contact repeat where the eye needs them: the aside on desktop, the bottom bar on phones.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>09</span>Lagom</h3><p>Just enough: one accent color, flat surfaces, hairlines over shadows, motion only to explain.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>10</span>Universal design</h3><p>WCAG 2.2 AA is the floor — contrast is tested for every theme, plus keyboard, zoom, print and forced colors.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>11</span>Swap, don’t fork</h3><p>Every visual decision is a token. New brand? New ramps. New density? One attribute.</p></div></li>
-          <li class="os-panel"><div class="os-panel__body"><h3><span>12</span>Works without the extras</h3><p>No JavaScript? Menus, filters, galleries and dialogs still work. Old browser? You get light mode.</p></div></li>
-        </ol>
-      </section>
-
-      <section class="os-stack os-stack--sm" aria-labelledby="h-pages">
-        <h2 id="h-pages" class="hx-page-h2">Explore</h2>
-        <ul class="os-grid hx-pages" role="list">
-          <li><a class="os-panel os-panel--interactive" href="listing.html"><img src="assets/img/facade.svg" alt="" width="1200" height="900"><span class="os-panel__body"><strong>Listing</strong><span>The 2011 detail page, rebuilt — gallery, facts, contact, map.</span></span></a></li>
-          <li><a class="os-panel os-panel--interactive" href="search.html"><img src="assets/img/townhouses.svg" alt="" width="1200" height="900"><span class="os-panel__body"><strong>Search</strong><span>Filters as a sheet on phones, results as rows or cards.</span></span></a></li>
-          <li><a class="os-panel os-panel--interactive" href="components.html"><img src="assets/img/kitchen.svg" alt="" width="1200" height="900"><span class="os-panel__body"><strong>Components</strong><span>Every component with live demo and copy-ready markup.</span></span></a></li>
-          <li><a class="os-panel os-panel--interactive" href="tokens.html"><img src="assets/img/map.svg" alt="" width="1200" height="900"><span class="os-panel__body"><strong>Tokens</strong><span>Palette, semantic colors, type, space — live values.</span></span></a></li>
-          <li><a class="os-panel os-panel--interactive" href="themes.html"><img src="assets/img/cabin.svg" alt="" width="1200" height="900"><span class="os-panel__body"><strong>Themes</strong><span>Eight schemes in light and dark, and a generator for your own.</span></span></a></li>
-          <li><a class="os-panel os-panel--interactive" href="preview.html"><img src="assets/img/modern.svg" alt="" width="1200" height="900"><span class="os-panel__body"><strong>Devices</strong><span>Desktop, tablet and phone side by side.</span></span></a></li>
-        </ul>
-      </section>
-
-      <section class="os-panel" aria-labelledby="h-start">
-        <header class="os-panel__header"><h2 class="os-panel__title" id="h-start">Quick start</h2></header>
-        <div class="os-panel__body os-stack os-stack--md">
-          <div class="os-grid os-grid--2">
-            <div class="os-stack os-stack--sm">
-              <h3 class="os-panel__heading">1 · Link the files</h3>
-<pre tabindex="0"><code>&lt;link rel="stylesheet" href="oldschool/dist/oldschool.css"&gt;
-&lt;script src="oldschool/dist/oldschool.js" defer&gt;&lt;/script&gt;</code></pre>
-              <h3 class="os-panel__heading">2 · Pick a theme (optional)</h3>
-<pre tabindex="0"><code>&lt;html lang="nb" data-theme="furu" data-mode="auto"&gt;</code></pre>
-            </div>
-            <div class="os-stack os-stack--sm">
-              <h3 class="os-panel__heading">3 · Build with boxes</h3>
-<pre tabindex="0"><code>&lt;section class="os-panel"&gt;
-  &lt;header class="os-panel__header"&gt;
-    &lt;h2 class="os-panel__title"&gt;Fakta&lt;/h2&gt;
-  &lt;/header&gt;
-  &lt;div class="os-panel__body"&gt;
-    &lt;dl class="os-kv"&gt;
-      &lt;div&gt;&lt;dt&gt;Soverom&lt;/dt&gt;&lt;dd&gt;1&lt;/dd&gt;&lt;/div&gt;
-    &lt;/dl&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-            </div>
-          </div>
-          <p class="os-note">Using Tailwind, React, or another platform? Start from <code>dist/tailwind.css</code>, <code>dist/tokens.json</code> and <code>docs/adoption.md</code>.</p>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <footer class="os-footer">
-    <div class="os-container">
-      <div class="os-footer__bottom" style="margin: 0; padding: 0; border: 0">
-        <p>Oldschool · MIT licensed · Inter (OFL) · Lucide icons (ISC) · Illustrations made for this project</p>
-        <ul class="os-seplist" role="list">
-          <li><a href="https://github.com/Zyvox/oldschool-no">GitHub</a></li>
-          <li><a href="tokens.html">Tokens</a></li>
-          <li><a href="themes.html">Themes</a></li>
-        </ul>
+        <p>Oldschool · MIT · icons: Lucide (ISC) · all people and organisations in the demos are fictional</p>
       </div>
-    </div>
-  </footer>
-  <script>
-    // Mirror the retro box into the modern one: literally the same markup.
-    document.getElementById('compare-modern').innerHTML = document.getElementById('compare-source').innerHTML;
-  </script>
+    </footer>
+  </div>
 </body>
 </html>

@@ -1,0 +1,45 @@
+/*
+ * Status — a coloured dot and a word, for the state of a job, a case or a
+ * service: "Kjører", "Ferdig", "Feilet". Quieter than a badge; reads well in
+ * table cells. The word carries the meaning, the dot only repeats it.
+ *
+ *   <span class="os-status os-status--running">Kjører</span>
+ *
+ * Tones: (neutral, idle) · --running · --success · --warning · --danger
+ * --pill adds a tinted box around it.
+ */
+@layer os.components {
+  .os-status {
+    --_dot: var(--os-color-text-subtle);
+    --_bg: var(--os-color-surface-sunken);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    color: var(--os-color-text);
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-bold);
+    white-space: nowrap;
+  }
+
+  .os-status::before {
+    content: "";
+    flex: none;
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    background-color: var(--_dot);
+  }
+
+  .os-status--running { --_dot: var(--os-color-accent); --_bg: var(--os-color-accent-subtle); }
+  .os-status--success { --_dot: var(--os-color-success-fill); --_bg: var(--os-color-success-subtle); }
+  .os-status--warning { --_dot: var(--os-color-warning-fill); --_bg: var(--os-color-warning-subtle); }
+  .os-status--danger { --_dot: var(--os-color-danger-fill); --_bg: var(--os-color-danger-subtle); }
+
+  .os-status--pill {
+    padding: 0.0625rem var(--os-space-1-5);
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: var(--os-radius-badge);
+    background-color: var(--_bg);
+  }
+}

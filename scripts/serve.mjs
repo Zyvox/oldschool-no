@@ -10,6 +10,7 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { build, root } from './build.mjs';
 
 const args = process.argv.slice(2);
@@ -80,10 +81,10 @@ if (watch) {
     clearTimeout(timer);
     timer = setTimeout(() => {
       if (rebuild) {
+        // Fresh process: ES modules (tokens/*.mjs) are cached per process.
         try {
-          build({ quiet: true });
-        } catch (error) {
-          console.error(`✗ build failed: ${error.message}`);
+          execFileSync(process.execPath, [path.join(root, 'scripts/build.mjs'), '--quiet'], { stdio: 'inherit' });
+        } catch {
           return;
         }
       }

@@ -7,10 +7,10 @@
  *     data-os-toast-pressed="…"   toast when turned on; data-os-toast-released="…" when turned off
  *     data-os-persist="key"       remember the state in localStorage
  *   data-os-share                 native share sheet, or copy the page link
- *   data-os-copy="text"           copy text (or the element's text) to the clipboard
+ *   data-os-copy="text"           copy text (or the element's text) to the clipboard;
+ *                                 data-os-copy="#id" copies the text of that element
  *   data-os-print                 print the page
  *   data-os-dialog="id"           open <dialog id="…"> with showModal()
- *   data-os-view="#list"          radio group switching a result list between list/grid
  */
 import { $, $$, store, t, copyText } from './core.js';
 import { toast } from './toast.js';
@@ -43,7 +43,7 @@ export function initToggle(button) {
     render(pressed);
     if (persistKey) store.set(PERSIST_KEY, { ...store.get(PERSIST_KEY, {}), [persistKey]: pressed });
     const message = pressed ? button.dataset.osToastPressed : button.dataset.osToastReleased;
-    if (message) toast(message, { icon: pressed ? 'circle-check' : 'info' });
+    if (message) toast(message);
   });
 }
 
@@ -59,15 +59,17 @@ export function initShare(button) {
       }
     }
     const ok = await copyText(data.url);
-    toast(ok ? t('linkCopied') : t('copyFailed'), { icon: ok ? 'link' : 'circle-alert' });
+    toast(ok ? t('linkCopied') : t('copyFailed'));
   });
 }
 
 export function initCopy(button) {
   button.addEventListener('click', async () => {
-    const text = button.dataset.osCopy || button.textContent.trim();
+    const value = button.dataset.osCopy;
+    const source = value?.startsWith('#') ? document.getElementById(value.slice(1)) : null;
+    const text = source ? source.textContent : value || button.textContent.trim();
     const ok = await copyText(text);
-    toast(ok ? button.dataset.osCopied || t('copied') : t('copyFailed'), { icon: ok ? 'clipboard-check' : 'circle-alert' });
+    toast(ok ? button.dataset.osCopied || t('copied') : t('copyFailed'));
   });
 }
 
@@ -82,15 +84,4 @@ export function initDialogTrigger(trigger) {
     event.preventDefault();
     dialog.showModal();
   });
-}
-
-export function initViewSwitch(group) {
-  const target = $(group.dataset.osView);
-  if (!target) return;
-  const apply = () => {
-    const value = $('input:checked', group)?.value;
-    target.classList.toggle('os-results--grid', value === 'grid');
-  };
-  $$('input', group).forEach((input) => input.addEventListener('change', apply));
-  apply();
 }

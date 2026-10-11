@@ -1,78 +1,48 @@
 /*
- * Alert — a message with a tone. Use role="status" for polite updates,
- * role="alert" only for errors that need immediate attention.
+ * Notices — a bordered message box with a bold first line. The yellow
+ * warning box is the 2008 classic.
  *
- *   <div class="os-alert os-alert--info" role="status">
- *     <svg class="os-icon">…#os-info</svg>
- *     <div class="os-alert__body">
- *       <p class="os-alert__title">Visning etter avtale</p>
- *       <p>Ta kontakt med megler for å avtale tidspunkt.</p>
- *     </div>
+ *   <div class="os-alert os-alert--warning" role="status">
+ *     <p class="os-alert__title">Obs!</p>
+ *     <p>Billettsalget stenger kl. 12 på konsertdagen.</p>
  *   </div>
  *
- * Note — the quiet grey footnote of the original ("Visning kan avtales med
- * oppdragsansvarlig."):  <p class="os-note">…</p>
+ * Tones: --info · --success · --warning · --danger. Use role="alert" only for
+ * errors that need immediate attention.
+ *
+ * Note — the quiet grey footnote ("Visning kan avtales med oppdragsansvarlig."):
+ *   <p class="os-note">…</p>
  */
 @layer os.components {
   .os-alert {
-    --_bg: var(--os-color-surface-muted);
+    --_bg: var(--os-color-surface-sunken);
     --_fg: var(--os-color-text-strong);
-    --_border: var(--os-color-border);
-    --_icon: var(--os-color-text-muted);
+    --_border: var(--os-color-border-strong);
 
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: start;
-    gap: var(--os-space-3);
-    padding: var(--os-space-3) var(--os-space-4);
+    padding: var(--os-space-2) var(--os-space-3);
     border: var(--os-border-width) solid var(--_border);
-    border-radius: var(--os-radius-control);
+    border-inline-start-width: 4px;
+    border-radius: var(--os-radius-xs);
     background-color: var(--_bg);
     color: var(--os-color-text);
-    font-size: var(--os-text-sm);
   }
 
-  .os-alert > .os-icon {
-    --os-icon-size: 1.25rem;
-    margin-block-start: 0.05rem;
-    color: var(--_icon);
-  }
-
-  .os-alert__body {
-    grid-column: 2;
-  }
-
-  .os-alert__body > * + * {
+  .os-alert > * + * {
     margin-block-start: var(--os-space-1);
   }
 
   .os-alert__title {
     color: var(--_fg);
-    font-weight: var(--os-weight-semibold);
+    font-weight: var(--os-weight-bold);
   }
 
-  .os-alert__close {
-    grid-column: 3;
-    margin: calc(var(--os-space-1) * -1) calc(var(--os-space-2) * -1) 0 0;
-  }
-
-  .os-alert--info { --_bg: var(--os-color-info-subtle); --_fg: var(--os-color-info); --_border: var(--os-color-info-border); --_icon: var(--os-color-info); }
-  .os-alert--success { --_bg: var(--os-color-success-subtle); --_fg: var(--os-color-success); --_border: var(--os-color-success-border); --_icon: var(--os-color-success); }
-  .os-alert--warning { --_bg: var(--os-color-warning-subtle); --_fg: var(--os-color-warning); --_border: var(--os-color-warning-border); --_icon: var(--os-color-warning); }
-  .os-alert--danger { --_bg: var(--os-color-danger-subtle); --_fg: var(--os-color-danger); --_border: var(--os-color-danger-border); --_icon: var(--os-color-danger); }
-
-  /* Banner: full-width strip at the top of a page. */
-  .os-alert--banner {
-    border-width: 0 0 var(--os-border-width);
-    border-radius: 0;
-  }
+  .os-alert--info { --_bg: var(--os-color-info-subtle); --_fg: var(--os-color-info); --_border: var(--os-color-info-border); }
+  .os-alert--success { --_bg: var(--os-color-success-subtle); --_fg: var(--os-color-success); --_border: var(--os-color-success-border); }
+  .os-alert--warning { --_bg: var(--os-color-warning-subtle); --_fg: var(--os-color-warning); --_border: var(--os-color-warning-border); }
+  .os-alert--danger { --_bg: var(--os-color-danger-subtle); --_fg: var(--os-color-danger); --_border: var(--os-color-danger-border); }
 
   .os-note {
     color: var(--os-color-text-muted);
-    font-size: var(--os-text-sm);
-  }
-
-  .os-note--xs {
     font-size: var(--os-text-xs);
   }
 }

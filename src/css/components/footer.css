@@ -1,90 +1,67 @@
 /*
- * Footer — link columns, then a bottom row with the legal small print.
- * Include an accessibility statement link (tilgjengelighetserklæring) —
- * required for Norwegian public-facing services and good practice everywhere.
+ * Footer — on the frame, below the last box: optional link columns, then a
+ * centred line of small links and the copyright.
+ * Include an accessibility statement link (tilgjengelighetserklæring).
  *
  *   <footer class="os-footer">
- *     <div class="os-container">
- *       <div class="os-footer__grid">
- *         <div class="os-footer__about">…</div>
- *         <nav class="os-footer__col" aria-labelledby="f-help">
- *           <h2 class="os-footer__title" id="f-help">Hjelp</h2>
- *           <ul class="os-footer__links" role="list">…</ul>
- *         </nav>
- *       </div>
- *       <div class="os-footer__bottom">…</div>
+ *     <div class="os-footer__grid">
+ *       <nav class="os-footer__col" aria-labelledby="f1">
+ *         <h2 class="os-footer__title" id="f1">Om oss</h2>
+ *         <ul class="os-footer__links" role="list">…</ul>
+ *       </nav>
  *     </div>
+ *     <div class="os-footer__bottom">…</div>
  *   </footer>
  */
 @layer os.components {
   .os-footer {
-    margin-block-start: auto;
-    padding-block: var(--os-space-12) var(--os-space-8);
-    border-block-start: var(--os-border-width) solid var(--os-color-border);
-    background-color: var(--os-color-surface);
-    color: var(--os-color-text-muted);
-    font-size: var(--os-text-sm);
+    margin-block-start: var(--os-space-4);
+    padding-block: var(--os-space-4) var(--os-space-2);
+    border-block-start: var(--os-border-width) solid var(--os-color-panel-border);
+    font-size: var(--os-text-xs);
   }
 
   .os-footer__grid {
     display: grid;
-    gap: var(--os-space-8) var(--os-space-6);
-    grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
-  }
-
-  @media (min-width: 60em) {
-    .os-footer__grid {
-      grid-template-columns: 1.6fr repeat(3, 1fr);
-    }
-  }
-
-  .os-footer__about > * + * {
-    margin-block-start: var(--os-space-3);
-  }
-
-  .os-footer__about p {
-    max-width: 34ch;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
+    gap: var(--os-space-4);
+    margin-block-end: var(--os-space-4);
   }
 
   .os-footer__col {
     min-width: 0;
   }
 
+  .os-footer__about > * + * {
+    margin-block-start: var(--os-space-2);
+  }
+
   .os-footer__title {
-    margin-block-end: var(--os-space-3);
-    color: var(--os-color-text-strong);
-    font-size: var(--os-text-sm);
-    font-weight: var(--os-weight-semibold);
-    letter-spacing: 0;
+    margin-block-end: var(--os-space-1);
+    font-size: var(--os-text-xs);
   }
 
   .os-footer__links {
     display: grid;
-    gap: var(--os-space-2);
+    gap: var(--os-space-1);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .os-footer a {
-    color: var(--os-color-text);
-    text-decoration: none;
-  }
-
-  .os-footer a:hover {
-    color: var(--os-color-link-hover);
-    text-decoration: underline;
+  .os-footer__links a {
+    display: inline-block;
+    min-height: 1.5rem;
+    padding-block: 0.125rem;
   }
 
   .os-footer__bottom {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--os-space-3) var(--os-space-6);
-    margin-block-start: var(--os-space-10);
-    padding-block-start: var(--os-space-6);
-    border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
-    font-size: var(--os-text-xs);
+    justify-content: center;
+    gap: var(--os-space-1) var(--os-space-3);
+    color: var(--os-color-text-muted);
+    text-align: center;
   }
 }

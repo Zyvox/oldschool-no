@@ -1,4 +1,4 @@
-/*! Oldschool v0.1.0 · MIT · https://github.com/Zyvox/oldschool-no */
+/*! Oldschool v0.2.0 · MIT · https://github.com/Zyvox/oldschool-no */
 (function () {
 'use strict';
 var __factories = {}, __cache = {};
@@ -55,30 +55,14 @@ const store = {
 
 const STRINGS = {
   en: {
-    gallery: 'Image gallery',
-    prev: 'Previous image',
-    next: 'Next image',
-    close: 'Close',
-    open: 'Show full screen',
-    imageOf: 'Image {i} of {n}',
     copied: 'Copied to the clipboard',
     linkCopied: 'Link copied',
     copyFailed: 'Could not copy',
-    saved: 'Saved',
-    removed: 'Removed',
   },
   nb: {
-    gallery: 'Bildegalleri',
-    prev: 'Forrige bilde',
-    next: 'Neste bilde',
-    close: 'Lukk',
-    open: 'Vis i fullskjerm',
-    imageOf: 'Bilde {i} av {n}',
-    copied: 'Kopiert til utklippstavlen',
+    copied: 'Kopiert',
     linkCopied: 'Lenken er kopiert',
     copyFailed: 'Kunne ikke kopiere',
-    saved: 'Lagret',
-    removed: 'Fjernet',
   },
 };
 
@@ -174,224 +158,6 @@ async function copyText(text) {
   __exports.copyText = copyText;
 });
 
-__define("lightbox.js", function (__require, __exports) {
-/**
- * Lightbox — full-screen image viewer on a native <dialog>.
- *
- *   Oldschool.openLightbox([{ src, alt, caption }], startIndex);
- *
- * Arrow keys and swipes move between images, Escape closes, and focus returns
- * to where it was when the viewer opened.
- */
-const { icon, t } = __require("core.js");
-function openLightbox(items, start = 0, { onChange } = {}) {
-  if (!items.length) return null;
-  let index = Math.max(0, Math.min(start, items.length - 1));
-
-  const dialog = document.createElement('dialog');
-  dialog.className = 'os-lightbox';
-  dialog.setAttribute('aria-label', t('gallery'));
-  dialog.innerHTML = `
-    <div class="os-lightbox__bar">
-      <span class="os-lightbox__count" aria-live="polite"></span>
-      <span class="os-lightbox__caption"></span>
-      <button type="button" class="os-lightbox__button" data-action="close" aria-label="${t('close')}">${icon('x')}</button>
-    </div>
-    <div class="os-lightbox__stage">
-      <img alt="">
-      <button type="button" class="os-lightbox__button os-lightbox__prev" data-action="prev" aria-label="${t('prev')}">${icon('chevron-left')}</button>
-      <button type="button" class="os-lightbox__button os-lightbox__next" data-action="next" aria-label="${t('next')}">${icon('chevron-right')}</button>
-    </div>
-    <div class="os-lightbox__thumbs"></div>`;
-
-  const img = dialog.querySelector('.os-lightbox__stage img');
-  const count = dialog.querySelector('.os-lightbox__count');
-  const caption = dialog.querySelector('.os-lightbox__caption');
-  const prev = dialog.querySelector('[data-action="prev"]');
-  const next = dialog.querySelector('[data-action="next"]');
-  const strip = dialog.querySelector('.os-lightbox__thumbs');
-
-  const thumbs = items.map((item, i) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'os-lightbox__thumb';
-    button.setAttribute('aria-label', t('imageOf', { i: i + 1, n: items.length }));
-    button.innerHTML = '<img alt="">';
-    button.querySelector('img').src = item.thumb ?? item.src;
-    button.addEventListener('click', () => show(i));
-    strip.append(button);
-    return button;
-  });
-
-  function show(i) {
-    index = (i + items.length) % items.length;
-    const item = items[index];
-    img.src = item.src;
-    img.alt = item.alt ?? '';
-    count.textContent = `${index + 1} / ${items.length}`;
-    caption.textContent = item.caption ?? item.alt ?? '';
-    thumbs.forEach((thumb, j) => thumb.setAttribute('aria-current', String(j === index)));
-    thumbs[index].scrollIntoView({ block: 'nearest', inline: 'nearest' });
-    onChange?.(index);
-  }
-
-  dialog.addEventListener('click', (event) => {
-    const action = event.target.closest('[data-action]')?.dataset.action;
-    if (action === 'close') dialog.close();
-    else if (action === 'prev') show(index - 1);
-    else if (action === 'next') show(index + 1);
-    else if (event.target === dialog || event.target.classList.contains('os-lightbox__stage')) dialog.close();
-  });
-
-  dialog.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); show(index - 1); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); show(index + 1); }
-    if (event.key === 'Home') { event.preventDefault(); show(0); }
-    if (event.key === 'End') { event.preventDefault(); show(items.length - 1); }
-  });
-
-  // Swipe
-  let startX = null;
-  const stage = dialog.querySelector('.os-lightbox__stage');
-  stage.addEventListener('pointerdown', (event) => { startX = event.clientX; });
-  stage.addEventListener('pointerup', (event) => {
-    if (startX === null) return;
-    const dx = event.clientX - startX;
-    startX = null;
-    if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
-  });
-
-  dialog.addEventListener('close', () => dialog.remove());
-
-  if (items.length < 2) {
-    prev.hidden = true;
-    next.hidden = true;
-    strip.hidden = true;
-  }
-
-  document.body.append(dialog);
-  show(index);
-  dialog.showModal();
-  dialog.querySelector('[data-action="close"]').focus();
-  return dialog;
-}
-  __exports.openLightbox = openLightbox;
-});
-
-__define("gallery.js", function (__require, __exports) {
-/**
- * Gallery — enhances .os-gallery[data-os-gallery]:
- *  · previous/next buttons and a full-screen button on the picture
- *  · thumbnails move the picture instead of jumping the page
- *  · arrow keys on the focused picture, counter kept in sync while swiping
- *  · [data-os-gallery-open] and clicking the picture open the lightbox
- */
-const { $, $$, icon, t, reducedMotion } = __require("core.js");
-const { openLightbox } = __require("lightbox.js");
-function initGallery(root) {
-  const track = $('.os-gallery__track', root);
-  const stage = $('.os-gallery__stage', root);
-  if (!track || !stage) return;
-
-  const slides = Array.from(track.children);
-  const thumbs = $$('.os-gallery__thumb', root);
-  const counters = $$('[data-os-gallery-current]', root);
-  const total = slides.length;
-  let index = 0;
-
-  const items = slides.map((slide) => {
-    const img = $('img', slide);
-    return {
-      src: slide.dataset.full || img?.currentSrc || img?.src,
-      thumb: img?.currentSrc || img?.src,
-      alt: img?.alt ?? '',
-      caption: slide.dataset.caption ?? img?.alt ?? '',
-    };
-  });
-
-  const makeButton = (className, label, iconName) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = className;
-    button.setAttribute('aria-label', label);
-    button.innerHTML = icon(iconName);
-    stage.append(button);
-    return button;
-  };
-
-  const prev = total > 1 ? makeButton('os-gallery__nav os-gallery__nav--prev', t('prev'), 'chevron-left') : null;
-  const next = total > 1 ? makeButton('os-gallery__nav os-gallery__nav--next', t('next'), 'chevron-right') : null;
-  makeButton('os-gallery__expand', t('open'), 'maximize-2').addEventListener('click', () => open());
-
-  track.tabIndex = 0;
-  track.setAttribute('aria-label', root.getAttribute('aria-label') ?? t('gallery'));
-  slides.forEach((slide, i) => {
-    slide.setAttribute('aria-label', t('imageOf', { i: i + 1, n: total }));
-  });
-
-  function setIndex(i) {
-    index = i;
-    counters.forEach((el) => { el.textContent = String(i + 1); });
-    thumbs.forEach((thumb, j) => thumb.setAttribute('aria-current', String(j === i)));
-    if (prev) prev.disabled = i === 0;
-    if (next) next.disabled = i === total - 1;
-  }
-
-  function go(i) {
-    const target = Math.max(0, Math.min(i, total - 1));
-    track.scrollTo({ left: target * track.clientWidth, behavior: reducedMotion() ? 'auto' : 'smooth' });
-    setIndex(target);
-  }
-
-  function open(i = index) {
-    openLightbox(items, i, { onChange: (j) => { if (j !== index) go(j); } });
-  }
-
-  let frame = 0;
-  track.addEventListener('scroll', () => {
-    cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(() => {
-      const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
-      if (i !== index && i >= 0 && i < total) setIndex(i);
-    });
-  }, { passive: true });
-
-  prev?.addEventListener('click', () => go(index - 1));
-  next?.addEventListener('click', () => go(index + 1));
-
-  thumbs.forEach((thumb, i) => {
-    thumb.addEventListener('click', (event) => {
-      event.preventDefault();
-      if (thumb.hasAttribute('data-more')) open(i);
-      else go(i);
-    });
-  });
-
-  track.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); go(index - 1); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); go(index + 1); }
-    if (event.key === 'Enter') { event.preventDefault(); open(); }
-  });
-
-  slides.forEach((slide, i) => {
-    slide.addEventListener('click', (event) => {
-      event.preventDefault();
-      open(i);
-    });
-  });
-
-  $$('[data-os-gallery-open]', root).forEach((trigger) => {
-    trigger.addEventListener('click', (event) => {
-      event.preventDefault();
-      open();
-    });
-  });
-
-  setIndex(0);
-}
-  __exports.initGallery = initGallery;
-});
-
 __define("tabs.js", function (__require, __exports) {
 /**
  * Tabs — WAI-ARIA tabs with automatic activation, arrow keys, Home/End.
@@ -447,12 +213,11 @@ function initTabs(root) {
 
 __define("toast.js", function (__require, __exports) {
 /**
- * Toasts — short confirmations in a polite live region.
+ * Toasts — the yellow "Lagret!" note at the top of the window, in a polite
+ * live region.
  *
- *   Oldschool.toast('Annonsen er lagret');
- *   Oldschool.toast('Kunne ikke kopiere', { icon: 'circle-alert' });
+ *   Oldschool.toast('Arrangementet er lagret');
  */
-const { icon } = __require("core.js");
 let region = null;
 
 function ensureRegion() {
@@ -465,12 +230,11 @@ function ensureRegion() {
   return region;
 }
 
-function toast(message, { icon: iconName = 'circle-check', duration = 3200 } = {}) {
+function toast(message, { duration = 3200 } = {}) {
   const host = ensureRegion();
   const el = document.createElement('div');
   el.className = 'os-toast';
-  el.innerHTML = `${icon(iconName)}<span></span>`;
-  el.querySelector('span').textContent = message;
+  el.textContent = message;
   host.append(el);
 
   const remove = () => el.remove();
@@ -494,10 +258,10 @@ __define("actions.js", function (__require, __exports) {
  *     data-os-toast-pressed="…"   toast when turned on; data-os-toast-released="…" when turned off
  *     data-os-persist="key"       remember the state in localStorage
  *   data-os-share                 native share sheet, or copy the page link
- *   data-os-copy="text"           copy text (or the element's text) to the clipboard
+ *   data-os-copy="text"           copy text (or the element's text) to the clipboard;
+ *                                 data-os-copy="#id" copies the text of that element
  *   data-os-print                 print the page
  *   data-os-dialog="id"           open <dialog id="…"> with showModal()
- *   data-os-view="#list"          radio group switching a result list between list/grid
  */
 const { $, $$, store, t, copyText } = __require("core.js");
 const { toast } = __require("toast.js");
@@ -529,7 +293,7 @@ function initToggle(button) {
     render(pressed);
     if (persistKey) store.set(PERSIST_KEY, { ...store.get(PERSIST_KEY, {}), [persistKey]: pressed });
     const message = pressed ? button.dataset.osToastPressed : button.dataset.osToastReleased;
-    if (message) toast(message, { icon: pressed ? 'circle-check' : 'info' });
+    if (message) toast(message);
   });
 }
 
@@ -545,15 +309,17 @@ function initShare(button) {
       }
     }
     const ok = await copyText(data.url);
-    toast(ok ? t('linkCopied') : t('copyFailed'), { icon: ok ? 'link' : 'circle-alert' });
+    toast(ok ? t('linkCopied') : t('copyFailed'));
   });
 }
 
 function initCopy(button) {
   button.addEventListener('click', async () => {
-    const text = button.dataset.osCopy || button.textContent.trim();
+    const value = button.dataset.osCopy;
+    const source = value?.startsWith('#') ? document.getElementById(value.slice(1)) : null;
+    const text = source ? source.textContent : value || button.textContent.trim();
     const ok = await copyText(text);
-    toast(ok ? button.dataset.osCopied || t('copied') : t('copyFailed'), { icon: ok ? 'clipboard-check' : 'circle-alert' });
+    toast(ok ? button.dataset.osCopied || t('copied') : t('copyFailed'));
   });
 }
 
@@ -569,37 +335,88 @@ function initDialogTrigger(trigger) {
     dialog.showModal();
   });
 }
-
-function initViewSwitch(group) {
-  const target = $(group.dataset.osView);
-  if (!target) return;
-  const apply = () => {
-    const value = $('input:checked', group)?.value;
-    target.classList.toggle('os-results--grid', value === 'grid');
-  };
-  $$('input', group).forEach((input) => input.addEventListener('change', apply));
-  apply();
-}
   __exports.initToggle = initToggle;
   __exports.initShare = initShare;
   __exports.initCopy = initCopy;
   __exports.initPrint = initPrint;
   __exports.initDialogTrigger = initDialogTrigger;
-  __exports.initViewSwitch = initViewSwitch;
+});
+
+__define("sort.js", function (__require, __exports) {
+/**
+ * Sortable tables — <table class="os-table" data-os-sort>.
+ * Header cells become buttons; aria-sort reflects the state. Numbers
+ * (including "7 500,-", "12,5 %" and dates written dd.mm.yyyy) sort
+ * numerically. Add data-os-nosort to a <th> to leave it alone.
+ */
+const { $, $$ } = __require("core.js");
+function sortValue(cell) {
+  const raw = (cell.dataset.sortValue ?? cell.textContent).trim();
+  const date = raw.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+  if (date) return Number(`${date[3]}${date[2].padStart(2, '0')}${date[1].padStart(2, '0')}`);
+  const numeric = raw.replace(/[\s ]/g, '').replace(/,-$/, '').replace(/kr$/i, '').replace('−', '-').replace(',', '.').replace(/%$/, '');
+  return numeric !== '' && !Number.isNaN(Number(numeric)) ? Number(numeric) : raw.toLocaleLowerCase('nb');
+}
+
+function initSortableTable(table) {
+  const head = $('thead tr', table);
+  const body = $('tbody', table);
+  if (!head || !body) return;
+  const headers = $$('th', head);
+
+  headers.forEach((th, column) => {
+    if (th.hasAttribute('data-os-nosort')) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'os-table__sort';
+    button.append(...th.childNodes);
+    th.append(button);
+
+    button.addEventListener('click', () => {
+      const ascending = th.getAttribute('aria-sort') !== 'ascending';
+      headers.forEach((other) => other.removeAttribute('aria-sort'));
+      th.setAttribute('aria-sort', ascending ? 'ascending' : 'descending');
+      const rows = $$('tr', body);
+      rows.sort((a, b) => {
+        const x = sortValue(a.cells[column]);
+        const y = sortValue(b.cells[column]);
+        const result = typeof x === 'number' && typeof y === 'number' ? x - y : String(x).localeCompare(String(y), 'nb');
+        return ascending ? result : -result;
+      });
+      body.append(...rows);
+    });
+  });
+}
+
+/**
+ * Stacked tables — <table class="os-table os-table--stack">. Copies each
+ * column header's text into data-label on cells that have none, so the
+ * stacked (narrow) layout can label every value.
+ */
+function initStackedTable(table) {
+  const headers = $$('thead th', table).map((th) => th.textContent.trim());
+  for (const row of $$('tbody tr', table)) {
+    Array.from(row.cells).forEach((cell, i) => {
+      if (!cell.hasAttribute('data-label') && headers[i]) cell.dataset.label = headers[i];
+    });
+  }
+}
+  __exports.initSortableTable = initSortableTable;
+  __exports.initStackedTable = initStackedTable;
 });
 
 __define("theme.js", function (__require, __exports) {
 /**
- * Theme, mode and density preferences.
+ * Theme, mode, density and width preferences.
  *
- *   <html data-theme="fjord" data-mode="dark" data-density="compact">
+ *   <html data-theme="standard" data-mode="dark" data-density="compact" data-width="wide">
  *
  * Preferences persist in localStorage ("os-prefs") and sync across tabs and
  * iframes. Put this in <head> *before* the stylesheet to avoid a flash:
  *
  *   <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;
  *   if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;
- *   if(p.density&&p.density!=='comfortable')d.dataset.density=p.density}catch(e){}})()</script>
+ *   if(p.density&&p.density!=='standard')d.dataset.density=p.density;if(p.width&&p.width!=='classic')d.dataset.width=p.width}catch(e){}})()</script>
  *
  * Declarative controls (select or radio group):
  *   <select data-os-theme-control="theme">…</select>
@@ -609,8 +426,8 @@ __define("theme.js", function (__require, __exports) {
  */
 const { $$, store } = __require("core.js");
 const KEY = 'os-prefs';
-const DEFAULTS = { theme: 'fjord', mode: 'auto', density: 'comfortable' };
-const ATTRS = { theme: 'data-theme', mode: 'data-mode', density: 'data-density' };
+const DEFAULTS = { theme: 'retro', mode: 'auto', density: 'standard', width: 'classic' };
+const ATTRS = { theme: 'data-theme', mode: 'data-mode', density: 'data-density', width: 'data-width' };
 
 function root() {
   return document.documentElement;
@@ -622,6 +439,7 @@ function getPreferences() {
     theme: el.getAttribute(ATTRS.theme) ?? DEFAULTS.theme,
     mode: el.getAttribute(ATTRS.mode) ?? DEFAULTS.mode,
     density: el.getAttribute(ATTRS.density) ?? DEFAULTS.density,
+    width: el.getAttribute(ATTRS.width) ?? DEFAULTS.width,
   };
 }
 
@@ -693,7 +511,7 @@ function listenForPreferenceChanges() {
 
 __define("oldschool.js", function (__require, __exports) {
 /**
- * Oldschool — behaviors entry point.
+ * Oldschool — behaviors entry point (optional: every component works without it).
  *
  * Classic script (works from file:// too):
  *   <script src="dist/oldschool.js" defer></script>      → window.Oldschool
@@ -705,22 +523,21 @@ __define("oldschool.js", function (__require, __exports) {
  * new markup, call Oldschool.init(container).
  */
 const { register, initAll } = __require("core.js");
-const { initGallery } = __require("gallery.js");
-const { openLightbox } = __require("lightbox.js");
 const { initTabs } = __require("tabs.js");
 const { toast } = __require("toast.js");
-const { initToggle, initShare, initCopy, initPrint, initDialogTrigger, initViewSwitch } = __require("actions.js");
+const { initToggle, initShare, initCopy, initPrint, initDialogTrigger } = __require("actions.js");
+const { initSortableTable, initStackedTable } = __require("sort.js");
 const { getPreferences, setPreferences, resolvedMode, bindThemeControl, listenForPreferenceChanges } = __require("theme.js");
-const version = '0.1.0';
+const version = '0.2.0';
 
-register('gallery', '[data-os-gallery]', initGallery);
 register('tabs', '[data-os-tabs]', initTabs);
 register('toggle', '[data-os-toggle]', initToggle);
 register('share', '[data-os-share]', initShare);
 register('copy', '[data-os-copy]', initCopy);
 register('print', '[data-os-print]', initPrint);
 register('dialog', '[data-os-dialog]', initDialogTrigger);
-register('view', '[data-os-view]', initViewSwitch);
+register('sort', 'table[data-os-sort]', initSortableTable);
+register('stack', 'table.os-table--stack', initStackedTable);
 register('theme-control', '[data-os-theme-control]', bindThemeControl);
 
 function init(root = document) {
@@ -744,7 +561,6 @@ if (typeof document !== 'undefined') {
   __exports.init = init;
   __exports.theme = theme;
   __exports.toast = toast;
-  __exports.openLightbox = openLightbox;
   __exports.register = register;
 });
 

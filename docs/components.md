@@ -4,20 +4,20 @@
 Every component is plain HTML with `os-` classes (BEM: `block__element--modifier`), styled only through tokens.
 Live examples with copy-ready markup: `site/components.html`. Behaviors: [javascript.md](javascript.md).
 
-[icon](#icon) · [skiplink](#skiplink) · [masthead](#masthead) · [brand](#brand) · [utilnav](#utilnav) · [menu](#menu) · [navbar](#navbar) · [crumbbar](#crumbbar) · [breadcrumbs](#breadcrumbs) · [pager](#pager) · [footer](#footer) · [mobilebar](#mobilebar) · [panel](#panel) · [heading](#heading) · [meta](#meta) · [actions](#actions) · [gallery](#gallery) · [linkrow](#linkrow) · [kv](#kv) · [price](#price) · [keyfacts](#keyfacts) · [summary](#summary) · [contact](#contact) · [avatar](#avatar) · [media](#media) · [checklist](#checklist) · [schedule](#schedule) · [prose](#prose) · [energy](#energy) · [button](#button) · [field](#field) · [choice](#choice) · [segmented](#segmented) · [search](#search) · [filters](#filters) · [chip](#chip) · [badge](#badge) · [alert](#alert) · [toast](#toast) · [tabs](#tabs) · [disclosure](#disclosure) · [table](#table) · [pagination](#pagination) · [result](#result) · [dialog](#dialog) · [skeleton](#skeleton) · [stat](#stat) · [empty](#empty) · [bleed](#bleed)
+[icon](#icon) · [skiplink](#skiplink) · [masthead](#masthead) · [brand](#brand) · [utilnav](#utilnav) · [menu](#menu) · [tabbar](#tabbar) · [subnav](#subnav) · [crumbbar](#crumbbar) · [breadcrumbs](#breadcrumbs) · [pager](#pager) · [sidenav](#sidenav) · [alphabet](#alphabet) · [footer](#footer) · [mobilebar](#mobilebar) · [panel](#panel) · [heading](#heading) · [meta](#meta) · [actions](#actions) · [linkrow](#linkrow) · [kv](#kv) · [price](#price) · [summary](#summary) · [contact](#contact) · [linklist](#linklist) · [teaser](#teaser) · [tags](#tags) · [checklist](#checklist) · [schedule](#schedule) · [prose](#prose) · [stat](#stat) · [progress](#progress) · [steps](#steps) · [table](#table) · [toolbar](#toolbar) · [bars](#bars) · [calendar](#calendar) · [log](#log) · [thread](#thread) · [files](#files) · [empty](#empty) · [button](#button) · [field](#field) · [choice](#choice) · [segmented](#segmented) · [search](#search) · [filters](#filters) · [chip](#chip) · [badge](#badge) · [status](#status) · [alert](#alert) · [errorsummary](#errorsummary) · [toast](#toast) · [tabs](#tabs) · [disclosure](#disclosure) · [pagination](#pagination) · [result](#result) · [dialog](#dialog) · [bleed](#bleed)
 
 ## icon
 
-Icon — SVG sprite symbols (Lucide, 24px grid, drawn with a lighter stroke).
+Icon — small line icons from an SVG sprite, used sparingly next to words
+(the way 2008 pages used 16px GIFs: in action rows and link lists).
 
 ```html
-<svg class="os-icon" aria-hidden="true"><use href="/path/to/icons.svg#os-star"></use></svg>
+<svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-printer"></use></svg>
 ```
 
-Icons scale with the surrounding font size (1.25em). Always pair an icon
-with visible text, or give its button an aria-label.
+1.15em of the surrounding text. Never icon-only without an aria-label.
 
-<sub>Classes: `os-icon` `os-icon--xs` `os-icon--sm` `os-icon--md` `os-icon--lg` `os-icon--xl` `os-icon--bold` `os-icon--filled` `os-icon--muted` `os-icon--accent` · Source: [src/css/components/icon.css](../src/css/components/icon.css)</sub>
+<sub>Classes: `os-icon` `os-icon--sm` `os-icon--md` `os-icon--lg` `os-icon--filled` `os-icon--muted` `os-icon--accent` · Source: [src/css/components/icon.css](../src/css/components/icon.css)</sub>
 
 ## skiplink
 
@@ -30,183 +30,223 @@ Skip link — the first focusable element on every page.
 
 ## masthead
 
-Masthead — brand on the left, utility links on the right, on the canvas.
+Masthead — logo on the left, small utility links top right, on the frame.
 
 ```html
 <header class="os-masthead">
-  <div class="os-container os-masthead__inner">
-    <a class="os-brand" href="/">…</a>
-    <button class="os-masthead__toggle os-button os-button--quiet" popovertarget="menu">…Meny</button>
-    <nav class="os-masthead__nav" id="menu" popover aria-label="…">
-      <ul class="os-utilnav" role="list">…</ul>
-    </nav>
-  </div>
+  <a class="os-brand" href="/">…</a>
+  <button class="os-button os-button--sm os-masthead__toggle" popovertarget="menu">Meny</button>
+  <nav class="os-masthead__nav" id="menu" popover aria-label="Snarveier">
+    <ul class="os-utilnav" role="list">…</ul>
+  </nav>
 </header>
 ```
 
-Below 60em the nav collapses into a popover menu opened by the toggle —
-no JavaScript needed. Browsers without popover support show the links inline.
+Below 40em the utility links fold into a popover menu — no JavaScript.
+Browsers without popover support simply show the links inline.
 
-<sub>Classes: `os-masthead` `os-masthead__inner` `os-masthead__toggle` `os-masthead__nav` `os-utilnav` · Source: [src/css/components/masthead.css](../src/css/components/masthead.css)</sub>
+<sub>Classes: `os-masthead` `os-masthead__toggle` `os-masthead__nav` `os-masthead__search` `os-utilnav` · Source: [src/css/components/masthead.css](../src/css/components/masthead.css)</sub>
 
 ## brand
 
-Brand — logomark + wordmark + product name.
+Brand — logomark + wordmark + section name ("oldschool kultur").
 
 ```html
 <a class="os-brand" href="/">
-  <svg class="os-brand__mark" viewBox="0 0 32 32" aria-hidden="true">…</svg>
+  <svg class="os-brand__mark" viewBox="0 0 40 28" aria-hidden="true">…</svg>
   <span class="os-brand__name">oldschool</span>
-  <span class="os-brand__product">eiendom</span>
+  <span class="os-brand__product">forum</span>
 </a>
 ```
 
-The mark is a four-pane window with an offset (Nordic) cross. It is drawn
-with currentColor inside .os-brand__mark so it follows the theme accent.
+The mark is drawn with currentColor and takes the theme accent.
 
-<sub>Classes: `os-brand__mark` `os-brand` `os-brand__name` `os-brand__product` · Source: [src/css/components/brand.css](../src/css/components/brand.css)</sub>
+<sub>Classes: `os-brand` `os-brand__mark` `os-brand__name` `os-brand__product` · Source: [src/css/components/brand.css](../src/css/components/brand.css)</sub>
 
 ## utilnav
 
-Utility navigation — the small links in the top-right corner, divided by
-hairlines exactly like the original ("Kundeservice | Sett inn annonse | Logg inn").
+Utility links — "Kundeservice | Sett inn annonse | Logg inn".
 
 ```html
 <ul class="os-utilnav" role="list">
   <li><a href="#">Kundeservice</a></li>
-  <li><a href="#"><svg class="os-icon">…</svg>Logg inn</a></li>
+  <li><a href="#">Logg inn</a></li>
 </ul>
 ```
 
-<sub>Classes: `os-utilnav` `os-icon` · Source: [src/css/components/utilnav.css](../src/css/components/utilnav.css)</sub>
+<sub>Classes: `os-utilnav` · Source: [src/css/components/utilnav.css](../src/css/components/utilnav.css)</sub>
 
 ## menu
 
-Menu — a floating list of actions or links (dropdowns, overflow menus).
-Works well as a popover:
+Menu — a dropdown list of links or actions, usually a popover.
 
 ```html
-<button class="os-button" popovertarget="more">Mer</button>
+<button class="os-button" popovertarget="more">Mer ▾</button>
 <div class="os-menu" id="more" popover>
-  <a class="os-menu__item" href="#">…</a>
+  <a class="os-menu__item" href="#">Rediger</a>
   <hr class="os-menu__sep">
-  <button class="os-menu__item" type="button">…</button>
+  <button class="os-menu__item" type="button">Slett</button>
 </div>
 ```
 
-<sub>Classes: `os-menu` `os-menu__item` `os-icon` `os-menu__label` `os-menu__sep` · Source: [src/css/components/menu.css](../src/css/components/menu.css)</sub>
+<sub>Classes: `os-menu` `os-menu__item` `os-menu__sep` · Source: [src/css/components/menu.css](../src/css/components/menu.css)</sub>
 
-## navbar
+## tabbar
 
-Navbar — a row of section links under the masthead (categories, product areas).
+Tab bar — the site's main sections as folder tabs across the top.
+The current tab is white and joins the strip below it (.os-subnav or the
+first box). Scrolls sideways on narrow screens; never wraps.
 
 ```html
-<nav class="os-navbar" aria-label="Kategorier">
-  <div class="os-container">
-    <ul class="os-navbar__list" role="list">
-      <li><a class="os-navbar__link" href="#" aria-current="page">Eiendom</a></li>
-    </ul>
-  </div>
+<nav class="os-tabbar" aria-label="Hovedmeny">
+  <ul class="os-tabbar__list" role="list">
+    <li><a class="os-tabbar__tab" href="/" aria-current="page">Forside</a></li>
+    <li><a class="os-tabbar__tab" href="/nyheter">Nyheter</a></li>
+  </ul>
 </nav>
 ```
 
-Scrolls horizontally when it does not fit — never wraps into two rows.
+<sub>Classes: `os-subnav` `os-tabbar` `os-tabbar__list` `os-tabbar__tab` `os-crumbbar` `os-panel` · Source: [src/css/components/tabbar.css](../src/css/components/tabbar.css)</sub>
 
-<sub>Classes: `os-navbar` `os-navbar__list` `os-navbar__link` `os-icon` · Source: [src/css/components/navbar.css](../src/css/components/navbar.css)</sub>
+## subnav
+
+Sub navigation — the white strip of section links under the tab bar.
+
+```html
+<nav class="os-subnav" aria-label="Nyheter">
+  <ul role="list">
+    <li><a href="#" aria-current="page">Siste</a></li>
+    <li><a href="#">Innenriks</a></li>
+  </ul>
+</nav>
+```
+
+<sub>Classes: `os-subnav` · Source: [src/css/components/subnav.css](../src/css/components/subnav.css)</sub>
 
 ## crumbbar
 
-Crumb bar — the band between masthead and content: where am I (breadcrumbs)
-and where can I go next (pager through the result list).
+Crumb bar — the band between header and content: where am I
+(breadcrumbs) and where can I go next (pager through a result list).
 
 ```html
 <div class="os-crumbbar">
   <nav aria-label="Brødsmulesti"><ol class="os-breadcrumbs">…</ol></nav>
-  <nav class="os-pager" aria-label="Bla i søkeresultatet">…</nav>
+  <nav class="os-pager" aria-label="Bla i resultatet">…</nav>
 </div>
 ```
 
-<sub>Classes: `os-crumbbar` `os-crumbbar--flat` `os-pager` · Source: [src/css/components/crumbbar.css](../src/css/components/crumbbar.css)</sub>
+<sub>Classes: `os-crumbbar` `os-pager` · Source: [src/css/components/crumbbar.css](../src/css/components/crumbbar.css)</sub>
 
 ## breadcrumbs
 
-Breadcrumbs — the path from the front page down to this page.
+Breadcrumbs — bold links separated by slashes, as in the original.
 
 ```html
 <ol class="os-breadcrumbs">
   <li><a href="/">Forsiden</a></li>
   <li><a href="/eiendom">Eiendom</a></li>
-  <li><a href="/eiendom/oslo">Oslo</a></li>
+  <li><span aria-current="page">Oslo</span></li>
 </ol>
 ```
 
-On phones only the last link is shown, as a "back to …" link.
-Add .os-breadcrumbs--full to always show every step.
+On phones only the closest parent link is shown, as "‹ Parent".
+Add .os-breadcrumbs--full to always show the whole trail.
 
 <sub>Classes: `os-breadcrumbs--full` `os-breadcrumbs` · Source: [src/css/components/breadcrumbs.css](../src/css/components/breadcrumbs.css)</sub>
 
 ## pager
 
-Pager — step through a result list from a detail page:
-"‹ Forrige · Resultat 3 av 128 · Neste ›".
+Pager — "‹ Forrige  Resultat  Neste ›" on a detail page.
 
 ```html
-<nav class="os-pager" aria-label="Bla i søkeresultatet">
-  <a class="os-pager__link" href="#" rel="prev"><svg class="os-icon">…</svg><span class="os-pager__label">Forrige</span></a>
-  <a class="os-pager__position" href="/sok">Resultat 3 av 128</a>
-  <a class="os-pager__link" href="#" rel="next"><span class="os-pager__label">Neste</span><svg class="os-icon">…</svg></a>
+<nav class="os-pager" aria-label="Bla i resultatet">
+  <a class="os-pager__link" href="#" rel="prev">‹ <span class="os-pager__label">Forrige</span></a>
+  <a class="os-pager__position" href="/sok"><span class="os-pager__label">Resultat </span>3 av 128</a>
+  <a class="os-pager__link" href="#" rel="next"><span class="os-pager__label">Neste</span> ›</a>
 </nav>
 ```
 
-On phones the labels become icon buttons (labels stay for screen readers).
+<sub>Classes: `os-pager` `os-pager__position` `os-pager__link` `os-pager__label` · Source: [src/css/components/pager.css](../src/css/components/pager.css)</sub>
 
-<sub>Classes: `os-pager` `os-pager__link` `os-pager__position` `os-pager__label` `os-icon` · Source: [src/css/components/pager.css](../src/css/components/pager.css)</sub>
+## sidenav
+
+Side menu — the left-hand navigation box of an intranet, a help centre or
+"Min side". One level of nesting.
+
+```html
+<nav class="os-sidenav" aria-labelledby="menu-title">
+  <h2 class="os-sidenav__title" id="menu-title">Min side</h2>
+  <ul class="os-sidenav__list" role="list">
+    <li><a href="#" aria-current="page">Oversikt</a></li>
+    <li><a href="#">Innstillinger</a>
+      <ul role="list"><li><a href="#">Varsler</a></li></ul>
+    </li>
+  </ul>
+</nav>
+```
+
+<sub>Classes: `os-sidenav` `os-sidenav__title` `os-sidenav__list` `os-sidenav__count` · Source: [src/css/components/sidenav.css](../src/css/components/sidenav.css)</sub>
+
+## alphabet
+
+Alphabet — the A–Å index ("Tjenester A–Å"): one link per letter, letters
+with nothing behind them greyed out but kept in place.
+
+```html
+<nav class="os-alphabet" aria-label="Tjenester A–Å">
+  <ul role="list">
+    <li><a href="#A">A</a></li>
+    <li><span aria-disabled="true">Q</span></li>
+```
+      …
+```html
+  </ul>
+</nav>
+```
+
+<sub>Classes: `os-alphabet` · Source: [src/css/components/alphabet.css](../src/css/components/alphabet.css)</sub>
 
 ## footer
 
-Footer — link columns, then a bottom row with the legal small print.
-Include an accessibility statement link (tilgjengelighetserklæring) —
-required for Norwegian public-facing services and good practice everywhere.
+Footer — on the frame, below the last box: optional link columns, then a
+centred line of small links and the copyright.
+Include an accessibility statement link (tilgjengelighetserklæring).
 
 ```html
 <footer class="os-footer">
-  <div class="os-container">
-    <div class="os-footer__grid">
-      <div class="os-footer__about">…</div>
-      <nav class="os-footer__col" aria-labelledby="f-help">
-        <h2 class="os-footer__title" id="f-help">Hjelp</h2>
-        <ul class="os-footer__links" role="list">…</ul>
-      </nav>
-    </div>
-    <div class="os-footer__bottom">…</div>
+  <div class="os-footer__grid">
+    <nav class="os-footer__col" aria-labelledby="f1">
+      <h2 class="os-footer__title" id="f1">Om oss</h2>
+      <ul class="os-footer__links" role="list">…</ul>
+    </nav>
   </div>
+  <div class="os-footer__bottom">…</div>
 </footer>
 ```
 
-<sub>Classes: `os-footer` `os-footer__grid` `os-footer__about` `os-footer__col` `os-footer__title` `os-footer__links` `os-footer__bottom` · Source: [src/css/components/footer.css](../src/css/components/footer.css)</sub>
+<sub>Classes: `os-footer` `os-footer__grid` `os-footer__col` `os-footer__about` `os-footer__title` `os-footer__links` `os-footer__bottom` · Source: [src/css/components/footer.css](../src/css/components/footer.css)</sub>
 
 ## mobilebar
 
-Mobile bar — sticky bottom bar on phones and tablets with the one number
-and the one action that matter ("7 500 kr/mnd · Ring · Send e-post").
-Hidden from 60em, where the aside shows the same information.
+Mobile bar — fixed to the bottom of phones and tablets with the one
+number and one or two actions that matter. Hidden from 60em, where the
+sidebar shows the same thing. Put it as a direct child of <body>.
 
 ```html
 <div class="os-mobilebar" role="region" aria-label="Kontakt">
   <div class="os-mobilebar__info">
-    <span class="os-mobilebar__label">Leie pr. mnd.</span>
-    <span class="os-mobilebar__value">7 500 kr</span>
+    <span class="os-mobilebar__label">Pris</span>
+    <span class="os-mobilebar__value">250,-</span>
   </div>
-  <a class="os-button" href="tel:…">Ring</a>
-  <a class="os-button os-button--primary" href="mailto:…">Send e-post</a>
+  <a class="os-button os-button--primary" href="#">Kjøp billett</a>
 </div>
 ```
 
-<sub>Classes: `os-mobilebar` `os-mobilebar__info` `os-mobilebar__label` `os-mobilebar__value` `os-button` `os-button__label` · Source: [src/css/components/mobilebar.css](../src/css/components/mobilebar.css)</sub>
+<sub>Classes: `os-mobilebar` `os-mobilebar__info` `os-mobilebar__label` `os-mobilebar__value` `os-button` · Source: [src/css/components/mobilebar.css](../src/css/components/mobilebar.css)</sub>
 
 ## panel
 
-Panel — the white box on the canvas. Everything on a page lives in one.
+Box — the white box on the frame. Everything on a page lives in one.
 
 ```html
 <section class="os-panel" aria-labelledby="price-title">
@@ -220,131 +260,99 @@ Panel — the white box on the canvas. Everything on a page lives in one.
 </section>
 ```
 
-The header is a tinted band — the signature of the 2000s original.
+The header is the tinted band of the original, with a one-pixel highlight.
 Variants:
-  --plain     header without the band (just a bold title)
-  --flush     body without padding (full-bleed media, tables, lists)
 ```html
---muted     quiet background, e.g. for notices
+--plain     no band: the title sits in the box (secondary boxes)
 ```
-  --tint      tinted background (callouts, highlighted summaries)
-  --accent    header band in the accent color
-  --compact   smaller padding
-  --raised    with shadow (use sparingly — flat is the default)
+  --flush     body without padding (tables, link lists)
+  --accent    band in the accent colour with white text ("Viktig!")
+  --tint      tinted body (highlighted summaries, tips)
+  --note      yellow sticky-note box
 
-Panels are size containers, so components inside adapt to the panel's
-width with @container queries (not the viewport).
+Boxes are size containers: components inside respond to the box's width.
 
-<sub>Classes: `os-panel` `os-panel__header` `os-panel__title` `os-icon` `os-panel__subtitle` `os-panel__action` `os-panel__body` `os-panel__heading` `os-panel__footer` `os-panel--flush` `os-panel--plain` `os-panel--muted` `os-panel--tint` `os-panel--accent` `os-panel--compact` `os-panel--raised` `os-panel--borderless` `os-panel--interactive` · Source: [src/css/components/panel.css](../src/css/components/panel.css)</sub>
+<sub>Classes: `os-panel` `os-panel__header` `os-panel__title` `os-panel__title--sm` `os-panel__action` `os-panel__body` `os-panel__heading` `os-panel__footer` `os-panel__footer--end` `os-panel--plain` `os-panel--flush` `os-panel--accent` `os-panel--tint` `os-panel--note` · Source: [src/css/components/panel.css](../src/css/components/panel.css)</sub>
 
 ## heading
 
-Heading block — page title with optional eyebrow and subtitle.
+Heading block — the page title with an optional kicker and subtitle.
 
 ```html
 <div class="os-heading">
-  <p class="os-heading__eyebrow">Bolig til leie</p>
-  <h1 class="os-heading__title">Lys og koselig 1-roms …</h1>
-  <p class="os-heading__subtitle">St. Hanshaugen – Ullevål, Oslo</p>
+  <h1 class="os-heading__title">Jazz i Botanisk hage</h1>
+  <p class="os-heading__kicker">Konsert</p>
+  <p class="os-heading__subtitle">Søndag 11. oktober · Tøyen, Oslo</p>
 </div>
 ```
 
-Section head — a heading between panels with a "see all" link:
+Section head — a heading on the frame between boxes, with a "see all" link:
 
 ```html
-<div class="os-sectionhead"><h2>Lignende annonser</h2><a href="#">Se alle</a></div>
+<div class="os-sectionhead"><h2>Siste nytt</h2><a href="#">Alle nyheter »</a></div>
 ```
 
-<sub>Classes: `os-heading` `os-heading__eyebrow` `os-heading__title` `os-heading__title--display` `os-heading__subtitle` `os-heading__lead` `os-sectionhead` · Source: [src/css/components/heading.css](../src/css/components/heading.css)</sub>
+<sub>Classes: `os-heading` `os-heading__kicker` `os-heading__title` `os-heading__subtitle` `os-heading__lead` `os-sectionhead` · Source: [src/css/components/heading.css](../src/css/components/heading.css)</sub>
 
 ## meta
 
-Meta — small secondary facts, separated by dots.
+Meta — small grey facts about the page ("Sist endret: 26. april 20:18").
 
 ```html
-<p class="os-meta"><span>Sist endret <time datetime="…">26. april 2026 20:18</time></span><span>…</span></p>
+<p class="os-meta"><span>Sist endret: <time datetime="…">26.09.2026 20:18</time></span><span>Vist 1 204 ganger</span></p>
 ```
 
-Reference code — the listing number people read out on the phone.
+Reference code — the big grey number people read out on the phone
+("Finnkode: 28159278").
 
 ```html
-<p class="os-refcode"><span class="os-refcode__label">Annonsenr.</span> <span class="os-refcode__value">281592780</span></p>
+<p class="os-refcode"><span class="os-refcode__label">Kode:</span> <span class="os-refcode__value">28159278</span></p>
 ```
 
-Separated list — any inline list with dot, pipe or slash separators.
+Separated list — any inline list with pipes, dots or slashes.
 
 ```html
-<ul class="os-seplist os-seplist--pipe" role="list"><li>…</li><li>…</li></ul>
+<ul class="os-seplist" role="list"><li>…</li><li>…</li></ul>        (pipes)
+.os-seplist--dot · .os-seplist--slash
 ```
 
-<sub>Classes: `os-meta` `os-refcode` `os-refcode__label` `os-refcode__value` `os-button` `os-seplist` `os-seplist--pipe` `os-seplist--slash` · Source: [src/css/components/meta.css](../src/css/components/meta.css)</sub>
+<sub>Classes: `os-seplist--dot` `os-seplist--slash` `os-meta` `os-refcode` `os-refcode__label` `os-refcode__value` `os-seplist` · Source: [src/css/components/meta.css](../src/css/components/meta.css)</sub>
 
 ## actions
 
-Actions — the row of icon + word links above a listing
-("Lagre annonsen | Tips en venn | Del | Skriv ut").
+Actions — the row of small icon + word links at the top of a page
+("★ Lagre annonsen | ✉ Tips en venn | f Del | 🖶 Skriv ut").
 
 ```html
 <ul class="os-actions" role="list">
   <li><button class="os-action" type="button" aria-pressed="false" data-os-toggle>
-    <svg class="os-icon">…#os-star</svg><span class="os-action__label">Lagre annonsen</span>
-  </button></li>
-  <li><a class="os-action" href="mailto:?…">…<span class="os-action__label">Tips en venn</span></a></li>
+    <svg class="os-icon">…#os-star</svg><span class="os-action__label">Lagre</span></button></li>
+  <li><a class="os-action" href="mailto:?…"><svg class="os-icon">…#os-mail</svg><span class="os-action__label">Tips en venn</span></a></li>
 </ul>
 ```
 
-In a narrow container (phones) the words move to screen readers only and
-the actions become 44px icon buttons. Pressed toggles fill their icon.
+Toggles use aria-pressed; a pressed star fills in.
 
-<sub>Classes: `os-actions` `os-action` `os-action__label` `os-icon` `os-actions--end` · Source: [src/css/components/actions.css](../src/css/components/actions.css)</sub>
-
-## gallery
-
-Gallery — the big picture plus a grid of thumbnails, like the original,
-that turns into a swipeable carousel with a counter on narrow screens.
-
-```html
-<figure class="os-gallery" data-os-gallery aria-label="Bilder av boligen">
-  <div class="os-gallery__grid">
-    <div class="os-gallery__stage">
-      <ul class="os-gallery__track" role="list">
-        <li class="os-gallery__slide" id="img-1"><img src="…" alt="…"></li> …
-      </ul>
-      <p class="os-gallery__counter"><span data-os-gallery-current>1</span> / 4</p>
-    </div>
-    <ul class="os-gallery__thumbs" role="list">
-      <li><a class="os-gallery__thumb" href="#img-1" aria-current="true"><img src="…" alt=""><span class="os-sr-only">Bilde 1</span></a></li> …
-    </ul>
-  </div>
-  <figcaption class="os-gallery__caption">Viser 4 av 4 bilder · <a href="#" data-os-gallery-open>Se store bilder</a></figcaption>
-</figure>
-```
-
-Without JavaScript it is a scroll-snap strip and thumbnails are anchor
-links. With oldschool.js: arrows, keyboard, counter, and a lightbox.
-Add data-more="8" to the last thumbnail to show "+8" over it.
-
-<sub>Classes: `os-gallery` `os-gallery__grid` `os-gallery__stage` `os-gallery__track` `os-gallery__slide` `os-gallery__counter` `os-gallery__nav` `os-gallery__expand` `os-gallery__nav--prev` `os-gallery__nav--next` `os-gallery__thumbs` `os-gallery__thumb` `os-gallery__caption` · Source: [src/css/components/gallery.css](../src/css/components/gallery.css)</sub>
+<sub>Classes: `os-actions` `os-action` `os-icon` `os-action__label` · Source: [src/css/components/actions.css](../src/css/components/actions.css)</sub>
 
 ## linkrow
 
 Link row — a few big, plain links to other views of the same thing
-("Se fra lufta · Se i kart · Se bilder av nabolaget").
+("Se fra lufta   Se i kart   Se bilder av nabolaget").
 
 ```html
 <ul class="os-linkrow" role="list">
-  <li><a href="#"><svg class="os-icon">…#os-map</svg>Se i kart</a></li>
+  <li><a href="#">Se i kart</a></li>
+  <li><a href="#">Se program</a></li>
 </ul>
 ```
 
-In narrow containers it becomes a stacked list with chevrons.
-
-<sub>Classes: `os-linkrow` `os-icon` · Source: [src/css/components/linkrow.css](../src/css/components/linkrow.css)</sub>
+<sub>Classes: `os-linkrow` · Source: [src/css/components/linkrow.css](../src/css/components/linkrow.css)</sub>
 
 ## kv
 
-Key/value list — label : value facts with hairline rhythm.
-Labels are quiet, values are strong; numbers are tabular.
+Facts — label : value rows with a thin rule, the "Fakta om boligen" table
+of the original. Values are bold; numbers are tabular.
 
 ```html
 <dl class="os-kv">
@@ -354,509 +362,682 @@ Labels are quiet, values are strong; numbers are tabular.
 ```
 
 Variants:
-  --cols    flows into as many columns as fit (min 16rem each)
-  --end     values right-aligned (summaries, price breakdowns)
-  --stack   label above value (very narrow spaces)
-  --plain   no hairlines
+  --cols    flows into two (or more) columns when the box is wide enough
+```html
+--end     values right-aligned (summaries: "Leie pr. mnd.   7 500,-")
+```
+  --plain   no rules
   --lg      larger values
 
-<sub>Classes: `os-kv` `os-kv--cols` `os-kv--end` `os-kv--stack` `os-kv--plain` `os-kv--lg` `os-kv--sm` `os-kv--ruled` · Source: [src/css/components/kv.css](../src/css/components/kv.css)</sub>
+<sub>Classes: `os-kv` `os-kv--cols` `os-kv--end` `os-kv--plain` `os-kv--lg` · Source: [src/css/components/kv.css](../src/css/components/kv.css)</sub>
 
 ## price
 
-Price — the important number is big.
+Key figure — the one big number on a page ("Leie pr måned  7 500,-").
 
 ```html
 <p class="os-price">
   <span class="os-price__label">Leie pr. måned</span>
-  <span class="os-price__amount">7 500 kr</span>
+  <span class="os-price__amount">7 500,-</span>
 </p>
 ```
 
-Variants: --inline (label and amount on one baseline), --split (label left,
-amount right, for summaries), --md / --lg sizes.
-Norwegian formatting: "7 500 kr" with a no-break space ( ) as thousands
-separator; Intl.NumberFormat('nb-NO') produces exactly this.
+Variants: --split (label left, amount right — for sidebars), --stack
+(label above), --lg. Norwegian formatting: "7 500,-" or "7 500 kr" with a
+no-break space as thousands separator.
 
-<sub>Classes: `os-price` `os-price__label` `os-price__amount` `os-price__unit` `os-price__old` `os-price__note` `os-price--lg` `os-price--xl` `os-price--md` `os-price--inline` `os-price--split` · Source: [src/css/components/price.css](../src/css/components/price.css)</sub>
-
-## keyfacts
-
-Key facts — the three or four facts that decide a click, right under the
-title: size, rooms, type, availability.
-
-```html
-<ul class="os-keyfacts" role="list">
-  <li><svg class="os-icon">…#os-ruler</svg><span><strong>29 m²</strong> bruksareal</span></li>
-</ul>
-```
-
-<sub>Classes: `os-keyfacts` `os-icon` `os-keyfacts--tiles` · Source: [src/css/components/keyfacts.css](../src/css/components/keyfacts.css)</sub>
+<sub>Classes: `os-price` `os-price__label` `os-price__amount` `os-price__unit` `os-price__note` `os-price__old` `os-price--split` `os-price--stack` `os-price--lg` · Source: [src/css/components/price.css](../src/css/components/price.css)</sub>
 
 ## summary
 
-Summary — the aside's first panel: price + the two or three facts that
-matter, repeated from the main column so they are always in view.
+Summary — the first box of the sidebar: the key figure and the two or
+three facts that matter, repeated from the main column.
 
 ```html
-<section class="os-panel os-summary" aria-label="Nøkkelinfo">
+<section class="os-panel os-summary" aria-label="Kort fortalt">
   <div class="os-panel__body">
     <p class="os-price os-price--split">…</p>
     <dl class="os-kv os-kv--end">…</dl>
-    <p class="os-summary__links">…</p>
+    <p class="os-summary__links"><a href="#">…</a></p>
   </div>
 </section>
 ```
 
-<sub>Classes: `os-summary` `os-panel__body` `os-price` `os-kv` `os-summary__links` · Source: [src/css/components/summary.css](../src/css/components/summary.css)</sub>
+<sub>Classes: `os-summary` `os-panel__body` `os-price` `os-summary__links` · Source: [src/css/components/summary.css](../src/css/components/summary.css)</sub>
 
 ## contact
 
-Contact card — who to call, and every way to reach them. The brand band
-carries the agency's own colors via two local custom properties.
+Contact box — organisation, person and every way to reach them.
 
 ```html
-<section class="os-panel os-contact" aria-labelledby="agent"
-         style="--os-contact-brand-bg:#1f3b33; --os-contact-brand-fg:#f2efe6">
-  <div class="os-contact__brand"><span class="os-contact__logo">Lunde &amp; Berg</span> utleie</div>
+<section class="os-panel os-contact" aria-labelledby="c1">
+  <div class="os-contact__org">Kulturetaten</div>
   <div class="os-panel__body">
-    <div class="os-contact__person">
-      <span class="os-avatar">IH</span>
-      <div><h2 class="os-contact__name" id="agent">Ingrid Haugen</h2><p class="os-contact__role">Utleiemegler</p></div>
-    </div>
-    <div class="os-contact__buttons">…buttons…</div>
-    <ul class="os-contact__links" role="list">…</ul>
+    <h2 class="os-contact__name" id="c1">Ingrid Haugen</h2>
+    <p class="os-contact__role">Arrangementsansvarlig</p>
+    <dl class="os-contact__lines">
+      <div><dt>Telefon</dt><dd><a href="tel:…">12 34 56 78</a></dd></div>
+    </dl>
+    <ul class="os-contact__links" role="list"><li><a href="#">Send e-post</a></li></ul>
   </div>
 </section>
 ```
 
-<sub>Classes: `os-contact__brand` `os-contact__logo` `os-contact` `os-panel__body` `os-contact__person` `os-contact__name` `os-contact__role` `os-contact__buttons` `os-contact__links` `os-icon` `os-contact__meta` · Source: [src/css/components/contact.css](../src/css/components/contact.css)</sub>
+The organisation strip can take the organisation's own colours via
+--os-contact-org-bg / --os-contact-org-fg.
 
-## avatar
+<sub>Classes: `os-contact__org` `os-contact` `os-panel__body` `os-contact__name` `os-contact__role` `os-contact__lines` `os-contact__links` · Source: [src/css/components/contact.css](../src/css/components/contact.css)</sub>
 
-Avatar — initials or a photo in a circle.
-```html
-<span class="os-avatar" aria-hidden="true">IH</span>
-<img class="os-avatar" src="…" alt="Ingrid Haugen">
-```
-Sizes: --sm (2rem), default (3rem), --lg (4rem). --square for logos.
+## linklist
 
-<sub>Classes: `os-avatar` `os-avatar--sm` `os-avatar--lg` `os-avatar--square` · Source: [src/css/components/avatar.css](../src/css/components/avatar.css)</sub>
-
-## media
-
-Media — an image with an optional caption, inside a panel.
+Link list — lists of links with » bullets; the backbone of every 2008
+sidebar ("Relaterte artikler", "Nyttige lenker"). Numbered variant for
+"Mest lest".
 
 ```html
-<figure class="os-media">
-  <a href="#"><img src="…" alt="…"></a>
-  <figcaption>Frognerparken, 6 min å gå</figcaption>
-</figure>
+<ul class="os-linklist" role="list">
+  <li><a href="#">Slik søker du barnehageplass</a> <span class="os-linklist__meta">(12.09)</span></li>
+</ul>
+
+<ol class="os-linklist os-linklist--numbered" role="list">…</ol>
 ```
 
-Map — an address, a map image and links to other map views.
+Variants: --ruled (rule between items), --numbered, --columns (2 columns when wide).
+
+<sub>Classes: `os-linklist` `os-linklist__meta` `os-linklist--ruled` `os-linklist--numbered` `os-linklist--columns` · Source: [src/css/components/linklist.css](../src/css/components/linklist.css)</sub>
+
+## teaser
+
+Teasers — text-only article or news listings: date, headline, a line of
+text and "Les mer »". No thumbnails needed.
 
 ```html
-<div class="os-map">
-  <address class="os-map__address">Fjellveien 6 C<br>0360 Oslo</address>
-  <a class="os-map__frame" href="#"><img src="map.svg" alt="Kart over …"></a>
-  <ul class="os-seplist" role="list">…Kart · Flyfoto · Gatebilde…</ul>
-</div>
-```
-
-<sub>Classes: `os-media` `os-media-grid` `os-map` `os-map__address` `os-map__frame` `os-map__links` · Source: [src/css/components/media.css](../src/css/components/media.css)</sub>
-
-## checklist
-
-Checklist — facilities and inclusions, scannable in columns.
-
-```html
-<ul class="os-checklist" role="list">
-  <li><svg class="os-icon">…#os-check</svg>Balkong</li>
-  <li class="os-checklist__no"><svg class="os-icon">…#os-x</svg>Parkering</li>
+<ul class="os-teasers" role="list">
+  <li class="os-teaser">
+    <p class="os-teaser__meta"><time datetime="2026-09-29">29.09.2026</time> · Kultur</p>
+    <h3 class="os-teaser__title"><a href="#">Nytt bibliotek åpner i Bjørvika</a></h3>
+    <p class="os-teaser__text">Det nye hovedbiblioteket …</p>
+  </li>
 </ul>
 ```
 
-<sub>Classes: `os-checklist` `os-icon` `os-checklist__no` `os-checklist--icons` · Source: [src/css/components/checklist.css](../src/css/components/checklist.css)</sub>
+Variants: --compact (headline + date on one line), --lead (first item larger).
+
+<sub>Classes: `os-teasers` `os-teaser` `os-teaser__meta` `os-teaser__title` `os-teaser__text` `os-teasers--lead` `os-teasers--compact` · Source: [src/css/components/teaser.css](../src/css/components/teaser.css)</sub>
+
+## tags
+
+Tags — a tag list or a proper 2008 tag cloud (sizes 1–5).
+
+```html
+<ul class="os-tags" role="list">
+  <li><a href="#" data-size="5">kultur</a></li>
+  <li><a href="#" data-size="2">bibliotek</a></li>
+</ul>
+```
+
+.os-tags--boxed shows small labelled boxes instead of a cloud.
+
+<sub>Classes: `os-tags--boxed` `os-tags` · Source: [src/css/components/tags.css](../src/css/components/tags.css)</sub>
+
+## checklist
+
+Checklist — inclusions and features, in columns when there is room.
+
+```html
+<ul class="os-checklist" role="list">
+  <li>Garderobe</li>
+  <li class="os-checklist__no">Servering <span class="os-sr-only">(ikke inkludert)</span></li>
+</ul>
+```
+
+<sub>Classes: `os-checklist` `os-checklist__no` · Source: [src/css/components/checklist.css](../src/css/components/checklist.css)</sub>
 
 ## schedule
 
-Schedule — upcoming dates (viewings, events) with a calendar tile.
+Schedule — a list of dates with a small calendar leaf.
 
 ```html
 <ul class="os-schedule" role="list">
   <li class="os-schedule__item">
-    <time class="os-schedule__date" datetime="2026-10-12">
-      <span class="os-schedule__day">12</span><span class="os-schedule__month">okt</span>
-    </time>
+    <time class="os-schedule__date" datetime="2026-10-11"><span class="os-schedule__month">okt</span><span class="os-schedule__day">11</span></time>
     <div class="os-schedule__body">
-      <p class="os-schedule__title">Søndag 12. oktober</p>
-      <p class="os-schedule__time">13:00–14:00 · Fellesvisning</p>
+      <p class="os-schedule__title"><a href="#">Søndag 11. oktober</a></p>
+      <p class="os-schedule__time">13:00–15:00 · Store scene</p>
     </div>
-    <a class="os-button os-button--sm" href="…">Legg i kalender</a>
   </li>
 </ul>
 ```
 
-<sub>Classes: `os-schedule` `os-schedule__item` `os-schedule__date` `os-schedule__day` `os-schedule__month` `os-schedule__body` `os-schedule__title` `os-schedule__time` · Source: [src/css/components/schedule.css](../src/css/components/schedule.css)</sub>
+<sub>Classes: `os-schedule` `os-schedule__item` `os-schedule__date` `os-schedule__month` `os-schedule__day` `os-schedule__body` `os-schedule__title` `os-schedule__time` · Source: [src/css/components/schedule.css](../src/css/components/schedule.css)</sub>
 
 ## prose
 
-Prose — long-form text (descriptions, articles, help pages).
-Comfortable measure, relaxed leading, visited links, sensible rhythm.
+Prose — long-form text (articles, descriptions, help pages).
 
 ```html
-<div class="os-prose"><h3>Om boligen</h3><p>…</p><ul>…</ul></div>
+<div class="os-prose"><p class="os-prose__ingress">…</p><h2>…</h2><p>…</p></div>
 ```
 
-<sub>Classes: `os-prose` `os-prose--lead` `os-prose--wide` · Source: [src/css/components/prose.css](../src/css/components/prose.css)</sub>
-
-## energy
-
-Energy label (energimerke) — the Norwegian A–G grade with the heating
-colour (grønn … rød). A domain example of a small, strict component.
-
+Fact box (floats right inside prose when there is room):
 ```html
-<span class="os-energy" data-grade="C" data-heating="gul">
-  <span class="os-energy__grade">C</span><span class="os-energy__text">Gul</span>
-</span>
+<aside class="os-factbox"><p class="os-factbox__title">Fakta</p><dl class="os-kv os-kv--plain">…</dl></aside>
 ```
 
-Grade colours are darkened so the white letter meets 4.5:1.
+<sub>Classes: `os-prose` `os-prose__ingress` `os-prose--wide` `os-factbox` `os-factbox__title` · Source: [src/css/components/prose.css](../src/css/components/prose.css)</sub>
 
-<sub>Classes: `os-energy` `os-energy__grade` `os-energy__text` · Source: [src/css/components/energy.css](../src/css/components/energy.css)</sub>
+## stat
 
-## button
-
-Button — a real <button> for actions, an <a> for navigation; same looks.
+Stats — key figures in a row, divided by rules.
 
 ```html
-<button class="os-button os-button--primary" type="button">Send e-post</button>
-<a class="os-button" href="tel:…"><svg class="os-icon">…</svg>Ring 12 34 56 78</a>
-```
-
-Looks:  (default) secondary · --primary · --tint · --quiet · --link · --danger
-Sizes:  --sm · (default 44px) · --lg
-Shape:  --block (full width) · --icon (square, needs aria-label)
-Label:  wrap text in .os-button__label if it should hide on tiny screens.
-
-<sub>Classes: `os-button__label` `os-button` `os-icon` `os-button--primary` `os-button--tint` `os-button--quiet` `os-button--danger` `os-button--link` `os-button--sm` `os-button--lg` `os-button--block` `os-button--icon` `os-button--pill` `os-button-group` · Source: [src/css/components/button.css](../src/css/components/button.css)</sub>
-
-## field
-
-Fields — label above, hint under the label, error under the input.
-Labels are always visible (placeholders are hints, never labels).
-
-```html
-<div class="os-field">
-  <label class="os-field__label" for="price-to">Pris til</label>
-  <p class="os-field__hint" id="price-to-hint">Leie pr. måned</p>
-  <div class="os-input-group">
-    <input class="os-input" id="price-to" inputmode="numeric" aria-describedby="price-to-hint">
-    <span class="os-input-group__addon">kr</span>
-  </div>
-  <p class="os-field__error" id="price-to-error">Skriv et tall.</p>
+<div class="os-stats">
+  <div class="os-stat"><p class="os-stat__label">Besøk i dag</p><p class="os-stat__value">1 284</p><p class="os-stat__delta os-stat__delta--up">+12 %</p></div>
 </div>
 ```
 
-Inputs: .os-input, .os-select, .os-textarea.  Invalid: aria-invalid="true".
+<sub>Classes: `os-stats` `os-stat` `os-stat__label` `os-stat__value` `os-stat__delta` `os-stat__delta--up` `os-stat__delta--down` · Source: [src/css/components/stat.css](../src/css/components/stat.css)</sub>
 
-<sub>Classes: `os-input` `os-select` `os-textarea` `os-field` `os-field__label` `os-field__optional` `os-field__hint` `os-field__error` `os-fieldset` `os-input--sm` `os-select--sm` `os-input--lg` `os-input--num` `os-select--inline` `os-input-group` `os-input-group__addon` `os-range` `os-range__sep` · Source: [src/css/components/field.css](../src/css/components/field.css)</sub>
+## progress
 
-## choice
-
-Choices — checkbox, radio and switch with a full-size clickable label.
+Progress — a plain bar with a label, for uploads, quotas and polls.
 
 ```html
-<label class="os-choice">
-  <input class="os-checkbox" type="checkbox" name="facilities" value="balcony">
-  <span class="os-choice__label">Balkong</span>
-  <span class="os-choice__count">128</span>
-</label>
-
-<input class="os-radio" type="radio" …>
-<input class="os-switch" type="checkbox" role="switch" …>
-```
-
-In forced-colors mode (Windows high contrast) the native controls return.
-
-<sub>Classes: `os-choice` `os-choice__label` `os-choice__hint` `os-choice__count` `os-choices` `os-checkbox` `os-radio` `os-switch` · Source: [src/css/components/choice.css](../src/css/components/choice.css)</sub>
-
-## segmented
-
-Segmented control — a small set of mutually exclusive options, built from
-real radio buttons (so it works without JavaScript and in forms).
-
-```html
-<fieldset class="os-segmented">
-  <legend class="os-sr-only">Visning</legend>
-  <label><input type="radio" name="view" value="list" checked><span>Liste</span></label>
-  <label><input type="radio" name="view" value="grid"><span>Rutenett</span></label>
-</fieldset>
-```
-
-<sub>Classes: `os-segmented` `os-icon` `os-segmented--block` · Source: [src/css/components/segmented.css](../src/css/components/segmented.css)</sub>
-
-## search
-
-Search — one big field and one button. The first thing on a search page.
-
-```html
-<form class="os-search" role="search" action="/sok">
-  <label class="os-sr-only" for="q">Søk</label>
-  <div class="os-search__field">
-    <svg class="os-icon">…#os-search</svg>
-    <input class="os-search__input" id="q" name="q" type="search" placeholder="Område, adresse eller stikkord">
-  </div>
-  <button class="os-button os-button--primary os-button--lg">Søk</button>
-</form>
-```
-
-<sub>Classes: `os-search` `os-search__field` `os-icon` `os-search__input` `os-search--sm` `os-button__label` · Source: [src/css/components/search.css](../src/css/components/search.css)</sub>
-
-## filters
-
-Filters — the facet column of a search page. On wide screens a panel in
-the sidebar; below 60em the same element becomes a sheet (popover) opened
-by a "Filtrer" button. No JavaScript required.
-
-```html
-<button class="os-button os-filters-toggle" popovertarget="filters">Filtrer (3)</button>
-<aside class="os-filters" id="filters" popover aria-labelledby="filters-title">
-  <div class="os-filters__header">
-    <h2 id="filters-title" class="os-filters__title">Filtrer</h2>
-    <button class="os-button os-button--quiet os-button--icon os-filters__close"
-            popovertarget="filters" popovertargetaction="hide" aria-label="Lukk">…</button>
-  </div>
-  <div class="os-filters__body">
-    <details class="os-filter" open>
-      <summary class="os-filter__title">Boligtype</summary>
-      <div class="os-filter__content">…choices…</div>
-    </details>
-  </div>
-  <div class="os-filters__footer">…"Vis 1 284 treff"…</div>
-</aside>
-```
-
-<sub>Classes: `os-filters` `os-filters__header` `os-filters__title` `os-filters__body` `os-filters__footer` `os-filter` `os-filter__title` `os-filter__content` `os-button` `os-filters-toggle` `os-filters__close` · Source: [src/css/components/filters.css](../src/css/components/filters.css)</sub>
-
-## chip
-
-Chips — compact, removable filters and quick toggles.
-
-```html
-<ul class="os-chips" role="list">
-  <li><button class="os-chip os-chip--remove" type="button">Oslo<span class="os-sr-only">, fjern filter</span></button></li>
-  <li><button class="os-chip" type="button" aria-pressed="true">Balkong</button></li>
-</ul>
-```
-
-<sub>Classes: `os-chips` `os-chip` `os-chip--selected` `os-chip--remove` `os-icon` · Source: [src/css/components/chip.css](../src/css/components/chip.css)</sub>
-
-## badge
-
-Badge — a short status word on a result or a heading ("Ny", "Visning", "Utleid").
-
-```html
-<span class="os-badge os-badge--success">Ny</span>
-```
-
-Tones: (neutral) · --accent · --success · --warning · --danger · --info
-Emphasis: --solid (filled) · --dot (leading status dot)
-
-<sub>Classes: `os-badge` `os-badge--accent` `os-badge--success` `os-badge--warning` `os-badge--danger` `os-badge--info` `os-badge--solid` `os-badge--dot` `os-badge--lg` `os-badges` · Source: [src/css/components/badge.css](../src/css/components/badge.css)</sub>
-
-## alert
-
-Alert — a message with a tone. Use role="status" for polite updates,
-role="alert" only for errors that need immediate attention.
-
-```html
-<div class="os-alert os-alert--info" role="status">
-  <svg class="os-icon">…#os-info</svg>
-  <div class="os-alert__body">
-    <p class="os-alert__title">Visning etter avtale</p>
-    <p>Ta kontakt med megler for å avtale tidspunkt.</p>
-  </div>
+<div class="os-progress">
+  <div class="os-progress__label"><span>Lagringsplass</span><span>62 %</span></div>
+  <progress class="os-progress__bar" max="100" value="62">62 %</progress>
 </div>
 ```
 
-Note — the quiet grey footnote of the original ("Visning kan avtales med
-oppdragsansvarlig."):  <p class="os-note">…</p>
+<sub>Classes: `os-progress` `os-progress__label` `os-progress__bar` `os-progress--success` `os-progress--warning` · Source: [src/css/components/progress.css](../src/css/components/progress.css)</sub>
 
-<sub>Classes: `os-alert` `os-icon` `os-alert__body` `os-alert__title` `os-alert__close` `os-alert--info` `os-alert--success` `os-alert--warning` `os-alert--danger` `os-alert--banner` `os-note` `os-note--xs` · Source: [src/css/components/alert.css](../src/css/components/alert.css)</sub>
+## steps
 
-## toast
-
-Toast — brief confirmation of something the user just did ("Annonsen er lagret").
-Created by Oldschool.toast('…'); lives in a polite live region.
-
-<sub>Classes: `os-toaster` `os-mobilebar` `os-toast` `os-icon` · Source: [src/css/components/toast.css](../src/css/components/toast.css)</sub>
-
-## tabs
-
-Tabs — switch between views of the same subject. Enhanced by oldschool.js
-(roles, arrow keys, roving tabindex). Without JavaScript every panel is
-shown in turn, each with its own heading.
+Steps — where you are in a multi-page form ("1 Personalia › 2 Adresse › 3 Bekreft").
 
 ```html
-<div class="os-tabs" data-os-tabs>
-  <div class="os-tabs__list" role="tablist" aria-label="Om boligen">
-    <button class="os-tabs__tab" role="tab" aria-controls="t-desc" aria-selected="true">Beskrivelse</button>
-    <button class="os-tabs__tab" role="tab" aria-controls="t-fac">Fasiliteter</button>
-  </div>
-  <section class="os-tabs__panel" id="t-desc" role="tabpanel"><h3 class="os-tabs__heading">Beskrivelse</h3>…</section>
-  <section class="os-tabs__panel" id="t-fac" role="tabpanel"><h3 class="os-tabs__heading">Fasiliteter</h3>…</section>
-</div>
+<ol class="os-steps" aria-label="Steg">
+  <li class="os-steps__item os-steps__item--done"><a href="#">Personalia</a></li>
+  <li class="os-steps__item" aria-current="step">Adresse</li>
+  <li class="os-steps__item">Bekreft</li>
+</ol>
 ```
 
-<sub>Classes: `os-tabs__list` `os-tabs` `os-tabs__panel` `os-tabs__heading` `os-tabs__tab` `os-tabs__count` · Source: [src/css/components/tabs.css](../src/css/components/tabs.css)</sub>
-
-## disclosure
-
-Disclosure — native <details>/<summary>, styled. Group several in an
-.os-accordion for an FAQ or a long list of facts.
-
-```html
-<details class="os-disclosure">
-  <summary>Hva er inkludert i leien?</summary>
-  <div class="os-disclosure__content">…</div>
-</details>
-```
-
-<sub>Classes: `os-accordion` `os-disclosure` `os-disclosure__content` `os-panel__body` · Source: [src/css/components/disclosure.css](../src/css/components/disclosure.css)</sub>
+<sub>Classes: `os-steps` `os-steps__item` `os-steps__item--done` · Source: [src/css/components/steps.css](../src/css/components/steps.css)</sub>
 
 ## table
 
-Table — for data that has two dimensions. Numbers right-aligned and tabular.
+Table — header band, zebra rows, thin rules; numbers right-aligned.
+Add data-os-sort to make headers clickable (oldschool.js).
 
 ```html
-<div class="os-table-wrap" tabindex="0" role="region" aria-label="Prishistorikk">
-  <table class="os-table">
+<div class="os-table-wrap" tabindex="0" role="region" aria-label="Billettpriser">
+  <table class="os-table" data-os-sort>
     <caption>…</caption>
-    <thead><tr><th scope="col">Dato</th><th scope="col" class="os-num">Pris</th></tr></thead>
-    <tbody><tr><td>…</td><td class="os-num">7 500 kr</td></tr></tbody>
+    <thead><tr><th scope="col">Billett</th><th scope="col" class="os-num">Pris</th></tr></thead>
+    <tbody><tr><td>Voksen</td><td class="os-num">250,-</td></tr></tbody>
   </table>
 </div>
 ```
 
-Variants: --striped · --compact · --hover · --lined (vertical rules too)
+Cells are vertically centred, so one-line cells line up with a wrapped
+neighbour. Give a column .os-num for numbers, .os-table__actions for the
+buttons at the end of a row (kept on one line), .os-table__title for the
+row's name.
 
-<sub>Classes: `os-table-wrap` `os-table` `os-num` `os-table--compact` `os-table--striped` `os-table--hover` `os-table--lined` · Source: [src/css/components/table.css](../src/css/components/table.css)</sub>
-
-## pagination
-
-Pagination — numbered pages at the bottom of a result list.
-
+Variants: --plain (no zebra) · --compact · --grid (rules between cells too)
+          --top (align cells to the top — for long running text)
 ```html
-<nav class="os-pagination" aria-label="Sider">
-  <ul role="list">
-    <li><a class="os-pagination__link" href="?page=2" rel="prev">…Forrige</a></li>
-    <li><a class="os-pagination__link" href="?page=1">1</a></li>
-    <li><a class="os-pagination__link" href="?page=3" aria-current="page">3</a></li>
-    <li><span class="os-pagination__gap">…</span></li>
-    <li><a class="os-pagination__link" href="?page=4" rel="next">Neste…</a></li>
-  </ul>
-</nav>
+        --stack (narrow containers: every row becomes a small box of
+```
+            label/value lines instead of scrolling sideways; labels come
+            from data-label on each cell, filled in from the header by
+```html
+          oldschool.js when missing)
+
+<div class="os-table-wrap" tabindex="0" role="region" aria-label="Jobber">
+  <table class="os-table os-table--stack">
+    <thead><tr><th scope="col">Navn</th><th scope="col" class="os-num">Nye</th><th scope="col"><span class="os-sr-only">Handlinger</span></th></tr></thead>
+    <tbody><tr>
+      <td class="os-table__title" data-label="Navn"><a href="#">Fjelltur mars</a></td>
+      <td class="os-num" data-label="Nye">3</td>
+      <td class="os-table__actions"><button class="os-button os-button--sm">Kjør nå</button></td>
+    </tr></tbody>
+  </table>
+</div>
 ```
 
-On phones only prev · current · next remain, plus "Side 3 av 43".
+<sub>Classes: `os-num` `os-table__actions` `os-table__title` `os-table-wrap` `os-table` `os-table--top` `os-table--plain` `os-table--compact` `os-table--grid` `os-table__sort` `os-table--stack` · Source: [src/css/components/table.css](../src/css/components/table.css)</sub>
 
-<sub>Classes: `os-pagination` `os-pagination__link` `os-pagination__gap` `os-pagination__status` · Source: [src/css/components/pagination.css](../src/css/components/pagination.css)</sub>
+## toolbar
 
-## result
-
-Result — one item in a search result list. The whole card is clickable
-(stretched title link), the save button stays independently clickable,
-and visited results change color — practical, old-school.
+Toolbar — the row above a table or list: what is selected, what you can
+do with it, and how it is sorted. Sits at the top of a panel body.
 
 ```html
-<ol class="os-results" role="list">
-  <li>
-    <article class="os-result">
-      <div class="os-result__media"><img src="…" alt=""></div>
-      <div class="os-result__body">
-        <p class="os-result__eyebrow">St. Hanshaugen, Oslo</p>
-        <h2 class="os-result__title"><a href="…">Lys og koselig 1-roms</a></h2>
-        <p class="os-result__facts"><span>29 m²</span><span>1 soverom</span></p>
-        <p class="os-result__price">7 500 kr <span>/mnd</span></p>
-        <p class="os-result__meta">Lunde &amp; Berg · 2 t siden</p>
-      </div>
-      <button class="os-result__save" type="button" aria-pressed="false" aria-label="Lagre …">…heart…</button>
-    </article>
+<div class="os-toolbar">
+  <div class="os-toolbar__group">
+    <button class="os-button os-button--sm">Kjør alle</button>
+    <button class="os-button os-button--sm">Pause</button>
+  </div>
+  <p class="os-toolbar__count">4 jobber · 2 kjører</p>
+  <div class="os-toolbar__group os-toolbar__end">
+    <label class="os-sr-only" for="sort">Sorter</label>
+    <select class="os-select os-select--sm" id="sort">…</select>
+  </div>
+</div>
+```
+
+Wraps onto two lines on narrow screens. --bar gives it the tinted crumb-bar
+band, for use between panels.
+
+<sub>Classes: `os-toolbar` `os-toolbar__group` `os-select` `os-input` `os-toolbar__count` `os-toolbar__end` `os-toolbar--bar` · Source: [src/css/components/toolbar.css](../src/css/components/toolbar.css)</sub>
+
+## bars
+
+Bars — a horizontal bar chart in plain HTML: poll results ("Hva mener
+du?"), votes, shares of a total. The number is always printed; the bar
+only illustrates it. Set each bar's length with --os-bars-value.
+
+```html
+<ol class="os-bars" role="list">
+  <li class="os-bars__item">
+    <span class="os-bars__label">Ja, absolutt</span>
+    <span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 62%"></span></span>
+    <span class="os-bars__value">62 %</span>
   </li>
 </ol>
 ```
 
-.os-results--grid lays the same markup out as cards.
+--stacked puts the label above the bar (narrow sidebars). Mark the
+winning row with .os-bars__item--lead.
 
-<sub>Classes: `os-results--grid` `os-results` `os-result` `os-result__title` `os-result__media` `os-badge` `os-result__body` `os-result__eyebrow` `os-result__facts` `os-result__price` `os-result__meta` `os-result__save` `os-icon` `os-result--muted` · Source: [src/css/components/result.css](../src/css/components/result.css)</sub>
+<sub>Classes: `os-bars__item--lead` `os-bars` `os-bars__item` `os-bars__track` `os-bars__bar` `os-bars__value` `os-bars__label` `os-bars--stacked` · Source: [src/css/components/bars.css](../src/css/components/bars.css)</sub>
 
-## dialog
+## calendar
 
-Dialog — native <dialog>, opened with showModal().
-
-```html
-<dialog class="os-dialog" aria-labelledby="d-title">
-  <div class="os-dialog__header">
-    <h2 class="os-dialog__title" id="d-title">Meld interesse</h2>
-    <form method="dialog"><button class="os-button os-button--quiet os-button--icon" aria-label="Lukk">…</button></form>
-  </div>
-  <div class="os-dialog__body">…</div>
-  <div class="os-dialog__footer">…</div>
-</dialog>
-```
-
-Lightbox — the full-screen image viewer the gallery opens (built by JS).
-
-<sub>Classes: `os-dialog` `os-dialog__header` `os-dialog__title` `os-dialog__body` `os-dialog__footer` `os-dialog--sheet` `os-lightbox` `os-lightbox__bar` `os-lightbox__count` `os-lightbox__caption` `os-lightbox__stage` `os-lightbox__button` `os-lightbox__prev` `os-lightbox__next` `os-lightbox__thumbs` `os-lightbox__thumb` · Source: [src/css/components/dialog.css](../src/css/components/dialog.css)</sub>
-
-## skeleton
-
-Skeleton — placeholder shapes while content loads. Pair the container with
-aria-busy="true"; the skeleton itself is aria-hidden.
+Calendar — a month at a glance, the portal sidebar classic. A real table:
+week numbers, Monday first, days with events are links.
 
 ```html
-<div class="os-skeleton os-skeleton--text" aria-hidden="true"></div>
+<table class="os-calendar">
+  <caption>Oktober 2026</caption>
+  <thead><tr><th scope="col"><abbr title="Uke">U</abbr></th><th scope="col"><abbr title="mandag">ma</abbr></th>…</tr></thead>
+  <tbody>
+    <tr><th scope="row">40</th><td class="os-calendar__other">28</td>…<td><a href="#" aria-label="Lørdag 10. oktober: 2 arrangementer">10</a></td>…</tr>
+  </tbody>
+</table>
 ```
 
-<sub>Classes: `os-skeleton` `os-skeleton--text` `os-skeleton--title` `os-skeleton--media` `os-skeleton--circle` · Source: [src/css/components/skeleton.css](../src/css/components/skeleton.css)</sub>
+Day cells: .os-calendar__other (another month) · aria-current="date" on
+today's cell. Weekend columns are tinted.
 
-## stat
+<sub>Classes: `os-calendar__other` `os-calendar` · Source: [src/css/components/calendar.css](../src/css/components/calendar.css)</sub>
 
-Stat — a key figure with a label and an optional change.
+## log
+
+Log — what happened, newest first: case history, price changes, job runs.
+A time column and a line of text, joined by a thin rail.
 
 ```html
-<div class="os-stat">
-  <p class="os-stat__label">Snittpris i området</p>
-  <p class="os-stat__value">14 200 kr</p>
-  <p class="os-stat__delta os-stat__delta--up">+3,1 % siste år</p>
-</div>
+<ol class="os-log" role="list">
+  <li class="os-log__item os-log__item--success">
+    <time class="os-log__time" datetime="2026-10-11T08:00">11.10. 08:00</time>
+    <p class="os-log__text"><strong>Kjøring ferdig</strong> — 3 nye treff</p>
+  </li>
+</ol>
 ```
 
-<sub>Classes: `os-stat` `os-stat__label` `os-stat__value` `os-stat__delta` `os-stat__delta--up` `os-stat__delta--down` `os-stats` · Source: [src/css/components/stat.css](../src/css/components/stat.css)</sub>
+Item tones mark the dot: --success · --warning · --danger · --accent.
+
+<sub>Classes: `os-log` `os-log__item` `os-log__time` `os-log__text` `os-log__item--accent` `os-log__item--success` `os-log__item--warning` `os-log__item--danger` · Source: [src/css/components/log.css](../src/css/components/log.css)</sub>
+
+## thread
+
+Thread — forum posts and comments, guestbook style: who and when in a
+narrow column on the left, the post on the right. Stacks on narrow
+containers.
+
+```html
+<ol class="os-thread" role="list">
+  <li class="os-thread__post" id="innlegg-1">
+    <div class="os-thread__author">
+      <strong>Kari N.</strong>
+      <span>212 innlegg</span>
+    </div>
+    <div class="os-thread__body">
+      <p class="os-thread__meta"><time datetime="2026-10-11T09:12">11.10.2026 kl. 09:12</time> · <a href="#innlegg-1">#1</a></p>
+      <blockquote class="os-thread__quote"><p><strong>Ola skrev:</strong> …</p></blockquote>
+      <p>Innlegget …</p>
+    </div>
+  </li>
+</ol>
+```
+
+.os-thread__post--op marks the opening post (tinted author column).
+
+<sub>Classes: `os-thread__post--op` `os-thread` `os-thread__post` `os-thread__author` `os-thread__body` `os-thread__meta` `os-thread__quote` · Source: [src/css/components/thread.css](../src/css/components/thread.css)</sub>
+
+## files
+
+Files — attachments and downloads with type and size, so nobody has to
+guess what a click will fetch.
+
+```html
+<ul class="os-files" role="list">
+  <li class="os-files__item">
+    <svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-file-text"></use></svg>
+    <a href="#" download>Vedtak om barnehageplass</a>
+    <span class="os-files__meta">PDF, 212 kB</span>
+  </li>
+</ul>
+```
+
+<sub>Classes: `os-files` `os-files__item` `os-icon` `os-files__meta` · Source: [src/css/components/files.css](../src/css/components/files.css)</sub>
 
 ## empty
 
-Empty state — when there is nothing to show, say why and what to do next.
+Empty state — when there is nothing to show, say why and what to do.
 
 ```html
 <div class="os-empty">
-  <svg class="os-icon os-empty__icon">…#os-search</svg>
-  <h2 class="os-empty__title">Ingen treff</h2>
-  <p>Prøv et større område eller fjern noen filtre.</p>
-  <a class="os-button" href="#">Nullstill filtre</a>
+  <p class="os-empty__title">Ingen treff på «xyz»</p>
+  <p>Sjekk stavemåten, eller prøv et mer generelt søkeord.</p>
 </div>
 ```
 
-<sub>Classes: `os-empty` `os-empty__icon` `os-empty__title` · Source: [src/css/components/empty.css](../src/css/components/empty.css)</sub>
+<sub>Classes: `os-empty` `os-empty__title` · Source: [src/css/components/empty.css](../src/css/components/empty.css)</sub>
+
+## button
+
+Button — <button> for actions, <a> for navigation; same looks.
+A faint top-to-bottom gradient and a one-pixel highlight: the 2008 button,
+flattened just enough.
+
+```html
+<button class="os-button" type="button">Avbryt</button>
+<button class="os-button os-button--primary" type="submit">Send</button>
+```
+
+Looks:  (default) · --primary · --danger · --link
+Sizes:  --sm · (default 30px, 40px on touch screens) · --lg
+Other:  --block (full width) · --icon (square; needs aria-label)
+
+<sub>Classes: `os-button` `os-icon` `os-button--primary` `os-button--danger` `os-button--link` `os-button--sm` `os-button--lg` `os-button--block` `os-button--icon` `os-button-group` `os-buttons` · Source: [src/css/components/button.css](../src/css/components/button.css)</sub>
+
+## field
+
+Forms — classic label column on wide screens, label above on narrow ones.
+
+```html
+<form class="os-form">
+  <div class="os-form__row">
+    <label class="os-form__label" for="name">Navn <span class="os-form__req" aria-hidden="true">*</span></label>
+    <div class="os-form__control">
+      <input class="os-input" id="name" required>
+      <p class="os-form__hint" id="name-hint">Slik det står i passet.</p>
+    </div>
+  </div>
+  <div class="os-form__row os-form__row--actions">
+    <div class="os-form__control os-buttons">…</div>
+  </div>
+</form>
+```
+
+Stand-alone field (label always above):
+```html
+<div class="os-field"><label class="os-field__label" for="q">Søk</label><input class="os-input" id="q"></div>
+```
+
+Inputs: .os-input, .os-select, .os-textarea. Errors: aria-invalid="true"
+plus .os-form__error / .os-field__error linked with aria-describedby.
+Input group: .os-input-group with .os-input-group__addon ("kr", "m²").
+
+<sub>Classes: `os-input` `os-select` `os-textarea` `os-form__error` `os-field__error` `os-input-group` `os-input-group__addon` `os-form` `os-form__row` `os-form__label` `os-field__label` `os-form__req` `os-form__control` `os-buttons` `os-form__hint` `os-field__hint` `os-form__section` `os-form__row--actions` `os-field` `os-input--sm` `os-select--sm` `os-input--short` `os-input--medium` `os-select--inline` `os-range` `os-range__sep` · Source: [src/css/components/field.css](../src/css/components/field.css)</sub>
+
+## choice
+
+Choices — native checkboxes and radios (tinted with accent-color) with
+a clickable label, the way forms always worked.
+
+```html
+<label class="os-choice"><input type="checkbox" name="n"> <span>Send meg nyhetsbrev</span></label>
+<label class="os-choice"><input type="radio" name="r"> <span>Alle</span> <span class="os-choice__count">(128)</span></label>
+```
+
+.os-choices stacks them; .os-choices--inline puts them on one line.
+
+<sub>Classes: `os-choices` `os-choices--inline` `os-choice` `os-choice__count` `os-choice__hint` `os-fieldset` · Source: [src/css/components/choice.css](../src/css/components/choice.css)</sub>
+
+## segmented
+
+Segmented choice — radios drawn as a joined button group
+("Liste | Tabell"). Real radios: works in forms and without JavaScript.
+
+```html
+<fieldset class="os-segmented">
+  <legend class="os-sr-only">Visning</legend>
+  <label><input type="radio" name="v" checked><span>Liste</span></label>
+  <label><input type="radio" name="v"><span>Tabell</span></label>
+</fieldset>
+```
+
+<sub>Classes: `os-segmented` · Source: [src/css/components/segmented.css](../src/css/components/segmented.css)</sub>
+
+## search
+
+Search box — a field and a "Søk" button, optionally with a scope select.
+
+```html
+<form class="os-search" role="search" action="/sok">
+  <label class="os-sr-only" for="q">Søk</label>
+  <input class="os-input os-search__input" id="q" name="q" type="search" placeholder="Søk i hele nettstedet">
+  <button class="os-button os-button--primary" type="submit">Søk</button>
+</form>
+```
+
+--lg for the search page itself.
+
+<sub>Classes: `os-search` `os-search__input` `os-select` `os-search--lg` `os-button` `os-search__hint` · Source: [src/css/components/search.css](../src/css/components/search.css)</sub>
+
+## filters
+
+Filters — the facet box of a search page. On wide screens it sits in the
+left column; below 60em the same element becomes a sheet (popover)
+opened by a "Filtrer" button. No JavaScript required.
+
+```html
+<button class="os-button os-filters-toggle" popovertarget="filters">Filtrer (2)</button>
+<aside class="os-filters" id="filters" popover aria-labelledby="filters-title">
+  <div class="os-filters__header">
+    <h2 class="os-filters__title" id="filters-title">Avgrens søket</h2>
+    <button class="os-button os-button--sm os-filters__close" popovertarget="filters" popovertargetaction="hide">Lukk</button>
+  </div>
+  <div class="os-filters__body">
+    <fieldset class="os-filter"><legend class="os-filter__title">Type</legend>…choices…</fieldset>
+  </div>
+  <div class="os-filters__footer">…</div>
+</aside>
+```
+
+<sub>Classes: `os-filters` `os-filters__header` `os-filters__title` `os-filters__body` `os-filters__footer` `os-filter` `os-filter__title` `os-filter__more` `os-button` `os-filters-toggle` `os-filters__close` · Source: [src/css/components/filters.css](../src/css/components/filters.css)</sub>
+
+## chip
+
+Active filters — small boxes with a remove cross ("Oslo ×").
+
+```html
+<ul class="os-chips" role="list">
+  <li><a class="os-chip" href="?…">Oslo <span aria-hidden="true">×</span><span class="os-sr-only">, fjern</span></a></li>
+</ul>
+```
+
+<sub>Classes: `os-chips` `os-chip` · Source: [src/css/components/chip.css](../src/css/components/chip.css)</sub>
+
+## badge
+
+Badge — a tiny status word: "NY", "OPPDATERT", "UTSOLGT".
+
+```html
+<span class="os-badge os-badge--new">Ny</span>
+```
+
+Tones: (neutral) · --accent · --success · --warning · --danger · --new (solid amber)
+
+<sub>Classes: `os-badge` `os-badge--accent` `os-badge--success` `os-badge--warning` `os-badge--danger` `os-badge--new` `os-badge--solid` · Source: [src/css/components/badge.css](../src/css/components/badge.css)</sub>
+
+## status
+
+Status — a coloured dot and a word, for the state of a job, a case or a
+service: "Kjører", "Ferdig", "Feilet". Quieter than a badge; reads well in
+table cells. The word carries the meaning, the dot only repeats it.
+
+```html
+<span class="os-status os-status--running">Kjører</span>
+```
+
+Tones: (neutral, idle) · --running · --success · --warning · --danger
+--pill adds a tinted box around it.
+
+<sub>Classes: `os-status` `os-status--running` `os-status--success` `os-status--warning` `os-status--danger` `os-status--pill` · Source: [src/css/components/status.css](../src/css/components/status.css)</sub>
+
+## alert
+
+Notices — a bordered message box with a bold first line. The yellow
+warning box is the 2008 classic.
+
+```html
+<div class="os-alert os-alert--warning" role="status">
+  <p class="os-alert__title">Obs!</p>
+  <p>Billettsalget stenger kl. 12 på konsertdagen.</p>
+</div>
+```
+
+Tones: --info · --success · --warning · --danger. Use role="alert" only for
+errors that need immediate attention.
+
+Note — the quiet grey footnote ("Visning kan avtales med oppdragsansvarlig."):
+```html
+<p class="os-note">…</p>
+```
+
+<sub>Classes: `os-alert` `os-alert__title` `os-alert--info` `os-alert--success` `os-alert--warning` `os-alert--danger` `os-note` · Source: [src/css/components/alert.css](../src/css/components/alert.css)</sub>
+
+## errorsummary
+
+Error summary — at the top of a form that failed: what went wrong, with a
+link to each field. Move focus to it after submit (tabindex="-1").
+
+```html
+<div class="os-errorsummary" role="alert" tabindex="-1" aria-labelledby="feil-tittel">
+  <h2 class="os-errorsummary__title" id="feil-tittel">Skjemaet har 2 feil</h2>
+  <ul class="os-errorsummary__list">
+    <li><a href="#oppstart">Skriv datoen som dd.mm.åååå</a></li>
+  </ul>
+</div>
+```
+
+<sub>Classes: `os-errorsummary` `os-errorsummary__title` `os-errorsummary__list` · Source: [src/css/components/errorsummary.css](../src/css/components/errorsummary.css)</sub>
+
+## toast
+
+Toast — the yellow "Lagret!" message that fades in at the top and goes away.
+Created by Oldschool.toast('…'); lives in a polite live region.
+
+<sub>Classes: `os-toaster` `os-toast` · Source: [src/css/components/toast.css](../src/css/components/toast.css)</sub>
+
+## tabs
+
+Tabs — folder tabs on top of a box. Enhanced by oldschool.js (roles, arrow
+keys). Without JavaScript every panel is shown in turn under its heading.
+
+```html
+<div class="os-tabs" data-os-tabs>
+  <div class="os-tabs__list" role="tablist" aria-label="Arrangement">
+    <button class="os-tabs__tab" role="tab" aria-controls="t1" aria-selected="true">Program</button>
+    <button class="os-tabs__tab" role="tab" aria-controls="t2">Praktisk info</button>
+  </div>
+  <section class="os-tabs__panel" id="t1"><h3 class="os-tabs__heading">Program</h3>…</section>
+  <section class="os-tabs__panel" id="t2"><h3 class="os-tabs__heading">Praktisk info</h3>…</section>
+</div>
+```
+
+<sub>Classes: `os-tabs__list` `os-tabs` `os-tabs__heading` `os-tabs__tab` `os-tabs__panel` · Source: [src/css/components/tabs.css](../src/css/components/tabs.css)</sub>
+
+## disclosure
+
+Disclosure — "[+] Vis mer" on native <details>. Group them in
+.os-accordion for FAQs.
+
+```html
+<details class="os-disclosure">
+  <summary>Hvordan kjøper jeg billett?</summary>
+  <div class="os-disclosure__content">…</div>
+</details>
+```
+
+<sub>Classes: `os-accordion` `os-disclosure` `os-disclosure__content` · Source: [src/css/components/disclosure.css](../src/css/components/disclosure.css)</sub>
+
+## pagination
+
+Pagination — "« Forrige  1 2 3 … 43  Neste »".
+
+```html
+<nav class="os-pagination" aria-label="Sider">
+  <ul role="list">
+    <li><a href="?side=1" rel="prev">« Forrige</a></li>
+    <li><a href="?side=1">1</a></li>
+    <li><span aria-current="page">2</span></li>
+    <li><span class="os-pagination__gap">…</span></li>
+    <li><a href="?side=3" rel="next">Neste »</a></li>
+  </ul>
+</nav>
+```
+
+<sub>Classes: `os-pagination` `os-pagination__gap` `os-pagination__status` · Source: [src/css/components/pagination.css](../src/css/components/pagination.css)</sub>
+
+## result
+
+Search results — text-only rows: title link, a line of text, and a green
+address/meta line, as search engines showed them.
+
+```html
+<ol class="os-results" role="list">
+  <li class="os-result">
+    <h2 class="os-result__title"><a href="#">Søknad om barnehageplass</a></h2>
+    <p class="os-result__text">Hovedopptaket har søknadsfrist 1. mars …</p>
+    <p class="os-result__meta"><span class="os-result__url">oldschool.no/barnehage/soknad</span> · Oppdatert 12.09.2026</p>
+  </li>
+</ol>
+```
+
+A trailing figure or action can sit in .os-result__aside (right column).
+
+<sub>Classes: `os-result__aside` `os-results` `os-result` `os-result__title` `os-result__text` `os-result__meta` `os-result__url` `os-result__figure` `os-results-summary` · Source: [src/css/components/result.css](../src/css/components/result.css)</sub>
+
+## dialog
+
+Dialog — a native <dialog> styled like an old window: accent title bar,
+white body, buttons bottom right.
+
+```html
+<dialog class="os-dialog" aria-labelledby="d-title">
+  <form method="dialog" class="os-dialog__header">
+    <h2 class="os-dialog__title" id="d-title">Tips en venn</h2>
+    <button class="os-dialog__close" value="cancel" aria-label="Lukk">×</button>
+  </form>
+  <div class="os-dialog__body">…</div>
+  <form method="dialog" class="os-dialog__footer">…buttons…</form>
+</dialog>
+```
+
+<sub>Classes: `os-dialog` `os-dialog__header` `os-dialog__title` `os-dialog__close` `os-dialog__body` `os-dialog__footer` · Source: [src/css/components/dialog.css](../src/css/components/dialog.css)</sub>
 
 ## bleed
 
-Bleed — on phones, .os-container--bleed removes the side gutter so panels
-become edge-to-edge sheets (no radius, no side borders): more room for
-content, still separated by the canvas. Loose content between the sheets
-(toolbars, chips, section heads) keeps the gutter.
+Bleed — on phones, .os-container--bleed removes the side gutter so boxes
+run edge to edge (no side borders, no radius): more room for text, still
+separated by the frame. Loose content between boxes keeps the gutter.
 
-<sub>Classes: `os-container--bleed` `os-panel` `os-crumbbar` `os-result` `os-filters` `os-panel__header` `os-contact__brand` `os-filters__header` `os-layout__main` `os-layout__aside` `os-page-section` `os-split` `os-cluster` `os-chips` `os-sectionhead` `os-pagination` · Source: [src/css/components/bleed.css](../src/css/components/bleed.css)</sub>
+<sub>Classes: `os-container--bleed` `os-panel` `os-crumbbar` `os-subnav` `os-sidenav` `os-filters` `os-tabs__panel` `os-layout__main` `os-layout__aside` `os-layout__nav` `os-page-section` `os-split` `os-cluster` `os-chips` `os-sectionhead` `os-pagination` `os-footer` · Source: [src/css/components/bleed.css](../src/css/components/bleed.css)</sub>
 

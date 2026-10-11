@@ -1,0 +1,49 @@
+/*
+ * Progress — a plain bar with a label, for uploads, quotas and polls.
+ *
+ *   <div class="os-progress">
+ *     <div class="os-progress__label"><span>Lagringsplass</span><span>62 %</span></div>
+ *     <progress class="os-progress__bar" max="100" value="62">62 %</progress>
+ *   </div>
+ */
+@layer os.components {
+  .os-progress {
+    display: grid;
+    gap: var(--os-space-1);
+  }
+
+  .os-progress__label {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--os-space-2);
+    font-size: var(--os-text-xs);
+  }
+
+  .os-progress__bar {
+    width: 100%;
+    height: 0.875rem;
+    overflow: hidden;
+    border: var(--os-border-width) solid var(--os-color-border-strong);
+    border-radius: var(--os-radius-xs);
+    background-color: var(--os-color-surface-sunken);
+    appearance: none;
+  }
+
+  .os-progress__bar::-webkit-progress-bar {
+    background-color: var(--os-color-surface-sunken);
+  }
+
+  .os-progress__bar::-webkit-progress-value {
+    background-color: var(--os-color-accent);
+    box-shadow: var(--os-bevel);
+  }
+
+  .os-progress__bar::-moz-progress-bar {
+    background-color: var(--os-color-accent);
+  }
+
+  .os-progress--success .os-progress__bar::-webkit-progress-value { background-color: var(--os-color-success-fill); }
+  .os-progress--success .os-progress__bar::-moz-progress-bar { background-color: var(--os-color-success-fill); }
+  .os-progress--warning .os-progress__bar::-webkit-progress-value { background-color: var(--os-color-warning-fill); }
+  .os-progress--warning .os-progress__bar::-moz-progress-bar { background-color: var(--os-color-warning-fill); }
+}

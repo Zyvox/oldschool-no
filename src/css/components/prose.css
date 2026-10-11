@@ -1,8 +1,10 @@
 /*
- * Prose — long-form text (descriptions, articles, help pages).
- * Comfortable measure, relaxed leading, visited links, sensible rhythm.
+ * Prose — long-form text (articles, descriptions, help pages).
  *
- *   <div class="os-prose"><h3>Om boligen</h3><p>…</p><ul>…</ul></div>
+ *   <div class="os-prose"><p class="os-prose__ingress">…</p><h2>…</h2><p>…</p></div>
+ *
+ * Fact box (floats right inside prose when there is room):
+ *   <aside class="os-factbox"><p class="os-factbox__title">Fakta</p><dl class="os-kv os-kv--plain">…</dl></aside>
  */
 @layer os.components {
   .os-prose {
@@ -11,20 +13,15 @@
   }
 
   .os-prose > * + * {
-    margin-block-start: 1em;
+    margin-block-start: 0.9em;
   }
 
   .os-prose > :is(h2, h3, h4) {
-    margin-block-start: 1.6em;
-    line-height: var(--os-leading-snug);
-  }
-
-  .os-prose > :is(h2, h3, h4):first-child {
-    margin-block-start: 0;
+    margin-block-start: 1.4em;
   }
 
   .os-prose > :is(h2, h3, h4) + * {
-    margin-block-start: 0.5em;
+    margin-block-start: 0.4em;
   }
 
   .os-prose h2 { font-size: var(--os-text-xl); }
@@ -32,19 +29,43 @@
   .os-prose h4 { font-size: var(--os-text-md); }
 
   .os-prose li + li {
-    margin-block-start: 0.35em;
+    margin-block-start: 0.25em;
   }
 
-  .os-prose a:visited {
-    color: var(--os-color-link-visited);
-  }
-
-  .os-prose--lead > p:first-child {
+  .os-prose__ingress {
     color: var(--os-color-text-strong);
     font-size: var(--os-text-lg);
+    font-weight: var(--os-weight-bold);
+    line-height: var(--os-leading-snug);
   }
 
   .os-prose--wide {
     max-width: none;
+  }
+
+  /* Fact box floated into an article, like the print-era "faktaboks". */
+  .os-factbox {
+    padding: var(--os-space-2) var(--os-pad);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    background-color: var(--os-color-crumbbar);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-factbox__title {
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-md);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-factbox > * + * {
+    margin-block-start: var(--os-space-1);
+  }
+
+  @container (min-width: 36rem) {
+    .os-factbox {
+      float: inline-end;
+      width: 40%;
+      margin: 0.3em 0 var(--os-space-2) var(--os-space-4);
+    }
   }
 }

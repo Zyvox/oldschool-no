@@ -4,11 +4,8 @@
  */
 import { semanticColors, primitives, buildPalette, resolveColors, resolveRoles, themes, defaultTheme } from './tokens.mjs';
 import * as foundation from '../../tokens/foundation.mjs';
-import { ACCENT_STEPS, NEUTRAL_STEPS } from '../../src/js/color.js';
 import fs from 'node:fs';
 import path from 'node:path';
-
-const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 
 /** Semantic color name → Tailwind color name (avoids `text-text-muted`). */
 export function tailwindColorName(name) {
@@ -22,17 +19,13 @@ export function tailwindColorName(name) {
 
 function tailwindEntries(pal) {
   const colors = Object.keys(semanticColors()).map((n) => [tailwindColorName(n), `var(--os-color-${n})`]);
-  const ramps = [
-    ...ACCENT_STEPS.map((s) => [`accent-${s}`, `var(--os-accent-${s})`]),
-    ...NEUTRAL_STEPS.map((s) => [`neutral-${s}`, `var(--os-neutral-${s})`]),
-  ];
-  const paletteRamps = Object.entries(pal).flatMap(([name, { ramp }]) =>
-    Object.keys(ramp).map((s) => [`${kebab(name)}-${s}`, `var(--os-${kebab(name)}-${s})`]));
-  return { colors, ramps, paletteRamps };
+  const ramps = ['accent', 'neutral'].flatMap((name) =>
+    Object.keys(pal[name].ramp).map((s) => [`${name}-${s}`, `var(--os-${name}-${s})`]));
+  return { colors, ramps };
 }
 
 export function tailwindV4(pal) {
-  const { colors, ramps, paletteRamps } = tailwindEntries(pal);
+  const { colors, ramps } = tailwindEntries(pal);
   const lines = [
     '/* GENERATED — Oldschool → Tailwind CSS v4 bridge.',
     '   Load after Tailwind and Oldschool:',
@@ -45,10 +38,8 @@ export function tailwindV4(pal) {
     '@theme inline {',
     '  /* Semantic colors */',
     ...colors.map(([k, v]) => `  --color-${k}: ${v};`),
-    '  /* Theme ramps */',
+    '  /* Ramps */',
     ...ramps.map(([k, v]) => `  --color-${k}: ${v};`),
-    '  /* Raw palette */',
-    ...paletteRamps.map(([k, v]) => `  --color-${k}: ${v};`),
     '  /* Type */',
     '  --font-sans: var(--os-font-body);',
     '  --font-heading: var(--os-font-heading);',
@@ -57,7 +48,7 @@ export function tailwindV4(pal) {
     '  /* Shape */',
     '  --radius-panel: var(--os-radius-panel);',
     '  --radius-control: var(--os-radius-control);',
-    '  --radius-media: var(--os-radius-media);',
+    '  --radius-tab: var(--os-radius-tab);',
     '  --radius-badge: var(--os-radius-badge);',
     '  /* Elevation */',
     '  --shadow-raised: var(--os-shadow-raised);',
@@ -69,30 +60,29 @@ export function tailwindV4(pal) {
     '  --spacing-pad: var(--os-pad);',
     '  --breakpoint-sm: 40rem;',
     '  --breakpoint-md: 60rem;',
-    '  --breakpoint-lg: 76rem;',
     '}',
   ];
   return `${lines.join('\n')}\n`;
 }
 
 export function tailwindV3(pal) {
-  const { colors, ramps, paletteRamps } = tailwindEntries(pal);
+  const { colors, ramps } = tailwindEntries(pal);
   const obj = (entries) => `{\n${entries.map(([k, v]) => `        '${k}': '${v}',`).join('\n')}\n      }`;
   return `/* GENERATED — Oldschool → Tailwind CSS v3 preset.
  * tailwind.config.js:  module.exports = { presets: [require('oldschool-no/dist/tailwind-preset.cjs')] }
  * Also load dist/oldschool.css (it defines the variables these utilities point to). */
 module.exports = {
   theme: {
-    screens: { sm: '40em', md: '60em', lg: '76em' },
+    screens: { sm: '40em', md: '60em' },
     extend: {
-      colors: ${obj([...colors, ...ramps, ...paletteRamps])},
+      colors: ${obj([...colors, ...ramps])},
       fontFamily: {
         sans: ['var(--os-font-body)'],
         heading: ['var(--os-font-heading)'],
         mono: ['var(--os-font-mono)'],
       },
       fontSize: ${obj(Object.keys(foundation.text).map((k) => [k, `var(--os-text-${k})`]))},
-      borderRadius: ${obj([['panel', 'var(--os-radius-panel)'], ['control', 'var(--os-radius-control)'], ['media', 'var(--os-radius-media)'], ['badge', 'var(--os-radius-badge)']])},
+      borderRadius: ${obj([['panel', 'var(--os-radius-panel)'], ['control', 'var(--os-radius-control)'], ['tab', 'var(--os-radius-tab)'], ['badge', 'var(--os-radius-badge)']])},
       boxShadow: ${obj([['raised', 'var(--os-shadow-raised)'], ['overlay', 'var(--os-shadow-overlay)']])},
       spacing: ${obj([['gutter', 'var(--os-gutter)'], ['gap', 'var(--os-gap)'], ['pad', 'var(--os-pad)']])},
       maxWidth: ${obj([['page', 'var(--os-container-width)'], ['measure', 'var(--os-measure)']])},
@@ -131,7 +121,7 @@ export function tokensMarkdown(pal = buildPalette()) {
     out.push(`| \`--os-color-${name}\` | \`${light[name]}\` | \`${dark[name]}\` | ${c.light} / ${c.dark} | ${c.description.replace(/\|/g, '\\|')} |`);
   }
 
-  out.push('', '## Role tokens', '', 'Re-declared per theme and density. Values for the default theme, comfortable density.', '');
+  out.push('', '## Role tokens', '', 'Re-declared per theme and density. Values for the default theme, standard density.', '');
   out.push('| Token | Value | Use |', '| --- | --- | --- |');
   for (const [name, value, description] of foundation.roles) {
     out.push(`| \`--os-${name}\` | \`${roles[name].replace(/\|/g, '\\|')}\` | ${description} |`);
@@ -156,16 +146,16 @@ export function tokensMarkdown(pal = buildPalette()) {
   out.push('| Name | Min-width | Pixels |', '| --- | --- | --- |');
   for (const [k, v] of Object.entries(foundation.breakpoints)) out.push(`| ${k} | \`${v}\` | ${parseFloat(v) * 16}px |`);
 
-  out.push('', '## Palette', '', 'Raw ramps generated in OKLCH (`tokens/palette.mjs`). Every ramp has identical lightness per step, so any accent ramp can replace any other.', '');
-  for (const [name, { description, ramp, fixed }] of Object.entries(pal)) {
-    out.push(`### ${kebab(name)}${fixed ? ' (hand-picked)' : ''}`, '', description, '');
+  out.push('', '## Palette', '', 'Ramps generated in OKLCH from the seeds in `tokens/palette.mjs`. Every ramp has identical lightness per step, so any seed keeps the contrast guarantees. Change `accent` there and rebuild to re-brand.', '');
+  for (const [name, { description, ramp, seed }] of Object.entries(pal)) {
+    out.push(`### ${name}`, '', `${description} Seed: \`${typeof seed === 'string' ? seed : JSON.stringify(seed)}\`.`, '');
     out.push(`| ${Object.keys(ramp).join(' | ')} |`, `| ${Object.keys(ramp).map(() => '---').join(' | ')} |`);
     out.push(`| ${Object.values(ramp).map((h) => `\`${h}\``).join(' | ')} |`, '');
   }
 
-  out.push('## Themes', '', '| Theme | `data-theme` | Accent | Neutral | Notes |', '| --- | --- | --- | --- | --- |');
+  out.push('## Themes', '', '| Theme | `data-theme` | Description |', '| --- | --- | --- |');
   for (const [name, t] of Object.entries(themes)) {
-    out.push(`| ${t.label} | \`${name}\`${name === defaultTheme ? ' (default)' : ''} | ${t.accent} | ${t.neutral} | ${t.description} |`);
+    out.push(`| ${t.label} | \`${name}\`${name === defaultTheme ? ' (default)' : ''} | ${t.description} |`);
   }
   out.push('');
   return out.join('\n');

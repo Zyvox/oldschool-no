@@ -1,33 +1,28 @@
 /*
- * Masthead — brand on the left, utility links on the right, on the canvas.
+ * Masthead — logo on the left, small utility links top right, on the frame.
  *
  *   <header class="os-masthead">
- *     <div class="os-container os-masthead__inner">
- *       <a class="os-brand" href="/">…</a>
- *       <button class="os-masthead__toggle os-button os-button--quiet" popovertarget="menu">…Meny</button>
- *       <nav class="os-masthead__nav" id="menu" popover aria-label="…">
- *         <ul class="os-utilnav" role="list">…</ul>
- *       </nav>
- *     </div>
+ *     <a class="os-brand" href="/">…</a>
+ *     <button class="os-button os-button--sm os-masthead__toggle" popovertarget="menu">Meny</button>
+ *     <nav class="os-masthead__nav" id="menu" popover aria-label="Snarveier">
+ *       <ul class="os-utilnav" role="list">…</ul>
+ *     </nav>
  *   </header>
  *
- * Below 60em the nav collapses into a popover menu opened by the toggle —
- * no JavaScript needed. Browsers without popover support show the links inline.
+ * Below 40em the utility links fold into a popover menu — no JavaScript.
+ * Browsers without popover support simply show the links inline.
  */
 @layer os.components {
   .os-masthead {
     position: relative;
     z-index: var(--os-z-header);
-    background-color: var(--os-color-masthead);
-  }
-
-  .os-masthead__inner {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: var(--os-space-3) var(--os-space-6);
+    gap: var(--os-space-2) var(--os-space-4);
     min-height: 4rem;
-    padding-block: var(--os-space-2);
+    padding-block: var(--os-space-3) var(--os-space-2);
+    background-color: var(--os-color-masthead);
   }
 
   .os-masthead .os-masthead__toggle {
@@ -39,12 +34,11 @@
     display: block;
   }
 
-  @media (min-width: 60em) {
-    .os-masthead__inner {
-      min-height: 4.75rem;
-    }
+  .os-masthead__search {
+    align-self: center;
+  }
 
-    /* Always inline on wide screens, even if opened as a popover earlier. */
+  @media (min-width: 40em) {
     .os-masthead__nav[popover] {
       position: static;
       inset: auto;
@@ -60,24 +54,28 @@
     }
   }
 
-  @media (max-width: 59.99em) {
+  @media (max-width: 39.99em) {
+    .os-masthead {
+      align-items: center;
+      min-height: 3.25rem;
+      padding-block: var(--os-space-2);
+      padding-inline: var(--os-gutter);
+    }
+
     .os-masthead .os-masthead__toggle {
       display: inline-flex;
     }
 
     .os-masthead__nav[popover] {
       position: fixed;
-      inset: 3.75rem var(--os-gutter) auto auto;
-      width: min(20rem, calc(100vw - 2 * var(--os-gutter)));
-      max-height: calc(100dvh - 5rem);
+      inset: 3.25rem var(--os-space-2) auto auto;
+      width: min(16rem, calc(100vw - 1rem));
       margin: 0;
-      padding: var(--os-space-2);
-      overflow: auto;
-      border: var(--os-border-width) solid var(--os-color-border);
-      border-radius: var(--os-radius-panel);
-      background-color: var(--os-color-surface-raised);
+      padding: var(--os-space-1) 0;
+      border: var(--os-border-width) solid var(--os-color-panel-border);
+      background-color: var(--os-color-surface);
       color: var(--os-color-text);
-      box-shadow: var(--os-shadow-overlay);
+      box-shadow: var(--os-shadow-raised);
     }
 
     .os-masthead__nav[popover]:not(:popover-open) {
@@ -94,16 +92,13 @@
       display: none;
     }
 
-    .os-masthead__nav .os-utilnav a,
-    .os-masthead__nav .os-utilnav button {
-      width: 100%;
-      padding: var(--os-space-3);
-      border-radius: var(--os-radius-control);
+    .os-masthead__nav .os-utilnav a {
+      display: block;
+      padding: var(--os-space-2) var(--os-space-3);
     }
 
-    .os-masthead__nav .os-utilnav a:hover,
-    .os-masthead__nav .os-utilnav button:hover {
-      background-color: var(--os-color-surface-tint);
+    .os-masthead__nav .os-utilnav li + li {
+      border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
     }
   }
 }

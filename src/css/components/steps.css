@@ -1,0 +1,78 @@
+/*
+ * Steps — where you are in a multi-page form ("1 Personalia › 2 Adresse › 3 Bekreft").
+ *
+ *   <ol class="os-steps" aria-label="Steg">
+ *     <li class="os-steps__item os-steps__item--done"><a href="#">Personalia</a></li>
+ *     <li class="os-steps__item" aria-current="step">Adresse</li>
+ *     <li class="os-steps__item">Bekreft</li>
+ *   </ol>
+ */
+@layer os.components {
+  .os-steps {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: os-steps;
+    font-size: var(--os-text-sm);
+  }
+
+  .os-steps__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--os-space-1-5);
+    padding: var(--os-space-1) var(--os-space-3) var(--os-space-1) var(--os-space-2);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    background-color: var(--os-color-surface);
+    color: var(--os-color-text-muted);
+    counter-increment: os-steps;
+  }
+
+  .os-steps__item + .os-steps__item {
+    border-inline-start: 0;
+  }
+
+  .os-steps__item:first-child {
+    border-start-start-radius: var(--os-radius-control);
+    border-end-start-radius: var(--os-radius-control);
+  }
+
+  .os-steps__item:last-child {
+    border-start-end-radius: var(--os-radius-control);
+    border-end-end-radius: var(--os-radius-control);
+  }
+
+  .os-steps__item::before {
+    content: counter(os-steps);
+    display: inline-grid;
+    place-items: center;
+    width: 1.35em;
+    height: 1.35em;
+    border-radius: 50%;
+    background-color: var(--os-color-surface-sunken);
+    border: var(--os-border-width) solid var(--os-color-border);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-steps__item--done::before {
+    content: "✓";
+    border-color: var(--os-color-success-border);
+    background-color: var(--os-color-success-subtle);
+    color: var(--os-color-success);
+  }
+
+  .os-steps__item[aria-current] {
+    background-color: var(--os-color-panel-header);
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-steps__item[aria-current]::before {
+    border-color: var(--os-color-accent);
+    background-color: var(--os-color-accent);
+    color: var(--os-color-text-on-accent);
+  }
+}

@@ -1,62 +1,35 @@
 /*
- * Badge — a short status word on a result or a heading ("Ny", "Visning", "Utleid").
+ * Badge — a tiny status word: "NY", "OPPDATERT", "UTSOLGT".
  *
- *   <span class="os-badge os-badge--success">Ny</span>
+ *   <span class="os-badge os-badge--new">Ny</span>
  *
- * Tones: (neutral) · --accent · --success · --warning · --danger · --info
- * Emphasis: --solid (filled) · --dot (leading status dot)
+ * Tones: (neutral) · --accent · --success · --warning · --danger · --new (solid amber)
  */
 @layer os.components {
   .os-badge {
-    --_bg: var(--os-color-surface-muted);
-    --_fg: var(--os-color-text);
+    --_bg: var(--os-color-surface-sunken);
+    --_fg: var(--os-color-text-muted);
     --_border: var(--os-color-border);
 
-    display: inline-flex;
-    align-items: center;
-    gap: var(--os-space-1);
-    padding: 0.125rem var(--os-space-2);
+    display: inline-block;
+    padding: 0.0625rem var(--os-space-1);
     border: var(--os-border-width) solid var(--_border);
     border-radius: var(--os-radius-badge);
     background-color: var(--_bg);
     color: var(--_fg);
     font-size: var(--os-text-2xs);
-    font-weight: var(--os-weight-semibold);
+    font-weight: var(--os-weight-bold);
     line-height: 1.35;
-    letter-spacing: 0.01em;
+    letter-spacing: var(--os-tracking-wide);
+    text-transform: uppercase;
+    vertical-align: 0.1em;
     white-space: nowrap;
-    vertical-align: middle;
   }
 
-  .os-badge--accent { --_bg: var(--os-color-accent-subtle); --_fg: var(--os-color-text-accent); --_border: var(--os-color-border-tint); }
+  .os-badge--accent { --_bg: var(--os-color-accent-subtle); --_fg: var(--os-color-text-accent); --_border: var(--os-color-panel-border); }
   .os-badge--success { --_bg: var(--os-color-success-subtle); --_fg: var(--os-color-success); --_border: var(--os-color-success-border); }
   .os-badge--warning { --_bg: var(--os-color-warning-subtle); --_fg: var(--os-color-warning); --_border: var(--os-color-warning-border); }
   .os-badge--danger { --_bg: var(--os-color-danger-subtle); --_fg: var(--os-color-danger); --_border: var(--os-color-danger-border); }
-  .os-badge--info { --_bg: var(--os-color-info-subtle); --_fg: var(--os-color-info); --_border: var(--os-color-info-border); }
-
-  .os-badge--solid { --_fg: var(--os-color-text-on-accent); }
-  .os-badge--solid:not([class*="--success"], [class*="--warning"], [class*="--danger"], [class*="--info"]) { --_bg: var(--os-color-accent); --_border: var(--os-color-accent); }
-  .os-badge--solid.os-badge--success { --_bg: var(--os-color-success-fill); --_border: var(--os-color-success-fill); }
-  .os-badge--solid.os-badge--warning { --_bg: var(--os-color-warning-fill); --_border: var(--os-color-warning-fill); }
-  .os-badge--solid.os-badge--danger { --_bg: var(--os-color-danger-fill); --_border: var(--os-color-danger-fill); }
-  .os-badge--solid.os-badge--info { --_bg: var(--os-color-info-fill); --_border: var(--os-color-info-fill); }
-
-  .os-badge--dot::before {
-    content: "";
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 50%;
-    background-color: currentColor;
-  }
-
-  .os-badge--lg {
-    padding: 0.1875rem var(--os-space-2-5);
-    font-size: var(--os-text-xs);
-  }
-
-  .os-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--os-space-1-5);
-  }
+  .os-badge--new { --_bg: var(--os-color-warning-fill); --_fg: var(--os-color-text-on-accent); --_border: var(--os-color-warning-fill); }
+  .os-badge--solid { --_bg: var(--os-color-accent); --_fg: var(--os-color-text-on-accent); --_border: var(--os-color-accent); }
 }

@@ -1,80 +1,47 @@
 /*
- * Search — one big field and one button. The first thing on a search page.
+ * Search box — a field and a "Søk" button, optionally with a scope select.
  *
  *   <form class="os-search" role="search" action="/sok">
  *     <label class="os-sr-only" for="q">Søk</label>
- *     <div class="os-search__field">
- *       <svg class="os-icon">…#os-search</svg>
- *       <input class="os-search__input" id="q" name="q" type="search" placeholder="Område, adresse eller stikkord">
- *     </div>
- *     <button class="os-button os-button--primary os-button--lg">Søk</button>
+ *     <input class="os-input os-search__input" id="q" name="q" type="search" placeholder="Søk i hele nettstedet">
+ *     <button class="os-button os-button--primary" type="submit">Søk</button>
  *   </form>
+ *
+ * --lg for the search page itself.
  */
 @layer os.components {
   .os-search {
     display: flex;
-    gap: var(--os-space-2);
+    align-items: stretch;
+    gap: var(--os-space-1);
     width: 100%;
+    max-width: var(--os-search-width, 100%);
   }
 
-  .os-search__field {
-    position: relative;
+  .os-search__input {
     flex: 1 1 auto;
     min-width: 0;
   }
 
-  .os-search__field > .os-icon {
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: var(--os-space-4);
-    --os-icon-size: 1.25rem;
-    color: var(--os-color-text-muted);
-    translate: 0 -50%;
-    pointer-events: none;
+  .os-search > .os-select {
+    flex: none;
+    width: auto;
   }
 
-  .os-search__input {
-    width: 100%;
+  .os-search--lg .os-search__input,
+  .os-search--lg .os-button,
+  .os-search--lg .os-select {
     min-height: var(--os-control-height-lg);
-    padding: var(--os-space-2) var(--os-space-4) var(--os-space-2) calc(var(--os-space-4) + 1.25rem + var(--os-space-3));
-    border: var(--os-border-width) solid var(--os-color-border-strong);
-    border-radius: var(--os-radius-control);
-    background-color: var(--os-color-surface);
-    color: var(--os-color-text-strong);
     font-size: var(--os-text-lg);
   }
 
-  .os-search__input::placeholder {
-    color: var(--os-color-text-subtle);
-    opacity: 1;
+  .os-search--lg .os-button {
+    padding-inline: var(--os-space-5);
   }
 
-  .os-search__input:hover {
-    border-color: var(--os-color-text-muted);
-  }
-
-  .os-search__input:focus-visible {
-    border-color: var(--os-color-focus);
-    outline: var(--os-focus-width) solid var(--os-color-focus);
-    outline-offset: 0;
-  }
-
-  .os-search__input::-webkit-search-cancel-button {
-    cursor: pointer;
-  }
-
-  .os-search--sm .os-search__input {
-    min-height: var(--os-control-height);
-    font-size: var(--os-text-md);
-  }
-
-  @media (max-width: 39.99em) {
-    .os-search .os-button__label {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip-path: inset(50%);
-    }
+  .os-search__hint {
+    margin-block-start: var(--os-space-1);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
   }
 }

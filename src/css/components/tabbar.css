@@ -1,0 +1,66 @@
+/*
+ * Tab bar — the site's main sections as folder tabs across the top.
+ * The current tab is white and joins the strip below it (.os-subnav or the
+ * first box). Scrolls sideways on narrow screens; never wraps.
+ *
+ *   <nav class="os-tabbar" aria-label="Hovedmeny">
+ *     <ul class="os-tabbar__list" role="list">
+ *       <li><a class="os-tabbar__tab" href="/" aria-current="page">Forside</a></li>
+ *       <li><a class="os-tabbar__tab" href="/nyheter">Nyheter</a></li>
+ *     </ul>
+ *   </nav>
+ */
+@layer os.components {
+  .os-tabbar {
+    border-block-end: var(--os-border-width) solid var(--os-color-panel-border);
+  }
+
+  .os-tabbar__list {
+    display: flex;
+    gap: var(--os-space-1);
+    margin: 0;
+    padding: 0 var(--os-space-2);
+    overflow-x: auto;
+    list-style: none;
+    scrollbar-width: none;
+  }
+
+  .os-tabbar__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .os-tabbar__tab {
+    display: block;
+    margin-block-end: calc(var(--os-border-width) * -1);
+    padding: var(--os-space-1-5) var(--os-space-3);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-end-color: transparent;
+    border-start-start-radius: var(--os-radius-tab);
+    border-start-end-radius: var(--os-radius-tab);
+    background-color: var(--os-color-tab);
+    box-shadow: var(--os-bevel);
+    color: var(--os-color-link);
+    font-size: var(--os-text-sm);
+    font-weight: var(--os-weight-bold);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .os-tabbar__tab:hover {
+    background-color: var(--os-color-surface);
+    text-decoration: underline;
+  }
+
+  .os-tabbar__tab[aria-current] {
+    border-block-end-color: var(--os-color-surface);
+    background-color: var(--os-color-surface);
+    box-shadow: none;
+    color: var(--os-color-text-strong);
+  }
+
+  .os-tabbar + :is(.os-subnav, .os-crumbbar, .os-panel) {
+    border-block-start: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+  }
+}

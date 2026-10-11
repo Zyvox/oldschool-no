@@ -18,7 +18,10 @@ when **replicating this design in another repo**.
    - one big number (price) per view; one primary button per view;
    - detail pages get breadcrumbs + result pager; phones get `.os-container--bleed` and `.os-mobilebar`;
    - only `--os-*` tokens — no hex values, px font sizes or ad-hoc shadows;
-   - WCAG 2.2 AA: contrast, 44px controls, visible focus, labels, `lang`.
+   - colours come from the accent seed in `tokens/palette.mjs` — to re-brand,
+     change the seed and rebuild; never edit ramps or add hex values;
+   - wide tables get `.os-table--stack` (and `.os-container--wide` or `.os-layout--late`);
+   - WCAG 2.2 AA: contrast, 24px targets, visible focus, labels, `lang`.
 
 ## Working in this repo
 
@@ -45,8 +48,13 @@ when **replicating this design in another repo**.
   circular imports (the tiny bundler in `scripts/lib/bundle.mjs` relies on this).
   Behaviors register with `register(name, selector, init)` and use `data-os-*` hooks.
   Everything must work without JS.
-- Demo content is Norwegian (bokmål) on `listing.html` / `search.html`, English elsewhere.
-  All people, brands and listings are fictional.
+- Demo pages (`portal`, `article`, `detail`, `search`, `app`, `jobs`) are Norwegian
+  (bokmål); the docs pages (`index`, `components`, `tokens`, `themes`, `preview`) are
+  English. All people, brands and listings are fictional. No images.
+- Themes: `retro` (default) and `standard`, defined as overrides in `tokens/themes.mjs`.
+  Read [docs/theming.md](docs/theming.md) before changing tokens or adding a theme.
+- Size matters: the CSS ships as one file to every visitor. Keep components small, reuse
+  role tokens, and check the gzip size `npm run build` prints.
 - New icon: copy the Lucide SVG into `src/icons/` and rebuild.
 
 ### Adding a component (checklist)

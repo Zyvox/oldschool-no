@@ -3,6 +3,7 @@
  * Static checks — zero dependencies, fast, run in CI.
  *
  *  1. Contrast   every semantic pair in tokens/semantic.mjs × every theme × light/dark
+ *                × normal and prefers-contrast: more
  *  2. Tokens     every var(--os-…) used in src/css and site/ is defined somewhere
  *  3. Classes    every os-* class used in site/*.html exists in the CSS
  *  4. HTML       unique ids, alt on every <img>, in-page links and aria refs resolve,
@@ -30,13 +31,15 @@ const pal = buildPalette();
 let pairs = 0;
 for (const theme of Object.keys(themes)) {
   for (const mode of ['light', 'dark']) {
-    for (const row of checkContrast(pal, theme, mode)) {
-      pairs += 1;
-      if (!row.pass) fail(`${theme}/${mode}: ${row.fg} on ${row.bg} = ${row.ratio.toFixed(2)} (needs ${row.min}) ${row.fgValue} / ${row.bgValue}`);
+    for (const contrast of [false, true]) {
+      for (const row of checkContrast(pal, theme, mode, { contrast })) {
+        pairs += 1;
+        if (!row.pass) fail(`${theme}/${mode}${contrast ? '/more-contrast' : ''}: ${row.fg} on ${row.bg} = ${row.ratio.toFixed(2)} (needs ${row.min}) ${row.fgValue} / ${row.bgValue}`);
+      }
     }
   }
 }
-ok(`${pairs} pairs across ${Object.keys(themes).length} themes × 2 modes`);
+ok(`${pairs} pairs across ${Object.keys(themes).length} themes × 2 modes × normal/more contrast`);
 
 /* 2 · Token references ---------------------------------------------------- */
 console.log('Token references');

@@ -1,9 +1,8 @@
 /*
- * Chips — compact, removable filters and quick toggles.
+ * Active filters — small boxes with a remove cross ("Oslo ×").
  *
  *   <ul class="os-chips" role="list">
- *     <li><button class="os-chip os-chip--remove" type="button">Oslo<span class="os-sr-only">, fjern filter</span></button></li>
- *     <li><button class="os-chip" type="button" aria-pressed="true">Balkong</button></li>
+ *     <li><a class="os-chip" href="?…">Oslo <span aria-hidden="true">×</span><span class="os-sr-only">, fjern</span></a></li>
  *   </ul>
  */
 @layer os.components {
@@ -11,55 +10,35 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--os-space-2);
+    gap: var(--os-space-1-5);
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size: var(--os-text-xs);
   }
 
   .os-chip {
     display: inline-flex;
     align-items: center;
-    gap: var(--os-space-1-5);
-    min-height: 2rem;
-    padding: var(--os-space-1) var(--os-space-3);
-    border: var(--os-border-width) solid var(--os-color-border-strong);
-    border-radius: var(--os-radius-full);
-    background-color: var(--os-color-surface);
-    color: var(--os-color-text);
-    font-size: var(--os-text-sm);
-    font-weight: var(--os-weight-medium);
-    line-height: 1.2;
+    gap: var(--os-space-1);
+    min-height: 1.5rem;
+    padding: 0 var(--os-space-1-5);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-radius: var(--os-radius-badge);
+    background-color: var(--os-color-crumbbar);
+    color: var(--os-color-text-strong);
+    font-size: inherit;
     text-decoration: none;
-    white-space: nowrap;
-    transition: background-color var(--os-duration-fast) var(--os-ease-standard), border-color var(--os-duration-fast);
   }
 
   .os-chip:hover {
-    border-color: var(--os-color-text-muted);
-    background-color: var(--os-color-surface-tint);
+    border-color: var(--os-color-danger-border);
+    background-color: var(--os-color-danger-subtle);
     color: var(--os-color-text-strong);
-    text-decoration: none;
   }
 
-  .os-chip[aria-pressed="true"],
-  .os-chip--selected {
-    border-color: var(--os-color-accent);
-    background-color: var(--os-color-accent-subtle);
-    color: var(--os-color-text-accent);
-  }
-
-  .os-chip--remove::after {
-    content: "";
-    width: 0.9rem;
-    height: 0.9rem;
-    margin-inline-end: calc(var(--os-space-1) * -1);
-    background-color: currentColor;
-    mask: var(--os-glyph-x) center / contain no-repeat;
-    opacity: 0.7;
-  }
-
-  .os-chip .os-icon {
-    --os-icon-size: 1rem;
+  .os-chip > [aria-hidden] {
+    color: var(--os-color-danger);
+    font-weight: var(--os-weight-bold);
   }
 }

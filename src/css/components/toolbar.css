@@ -1,0 +1,59 @@
+/*
+ * Toolbar — the row above a table or list: what is selected, what you can
+ * do with it, and how it is sorted. Sits at the top of a panel body.
+ *
+ *   <div class="os-toolbar">
+ *     <div class="os-toolbar__group">
+ *       <button class="os-button os-button--sm">Kjør alle</button>
+ *       <button class="os-button os-button--sm">Pause</button>
+ *     </div>
+ *     <p class="os-toolbar__count">4 jobber · 2 kjører</p>
+ *     <div class="os-toolbar__group os-toolbar__end">
+ *       <label class="os-sr-only" for="sort">Sorter</label>
+ *       <select class="os-select os-select--sm" id="sort">…</select>
+ *     </div>
+ *   </div>
+ *
+ * Wraps onto two lines on narrow screens. --bar gives it the tinted crumb-bar
+ * band, for use between panels.
+ */
+@layer os.components {
+  .os-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-space-2) var(--os-space-3);
+    padding-block-end: var(--os-space-2);
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
+    margin-block-end: var(--os-space-2);
+  }
+
+  .os-toolbar__group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--os-space-1);
+  }
+
+  .os-toolbar :is(.os-select, .os-input) {
+    width: auto;
+  }
+
+  .os-toolbar__count {
+    margin: 0;
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-toolbar__end {
+    margin-inline-start: auto;
+  }
+
+  .os-toolbar--bar {
+    padding: var(--os-space-1-5) var(--os-pad);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-radius: var(--os-radius-panel);
+    background-color: var(--os-color-crumbbar);
+    margin-block-end: 0;
+  }
+}

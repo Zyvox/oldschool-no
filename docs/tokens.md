@@ -13,158 +13,162 @@ Machine-readable, fully resolved values for every theme live in [`dist/tokens.js
 
 ## Semantic colors
 
-Values shown for the default theme (`fjord`). Reference = ramp step used in light / dark mode.
+Values shown for the default theme (`retro`). Reference = ramp step used in light / dark mode.
 
 
 ### Surface
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-canvas` | `#eaeff4` | `#0f1317` | neutral.100 / neutral.1000 | Page background — the calm frame that panels sit on. |
-| `--os-color-surface` | `#ffffff` | `#171c20` | neutral.0 / neutral.950 | Panels, cards and form fields. |
-| `--os-color-surface-raised` | `#ffffff` | `#20252a` | neutral.0 / neutral.900 | Menus, popovers, dialogs and sticky bars. |
-| `--os-color-surface-sunken` | `#f2f6f9` | `#0f1317` | neutral.50 / neutral.1000 | Wells and code blocks inside panels. |
-| `--os-color-surface-muted` | `#f8fafd` | `#20252a` | neutral.25 / neutral.900 | Hover rows, zebra stripes and quiet fills. |
-| `--os-color-surface-tint` | `#f0f7ff` | `#0a2146` | accent.50 / accent.950 | Panel header bands, crumb bar and selected rows. |
-| `--os-color-surface-tint-strong` | `#deedff` | `#0f3163` | accent.100 / accent.900 | Pressed or current tinted fills. |
-| `--os-color-surface-inverse` | `#20252a` | `#f2f6f9` | neutral.900 / neutral.50 | Toasts, tooltips and inverse chips. |
+| `--os-color-canvas` | `#c0d6f9` | `#111315` | accent.100 / neutral.1000 | The frame: tinted page background that the white boxes sit on. |
+| `--os-color-surface` | `#ffffff` | `#191b1e` | neutral.0 / neutral.950 | Panels, cards and form fields. |
+| `--os-color-surface-raised` | `#ffffff` | `#222427` | neutral.0 / neutral.900 | Menus, popovers, dialogs and sticky bars. |
+| `--os-color-surface-sunken` | `#f4f5f8` | `#111315` | neutral.50 / neutral.1000 | Wells and code blocks inside panels. |
+| `--os-color-surface-muted` | `#f9fafc` | `#222427` | neutral.25 / neutral.900 | Hover rows, zebra stripes and quiet fills. |
+| `--os-color-surface-tint` | `#f1f6ff` | `#0a2146` | accent.50 / accent.950 | Panel header bands, crumb bar and selected rows. |
+| `--os-color-surface-tint-strong` | `#dce9fd` | `#113163` | accent.100 / accent.900 | Pressed or current tinted fills. |
+| `--os-color-surface-inverse` | `#222427` | `#f4f5f8` | neutral.900 / neutral.50 | Toasts, tooltips and inverse chips. |
 
 ### Text
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-text` | `#20252a` | `#f2f6f9` | neutral.900 / neutral.50 | Body text. |
-| `--os-color-text-strong` | `#0f1317` | `#ffffff` | neutral.1000 / neutral.0 | Headings, values and prices. |
-| `--os-color-text-muted` | `#585e65` | `#8c939b` | neutral.600 / neutral.400 | Labels, meta and secondary text. AA on every surface. |
-| `--os-color-text-subtle` | `#6d747b` | `#8c939b` | neutral.500 / neutral.400 | Placeholders and captions. AA on surface. |
-| `--os-color-text-inverse` | `#ffffff` | `#0f1317` | neutral.0 / neutral.1000 | Text on surface-inverse. |
-| `--os-color-text-on-accent` | `#ffffff` | `#0f1317` | neutral.0 / neutral.1000 | Text and icons on accent and status fills. |
-| `--os-color-text-accent` | `#1e56a1` | `#91c1ff` | accent.700 / accent.300 | Accent-colored text: eyebrows, active navigation. |
+| `--os-color-text` | `#222427` | `#f4f5f8` | neutral.900 / neutral.50 | Body text. |
+| `--os-color-text-strong` | `#111315` | `#ffffff` | neutral.1000 / neutral.0 | Headings, values and prices. |
+| `--os-color-text-muted` | `#484a4f` | `#8f9297` | neutral.600 / neutral.400 | Labels, meta and secondary text. AA on every surface. |
+| `--os-color-text-subtle` | `#707378` | `#8f9297` | neutral.500 / neutral.400 | Placeholders and captions. AA on surface. |
+| `--os-color-text-inverse` | `#ffffff` | `#111315` | neutral.0 / neutral.1000 | Text on surface-inverse. |
+| `--os-color-text-on-accent` | `#ffffff` | `#111315` | neutral.0 / neutral.1000 | Text and icons on accent and status fills. |
+| `--os-color-text-accent` | `#2555a2` | `#97bfff` | accent.700 / accent.300 | Accent-colored text: eyebrows, active navigation. |
 
 ### Link
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-link` | `#1e56a1` | `#91c1ff` | accent.700 / accent.300 | Links. Underlined wherever they sit in content. |
-| `--os-color-link-hover` | `#164382` | `#bddaff` | accent.800 / accent.200 | Hovered links. |
-| `--os-color-link-visited` | `#763e7d` | `#d8abe1` | visited.700 / visited.300 | Visited links in content and result lists. |
+| `--os-color-link` | `#2555a2` | `#97bfff` | link.700 / link.300 | Links. Underlined wherever they sit in content. |
+| `--os-color-link-hover` | `#1a4283` | `#c0d6f9` | link.800 / link.200 | Hovered links. |
+| `--os-color-link-visited` | `#674687` | `#c9b1e9` | visited.700 / visited.300 | Visited links in content and result lists. |
 
 ### Border
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-border` | `#d7dde4` | `#343a40` | neutral.200 / neutral.800 | Panel outlines and dividers. |
-| `--os-color-border-subtle` | `#e1e7ed` | `#292e34` | neutral.150 / neutral.850 | Hairlines inside panels (key/value rows). |
-| `--os-color-border-strong` | `#8c939b` | `#6d747b` | neutral.400 / neutral.500 | Form control outlines — at least 3:1 against surface. |
-| `--os-color-border-tint` | `#deedff` | `#0f3163` | accent.100 / accent.900 | Edges of tinted bands. |
+| `--os-color-border` | `#dadce1` | `#37393d` | neutral.200 / neutral.800 | Panel outlines and dividers. |
+| `--os-color-border-subtle` | `#e4e6ea` | `#2c2e31` | neutral.150 / neutral.850 | Hairlines inside panels (key/value rows). |
+| `--os-color-border-strong` | `#8f9297` | `#707378` | neutral.400 / neutral.500 | Form control outlines — at least 3:1 against surface. |
+| `--os-color-border-tint` | `#dce9fd` | `#113163` | accent.100 / accent.900 | Edges of tinted bands. |
 
 ### Accent
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-accent` | `#2a6cc2` | `#68a4f0` | accent.600 / accent.400 | Primary buttons, checked controls and brand fills. |
-| `--os-color-accent-hover` | `#1e56a1` | `#91c1ff` | accent.700 / accent.300 | Hovered accent fills. |
-| `--os-color-accent-active` | `#164382` | `#bddaff` | accent.800 / accent.200 | Pressed accent fills. |
-| `--os-color-accent-subtle` | `#f0f7ff` | `#0a2146` | accent.50 / accent.950 | Selected-state backgrounds. |
-| `--os-color-accent-muted` | `#deedff` | `#0f3163` | accent.100 / accent.900 | Stronger selected states and accent badges. |
-| `--os-color-focus` | `#2a6cc2` | `#68a4f0` | accent.600 / accent.400 | Focus ring. |
-| `--os-color-selection` | `#deedff` | `#164382` | accent.100 / accent.800 | Text selection background. |
+| `--os-color-accent` | `#336ac3` | `#70a2f2` | accent.600 / accent.400 | Primary buttons, checked controls and brand fills. |
+| `--os-color-accent-hover` | `#2555a2` | `#97bfff` | accent.700 / accent.300 | Hovered accent fills. |
+| `--os-color-accent-active` | `#1a4283` | `#c0d6f9` | accent.800 / accent.200 | Pressed accent fills. |
+| `--os-color-accent-subtle` | `#f1f6ff` | `#0a2146` | accent.50 / accent.950 | Selected-state backgrounds. |
+| `--os-color-accent-muted` | `#dce9fd` | `#113163` | accent.100 / accent.900 | Stronger selected states and accent badges. |
+| `--os-color-focus` | `#336ac3` | `#70a2f2` | accent.600 / accent.400 | Focus ring. |
+| `--os-color-selection` | `#dce9fd` | `#1a4283` | accent.100 / accent.800 | Text selection background. |
 
 ### Success
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-success` | `#2e6724` | `#9ccd99` | success.700 / success.300 | Success text and icons. |
-| `--os-color-success-fill` | `#3c7f33` | `#77b372` | success.600 / success.400 | Solid success fills (pair with text-on-accent). |
-| `--os-color-success-subtle` | `#eff9ee` | `#102a08` | success.50 / success.950 | Success message backgrounds. |
-| `--os-color-success-border` | `#c1e2bf` | `#235218` | success.200 / success.800 | Success message borders. |
+| `--os-color-success` | `#326720` | `#9ecc97` | success.700 / success.300 | Success text and icons. |
+| `--os-color-success-fill` | `#417f2f` | `#7ab370` | success.600 / success.400 | Solid success fills (pair with text-on-accent). |
+| `--os-color-success-subtle` | `#f1f8f0` | `#122a07` | success.50 / success.950 | Success message backgrounds. |
+| `--os-color-success-border` | `#c4ddc0` | `#265115` | success.200 / success.800 | Success message borders. |
 
 ### Warning
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-warning` | `#7e4a00` | `#e8b373` | warning.700 / warning.300 | Warning text and icons. |
-| `--os-color-warning-fill` | `#9a5d00` | `#d5913b` | warning.600 / warning.400 | Solid warning fills (pair with text-on-accent). |
-| `--os-color-warning-subtle` | `#fef4e7` | `#371b00` | warning.50 / warning.950 | Warning message backgrounds. |
-| `--os-color-warning-border` | `#f4d1a6` | `#653900` | warning.200 / warning.800 | Warning message borders. |
+| `--os-color-warning` | `#834600` | `#e6b281` | warning.700 / warning.300 | Warning text and icons. |
+| `--os-color-warning-fill` | `#a05900` | `#d39153` | warning.600 / warning.400 | Solid warning fills (pair with text-on-accent). |
+| `--os-color-warning-subtle` | `#fcf6e0` | `#262400` | note.50 / note.950 | Notice backgrounds — classic pale yellow. |
+| `--os-color-warning-border` | `#e9d57f` | `#4d4600` | note.200 / note.800 | Notice borders. |
 
 ### Danger
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-danger` | `#9b262c` | `#ffa099` | danger.700 / danger.300 | Danger text and icons. |
-| `--os-color-danger-fill` | `#bc363a` | `#ef7973` | danger.600 / danger.400 | Solid danger fills (pair with text-on-accent). |
-| `--os-color-danger-subtle` | `#fff3f1` | `#430b0f` | danger.50 / danger.950 | Danger message backgrounds. |
-| `--os-color-danger-border` | `#ffc8c2` | `#7d1b21` | danger.200 / danger.800 | Danger message borders. |
+| `--os-color-danger` | `#9c2728` | `#ffa096` | danger.700 / danger.300 | Danger text and icons. |
+| `--os-color-danger-fill` | `#bc3735` | `#ef7a70` | danger.600 / danger.400 | Solid danger fills (pair with text-on-accent). |
+| `--os-color-danger-subtle` | `#fff3f1` | `#430b0d` | danger.50 / danger.950 | Danger message backgrounds. |
+| `--os-color-danger-border` | `#fac6bf` | `#7d1b1d` | danger.200 / danger.800 | Danger message borders. |
 
 ### Info
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-info` | `#1e56a1` | `#91c1ff` | info.700 / info.300 | Info text and icons. |
-| `--os-color-info-fill` | `#2a6cc2` | `#68a4f0` | info.600 / info.400 | Solid info fills (pair with text-on-accent). |
-| `--os-color-info-subtle` | `#f0f7ff` | `#0a2146` | info.50 / info.950 | Info message backgrounds. |
-| `--os-color-info-border` | `#bddaff` | `#164382` | info.200 / info.800 | Info message borders. |
+| `--os-color-info` | `#245897` | `#95c1f6` | info.700 / info.300 | Info text and icons. |
+| `--os-color-info-fill` | `#316eb6` | `#6ea5e6` | info.600 / info.400 | Solid info fills (pair with text-on-accent). |
+| `--os-color-info-subtle` | `#f0f7ff` | `#0b2341` | info.50 / info.950 | Info message backgrounds. |
+| `--os-color-info-border` | `#bfd7f3` | `#1a457a` | info.200 / info.800 | Info message borders. |
 
 ### Misc
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-highlight` | `#fce8cf` | `#4d2900` | warning.100 / warning.900 | <mark> and matched search terms. |
-| `--os-color-saved` | `#bc363a` | `#ef7973` | danger.600 / danger.400 | Filled heart/star on saved items. |
-| `--os-color-overlay` | `rgba(15, 19, 23, 0.45)` | `rgba(15, 19, 23, 0.72)` | mix(neutral.1000 45%) / mix(neutral.1000 72%) | Backdrop behind dialogs and sheets. |
-| `--os-color-shadow` | `rgba(15, 19, 23, 0.08)` | `rgba(15, 19, 23, 0.5)` | mix(neutral.1000 8%) / mix(neutral.1000 50%) | Soft shadow color. |
-| `--os-color-shadow-strong` | `rgba(15, 19, 23, 0.18)` | `rgba(15, 19, 23, 0.7)` | mix(neutral.1000 18%) / mix(neutral.1000 70%) | Strong shadow color. |
+| `--os-color-highlight` | `#f4e8bb` | `#383400` | note.100 / note.900 | <mark> and matched search terms. |
+| `--os-color-saved` | `#bc3735` | `#ef7a70` | danger.600 / danger.400 | Filled heart/star on saved items. |
+| `--os-color-overlay` | `#11131573` | `#111315b8` | mix(neutral.1000 45%) / mix(neutral.1000 72%) | Backdrop behind dialogs and sheets. |
+| `--os-color-shadow` | `#11131514` | `#11131580` | mix(neutral.1000 8%) / mix(neutral.1000 50%) | Soft shadow color. |
+| `--os-color-shadow-strong` | `#1113152e` | `#111315b3` | mix(neutral.1000 18%) / mix(neutral.1000 70%) | Strong shadow color. |
 
 ### Component
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-masthead` | `transparent` | `transparent` | transparent / transparent | Masthead background (sits on the canvas by default). |
-| `--os-color-crumbbar` | `#ffffff` | `#171c20` | =surface / =surface | Crumb bar (breadcrumbs + pager) background. |
-| `--os-color-panel-border` | `#d7dde4` | `#343a40` | =border / =border | Panel outline. |
-| `--os-color-panel-header` | `#f0f7ff` | `#0a2146` | =surface-tint / =surface-tint | Panel header band. |
-| `--os-color-panel-header-border` | `#e1e7ed` | `#343a40` | =border-subtle / =border | Line under the panel header band. |
-| `--os-color-price` | `#0f1317` | `#ffffff` | =text-strong / =text-strong | Prices and key figures. |
+| `--os-color-masthead` | `transparent` | `transparent` | transparent / transparent | Masthead background (sits on the frame by default). |
+| `--os-color-crumbbar` | `#f1f6ff` | `#0a2146` | accent.50 / accent.950 | Crumb bar (breadcrumbs + pager) band. |
+| `--os-color-panel-border` | `transparent` | `transparent` | accent.200 / neutral.800 | Box outline — a hairline one step darker than the frame. |
+| `--os-color-panel-header` | `#dce9fd` | `#0a2146` | accent.100 / accent.950 | Box header band. |
+| `--os-color-panel-header-border` | `transparent` | `transparent` | accent.200 / neutral.800 | Line under the box header band. |
+| `--os-color-tab` | `#f1f6ff` | `#222427` | accent.50 / neutral.900 | Inactive folder tab. |
+| `--os-color-zebra` | `#f1f6ff` | `#222427` | accent.50 / neutral.900 | Alternate table and list rows. |
+| `--os-color-button` | `#eceef2` | `#2c2e31` | neutral.100 / neutral.850 | Bottom of the secondary button gradient (top is surface). |
+| `--os-color-button-hover` | `#e4e6ea` | `#37393d` | neutral.150 / neutral.800 | Hovered secondary button. |
+| `--os-color-price` | `#111315` | `#ffffff` | =text-strong / =text-strong | Prices and key figures. |
 
 ## Role tokens
 
-Re-declared per theme and density. Values for the default theme, comfortable density.
+Re-declared per theme and density. Values for the default theme, standard density.
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--os-font-body` | `"Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif` | Body copy font stack. |
-| `--os-font-heading` | `"Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif` | Headings font stack. |
-| `--os-text-body` | `1rem` | Body copy size. |
-| `--os-leading-body` | `1.5` | Body copy line-height. |
-| `--os-weight-heading` | `600` | Weight for headings and panel titles. |
-| `--os-weight-strong` | `600` | Weight for values in key/value lists, prices, <strong>. |
-| `--os-tracking-heading` | `-0.015em` | Letter-spacing for headings. |
-| `--os-gutter` | `clamp(1rem, 0.52rem + 2.1vw, 1.5rem)` | Container side padding. |
-| `--os-gap` | `clamp(0.75rem, 0.52rem + 1vw, 1.25rem)` | Gap between panels on the canvas. |
-| `--os-pad` | `clamp(1rem, 0.52rem + 2.1vw, 1.5rem)` | Inner padding of panels. |
-| `--os-row-pad` | `0.625rem` | Vertical padding of key/value and list rows. |
-| `--os-measure` | `68ch` | Max line length for running text. |
-| `--os-container-width` | `76rem` | Max width of the page container. |
-| `--os-aside-width` | `22.5rem` | Width of the right-hand aside (summary, contact). |
-| `--os-sidebar-width` | `17rem` | Width of a left sidebar (filters, docs nav). |
-| `--os-radius-panel` | `8px` | Corner radius of panels and cards. |
-| `--os-radius-control` | `6px` | Corner radius of buttons and inputs. |
-| `--os-radius-media` | `6px` | Corner radius of images inside panels. |
-| `--os-radius-badge` | `4px` | Corner radius of badges and tags. |
-| `--os-border-width` | `1px` | Default border and hairline width. |
-| `--os-control-height` | `2.75rem` | Height of buttons and inputs (44px touch target). |
-| `--os-control-height-sm` | `2.25rem` | Height of small buttons and inputs. |
-| `--os-control-height-lg` | `3.25rem` | Height of large buttons and inputs. |
-| `--os-control-pad-x` | `1rem` | Horizontal padding of buttons and inputs. |
-| `--os-shadow-panel` | `none` | Panels are flat: separation comes from the canvas. |
-| `--os-shadow-raised` | `0 1px 2px rgba(15, 19, 23, 0.08), 0 4px 12px -2px rgba(15, 19, 23, 0.08)` | Menus, popovers, sticky bars. |
-| `--os-shadow-overlay` | `0 2px 6px rgba(15, 19, 23, 0.08), 0 24px 48px -12px rgba(15, 19, 23, 0.18)` | Dialogs and sheets. |
+| `--os-font-body` | `Verdana, "DejaVu Sans", Geneva, Tahoma, sans-serif` | Body copy font stack. |
+| `--os-font-heading` | `Arial, "Helvetica Neue", Helvetica, "Liberation Sans", "Nimbus Sans", sans-serif` | Headings font stack. |
+| `--os-text-body` | `0.75rem` | Body copy size (14px). |
+| `--os-leading-body` | `1.35` | Body copy line-height. |
+| `--os-weight-heading` | `700` | Weight for headings and box titles. |
+| `--os-weight-strong` | `700` | Weight for values, prices, <strong>. |
+| `--os-tracking-heading` | `0` | Letter-spacing for headings. |
+| `--os-gutter` | `0.75rem` | Side padding of the page frame. |
+| `--os-gap` | `0.5rem` | Gap between boxes on the canvas (10px). |
+| `--os-pad` | `0.625rem` | Inner padding of boxes (12px). |
+| `--os-row-pad` | `0.25rem` | Vertical padding of key/value, table and list rows. |
+| `--os-measure` | `72ch` | Max line length for running text. |
+| `--os-container-width` | `62.5rem` | Max width of the page (1000px). .os-container--wide and data-width="wide": 1200px. |
+| `--os-aside-width` | `18.75rem` | Width of the right column (300px — the classic sidebar). |
+| `--os-sidebar-width` | `12.5rem` | Width of a left navigation column (200px). |
+| `--os-radius-panel` | `0` | Corner radius of boxes (3px). |
+| `--os-radius-control` | `0` | Corner radius of buttons and inputs. |
+| `--os-radius-tab` | `0` | Top corners of folder tabs. |
+| `--os-radius-badge` | `0` | Corner radius of badges. |
+| `--os-border-width` | `1px` | Border and rule width. |
+| `--os-control-height` | `1.5rem` | Height of buttons and inputs (30px; 40px on touch screens). |
+| `--os-control-height-sm` | `1.5rem` | Height of small buttons and inputs. |
+| `--os-control-height-lg` | `1.875rem` | Height of large buttons and inputs. |
+| `--os-control-pad-x` | `0.5rem` | Horizontal padding of buttons and inputs. |
+| `--os-shadow-panel` | `none` | Boxes are flat. |
+| `--os-shadow-raised` | `0 2px 6px #11131514` | Menus and popovers. |
+| `--os-shadow-overlay` | `0 4px 24px #1113152e` | Dialogs. |
+| `--os-bevel` | `none` | Top highlight on buttons and bands — the one nod to 2008 gloss. |
 | `--os-focus-width` | `2px` | Focus ring thickness. |
-| `--os-focus-offset` | `2px` | Gap between element and focus ring. |
-| `--os-link-underline-mix` | `45%` | Opacity of link underlines (mixed with the link color). |
-| `--os-link-underline-thickness` | `1px` | Link underline thickness (doubles on hover). |
-| `--os-link-underline-offset` | `0.2em` | Distance from baseline to underline. |
+| `--os-focus-offset` | `1px` | Gap between element and focus ring. |
+| `--os-link-underline-offset` | `auto` | Distance from baseline to link underline. |
+| `--os-link-underline-thickness` | `1px` | Link underline thickness. |
 
 ### Density: compact
 
@@ -172,15 +176,13 @@ Re-declared per theme and density. Values for the default theme, comfortable den
 
 | Token | Compact |
 | --- | --- |
-| `--os-text-body` | `0.9375rem` |
-| `--os-leading-body` | `1.45` |
-| `--os-gap` | `0.625rem` |
-| `--os-pad` | `0.875rem` |
-| `--os-row-pad` | `0.375rem` |
-| `--os-control-height` | `2.25rem` |
-| `--os-control-height-sm` | `1.875rem` |
-| `--os-control-height-lg` | `2.75rem` |
-| `--os-control-pad-x` | `0.75rem` |
+| `--os-text-body` | `{text.sm}` |
+| `--os-leading-body` | `1.4` |
+| `--os-gap` | `0.5rem` |
+| `--os-pad` | `0.625rem` |
+| `--os-row-pad` | `0.1875rem` |
+| `--os-control-height` | `1.5rem` |
+| `--os-control-height-sm` | `1.5rem` |
 
 ## Primitive scales
 
@@ -188,51 +190,50 @@ Re-declared per theme and density. Values for the default theme, comfortable den
 
 | Token | Value |
 | --- | --- |
-| `--os-font-sans` | `"Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif` |
-| `--os-font-mono` | `ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Consolas, monospace` |
+| `--os-font-sans` | `Arial, "Helvetica Neue", Helvetica, "Liberation Sans", "Nimbus Sans", sans-serif` |
+| `--os-font-verdana` | `Verdana, "DejaVu Sans", Geneva, Tahoma, sans-serif` |
+| `--os-font-serif` | `Georgia, "Times New Roman", "Liberation Serif", serif` |
+| `--os-font-mono` | `"Courier New", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace` |
 
 ### text
 
 | Token | Value |
 | --- | --- |
-| `--os-text-2xs` | `0.75rem` |
-| `--os-text-xs` | `0.8125rem` |
-| `--os-text-sm` | `0.875rem` |
-| `--os-text-md` | `1rem` |
-| `--os-text-lg` | `1.125rem` |
-| `--os-text-xl` | `1.25rem` |
-| `--os-text-2xl` | `clamp(1.375rem, 1.32rem + 0.25vw, 1.5rem)` |
-| `--os-text-3xl` | `clamp(1.625rem, 1.47rem + 0.7vw, 2rem)` |
-| `--os-text-4xl` | `clamp(2rem, 1.69rem + 1.4vw, 2.75rem)` |
-| `--os-text-5xl` | `clamp(2.5rem, 1.88rem + 2.8vw, 4rem)` |
+| `--os-text-2xs` | `0.6875rem` |
+| `--os-text-xs` | `0.75rem` |
+| `--os-text-sm` | `0.8125rem` |
+| `--os-text-md` | `0.875rem` |
+| `--os-text-lg` | `1rem` |
+| `--os-text-xl` | `1.125rem` |
+| `--os-text-2xl` | `1.25rem` |
+| `--os-text-3xl` | `1.5rem` |
+| `--os-text-4xl` | `1.875rem` |
+| `--os-text-5xl` | `2.25rem` |
 
 ### leading
 
 | Token | Value |
 | --- | --- |
 | `--os-leading-none` | `1` |
-| `--os-leading-tight` | `1.15` |
+| `--os-leading-tight` | `1.2` |
 | `--os-leading-snug` | `1.3` |
-| `--os-leading-normal` | `1.5` |
-| `--os-leading-relaxed` | `1.65` |
+| `--os-leading-normal` | `1.45` |
+| `--os-leading-relaxed` | `1.6` |
 
 ### tracking
 
 | Token | Value |
 | --- | --- |
-| `--os-tracking-tighter` | `-0.025em` |
-| `--os-tracking-tight` | `-0.015em` |
+| `--os-tracking-tight` | `-0.01em` |
 | `--os-tracking-normal` | `0` |
-| `--os-tracking-wide` | `0.01em` |
-| `--os-tracking-caps` | `0.06em` |
+| `--os-tracking-wide` | `0.02em` |
+| `--os-tracking-caps` | `0.05em` |
 
 ### weight
 
 | Token | Value |
 | --- | --- |
 | `--os-weight-regular` | `400` |
-| `--os-weight-medium` | `500` |
-| `--os-weight-semibold` | `600` |
 | `--os-weight-bold` | `700` |
 
 ### space
@@ -246,14 +247,10 @@ Re-declared per theme and density. Values for the default theme, comfortable den
 | `--os-space-4` | `1rem` |
 | `--os-space-5` | `1.25rem` |
 | `--os-space-6` | `1.5rem` |
-| `--os-space-7` | `1.75rem` |
 | `--os-space-8` | `2rem` |
 | `--os-space-10` | `2.5rem` |
 | `--os-space-12` | `3rem` |
-| `--os-space-14` | `3.5rem` |
 | `--os-space-16` | `4rem` |
-| `--os-space-20` | `5rem` |
-| `--os-space-24` | `6rem` |
 | `--os-space-px` | `1px` |
 | `--os-space-0-5` | `0.125rem` |
 | `--os-space-1-5` | `0.375rem` |
@@ -265,11 +262,9 @@ Re-declared per theme and density. Values for the default theme, comfortable den
 | --- | --- |
 | `--os-radius-none` | `0` |
 | `--os-radius-xs` | `2px` |
-| `--os-radius-sm` | `4px` |
-| `--os-radius-md` | `6px` |
-| `--os-radius-lg` | `8px` |
-| `--os-radius-xl` | `12px` |
-| `--os-radius-2xl` | `16px` |
+| `--os-radius-sm` | `3px` |
+| `--os-radius-md` | `4px` |
+| `--os-radius-lg` | `6px` |
 | `--os-radius-full` | `9999px` |
 
 ### border
@@ -283,18 +278,15 @@ Re-declared per theme and density. Values for the default theme, comfortable den
 
 | Token | Value |
 | --- | --- |
-| `--os-duration-instant` | `80ms` |
-| `--os-duration-fast` | `140ms` |
-| `--os-duration-base` | `220ms` |
-| `--os-duration-slow` | `360ms` |
+| `--os-duration-instant` | `60ms` |
+| `--os-duration-fast` | `120ms` |
+| `--os-duration-base` | `180ms` |
 
 ### ease
 
 | Token | Value |
 | --- | --- |
-| `--os-ease-standard` | `cubic-bezier(0.2, 0, 0, 1)` |
-| `--os-ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` |
-| `--os-ease-in-out` | `cubic-bezier(0.65, 0, 0.35, 1)` |
+| `--os-ease-standard` | `ease-out` |
 
 ### z
 
@@ -314,20 +306,18 @@ Re-declared per theme and density. Values for the default theme, comfortable den
 | Token | Value |
 | --- | --- |
 | `--os-container-sm` | `40rem` |
-| `--os-container-md` | `60rem` |
-| `--os-container-lg` | `76rem` |
-| `--os-container-xl` | `90rem` |
+| `--os-container-md` | `48rem` |
+| `--os-container-lg` | `62.5rem` |
+| `--os-container-xl` | `75rem` |
 
 ### icon
 
 | Token | Value |
 | --- | --- |
-| `--os-icon-xs` | `0.875rem` |
-| `--os-icon-sm` | `1rem` |
-| `--os-icon-md` | `1.25rem` |
-| `--os-icon-lg` | `1.5rem` |
-| `--os-icon-xl` | `2rem` |
-| `--os-icon-stroke` | `1.75` |
+| `--os-icon-sm` | `0.875rem` |
+| `--os-icon-md` | `1rem` |
+| `--os-icon-lg` | `1.25rem` |
+| `--os-icon-stroke` | `2` |
 
 ### Breakpoints
 
@@ -337,125 +327,78 @@ Not custom properties (they cannot be used in `@media`). Use these exact values:
 | --- | --- | --- |
 | sm | `40em` | 640px |
 | md | `60em` | 960px |
-| lg | `76em` | 1216px |
 
 ## Palette
 
-Raw ramps generated in OKLCH (`tokens/palette.mjs`). Every ramp has identical lightness per step, so any accent ramp can replace any other.
+Ramps generated in OKLCH from the seeds in `tokens/palette.mjs`. Every ramp has identical lightness per step, so any seed keeps the contrast guarantees. Change `accent` there and rebuild to re-brand.
 
-### fjord
+### accent
 
-Deep fjord blue. The default accent and the info color.
-
-| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#f0f7ff` | `#deedff` | `#bddaff` | `#91c1ff` | `#68a4f0` | `#4386de` | `#2a6cc2` | `#1e56a1` | `#164382` | `#0f3163` | `#0a2146` |
-
-### blekk
-
-Blekk (ink). A quiet navy for print-like, low-color themes.
+The brand colour: frame, bands, buttons, links, focus. Seed: `#2a5aa8`.
 
 | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#f2f6fd` | `#e4ecf9` | `#cbd8ef` | `#acbfdf` | `#8ca2cb` | `#6d86b4` | `#556d99` | `#43587e` | `#344565` | `#25334b` | `#192335` |
+| `#f1f6ff` | `#dce9fd` | `#c0d6f9` | `#97bfff` | `#70a2f2` | `#4c84e0` | `#336ac3` | `#2555a2` | `#1a4283` | `#113163` | `#0a2146` |
 
-### nordlys
+### neutral
 
-Nordlys (aurora). Cold teal.
-
-| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#ecf9fa` | `#d8f1f2` | `#b5e1e3` | `#88cccd` | `#58b2b4` | `#1d989a` | `#007d7e` | `#006565` | `#00504f` | `#003b3a` | `#002928` |
-
-### furu
-
-Furu (pine). Dark forest green.
-
-| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#eef9f3` | `#ddf1e6` | `#bee1cd` | `#98ccae` | `#71b28e` | `#4b986f` | `#317e56` | `#246743` | `#1a5133` | `#123c24` | `#0c2a17` |
-
-### mose
-
-Mose (moss). Success.
-
-| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#eff9ee` | `#def2dd` | `#c1e2bf` | `#9ccd99` | `#77b372` | `#54994d` | `#3c7f33` | `#2e6724` | `#235218` | `#193c0f` | `#102a08` |
-
-### multe
-
-Multe (cloudberry). Warning and highlights.
-
-| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#fef4e7` | `#fce8cf` | `#f4d1a6` | `#e8b373` | `#d5913b` | `#bb7400` | `#9a5d00` | `#7e4a00` | `#653900` | `#4d2900` | `#371b00` |
-
-### tyttebaer
-
-Tyttebær (lingonberry). Danger, and a warm accent.
-
-| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#fff3f1` | `#ffe4e1` | `#ffc8c2` | `#ffa099` | `#ef7973` | `#da5351` | `#bc363a` | `#9b262c` | `#7d1b21` | `#5e1217` | `#430b0f` |
-
-### lyng
-
-Lyng (heather). Visited links, and an accent.
-
-| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#fbf2fe` | `#f6e4fa` | `#eacbf0` | `#d8abe1` | `#c28acc` | `#aa6ab4` | `#905099` | `#763e7d` | `#5f2f63` | `#47224a` | `#321634` |
-
-### is
-
-Is (ice). Cool, slightly blue grey.
+Greys for text, surfaces and rules, tinted towards the accent. Seed: `{"chroma":0.008}`.
 
 | 0 | 25 | 50 | 100 | 150 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 850 | 900 | 950 | 1000 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#ffffff` | `#f8fafd` | `#f2f6f9` | `#eaeff4` | `#e1e7ed` | `#d7dde4` | `#c1c8cf` | `#8c939b` | `#6d747b` | `#585e65` | `#454b52` | `#343a40` | `#292e34` | `#20252a` | `#171c20` | `#0f1317` |
+| `#ffffff` | `#f9fafc` | `#f4f5f8` | `#eceef2` | `#e4e6ea` | `#dadce1` | `#c4c7cc` | `#8f9297` | `#707378` | `#5b5e62` | `#484a4f` | `#37393d` | `#2c2e31` | `#222427` | `#191b1e` | `#111315` |
 
-### granitt
+### visited
 
-Granitt (granite). Almost pure grey.
-
-| 0 | 25 | 50 | 100 | 150 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 850 | 900 | 950 | 1000 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#ffffff` | `#fafafb` | `#f4f5f6` | `#edeef0` | `#e5e6e8` | `#dbdcde` | `#c6c7ca` | `#919295` | `#727375` | `#5c5e60` | `#494a4d` | `#38393b` | `#2d2e30` | `#232426` | `#1a1b1d` | `#121314` |
-
-### sand
-
-Sand. Warm, paper-like grey.
-
-| 0 | 25 | 50 | 100 | 150 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 850 | 900 | 950 | 1000 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#ffffff` | `#fbfaf7` | `#f7f5f1` | `#f1eee9` | `#e9e6e0` | `#e0dcd5` | `#cbc7c0` | `#96918a` | `#77726b` | `#615d56` | `#4e4a43` | `#3d3933` | `#312d28` | `#27231f` | `#1e1b16` | `#15120e` |
-
-### retro-blue (hand-picked)
-
-Mid-2000s link blue and pale frame blue.
+Visited links. Seed: `{"hue":305,"chroma":0.12,"hueShift":-6}`.
 
 | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#eef4fb` | `#dce8f6` | `#c6daf0` | `#a2c1e6` | `#6f9bd4` | `#3f74c2` | `#1f55ad` | `#123f94` | `#0d3077` | `#0a2459` | `#061838` |
+| `#f7f4fd` | `#ebe4f6` | `#daceec` | `#c9b1e9` | `#b091d6` | `#9772c0` | `#7e59a4` | `#674687` | `#52366c` | `#3d2751` | `#2b1a39` |
 
-### retro-gray (hand-picked)
+### success
 
-Plain greys, no tint.
+Success. Seed: `{"hue":140,"chroma":0.13,"hueShift":6}`.
 
-| 0 | 25 | 50 | 100 | 150 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 850 | 900 | 950 | 1000 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `#ffffff` | `#fbfbfb` | `#f6f6f6` | `#efefef` | `#e6e6e6` | `#dddddd` | `#cccccc` | `#8f8f8f` | `#737373` | `#5e5e5e` | `#4d4d4d` | `#383838` | `#2c2c2c` | `#222222` | `#1a1a1a` | `#111111` |
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `#f1f8f0` | `#deeddd` | `#c4ddc0` | `#9ecc97` | `#7ab370` | `#58994a` | `#417f2f` | `#326720` | `#265115` | `#1b3c0d` | `#122a07` |
+
+### warning
+
+Warning. Seed: `{"hue":62,"chroma":0.13,"hueShift":12}`.
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `#fcf4ed` | `#f4e5d6` | `#eacfb5` | `#e6b281` | `#d39153` | `#bd7221` | `#a05900` | `#834600` | `#693600` | `#4f2700` | `#391900` |
+
+### danger
+
+Danger, and the filled heart on saved items. Seed: `{"hue":26,"chroma":0.17,"hueShift":4}`.
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `#fff3f1` | `#fee0dc` | `#fac6bf` | `#ffa096` | `#ef7a70` | `#da534d` | `#bc3735` | `#9c2728` | `#7d1b1d` | `#5e1214` | `#430b0d` |
+
+### info
+
+Information. Seed: `{"hue":254,"chroma":0.13,"hueShift":-4}`.
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `#f0f7ff` | `#dce9f9` | `#bfd7f3` | `#95c1f6` | `#6ea5e6` | `#4a88d2` | `#316eb6` | `#245897` | `#1a457a` | `#12335c` | `#0b2341` |
+
+### note
+
+Post-it yellow: notices and <mark>. Seed: `{"hue":100,"chroma":0.3,"hueShift":-12}`.
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `#fcf6e0` | `#f4e8bb` | `#e9d57f` | `#dbbd00` | `#b9a200` | `#998700` | `#7b6e00` | `#635900` | `#4d4600` | `#383400` | `#262400` |
 
 ## Themes
 
-| Theme | `data-theme` | Accent | Neutral | Notes |
-| --- | --- | --- | --- | --- |
-| Fjord | `fjord` (default) | fjord | is | The default. Fjord blue on ice grey — the closest modern echo of the 2000s original. |
-| Furu | `furu` | furu | granitt | Pine green on granite. Calm and outdoorsy. |
-| Lyng | `lyng` | lyng | is | Heather violet. Soft, a little playful. |
-| Nordlys | `nordlys` | nordlys | is | Aurora teal on ice. Crisp and technical. |
-| Bjørk | `bjork` | blekk | sand | Ink on birch paper. Warm, editorial, almost colorless. |
-| Tyttebær | `tyttebaer` | tyttebaer | sand | Lingonberry red on warm sand. For brands that want a bold primary. |
-| Retro 2011 | `retro` | retroBlue | retroGray | The original, reconstructed: Arial, square corners, 13px text, pale-blue frame. Same markup. |
-| Kontrast | `kontrast` | fjord | granitt | Maximum contrast for low vision: black on white, 2px borders, thick focus rings. |
+| Theme | `data-theme` | Description |
+| --- | --- | --- |
+| Retro | `retro` (default) | The default. The 2008 portal as it was: Verdana 12px, saturated frame, square corners, tight boxes. |
+| Standard | `standard` | The same structure, tidied: Arial 14px, a paler frame, 3px corners, ruled rows and more air. |

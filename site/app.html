@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Min side – Søknad om barnehageplass – oldschool.no</title>
+  <meta name="description" content="Demo: selvbetjening med meny, stegindikator, skjema og tabeller, bygget med Oldschool.">
+  <meta name="color-scheme" content="light dark">
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;if(p.density&&p.density!=='standard')d.dataset.density=p.density;if(p.width&&p.width!=='classic')d.dataset.width=p.width}catch(e){}})()</script>
+  <link rel="stylesheet" href="../dist/oldschool.min.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script src="assets/generated/themes.js" defer></script>
+  <script src="assets/site.js" defer></script>
+  <script src="../dist/oldschool.min.js" defer></script>
+</head>
+<body class="os-page">
+  <a class="os-skiplink" href="#main">Hopp til hovedinnhold</a>
+
+  <div class="os-container os-container--bleed">
+    <header class="os-masthead">
+      <a class="os-brand" href="portal.html" aria-label="oldschool.no min side – til forsiden">
+        <svg class="os-brand__mark" viewBox="0 0 40 28" aria-hidden="true"><rect x="0" y="4" width="22" height="22" rx="6" fill="currentColor" opacity=".45"/><rect x="12" y="1" width="28" height="26" rx="7" fill="currentColor"/></svg>
+        <span class="os-brand__name">oldschool</span>
+        <span class="os-brand__product">min side</span>
+      </a>
+      <button class="os-button os-button--sm os-masthead__toggle" type="button" popovertarget="site-menu">Meny</button>
+      <nav class="os-masthead__nav" id="site-menu" popover aria-label="Konto">
+        <ul class="os-utilnav" role="list">
+          <li><span>Innlogget som <strong>Kari Nordmann</strong></span></li>
+          <li><a href="#">Innstillinger</a></li>
+          <li><a href="portal.html">Logg ut</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <nav class="os-tabbar" aria-label="Hovedmeny">
+      <ul class="os-tabbar__list" role="list">
+        <li><a class="os-tabbar__tab" href="portal.html">Forside</a></li>
+        <li><a class="os-tabbar__tab" href="article.html">Nyheter</a></li>
+        <li><a class="os-tabbar__tab" href="detail.html">Kultur</a></li>
+        <li><a class="os-tabbar__tab" href="search.html">Tjenester</a></li>
+        <li><a class="os-tabbar__tab" href="app.html" aria-current="page">Min side</a></li>
+      </ul>
+    </nav>
+
+    <div class="os-crumbbar">
+      <nav aria-label="Brødsmulesti">
+        <ol class="os-breadcrumbs">
+          <li><a href="portal.html">oldschool.no</a></li>
+          <li><a href="app.html">Min side</a></li>
+          <li><a href="app.html">Søknader</a></li>
+          <li><span aria-current="page">Barnehageplass</span></li>
+        </ol>
+      </nav>
+      <p class="os-text-xs">Sist innlogget: 28.09.2026 kl. 21:14</p>
+    </div>
+
+    <div class="os-layout os-layout--start">
+      <div class="os-layout__nav">
+        <nav class="os-sidenav" aria-labelledby="meny-tittel">
+          <h2 class="os-sidenav__title" id="meny-tittel">Min side</h2>
+          <ul class="os-sidenav__list" role="list">
+            <li><a href="#">Oversikt</a></li>
+            <li><a href="#">Meldinger <span class="os-sidenav__count">(2)</span></a></li>
+            <li><a href="#">Søknader</a>
+              <ul role="list">
+                <li><a href="#" aria-current="page">Barnehageplass</a></li>
+                <li><a href="#">Parkeringstillatelse</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Mine saker</a></li>
+            <li><a href="#">Fakturaer</a></li>
+            <li><a href="#">Innstillinger</a></li>
+          </ul>
+        </nav>
+        <section class="os-panel os-panel--note" aria-labelledby="hjelp">
+          <header class="os-panel__header"><h2 class="os-panel__title os-panel__title--sm" id="hjelp">Trenger du hjelp?</h2></header>
+          <div class="os-panel__body"><p>Ring <a href="tel:+4712345678">12 34 56 78</a> hverdager 08–16.</p></div>
+        </section>
+      </div>
+
+      <main class="os-layout__main" id="main">
+        <section class="os-panel" aria-labelledby="soknad">
+          <header class="os-panel__header"><h1 class="os-panel__title" id="soknad">Søknad om barnehageplass</h1><span class="os-text-xs">Skjema 12.04</span></header>
+          <div class="os-panel__body os-stack os-stack--md">
+            <ol class="os-steps" aria-label="Steg i søknaden">
+              <li class="os-steps__item os-steps__item--done"><a href="#">Barnet</a></li>
+              <li class="os-steps__item os-steps__item--done"><a href="#">Foresatte</a></li>
+              <li class="os-steps__item" aria-current="step">Ønsker</li>
+              <li class="os-steps__item">Bekreft</li>
+            </ol>
+
+            <div class="os-alert os-alert--info" role="status">
+              <p class="os-alert__title">Opplysningene lagres underveis</p>
+              <p>Du kan avbryte og fortsette senere. Søknadsfristen for hovedopptaket er 1. mars 2027.</p>
+            </div>
+
+            <form class="os-form" action="#" novalidate>
+              <h2 class="os-form__section">Ønsket barnehage</h2>
+              <div class="os-form__row">
+                <label class="os-form__label" for="bhg1">1. prioritet <span class="os-form__req" aria-hidden="true">*</span></label>
+                <div class="os-form__control">
+                  <select class="os-select" id="bhg1" required style="--os-input-width: 22rem">
+                    <option>Tøyen barnehage</option>
+                    <option>Kampen barnehage</option>
+                    <option>Vålerenga barnehage</option>
+                  </select>
+                </div>
+              </div>
+              <div class="os-form__row">
+                <label class="os-form__label" for="bhg2">2. prioritet</label>
+                <div class="os-form__control">
+                  <select class="os-select" id="bhg2" style="--os-input-width: 22rem">
+                    <option>– Velg –</option>
+                    <option>Kampen barnehage</option>
+                  </select>
+                </div>
+              </div>
+              <div class="os-form__row">
+                <label class="os-form__label" for="start">Ønsket oppstart <span class="os-form__req" aria-hidden="true">*</span></label>
+                <div class="os-form__control">
+                  <input class="os-input os-input--short" id="start" value="15.08.20" aria-invalid="true" aria-describedby="start-feil start-hint" required>
+                  <p class="os-form__error" id="start-feil">Skriv datoen som dd.mm.åååå, for eksempel 15.08.2027.</p>
+                  <p class="os-form__hint" id="start-hint">Hovedopptaket gir plass fra august.</p>
+                </div>
+              </div>
+              <div class="os-form__row">
+                <span class="os-form__label" id="tid-label">Oppholdstid</span>
+                <div class="os-form__control">
+                  <div class="os-choices os-choices--inline" role="radiogroup" aria-labelledby="tid-label">
+                    <label class="os-choice"><input type="radio" name="tid" checked> <span>Heltid</span></label>
+                    <label class="os-choice"><input type="radio" name="tid"> <span>60 %</span></label>
+                    <label class="os-choice"><input type="radio" name="tid"> <span>80 %</span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="os-form__row">
+                <label class="os-form__label" for="inntekt">Husstandens inntekt</label>
+                <div class="os-form__control">
+                  <div class="os-input-group" style="--os-input-width: 14rem"><input class="os-input" id="inntekt" inputmode="numeric" aria-describedby="inntekt-hint"><span class="os-input-group__addon">kr/år</span></div>
+                  <p class="os-form__hint" id="inntekt-hint">Brukes for å beregne redusert foreldrebetaling. <a href="#">Les om satsene</a></p>
+                </div>
+              </div>
+              <div class="os-form__row">
+                <label class="os-form__label" for="merknad">Merknader</label>
+                <div class="os-form__control"><textarea class="os-textarea" id="merknad" rows="3"></textarea></div>
+              </div>
+              <div class="os-form__row">
+                <span class="os-form__label"></span>
+                <div class="os-form__control">
+                  <label class="os-choice"><input type="checkbox"> <span>Barnet har søsken i ønsket barnehage</span></label>
+                  <label class="os-choice"><input type="checkbox"> <span>Barnet har særskilte behov <span class="os-choice__hint">Legg ved dokumentasjon i neste steg.</span></span></label>
+                </div>
+              </div>
+              <div class="os-form__row os-form__row--actions">
+                <div class="os-form__control os-buttons">
+                  <button class="os-button os-button--primary" type="submit">Neste steg »</button>
+                  <button class="os-button" type="button">« Tilbake</button>
+                  <a href="#">Avbryt søknaden</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <div class="os-tabs" data-os-tabs>
+          <div class="os-tabs__list" role="tablist" aria-label="Oversikt">
+            <button class="os-tabs__tab" role="tab" aria-controls="t-saker" aria-selected="true">Mine saker</button>
+            <button class="os-tabs__tab" role="tab" aria-controls="t-faktura">Fakturaer</button>
+            <button class="os-tabs__tab" role="tab" aria-controls="t-bruk">Lagring</button>
+          </div>
+          <section class="os-tabs__panel" id="t-saker">
+            <h2 class="os-tabs__heading">Mine saker</h2>
+            <div class="os-table-wrap" tabindex="0" role="region" aria-label="Mine saker">
+              <table class="os-table os-table--stack" data-os-sort>
+                <thead>
+                  <tr><th scope="col">Saksnr.</th><th scope="col">Sak</th><th scope="col">Mottatt</th><th scope="col">Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="os-num">26/10412</td><td class="os-table__title"><a href="#">Parkeringstillatelse, beboer</a></td><td>12.09.2026</td><td><span class="os-badge os-badge--success">Innvilget</span></td></tr>
+                  <tr><td class="os-num">26/09877</td><td><a href="#">Bestilling av container</a></td><td>03.09.2026</td><td><span class="os-badge os-badge--warning">Under behandling</span></td></tr>
+                  <tr><td class="os-num">26/08213</td><td><a href="#">Klage på gebyr</a></td><td>21.08.2026</td><td><span class="os-badge os-badge--danger">Avslått</span></td></tr>
+                  <tr><td class="os-num">26/07001</td><td><a href="#">Flyttemelding</a></td><td>30.07.2026</td><td><span class="os-badge">Avsluttet</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="os-tabs__panel" id="t-faktura">
+            <h2 class="os-tabs__heading">Fakturaer</h2>
+            <div class="os-table-wrap" tabindex="0" role="region" aria-label="Fakturaer">
+              <table class="os-table" data-os-sort>
+                <thead><tr><th scope="col">Forfall</th><th scope="col">Gjelder</th><th scope="col" class="os-num">Beløp</th><th scope="col" data-os-nosort>Betalt</th></tr></thead>
+                <tbody>
+                  <tr><td>20.10.2026</td><td>Renovasjon, 4. termin</td><td class="os-num">1 284,-</td><td>Nei</td></tr>
+                  <tr><td>20.09.2026</td><td>Beboerparkering 2026/27</td><td class="os-num">3 900,-</td><td>Ja</td></tr>
+                  <tr><td>20.07.2026</td><td>Renovasjon, 3. termin</td><td class="os-num">1 284,-</td><td>Ja</td></tr>
+                </tbody>
+                <tfoot><tr><th scope="row" colspan="2">Sum</th><td class="os-num">6 468,-</td><td></td></tr></tfoot>
+              </table>
+            </div>
+          </section>
+          <section class="os-tabs__panel" id="t-bruk">
+            <h2 class="os-tabs__heading">Lagring</h2>
+            <div class="os-stack os-stack--sm">
+              <div class="os-progress"><div class="os-progress__label"><span>Vedlegg (62 av 100 MB)</span><span>62 %</span></div><progress class="os-progress__bar" max="100" value="62">62 %</progress></div>
+              <div class="os-progress os-progress--warning"><div class="os-progress__label"><span>Meldinger (91 av 100)</span><span>91 %</span></div><progress class="os-progress__bar" max="100" value="91">91 %</progress></div>
+            </div>
+          </section>
+        </div>
+
+        <section class="os-panel" aria-labelledby="tall">
+          <header class="os-panel__header"><h2 class="os-panel__title os-panel__title--sm" id="tall">Din aktivitet i 2026</h2></header>
+          <div class="os-panel__body">
+            <div class="os-stats">
+              <div class="os-stat"><p class="os-stat__label">Innsendte skjema</p><p class="os-stat__value">7</p><p class="os-stat__delta">2 under behandling</p></div>
+              <div class="os-stat"><p class="os-stat__label">Betalt i år</p><p class="os-stat__value">9 752,-</p><p class="os-stat__delta os-stat__delta--up">−4 % mot 2025</p></div>
+              <div class="os-stat"><p class="os-stat__label">Uleste meldinger</p><p class="os-stat__value">2</p><p class="os-stat__delta"><a href="#">Les nå</a></p></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="os-footer">
+      <div class="os-footer__bottom">
+        <ul class="os-seplist" role="list">
+          <li><a href="#">Hjelp til Min side</a></li>
+          <li><a href="#">Personvern</a></li>
+          <li><a href="#">Tilgjengelighetserklæring</a></li>
+        </ul>
+        <p>© 2026 oldschool.no — demoside. Personen og sakene er oppdiktet.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

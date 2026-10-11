@@ -1,0 +1,80 @@
+/*
+ * Calendar — a month at a glance, the portal sidebar classic. A real table:
+ * week numbers, Monday first, days with events are links.
+ *
+ *   <table class="os-calendar">
+ *     <caption>Oktober 2026</caption>
+ *     <thead><tr><th scope="col"><abbr title="Uke">U</abbr></th><th scope="col"><abbr title="mandag">ma</abbr></th>…</tr></thead>
+ *     <tbody>
+ *       <tr><th scope="row">40</th><td class="os-calendar__other">28</td>…<td><a href="#" aria-label="Lørdag 10. oktober: 2 arrangementer">10</a></td>…</tr>
+ *     </tbody>
+ *   </table>
+ *
+ * Day cells: .os-calendar__other (another month) · aria-current="date" on
+ * today's cell. Weekend columns are tinted.
+ */
+@layer os.components {
+  .os-calendar {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--os-text-sm);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+
+  .os-calendar caption {
+    padding: var(--os-space-1) 0;
+    color: var(--os-color-text-strong);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-calendar :is(th, td) {
+    padding: 0;
+    border: var(--os-border-width) solid var(--os-color-border-subtle);
+    text-align: center;
+  }
+
+  .os-calendar thead th {
+    padding-block: var(--os-space-0-5);
+    background-color: var(--os-color-panel-header);
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-calendar abbr {
+    text-decoration: none;
+  }
+
+  .os-calendar tbody th {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-2xs);
+    font-weight: var(--os-weight-regular);
+  }
+
+  .os-calendar td {
+    height: 1.75rem;
+  }
+
+  .os-calendar :is(td:nth-child(7), td:nth-child(8)) {
+    background-color: var(--os-color-surface-muted);
+  }
+
+  .os-calendar td > a {
+    display: grid;
+    place-items: center;
+    min-height: 1.75rem;
+    background-color: var(--os-color-accent-subtle);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-calendar .os-calendar__other {
+    color: var(--os-color-text-subtle);
+  }
+
+  .os-calendar [aria-current="date"] {
+    outline: 2px solid var(--os-color-accent);
+    outline-offset: -2px;
+    font-weight: var(--os-weight-bold);
+  }
+}

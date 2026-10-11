@@ -1,0 +1,70 @@
+/*
+ * Bars — a horizontal bar chart in plain HTML: poll results ("Hva mener
+ * du?"), votes, shares of a total. The number is always printed; the bar
+ * only illustrates it. Set each bar's length with --os-bars-value.
+ *
+ *   <ol class="os-bars" role="list">
+ *     <li class="os-bars__item">
+ *       <span class="os-bars__label">Ja, absolutt</span>
+ *       <span class="os-bars__track"><span class="os-bars__bar" style="--os-bars-value: 62%"></span></span>
+ *       <span class="os-bars__value">62 %</span>
+ *     </li>
+ *   </ol>
+ *
+ * --stacked puts the label above the bar (narrow sidebars). Mark the
+ * winning row with .os-bars__item--lead.
+ */
+@layer os.components {
+  .os-bars {
+    display: grid;
+    grid-template-columns: minmax(6em, max-content) minmax(4rem, 1fr) max-content;
+    gap: var(--os-space-1-5) var(--os-space-2);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--os-text-sm);
+  }
+
+  .os-bars__item {
+    display: contents;
+  }
+
+  .os-bars__track {
+    height: 0.875rem;
+    border: var(--os-border-width) solid var(--os-color-border);
+    background-color: var(--os-color-surface-sunken);
+  }
+
+  .os-bars__bar {
+    display: block;
+    width: var(--os-bars-value, 0%);
+    height: 100%;
+    background-color: var(--os-color-accent-muted);
+    box-shadow: inset 0 0 0 var(--os-border-width) var(--os-color-accent);
+  }
+
+  .os-bars__value {
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--os-weight-bold);
+    text-align: end;
+  }
+
+  .os-bars__item--lead .os-bars__bar {
+    background-color: var(--os-color-accent);
+  }
+
+  .os-bars__item--lead .os-bars__label {
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-bars--stacked {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    row-gap: var(--os-space-0-5);
+  }
+
+  .os-bars--stacked .os-bars__label {
+    grid-column: 1 / -1;
+    margin-block-start: var(--os-space-1);
+  }
+}

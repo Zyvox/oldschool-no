@@ -1,0 +1,44 @@
+/*
+ * Files — attachments and downloads with type and size, so nobody has to
+ * guess what a click will fetch.
+ *
+ *   <ul class="os-files" role="list">
+ *     <li class="os-files__item">
+ *       <svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-file-text"></use></svg>
+ *       <a href="#" download>Vedtak om barnehageplass</a>
+ *       <span class="os-files__meta">PDF, 212 kB</span>
+ *     </li>
+ *   </ul>
+ */
+@layer os.components {
+  .os-files {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .os-files__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--os-space-2);
+    min-height: var(--os-control-height);
+    padding-block: var(--os-row-pad);
+    border-block-end: var(--os-border-width) solid var(--os-color-border-subtle);
+  }
+
+  .os-files__item:last-child {
+    border-block-end: 0;
+  }
+
+  .os-files__item > .os-icon {
+    color: var(--os-color-text-muted);
+  }
+
+  .os-files__meta {
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-xs);
+    white-space: nowrap;
+  }
+}

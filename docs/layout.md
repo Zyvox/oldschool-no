@@ -2,83 +2,98 @@
 
 ## Page shell
 
+Everything sits in one centred column on the frame, the way portals were laid
+out in 2008:
+
 ```html
 <body class="os-page">
   <a class="os-skiplink" href="#main">Hopp til hovedinnhold</a>
-  <header class="os-masthead">…</header>
-  <div class="os-page__body">
-    <div class="os-container os-container--bleed">
-      <div class="os-crumbbar">…</div>
-      <main class="os-layout" id="main">
-        <article class="os-layout__main">…panels…</article>
-        <aside class="os-layout__aside">…panels…</aside>
-      </main>
-    </div>
+  <div class="os-container os-container--bleed">
+    <header class="os-masthead">…</header>
+    <nav class="os-tabbar" aria-label="Hovedmeny">…</nav>      <!-- optional -->
+    <div class="os-crumbbar">…breadcrumbs… …pager…</div>
+    <main class="os-layout" id="main">
+      <div class="os-layout__main">…boxes…</div>
+      <aside class="os-layout__aside">…boxes…</aside>
+    </main>
+    <footer class="os-footer">…</footer>
   </div>
-  <footer class="os-footer">…</footer>
-  <div class="os-mobilebar">…</div>   <!-- optional, direct child of body -->
+  <div class="os-mobilebar" role="region" aria-label="…">…</div>   <!-- optional, direct child of body -->
 </body>
 ```
 
-`.os-page` is a flex column so the footer sits at the bottom of short pages.
+## Widths
+
+| Class / attribute | Width | For |
+| --- | --- | --- |
+| `.os-container` | 1000px + gutters | everything — the classic page |
+| `.os-container--wide` or `<html data-width="wide">` | 1200px | app pages, dashboards, wide tables |
+| `.os-container--md` | 768px | forms, articles without a sidebar |
+
+All are centred on the frame, so even the wide page floats with the frame
+visible on both sides of a 1920px screen. The value is one role token —
+`--os-container-width` — so any other width is one line of CSS.
+
+## Columns
+
+```html
+<main class="os-layout">              main + 300px aside        detail pages
+<main class="os-layout os-layout--start">  200px menu + main    search, settings, self-service
+<main class="os-layout os-layout--three">  menu + main + aside  front pages
+<main class="os-layout os-layout--late">   main + aside from 76em  pages with wide tables
+<main class="os-layout os-layout--single"> one column
+```
+
+For `--start` and `--three`, put the left column first in source as
+`.os-layout__nav`. Below 60em every column stacks in source order: nav, main,
+aside. Repeat what matters (the price, the contact) in the main column or the
+mobile bar instead of re-ordering with CSS.
+
+**Tables and the aside.** A 300px aside leaves ~690px for the main column on
+the classic page — tight for a six-column table with buttons. Choose one:
+
+1. `.os-container--wide` — main gets ~890px;
+2. `.os-layout--late` — the aside drops below the content until the screen is
+   76em (1216px) wide, so laptops give the table the full width;
+3. `.os-table--stack` on the table — under 36em of container width its rows
+   become small label/value boxes, so phones never scroll sideways.
+
+The `jobs.html` demo page uses all three.
+
+Layout primitives for inside boxes: `.os-stack` (vertical rhythm),
+`.os-cluster` (wrapping row), `.os-split` (two ends of a row), `.os-columns`
+(2 or 3 equal columns from 40em) and `.os-grid` (auto-fit cards). See
+`src/css/layout/primitives.css`.
 
 ## Breakpoints
 
 | Name | Min width | What happens |
-|---|---|---|
-| — | 0 | one column, panels as edge-to-edge sheets (with `--bleed`), mobile bar |
-| `sm` | 40em / 640px | gutters and panel radius return; pager shows words |
-| `md` | 60em / 960px | two columns, masthead links inline, filters as sidebar, mobile bar hidden |
-| `lg` | 76em / 1216px | container reaches max width |
+| --- | --- | --- |
+| — | 0 | one column; boxes edge to edge with `--bleed`; masthead links in a popover; breadcrumbs as "‹ parent"; mobile bar |
+| `sm` | 40em / 640px | gutters and full breadcrumbs return; masthead links inline |
+| `md` | 60em / 960px | columns side by side; filters as a sidebar; mobile bar hidden |
+| `lg` | 76em / 1216px | `--late` layouts get their aside |
 
-Media queries use `em` so they respect the user's font size. CSS variables
-cannot be used in `@media`, so these values are written out in the CSS and
-exported in `dist/tokens.json` (`breakpoints`).
+Media queries use `em` so they respect the user's font size. Custom properties
+cannot be used in `@media`, so the values are written out and exported in
+`dist/tokens.json` (`breakpoints`).
 
-**Prefer container queries.** Panels (`.os-panel`), the gallery and result
-lists are size containers, so their contents respond to the space they get: a
-key/value list in a wide main column gets two columns, the same list in the
-aside stays one. Write new components the same way.
+**Prefer container queries.** Boxes (`.os-panel`), table wraps and threads are
+size containers, so their contents respond to the space they actually get:
+facts in a wide main column flow into two columns, the same facts in the aside
+stay in one; a form puts labels beside fields only when its box is ≥ 34rem.
 
-## Layouts
+## Phone patterns
 
-| Class | Columns ≥ 60em | Use |
-|---|---|---|
-| `.os-layout` | `1fr 22.5rem` | detail pages: content + summary/contact aside |
-| `.os-layout--start` | `17rem 1fr` | search/docs: filters or navigation on the left (put the aside first in source) |
-| `.os-layout--single` | `1fr` | landing pages, forms |
-| `.os-layout__sticky` | — | makes an aside item sticky (only if it is shorter than the viewport) |
+| Pattern | Where | How |
+| --- | --- | --- |
+| Edge-to-edge boxes | `.os-container--bleed` < 40em | no side gutter, borders or radius |
+| Masthead menu | `.os-masthead__toggle` + `popover` | the utility links in a dropdown, no JS |
+| Short breadcrumbs | `.os-breadcrumbs` < 40em | only "‹ parent"; `--full` keeps the trail |
+| Mobile bar | `.os-mobilebar` < 60em | key figure + primary action, fixed to the bottom |
+| Filter sheet | `.os-filters` < 60em | the sidebar box becomes a `popover` sheet |
+| Stacked table | `.os-table--stack` in < 36em | rows become label/value boxes |
+| Stacked thread | `.os-thread` < 32rem | author line above each post |
 
-## Primitives
-
-| Class | What |
-|---|---|
-| `.os-container` (`--sm/--md/--xl`, `--bleed`) | max-width + gutters |
-| `.os-stack` (`--2xs` … `--2xl`, `--gap`) | vertical rhythm between children |
-| `.os-cluster` (`--sm/--lg/--baseline/--end/--nowrap`) | wrapping inline group |
-| `.os-split` | two ends pushed apart |
-| `.os-grid` (`--sm/--lg/--fit`, `--2/--3/--4`) | auto-fill grid, min width via `--os-grid-min` |
-| `.os-frame` (`--16x9/--3x2/--1x1`) | aspect-ratio media box |
-| `.os-scroller` | horizontal scroll-snap strip |
-| `.os-divider` | hairline |
-| `.os-bleed` | pull a child out to the panel edges |
-
-## Mobile patterns
-
-These are the "separate where necessary" parts — each is a deliberate mobile
-design, not just a squeezed desktop:
-
-| Pattern | Class / mechanism | Why |
-|---|---|---|
-| Edge-to-edge sheets | `.os-container--bleed` | ~10% more reading width; the canvas still separates groups |
-| Sticky contact bar | `.os-mobilebar` | the aside is far down on phones — price and "Ring" stay in reach |
-| Collapsed breadcrumbs | `.os-breadcrumbs` | only "‹ parent" — the full trail rarely fits |
-| Icon actions | `.os-actions` in narrow containers | 44px targets; words remain for screen readers |
-| Carousel gallery | `.os-gallery` < 34rem | swipe with counter instead of thumbnails |
-| List-style link row | `.os-linkrow` < 30rem | full-width rows with chevrons are easier to tap |
-| Filter sheet | `.os-filters[popover]` | a full-height sheet opened by "Filtrer (3)", no JS |
-| Menu popover | `.os-masthead__nav[popover]` | utility links in a dropdown, no JS |
-| Pager / pagination | icon buttons + "Side 2 av 15" | fits one row |
-
-Test with the device preview (`site/preview.html`) and `npm run smoke`, which
-fails on horizontal overflow at 360px.
+Everything above works without JavaScript; `popover` is supported by every
+current browser, and older ones simply show the content inline.

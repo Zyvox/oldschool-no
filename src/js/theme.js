@@ -1,14 +1,14 @@
 /**
- * Theme, mode and density preferences.
+ * Theme, mode, density and width preferences.
  *
- *   <html data-theme="fjord" data-mode="dark" data-density="compact">
+ *   <html data-theme="standard" data-mode="dark" data-density="compact" data-width="wide">
  *
  * Preferences persist in localStorage ("os-prefs") and sync across tabs and
  * iframes. Put this in <head> *before* the stylesheet to avoid a flash:
  *
  *   <script>(function(){try{var p=JSON.parse(localStorage.getItem('os-prefs')||'{}'),d=document.documentElement;
  *   if(d.hasAttribute('data-os-lock'))return;if(p.theme)d.dataset.theme=p.theme;if(p.mode&&p.mode!=='auto')d.dataset.mode=p.mode;
- *   if(p.density&&p.density!=='comfortable')d.dataset.density=p.density}catch(e){}})()</script>
+ *   if(p.density&&p.density!=='standard')d.dataset.density=p.density;if(p.width&&p.width!=='classic')d.dataset.width=p.width}catch(e){}})()</script>
  *
  * Declarative controls (select or radio group):
  *   <select data-os-theme-control="theme">…</select>
@@ -19,8 +19,8 @@
 import { $$, store } from './core.js';
 
 const KEY = 'os-prefs';
-const DEFAULTS = { theme: 'fjord', mode: 'auto', density: 'comfortable' };
-const ATTRS = { theme: 'data-theme', mode: 'data-mode', density: 'data-density' };
+const DEFAULTS = { theme: 'retro', mode: 'auto', density: 'standard', width: 'classic' };
+const ATTRS = { theme: 'data-theme', mode: 'data-mode', density: 'data-density', width: 'data-width' };
 
 function root() {
   return document.documentElement;
@@ -32,6 +32,7 @@ export function getPreferences() {
     theme: el.getAttribute(ATTRS.theme) ?? DEFAULTS.theme,
     mode: el.getAttribute(ATTRS.mode) ?? DEFAULTS.mode,
     density: el.getAttribute(ATTRS.density) ?? DEFAULTS.density,
+    width: el.getAttribute(ATTRS.width) ?? DEFAULTS.width,
   };
 }
 

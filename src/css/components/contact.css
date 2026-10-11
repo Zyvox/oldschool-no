@@ -1,55 +1,44 @@
 /*
- * Contact card — who to call, and every way to reach them. The brand band
- * carries the agency's own colors via two local custom properties.
+ * Contact box — organisation, person and every way to reach them.
  *
- *   <section class="os-panel os-contact" aria-labelledby="agent"
- *            style="--os-contact-brand-bg:#1f3b33; --os-contact-brand-fg:#f2efe6">
- *     <div class="os-contact__brand"><span class="os-contact__logo">Lunde &amp; Berg</span> utleie</div>
+ *   <section class="os-panel os-contact" aria-labelledby="c1">
+ *     <div class="os-contact__org">Kulturetaten</div>
  *     <div class="os-panel__body">
- *       <div class="os-contact__person">
- *         <span class="os-avatar">IH</span>
- *         <div><h2 class="os-contact__name" id="agent">Ingrid Haugen</h2><p class="os-contact__role">Utleiemegler</p></div>
- *       </div>
- *       <div class="os-contact__buttons">…buttons…</div>
- *       <ul class="os-contact__links" role="list">…</ul>
+ *       <h2 class="os-contact__name" id="c1">Ingrid Haugen</h2>
+ *       <p class="os-contact__role">Arrangementsansvarlig</p>
+ *       <dl class="os-contact__lines">
+ *         <div><dt>Telefon</dt><dd><a href="tel:…">12 34 56 78</a></dd></div>
+ *       </dl>
+ *       <ul class="os-contact__links" role="list"><li><a href="#">Send e-post</a></li></ul>
  *     </div>
  *   </section>
+ *
+ * The organisation strip can take the organisation's own colours via
+ * --os-contact-org-bg / --os-contact-org-fg.
  */
 @layer os.components {
-  .os-contact__brand {
-    display: flex;
-    align-items: baseline;
-    gap: var(--os-space-2);
-    min-height: 3.5rem;
-    padding: var(--os-space-4) var(--os-pad);
+  .os-contact__org {
+    padding: var(--os-space-2) var(--os-pad);
+    border-block-end: var(--os-border-width) solid var(--os-color-panel-header-border);
     border-start-start-radius: calc(var(--os-radius-panel) - var(--os-border-width));
     border-start-end-radius: calc(var(--os-radius-panel) - var(--os-border-width));
-    background-color: var(--os-contact-brand-bg, var(--os-color-surface-inverse));
-    color: var(--os-contact-brand-fg, var(--os-color-text-inverse));
-    font-size: var(--os-text-sm);
-    letter-spacing: 0.02em;
-  }
-
-  .os-contact__logo {
-    font-size: var(--os-text-lg);
+    background-color: var(--os-contact-org-bg, var(--os-color-surface));
+    color: var(--os-contact-org-fg, var(--os-color-text-accent));
+    font-size: var(--os-text-xl);
     font-weight: var(--os-weight-bold);
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
+    letter-spacing: var(--os-tracking-tight);
   }
 
   .os-contact .os-panel__body > * + * {
-    margin-block-start: var(--os-space-4);
-  }
-
-  .os-contact__person {
-    display: flex;
-    align-items: center;
-    gap: var(--os-space-3);
+    margin-block-start: var(--os-space-2);
   }
 
   .os-contact__name {
     font-size: var(--os-text-lg);
-    letter-spacing: var(--os-tracking-tight);
+  }
+
+  .os-contact__name + .os-contact__role {
+    margin-block-start: 0;
   }
 
   .os-contact__role {
@@ -57,14 +46,28 @@
     font-size: var(--os-text-sm);
   }
 
-  .os-contact__buttons {
-    display: grid;
+  .os-contact__lines {
+    margin: 0;
+    font-size: var(--os-text-sm);
+  }
+
+  .os-contact__lines > div {
+    display: flex;
     gap: var(--os-space-2);
+  }
+
+  .os-contact__lines dt {
+    min-width: 4.5rem;
+  }
+
+  .os-contact__lines dd {
+    margin: 0;
+    font-weight: var(--os-weight-bold);
   }
 
   .os-contact__links {
     display: grid;
-    gap: var(--os-space-2);
+    gap: var(--os-space-1);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -72,27 +75,7 @@
   }
 
   .os-contact__links a {
-    display: inline-flex;
-    align-items: flex-start;
-    gap: var(--os-space-2);
-  }
-
-  .os-contact__links .os-icon {
-    --os-icon-size: 1.1rem;
-    margin-block-start: 0.1em;
-    color: var(--os-color-text-muted);
-  }
-
-  .os-contact__meta {
-    padding-block-start: var(--os-space-3);
-    border-block-start: var(--os-border-width) solid var(--os-color-border-subtle);
-    color: var(--os-color-text-muted);
-    font-size: var(--os-text-xs);
-  }
-
-  @container (min-width: 30rem) {
-    .os-contact__buttons {
-      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    }
+    display: inline-block;
+    min-height: 1.5rem;
   }
 }

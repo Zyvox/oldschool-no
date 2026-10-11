@@ -1,18 +1,18 @@
 /*
- * Icon — SVG sprite symbols (Lucide, 24px grid, drawn with a lighter stroke).
+ * Icon — small line icons from an SVG sprite, used sparingly next to words
+ * (the way 2008 pages used 16px GIFs: in action rows and link lists).
  *
- *   <svg class="os-icon" aria-hidden="true"><use href="/path/to/icons.svg#os-star"></use></svg>
+ *   <svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-printer"></use></svg>
  *
- * Icons scale with the surrounding font size (1.25em). Always pair an icon
- * with visible text, or give its button an aria-label.
+ * 1.15em of the surrounding text. Never icon-only without an aria-label.
  */
 @layer os.components {
   .os-icon {
     display: inline-block;
     flex-shrink: 0;
-    width: var(--os-icon-size, 1.25em);
-    height: var(--os-icon-size, 1.25em);
-    vertical-align: -0.25em;
+    width: var(--os-icon-size, 1.15em);
+    height: var(--os-icon-size, 1.15em);
+    vertical-align: -0.2em;
     fill: none;
     stroke: currentColor;
     stroke-width: var(--os-icon-stroke);
@@ -21,12 +21,9 @@
     overflow: visible;
   }
 
-  .os-icon--xs { --os-icon-size: var(--os-icon-xs); }
   .os-icon--sm { --os-icon-size: var(--os-icon-sm); }
   .os-icon--md { --os-icon-size: var(--os-icon-md); }
   .os-icon--lg { --os-icon-size: var(--os-icon-lg); }
-  .os-icon--xl { --os-icon-size: var(--os-icon-xl); }
-  .os-icon--bold { --os-icon-stroke: 2.25; }
   .os-icon--filled { fill: currentColor; }
   .os-icon--muted { color: var(--os-color-text-muted); }
   .os-icon--accent { color: var(--os-color-text-accent); }
