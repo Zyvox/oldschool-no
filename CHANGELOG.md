@@ -32,6 +32,10 @@ The design is back to the 2008 original. Breaking changes throughout.
   two-line `<br>` headers, server-side sort links with `.os-table__sort`;
   `.os-tabs--nav` link tabs with `.os-tabs__count`; `.os-score`;
   `.os-output`; utilities `.os-clamp`, `.os-pre-line`, `.os-multicol`.
+- Two button styles: `.os-button--flat` (solid primary, white secondary with a
+  rule, no gradient) per button or `data-buttons="flat"` for every button in a
+  section or page, plus `.os-button--ghost`. Line tabs: `.os-tabs--line`. The
+  App demo page uses both.
 - Notifications: `Oldschool.notify()` and `.os-notification` — a small
   window with a tone-coloured title bar and close box, stacked in the bottom
   corner (above the mobile bar on phones), or centred over a dimmed page with

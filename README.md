@@ -76,6 +76,9 @@ How themes and colours are built, and how to add your own: [docs/theming.md](doc
   calendar, log, forum thread, files) and controls (buttons, forms, error
   summary, search, filters, tabs, menus, status, scores, toasts, notifications, dialogs). Everything works
   without JavaScript.
+- **Two button styles**: the retro bevelled `.os-button`, and a flat one
+  (`.os-button--flat`, or `data-buttons="flat"` for a whole page) with a
+  borderless `--ghost` variant; folder tabs or plain `.os-tabs--line` tabs.
 - **Tables for apps**: cells centred vertically, an actions column that stays
   on one line (and sticks to the right edge with `--sticky`), a "Mer ▾" menu
   per row, capped cell widths, thumbnails, row states, scores, status dots,

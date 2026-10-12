@@ -799,11 +799,24 @@ flattened just enough.
 <button class="os-button os-button--primary" type="submit">Send</button>
 ```
 
-Looks:  (default) · --primary · --danger · --link
+Looks:  (default) · --primary · --danger · --link · --ghost (no box: "··· Mer")
 Sizes:  --sm · (default 30px, 40px on touch screens) · --lg
 Other:  --block (full width) · --icon (square; needs aria-label)
 
-<sub>Classes: `os-button` `os-icon` `os-button--primary` `os-button--danger` `os-button--link` `os-button--sm` `os-button--lg` `os-button--block` `os-button--icon` `os-button-group` `os-buttons` · Source: [src/css/components/button.css](../src/css/components/button.css)</sub>
+Two styles. The default is the retro button: gradient and highlight.
+--flat is the plain one — solid primary, white secondary with a rule,
+no gradient — for app screens. Put it on one button, or data-buttons="flat"
+on any element (or <html>) to make every button inside flat. Every look,
+size and group works in both styles.
+
+```html
+<button class="os-button os-button--flat os-button--primary" type="button">
+  <svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-search"></use></svg> Finn nye
+</button>
+<div data-buttons="flat">…every .os-button in here is flat…</div>
+```
+
+<sub>Classes: `os-button` `os-button--flat` `os-icon` `os-button--primary` `os-button--danger` `os-button--ghost` `os-button--link` `os-button--sm` `os-button--lg` `os-button--block` `os-button--icon` `os-button-group` `os-buttons` · Source: [src/css/components/button.css](../src/css/components/button.css)</sub>
 
 ## field
 
@@ -1069,7 +1082,11 @@ No JavaScript involved, so no data-os-tabs and no tab roles.
 </div>
 ```
 
-<sub>Classes: `os-tabs__list` `os-tabs` `os-tabs--nav` `os-tabs__heading` `os-tabs__tab` `os-tabs__panel` `os-tabs__count` · Source: [src/css/components/tabs.css](../src/css/components/tabs.css)</sub>
+--line: the plain style — words on the frame with a coloured bar under the
+current one, no folder tabs; the panels are see-through, so put boxes in
+them. Works with ARIA tabs and with --nav.
+
+<sub>Classes: `os-tabs__list` `os-tabs` `os-tabs--nav` `os-tabs__heading` `os-tabs__tab` `os-tabs__panel` `os-tabs__count` `os-tabs--line` · Source: [src/css/components/tabs.css](../src/css/components/tabs.css)</sub>
 
 ## disclosure
 

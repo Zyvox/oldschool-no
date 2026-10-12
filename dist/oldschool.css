@@ -3835,9 +3835,20 @@
  *   <button class="os-button" type="button">Avbryt</button>
  *   <button class="os-button os-button--primary" type="submit">Send</button>
  *
- * Looks:  (default) · --primary · --danger · --link
+ * Looks:  (default) · --primary · --danger · --link · --ghost (no box: "··· Mer")
  * Sizes:  --sm · (default 30px, 40px on touch screens) · --lg
  * Other:  --block (full width) · --icon (square; needs aria-label)
+ *
+ * Two styles. The default is the retro button: gradient and highlight.
+ * --flat is the plain one — solid primary, white secondary with a rule,
+ * no gradient — for app screens. Put it on one button, or data-buttons="flat"
+ * on any element (or <html>) to make every button inside flat. Every look,
+ * size and group works in both styles.
+ *
+ *   <button class="os-button os-button--flat os-button--primary" type="button">
+ *     <svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-search"></use></svg> Finn nye
+ *   </button>
+ *   <div data-buttons="flat">…every .os-button in here is flat…</div>
  */
 @layer os.components {
   .os-button {
@@ -3880,6 +3891,26 @@
     box-shadow: inset 0 1px 2px var(--os-color-shadow);
   }
 
+  /* Flat style. Before the looks below, so --primary and --danger keep their colours. */
+  .os-button--flat,
+  :where([data-buttons="flat"]) .os-button {
+    --_bottom: var(--os-color-surface);
+
+    background-image: none;
+    box-shadow: none;
+  }
+
+  .os-button--flat:hover,
+  :where([data-buttons="flat"]) .os-button:hover {
+    --_bottom: var(--os-color-surface-tint);
+  }
+
+  .os-button--flat:active,
+  :where([data-buttons="flat"]) .os-button:active {
+    background-image: none;
+    box-shadow: inset 0 1px 2px var(--os-color-shadow);
+  }
+
   .os-button:disabled,
   .os-button[aria-disabled="true"] {
     opacity: 0.55;
@@ -3912,6 +3943,37 @@
   .os-button--danger:hover {
     --_top: var(--os-color-danger-fill);
     --_bottom: var(--os-color-danger);
+  }
+
+  .os-button--flat.os-button--primary,
+  :where([data-buttons="flat"]) .os-button--primary {
+    --_bottom: var(--os-color-accent-hover);
+    --_border: var(--os-color-accent-hover);
+  }
+
+  .os-button--flat.os-button--primary:hover,
+  :where([data-buttons="flat"]) .os-button--primary:hover {
+    --_bottom: var(--os-color-accent-active);
+  }
+
+  .os-button--flat.os-button--danger:hover,
+  :where([data-buttons="flat"]) .os-button--danger:hover {
+    --_bottom: var(--os-color-danger);
+  }
+
+  .os-button--ghost {
+    --_border: transparent;
+    --_fg: var(--os-color-link);
+
+    background: none;
+    box-shadow: none;
+  }
+
+  .os-button--ghost:hover,
+  .os-button--ghost:active {
+    background: var(--os-color-surface-tint);
+    box-shadow: none;
+    color: var(--os-color-link-hover);
   }
 
   .os-button--link {
@@ -5034,6 +5096,10 @@
  *     </nav>
  *     <div class="os-tabs__panel">…</div>
  *   </div>
+ *
+ * --line: the plain style — words on the frame with a coloured bar under the
+ * current one, no folder tabs; the panels are see-through, so put boxes in
+ * them. Works with ARIA tabs and with --nav.
  */
 @layer os.components {
   .os-tabs__list {
@@ -5111,6 +5177,43 @@
   .os-tabs__count {
     color: var(--os-color-text-muted);
     font-weight: var(--os-weight-regular);
+  }
+
+  /* Line tabs */
+  .os-tabs--line > .os-tabs__list {
+    gap: var(--os-space-5);
+    padding-inline: var(--os-space-1);
+    border-block-end-color: var(--os-color-border);
+  }
+
+  .os-tabs--line .os-tabs__tab {
+    margin-block-end: calc(var(--os-border-width) * -1);
+    padding: var(--os-space-2) var(--os-space-0-5);
+    border: 0;
+    border-block-end: 3px solid transparent;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--os-color-text);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-tabs--line .os-tabs__tab:hover {
+    border-block-end-color: var(--os-color-border-strong);
+  }
+
+  .os-tabs--line .os-tabs__tab:is([aria-selected="true"], [aria-current="page"]) {
+    border-block-end-color: var(--os-color-accent);
+    color: var(--os-color-link);
+    text-decoration: underline;
+  }
+
+  .os-tabs--line > .os-tabs__panel,
+  .os-tabs--line:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
+    margin-block-start: var(--os-gap);
+    padding: 0;
+    border: 0;
+    background: none;
   }
 }
 

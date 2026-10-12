@@ -153,6 +153,11 @@ Rules that hold across them:
 
 - **Everything lives in a box.** Loose text on the frame is only for the masthead, crumb bar and footer.
 - **One primary button and one key figure per view.**
+- **Two button styles, one component.** `.os-button` is the retro button
+  (gradient, highlight). `.os-button--flat` — or `data-buttons="flat"` on a
+  page or section — is the plain one for app screens: solid primary, white
+  secondary with a rule, `--ghost` for "··· Mer". Pick one style per page.
+  Tabs come the same way: folder tabs (default) or `.os-tabs--line`.
 - **Facts are `.os-kv`** — label muted, value strong — never a sentence.
 - **Detail pages** get breadcrumbs and a result pager in the crumb bar.
 - **Tables**: numbers right-aligned (`.os-num`), cells centred vertically, the

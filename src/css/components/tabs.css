@@ -22,6 +22,10 @@
  *     </nav>
  *     <div class="os-tabs__panel">…</div>
  *   </div>
+ *
+ * --line: the plain style — words on the frame with a coloured bar under the
+ * current one, no folder tabs; the panels are see-through, so put boxes in
+ * them. Works with ARIA tabs and with --nav.
  */
 @layer os.components {
   .os-tabs__list {
@@ -99,5 +103,42 @@
   .os-tabs__count {
     color: var(--os-color-text-muted);
     font-weight: var(--os-weight-regular);
+  }
+
+  /* Line tabs */
+  .os-tabs--line > .os-tabs__list {
+    gap: var(--os-space-5);
+    padding-inline: var(--os-space-1);
+    border-block-end-color: var(--os-color-border);
+  }
+
+  .os-tabs--line .os-tabs__tab {
+    margin-block-end: calc(var(--os-border-width) * -1);
+    padding: var(--os-space-2) var(--os-space-0-5);
+    border: 0;
+    border-block-end: 3px solid transparent;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--os-color-text);
+    font-size: var(--os-text-sm);
+  }
+
+  .os-tabs--line .os-tabs__tab:hover {
+    border-block-end-color: var(--os-color-border-strong);
+  }
+
+  .os-tabs--line .os-tabs__tab:is([aria-selected="true"], [aria-current="page"]) {
+    border-block-end-color: var(--os-color-accent);
+    color: var(--os-color-link);
+    text-decoration: underline;
+  }
+
+  .os-tabs--line > .os-tabs__panel,
+  .os-tabs--line:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
+    margin-block-start: var(--os-gap);
+    padding: 0;
+    border: 0;
+    background: none;
   }
 }

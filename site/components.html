@@ -651,7 +651,7 @@
         <h2 class="os-sectionhead" id="controls">Controls</h2>
 
         <section class="os-panel hx-section" id="button" aria-labelledby="h-button">
-          <header class="os-panel__header"><h3 class="os-panel__title" id="h-button">Buttons</h3><code>.os-button</code></header>
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-button">Buttons</h3><code>.os-button .os-button--flat</code></header>
           <div class="os-panel__body os-stack os-stack--sm">
             <p>The 2008 button, flattened just enough: faint gradient, one-pixel highlight, bold label. 30px tall; 40px on touch screens. One primary per view.</p>
             <div class="hx-demo hx-demo--white" data-demo>
@@ -675,6 +675,26 @@
                     <label><input type="radio" name="seg" checked><span>List</span></label>
                     <label><input type="radio" name="seg"><span>Table</span></label>
                   </fieldset>
+                </div>
+              </div>
+            </div>
+            <p><strong>Flat style</strong> for app screens: <code>.os-button--flat</code> on a button, or <code>data-buttons="flat"</code> on any element (or <code>&lt;html&gt;</code>) to make every button inside flat. Solid primary, white secondary with a rule, no gradient. <code>.os-button--ghost</code> is a button without a box, for "··· More". Sizes, icons and groups work in both styles.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-stack os-stack--sm" data-buttons="flat">
+                <div class="os-buttons">
+                  <button class="os-button os-button--primary" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-search"></use></svg> Find new candidates</button>
+                  <button class="os-button" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-rotate-ccw"></use></svg> Update watchlist</button>
+                  <button class="os-button os-button--ghost" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-ellipsis"></use></svg> More</button>
+                </div>
+                <div class="os-buttons">
+                  <button class="os-button os-button--sm" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-plus"></use></svg> Add</button>
+                  <button class="os-button os-button--danger" type="button">Delete</button>
+                  <button class="os-button os-button--primary os-button--lg" type="button">Large</button>
+                  <div class="os-button-group" role="group" aria-label="Pages (flat)">
+                    <button class="os-button" type="button">« Previous</button>
+                    <button class="os-button" type="button">Next »</button>
+                  </div>
+                  <button class="os-button" type="button" disabled>Disabled</button>
                 </div>
               </div>
             </div>
@@ -794,6 +814,26 @@
                   <a class="os-tabs__tab" href="#tabs">All <span class="os-tabs__count">87</span></a>
                 </nav>
                 <div class="os-tabs__panel"><p>Only the current tab's content is on the page.</p></div>
+              </div>
+            </div>
+            <p><strong>Line tabs</strong>, the plain style: <code>.os-tabs--line</code> — words with a bar under the current one, no folder tabs. The panel is see-through, so it holds boxes. Works with ARIA tabs and with <code>--nav</code>.</p>
+            <div class="hx-demo" data-demo>
+              <div class="os-tabs os-tabs--line os-tabs--nav">
+                <nav class="os-tabs__list" aria-label="Job sections">
+                  <a class="os-tabs__tab" href="#tabs" aria-current="page">Candidates</a>
+                  <a class="os-tabs__tab" href="#tabs">Watchlist</a>
+                  <a class="os-tabs__tab" href="#tabs">Rating</a>
+                  <a class="os-tabs__tab" href="#tabs">Settings</a>
+                  <a class="os-tabs__tab" href="#tabs">Run log</a>
+                </nav>
+                <div class="os-tabs__panel">
+                  <section class="os-panel" aria-labelledby="demo-cand">
+                    <header class="os-panel__header"><h4 class="os-panel__title" id="demo-cand">Candidates <span class="os-tabs__count">0</span></h4></header>
+                    <div class="os-panel__body">
+                      <div class="os-empty"><p class="os-empty__title">No candidates</p><p>Press <strong>Find new candidates</strong> to run the search.</p></div>
+                    </div>
+                  </section>
+                </div>
               </div>
             </div>
           </div>
