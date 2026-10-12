@@ -5,19 +5,13 @@
  * Showcase only — not part of the design system.
  */
 import { schemeFromSeeds, contrastRatio } from '../../dist/esm/color.js';
+import { recipes as RECIPES, frames as FRAMES } from '../../tokens/recipes.mjs';
 
 const T = window.OS_TOKENS;
 const template = document.getElementById('sample');
 const seeds = T.resolved.seeds;
-const PRESETS = [
-  ['Portal blue', '#2a5aa8'],
-  ['Forest', '#2f6b3f', true],
-  ['Burgundy', '#8e2a3e'],
-  ['Amber', '#b25d00', true],
-  ['Heather', '#6b4a9a'],
-  ['Teal', '#1f6f7a'],
-  ['Slate', '#4a5868', true],
-];
+const PRESETS = RECIPES.map((r) => [r.name, r.accent, r.frame, Boolean(r.link)]);
+const seedText = (v) => (v ? JSON.stringify(v).replace(/"(\w+)":/g, '$1: ').replace(/,/g, ', ').replace(/^\{|\}$/g, (b) => (b === '{' ? '{ ' : ' }')) : 'null');
 
 function sample(attrs, caption) {
   const figure = document.createElement('figure');
@@ -38,14 +32,14 @@ function sample(attrs, caption) {
   return figure;
 }
 
-/** Ramps for an accent seed; link = blue seed when blueLinks. */
-function scheme(accent, blueLinks) {
-  return schemeFromSeeds({ accent, neutral: seeds.neutral, link: blueLinks ? seeds.accent : null });
+/** Ramps for an accent seed and a frame key; link = blue seed when blueLinks. */
+function scheme(accent, frame, blueLinks) {
+  return schemeFromSeeds({ accent, frame: FRAMES[frame] ?? null, neutral: seeds.neutral, link: blueLinks ? seeds.accent : null });
 }
 
 /** Paint a scheme onto a themed frame with inline custom properties. */
 function paint(frame, s) {
-  for (const name of ['accent', 'neutral']) {
+  for (const name of ['accent', 'frame', 'neutral']) {
     for (const [step, hex] of Object.entries(s[name])) frame.style.setProperty(`--os-${name}-${step}`, hex);
   }
   const link = s.link;
@@ -88,6 +82,7 @@ if (form) {
   const pick = document.getElementById('accent-pick');
   const hex = document.getElementById('accent-hex');
   const blue = document.getElementById('accent-bluelinks');
+  const frameSel = document.getElementById('accent-frame');
   const presets = document.getElementById('accent-presets');
   const preview = document.getElementById('accent-preview');
   const checks = document.getElementById('accent-checks');
@@ -99,22 +94,23 @@ if (form) {
   ];
   preview.append(...frames);
 
-  presets.innerHTML = PRESETS.map(([label, value, links]) =>
-    `<button class="os-button os-button--sm" type="button" data-hex="${value}"${links ? ' data-links' : ''}><span class="hx-swatch" style="background:${value}"></span>${label}</button>`).join('');
+  presets.innerHTML = PRESETS.map(([label, value, frame, links]) =>
+    `<button class="os-button os-button--sm" type="button" data-hex="${value}" data-frame="${frame}"${links ? ' data-links' : ''}><span class="hx-swatch" style="background:${value}"></span>${label}</button>`).join('');
 
   const update = () => {
     const value = hex.value.trim();
     if (!/^#[0-9a-f]{6}$/i.test(value)) return;
     pick.value = value.toLowerCase();
-    const s = scheme(value, blue.checked);
+    const s = scheme(value, frameSel.value, blue.checked);
     frames.forEach((f) => paint(f.querySelector('.hx-theme__frame'), s));
     const a = s.accent;
+    const fr = s.frame;
     const n = s.neutral;
     const l = s.link ?? a;
     const rows = [
       ['Links on white', l[700], n[0], 4.5],
-      ['Links on the retro frame', l[700], a[200], 4.5],
-      ['Links on header bands', l[700], a[100], 4.5],
+      ['Links on the retro frame', l[700], fr[200], 4.5],
+      ['Links on header bands', l[700], fr[100], 4.5],
       ['White text on buttons', n[0], a[600], 4.5],
       ['Focus ring on white', a[600], n[0], 3],
       ['Links in dark mode', l[300], n[950], 4.5],
@@ -124,16 +120,18 @@ if (form) {
       const ok = ratio >= min;
       return `<div><dt>${label}</dt><dd>${ratio.toFixed(1)}:1 <span class="os-badge os-badge--${ok ? 'success' : 'danger'}">${ok ? 'AA' : 'fails'}</span></dd></div>`;
     }).join('');
-    code.textContent = `// tokens/palette.mjs\nexport const accent = '${value.toLowerCase()}';\nexport const link = ${blue.checked ? `'${seeds.accent}'; // classic blue links` : 'null;'}`;
+    code.textContent = `// tokens/palette.mjs\nexport const accent = '${value.toLowerCase()}';\nexport const frame = ${seedText(FRAMES[frameSel.value])};\nexport const link = ${blue.checked ? `'${seeds.accent}'; // classic blue links` : 'null;'}`;
   };
 
   pick.addEventListener('input', () => { hex.value = pick.value; update(); });
   hex.addEventListener('input', update);
   blue.addEventListener('change', update);
+  frameSel.addEventListener('change', update);
   presets.addEventListener('click', (event) => {
     const button = event.target.closest('[data-hex]');
     if (!button) return;
     hex.value = button.dataset.hex;
+    frameSel.value = button.dataset.frame;
     blue.checked = button.hasAttribute('data-links');
     update();
   });
@@ -144,10 +142,10 @@ if (form) {
 /* Recipes ----------------------------------------------------------------- */
 const recipes = document.getElementById('recipes');
 if (recipes) {
-  for (const [label, value, links] of PRESETS.slice(0, 4)) {
+  for (const [label, value, frame, links] of PRESETS) {
     const fig = sample({ theme: 'retro', mode: 'light' },
-      `<strong>${label}</strong> — <code>accent = '${value}'</code>${links ? ' + blue links' : ''}`);
-    paint(fig.querySelector('.hx-theme__frame'), scheme(value, links));
+      `<strong>${label}</strong> — <code>accent = '${value}'</code>${frame === 'accent' ? '' : `, ${frame} frame`}${links ? ', blue links' : ''}`);
+    paint(fig.querySelector('.hx-theme__frame'), scheme(value, frame, links));
     recipes.append(fig);
   }
 }

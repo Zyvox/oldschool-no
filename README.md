@@ -22,13 +22,14 @@ dark mode, and the code underneath is modern CSS with no dependencies.
 
 ## Theme colours
 
-Every colour grows from **one seed**. To re-brand a clone, change one line and
-rebuild:
+Every colour grows from **one seed**. To re-brand a clone, change a line or
+two and rebuild:
 
 ```js
 // tokens/palette.mjs
-export const accent = '#2f6b3f';   // any hex — its hue and colourfulness are kept
-export const link = '#2a5aa8';     // optional: keep classic blue links
+export const accent = '#2f6b3f';                 // any hex — its hue and colourfulness are kept
+export const frame = { hue: 80, chroma: 0.02 };  // optional: a neutral frame (null = the accent, as in 2008)
+export const link = null;                        // optional: '#2a5aa8' keeps classic blue links
 ```
 
 ```sh
@@ -37,22 +38,28 @@ npm run build && npm test          # regenerates the CSS, re-checks every contra
 
 The build fixes the lightness of every ramp step, so links, white button text
 and the frame keep WCAG AA contrast whatever colour you pick — and `npm test`
-fails if a seed ever breaks a pair. The greys follow the accent's hue too.
+fails if a seed ever breaks a pair.
 
-![The retro theme with four accent seeds: portal blue, forest, burgundy and amber](screenshots/accent-recipes.png)
+Portal blue is the 2008 look: the frame and header bands are the accent, so
+the site is blue all over. The other recipes are the modern look: the frame
+and bands are a near-grey (`frame`), and the colour sits only on buttons,
+links and focus.
 
-| Recipe | `accent` | `link` |
-| --- | --- | --- |
-| Portal blue (default) | `'#2a5aa8'` | `null` |
-| Forest | `'#2f6b3f'` | `'#2a5aa8'` |
-| Burgundy | `'#8e2a3e'` | `null` |
-| Amber | `'#b25d00'` | `'#2a5aa8'` |
-| Heather | `'#6b4a9a'` | `null` |
-| Teal | `'#1f6f7a'` | `null` |
-| Slate | `'#4a5868'` | `'#2a5aa8'` |
+![The retro theme with six recipes: portal blue, forest, fjord, clay, indigo and graphite](screenshots/accent-recipes.png)
 
-Try any colour live on the themes page (`site/themes.html#h-accent`): it
-previews both themes, prints the contrast ratios and gives you the line to
+| Recipe | `accent` | `frame` | `link` |
+| --- | --- | --- | --- |
+| Portal blue (default) | `'#2a5aa8'` | `null` | `null` |
+| Forest | `'#2f6b3f'` | `{ hue: 80, chroma: 0.02 }` (stone) | `null` |
+| Fjord | `'#0f6e6a'` | `{ hue: 250, chroma: 0.02 }` (steel) | `null` |
+| Clay | `'#b4532a'` | `{ hue: 80, chroma: 0.02 }` (stone) | `null` |
+| Indigo | `'#4b47c9'` | `{ hue: 250, chroma: 0.02 }` (steel) | `null` |
+| Graphite | `'#3d4654'` | `{ chroma: 0 }` (grey) | `'#2a5aa8'` |
+
+They live in `tokens/recipes.mjs`, and `npm test` checks every one of them too.
+
+Try any colour and frame live on the themes page (`site/themes.html#h-accent`):
+it previews both themes, prints the contrast ratios and gives you the lines to
 paste.
 
 ![The accent playground](screenshots/accent-playground.png)
@@ -67,7 +74,8 @@ How themes and colours are built, and how to add your own: [docs/theming.md](doc
   - **`standard`** — the same structure tidied: Arial 14px, a paler frame,
     3px corners, ruled rows, more air.
 - **One accent seed** in `tokens/palette.mjs` → every ramp, generated in OKLCH
-  with fixed lightness per step. `prefers-contrast: more` is honoured.
+  with fixed lightness per step; an optional neutral frame for a modern look.
+  `prefers-contrast: more` is honoured.
 - **Three densities** (`compact`, `standard`, `comfortable`) and **two widths**
   (the classic 1000px page, or 1200px with `.os-container--wide`).
 - **62 components** as plain HTML + `os-` classes: page chrome (masthead, tab
@@ -162,7 +170,7 @@ Your own colours: fork or copy the repo, change `tokens/palette.mjs`, run
 ## Repository layout
 
 ```
-tokens/        source of truth: palette.mjs (seeds), foundation.mjs, semantic.mjs, themes.mjs
+tokens/        source of truth: palette.mjs (seeds), foundation.mjs, semantic.mjs, themes.mjs, recipes.mjs
 src/css/       oldschool.css entry → tokens/ (generated), base/, layout/, components/, utilities/
 src/js/        ES modules: core, theme, tabs, sort, actions, toast, color (OKLCH engine)
 src/icons/     Lucide SVGs → dist/icons.svg

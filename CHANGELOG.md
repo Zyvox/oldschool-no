@@ -46,8 +46,16 @@ The design is back to the 2008 original. Breaking changes throughout.
   opened with `showPopover()` (oldschool.js), with a 4px gap.
 - Fixed: visually hidden text in table cells widened the page on phones
   (`.os-table-wrap` is now `position: relative`).
-- Showcase: an app dashboard (`jobs.html`), an accent playground and recipes on
-  the themes page, width switch in the harness bar; images and Inter removed.
+- **Frame seed**: `frame` in `tokens/palette.mjs` (default `null` = the accent)
+  colours the frame, header bands, crumb bar, inactive tabs and zebra rows
+  through a new `frame` ramp; a near-grey frame gives a modern look with the
+  accent only on what you can click. The greys follow the frame's hue.
+- **Recipes** in `tokens/recipes.mjs`, checked by `npm test`: Portal blue
+  (default), Forest, Fjord, Clay, Indigo and Graphite. Burgundy, Amber,
+  Heather, Teal and Slate are gone.
+- Showcase: an app dashboard (`jobs.html`), an accent playground (with a frame
+  choice) and recipes on the themes page, width switch in the harness bar;
+  images and Inter removed.
 
 ## 0.1.0 — 2026-09-30
 

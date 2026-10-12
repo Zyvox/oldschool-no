@@ -108,12 +108,15 @@ await test('themes page: accent playground re-colours the previews and passes co
   await page.goto(`${url}/site/themes.html`);
   const frame = '#accent-preview .hx-theme__frame';
   const before = await page.$eval(frame, (f) => getComputedStyle(f).backgroundColor);
-  await page.click('#accent-presets [data-hex="#8e2a3e"]');
+  await page.click('#accent-presets [data-hex="#2f6b3f"]');
   const after = await page.$eval(frame, (f) => getComputedStyle(f).backgroundColor);
   expect(before !== after, 'frame colour did not change');
-  expect((await page.textContent('#accent-code')).includes("'#8e2a3e'"), 'snippet not updated');
+  expect(await page.inputValue('#accent-frame') === 'stone', 'the recipe did not pick its frame');
+  expect(await page.$eval(frame, (f) => f.style.getPropertyValue('--os-frame-200') !== f.style.getPropertyValue('--os-accent-200')), 'the stone frame is the accent');
+  const code = await page.textContent('#accent-code');
+  expect(code.includes("'#2f6b3f'") && code.includes('frame = { hue: 80'), `snippet not updated: ${code}`);
   expect(!(await page.$('#accent-checks .os-badge--danger')), 'a preset fails contrast');
-  expect(await page.$$eval('#recipes .hx-theme__frame', (f) => new Set(f.map((x) => getComputedStyle(x).backgroundColor)).size) === 4, 'recipes are not four colours');
+  expect(await page.$$eval('#recipes .hx-theme__frame', (f) => new Set(f.map((x) => x.style.getPropertyValue('--os-accent-600'))).size) === 6, 'recipes are not six colours');
 });
 
 await test('stacked table: rows become labelled boxes on phones, a table on desktop', async (page) => {

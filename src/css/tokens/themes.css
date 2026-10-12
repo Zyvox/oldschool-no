@@ -30,10 +30,10 @@
     --os-control-pad-x: 0.5rem;
     --os-bevel: none;
     --os-link-underline-offset: auto;
-    --os-color-canvas: light-dark(var(--os-accent-200), var(--os-neutral-1000));
-    --os-color-crumbbar: light-dark(var(--os-accent-50), var(--os-accent-950));
+    --os-color-canvas: light-dark(var(--os-frame-200), var(--os-neutral-1000));
+    --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
     --os-color-panel-border: transparent;
-    --os-color-panel-header: light-dark(var(--os-accent-100), var(--os-accent-950));
+    --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
     --os-color-panel-header-border: transparent;
     --os-color-text: light-dark(var(--os-neutral-900), var(--os-neutral-50));
     --os-color-text-muted: light-dark(var(--os-neutral-700), var(--os-neutral-400));
@@ -67,11 +67,11 @@
     --os-control-pad-x: 0.625rem;
     --os-bevel: inset 0 1px 0 rgb(255 255 255 / 0.55);
     --os-link-underline-offset: 0.15em;
-    --os-color-canvas: light-dark(var(--os-accent-100), var(--os-neutral-1000));
-    --os-color-crumbbar: light-dark(var(--os-accent-50), var(--os-accent-950));
-    --os-color-panel-border: light-dark(var(--os-accent-200), var(--os-neutral-800));
-    --os-color-panel-header: light-dark(var(--os-accent-100), var(--os-accent-950));
-    --os-color-panel-header-border: light-dark(var(--os-accent-200), var(--os-neutral-800));
+    --os-color-canvas: light-dark(var(--os-frame-100), var(--os-neutral-1000));
+    --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
+    --os-color-panel-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
+    --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
+    --os-color-panel-header-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
     --os-color-text: light-dark(var(--os-neutral-900), var(--os-neutral-50));
     --os-color-text-muted: light-dark(var(--os-neutral-600), var(--os-neutral-400));
   }

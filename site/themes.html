@@ -61,7 +61,7 @@
       <section class="os-panel" aria-labelledby="h-accent">
         <header class="os-panel__header"><h2 class="os-panel__title" id="h-accent">Try an accent</h2></header>
         <div class="os-panel__body os-stack os-stack--sm">
-          <p class="os-measure">Pick any colour. The ramp keeps its hue and colourfulness and fixes the lightness of every step, so links, white button text and the frame keep their contrast. The greys follow the hue too. When you like it, paste the line into <code>tokens/palette.mjs</code> and run <code>npm run build</code>.</p>
+          <p class="os-measure">Pick any colour. The ramp keeps its hue and colourfulness and fixes the lightness of every step, so links, white button text and the frame keep their contrast. Then choose the frame: the accent itself, as in 2008, or a near-grey, so the colour is only on what you can click. The greys follow the frame. When you like it, paste the line into <code>tokens/palette.mjs</code> and run <code>npm run build</code>.</p>
           <form class="hx-accent" id="accent-form" action="#">
             <div class="os-field">
               <label class="os-field__label" for="accent-pick">Accent</label>
@@ -71,6 +71,15 @@
               <legend class="os-field__label">Recipes</legend>
               <div class="os-buttons" id="accent-presets"></div>
             </fieldset>
+            <div class="os-field">
+              <label class="os-field__label" for="accent-frame">Frame</label>
+              <select class="os-select" id="accent-frame">
+                <option value="accent">The accent (2008)</option>
+                <option value="stone">Stone — warm grey</option>
+                <option value="steel">Steel — cool grey</option>
+                <option value="grey">Grey</option>
+              </select>
+            </div>
             <label class="os-choice"><input type="checkbox" id="accent-bluelinks"> <span>Keep classic blue links</span></label>
           </form>
           <div class="hx-themes" id="accent-preview"></div>
@@ -85,9 +94,9 @@
       </section>
 
       <section class="os-panel" aria-labelledby="h-recipes">
-        <header class="os-panel__header"><h2 class="os-panel__title" id="h-recipes">Accent recipes</h2></header>
+        <header class="os-panel__header"><h2 class="os-panel__title" id="h-recipes">Colour recipes</h2></header>
         <div class="os-panel__body os-stack os-stack--sm">
-          <p class="os-measure">The retro theme with four different seeds. Each is one line in <code>tokens/palette.mjs</code>; nothing else changes.</p>
+          <p class="os-measure">The retro theme with six palettes. Portal blue is the 2008 look, blue all over; the others keep the frame and header bands in a near-grey and use the colour for buttons, links and focus. Each is two lines in <code>tokens/palette.mjs</code>; nothing else changes.</p>
           <div class="hx-recipes" id="recipes"></div>
         </div>
       </section>
@@ -104,7 +113,7 @@
         <header class="os-panel__header"><h2 class="os-panel__title" id="h-own">How it is built</h2></header>
         <div class="os-panel__body os-stack os-stack--sm">
           <ol class="os-measure">
-            <li><code>tokens/palette.mjs</code> — the seeds: accent, neutral tint, optional link colour, visited and status colours. The build turns each into a ramp of fixed lightness steps.</li>
+            <li><code>tokens/palette.mjs</code> — the seeds: accent, an optional frame colour, neutral tint, optional link colour, visited and status colours. The build turns each into a ramp of fixed lightness steps.</li>
             <li><code>tokens/semantic.mjs</code> — what each colour is for: <code>link</code> is <code>accent.700</code> in light mode and <code>accent.300</code> in dark, and so on.</li>
             <li><code>tokens/themes.mjs</code> — the two themes, as overrides of type sizes, role tokens and semantic colours on top of that base.</li>
             <li><code>npm run build</code> writes the CSS; <code>npm test</code> checks every text/background pair in both themes and modes against WCAG AA and fails the build if a seed breaks one.</li>

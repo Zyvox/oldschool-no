@@ -20,12 +20,12 @@ Values shown for the default theme (`retro`). Reference = ramp step used in ligh
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-canvas` | `#c0d6f9` | `#111315` | accent.100 / neutral.1000 | The frame: tinted page background that the white boxes sit on. |
+| `--os-color-canvas` | `#c0d6f9` | `#111315` | frame.100 / neutral.1000 | The frame: tinted page background that the white boxes sit on. |
 | `--os-color-surface` | `#ffffff` | `#191b1e` | neutral.0 / neutral.950 | Panels, cards and form fields. |
 | `--os-color-surface-raised` | `#ffffff` | `#222427` | neutral.0 / neutral.900 | Menus, popovers, dialogs and sticky bars. |
 | `--os-color-surface-sunken` | `#f4f5f8` | `#111315` | neutral.50 / neutral.1000 | Wells and code blocks inside panels. |
 | `--os-color-surface-muted` | `#f9fafc` | `#222427` | neutral.25 / neutral.900 | Hover rows, zebra stripes and quiet fills. |
-| `--os-color-surface-tint` | `#f1f6ff` | `#0a2146` | accent.50 / accent.950 | Panel header bands, crumb bar and selected rows. |
+| `--os-color-surface-tint` | `#f1f6ff` | `#0a2146` | accent.50 / accent.950 | Hover and current items in menus, side menus and threads. |
 | `--os-color-surface-tint-strong` | `#dce9fd` | `#113163` | accent.100 / accent.900 | Pressed or current tinted fills. |
 | `--os-color-surface-inverse` | `#222427` | `#f4f5f8` | neutral.900 / neutral.50 | Toasts, tooltips and inverse chips. |
 
@@ -56,7 +56,7 @@ Values shown for the default theme (`retro`). Reference = ramp step used in ligh
 | `--os-color-border` | `#dadce1` | `#37393d` | neutral.200 / neutral.800 | Panel outlines and dividers. |
 | `--os-color-border-subtle` | `#e4e6ea` | `#2c2e31` | neutral.150 / neutral.850 | Hairlines inside panels (key/value rows). |
 | `--os-color-border-strong` | `#8f9297` | `#707378` | neutral.400 / neutral.500 | Form control outlines — at least 3:1 against surface. |
-| `--os-color-border-tint` | `#dce9fd` | `#113163` | accent.100 / accent.900 | Edges of tinted bands. |
+| `--os-color-border-tint` | `#dce9fd` | `#113163` | frame.100 / frame.900 | Edges of tinted bands. |
 
 ### Accent
 
@@ -121,12 +121,12 @@ Values shown for the default theme (`retro`). Reference = ramp step used in ligh
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
 | `--os-color-masthead` | `transparent` | `transparent` | transparent / transparent | Masthead background (sits on the frame by default). |
-| `--os-color-crumbbar` | `#f1f6ff` | `#0a2146` | accent.50 / accent.950 | Crumb bar (breadcrumbs + pager) band. |
-| `--os-color-panel-border` | `transparent` | `transparent` | accent.200 / neutral.800 | Box outline — a hairline one step darker than the frame. |
-| `--os-color-panel-header` | `#dce9fd` | `#0a2146` | accent.100 / accent.950 | Box header band. |
-| `--os-color-panel-header-border` | `transparent` | `transparent` | accent.200 / neutral.800 | Line under the box header band. |
-| `--os-color-tab` | `#f1f6ff` | `#222427` | accent.50 / neutral.900 | Inactive folder tab. |
-| `--os-color-zebra` | `#f1f6ff` | `#222427` | accent.50 / neutral.900 | Alternate table and list rows. |
+| `--os-color-crumbbar` | `#f1f6ff` | `#0a2146` | frame.50 / frame.950 | Crumb bar (breadcrumbs + pager) band. |
+| `--os-color-panel-border` | `transparent` | `transparent` | frame.200 / neutral.800 | Box outline — a hairline one step darker than the frame. |
+| `--os-color-panel-header` | `#dce9fd` | `#0a2146` | frame.100 / frame.950 | Box header band. |
+| `--os-color-panel-header-border` | `transparent` | `transparent` | frame.200 / neutral.800 | Line under the box header band. |
+| `--os-color-tab` | `#f1f6ff` | `#222427` | frame.50 / neutral.900 | Inactive folder tab. |
+| `--os-color-zebra` | `#f1f6ff` | `#222427` | frame.50 / neutral.900 | Alternate table and list rows. |
 | `--os-color-button` | `#eceef2` | `#2c2e31` | neutral.100 / neutral.850 | Bottom of the secondary button gradient (top is surface). |
 | `--os-color-button-hover` | `#e4e6ea` | `#37393d` | neutral.150 / neutral.800 | Hovered secondary button. |
 | `--os-color-price` | `#111315` | `#ffffff` | =text-strong / =text-strong | Prices and key figures. |
@@ -330,11 +330,19 @@ Not custom properties (they cannot be used in `@media`). Use these exact values:
 
 ## Palette
 
-Ramps generated in OKLCH from the seeds in `tokens/palette.mjs`. Every ramp has identical lightness per step, so any seed keeps the contrast guarantees. Change `accent` there and rebuild to re-brand.
+Ramps generated in OKLCH from the seeds in `tokens/palette.mjs`. Every ramp has identical lightness per step, so any seed keeps the contrast guarantees. Change `accent` (and optionally `frame`) there and rebuild to re-brand.
 
 ### accent
 
-The brand colour: frame, bands, buttons, links, focus. Seed: `#2a5aa8`.
+The brand colour: buttons, links, focus and selected states. Seed: `#2a5aa8`.
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `#f1f6ff` | `#dce9fd` | `#c0d6f9` | `#97bfff` | `#70a2f2` | `#4c84e0` | `#336ac3` | `#2555a2` | `#1a4283` | `#113163` | `#0a2146` |
+
+### frame
+
+The frame, header bands, crumb bar, tabs and zebra rows (the accent unless palette.frame is set). Seed: `= accent`.
 
 | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -342,7 +350,7 @@ The brand colour: frame, bands, buttons, links, focus. Seed: `#2a5aa8`.
 
 ### neutral
 
-Greys for text, surfaces and rules, tinted towards the accent. Seed: `{"chroma":0.008}`.
+Greys for text, surfaces and rules, tinted towards the frame. Seed: `{"chroma":0.008}`.
 
 | 0 | 25 | 50 | 100 | 150 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 850 | 900 | 950 | 1000 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

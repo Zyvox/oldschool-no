@@ -19,13 +19,25 @@
  * Recipes for other brands are in docs/theming.md.
  */
 
-/** The one brand colour: frame, header bands, buttons, links, focus. */
+/** The one brand colour: buttons, links, focus, selected states. */
 export const accent = '#2a5aa8';
 
 /**
- * Greys for text, surfaces and rules. They borrow the accent hue at this
- * chroma, so a new accent re-tints them too. 0 = pure grey; 0.012 = clearly
- * tinted. Give `hue` to tint towards something other than the accent.
+ * The frame, header bands, crumb bar, tabs and zebra rows.
+ *   null                          the accent — the 2008 look: a blue site is
+ *                                 blue all over (the default);
+ *   { hue: 80, chroma: 0.02 }     a near-grey (stone) — the modern look: the
+ *                                 accent only on what you can click;
+ *   { chroma: 0.02 }              a near-grey leaning to the accent's hue;
+ *   any seed                      a second colour.
+ * The lightness of each step is fixed, so contrast holds either way.
+ */
+export const frame = null;
+
+/**
+ * Greys for text, surfaces and rules. They borrow the frame's hue (so the
+ * accent's, by default) at this chroma. 0 = pure grey; 0.012 = clearly
+ * tinted. Give `hue` to tint towards something else.
  */
 export const neutral = { chroma: 0.008 };
 

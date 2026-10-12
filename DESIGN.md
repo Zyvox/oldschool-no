@@ -26,9 +26,9 @@ Only what dates it is fixed:
 
 Two themes share all markup:
 
-- **`retro`** — the default: Verdana 12px, the saturated frame (`accent.200`),
+- **`retro`** — the default: Verdana 12px, the saturated frame (`frame.200`),
   square corners, no outline around boxes, tight spacing (8px gaps, 10px padding).
-- **`standard`** — tidied: Arial 14px, a paler frame (`accent.100`), 3px
+- **`standard`** — tidied: Arial 14px, a paler frame (`frame.100`), 3px
   corners, hairline box outlines, a one-pixel bevel, 10/12px spacing.
 
 Use `standard` when a page is read for long stretches; `retro` for everything
@@ -86,9 +86,9 @@ Components use semantic colours only. Ramps are an implementation detail.
 
 | Role | Light | Dark | Used for |
 | --- | --- | --- | --- |
-| `canvas` | accent.200 (retro) / accent.100 | neutral.1000 | the frame |
+| `canvas` | frame.200 (retro) / frame.100 | neutral.1000 | the frame |
 | `surface` | white | neutral.950 | boxes, inputs |
-| `panel-header`, `crumbbar` | accent.100, accent.50 | accent.950 | header bands, crumb bar |
+| `panel-header`, `crumbbar` | frame.100, frame.50 | frame.950 | header bands, crumb bar |
 | `text` / `text-strong` | neutral.900 / 1000 | neutral.50 / 0 | body / headings, values, prices |
 | `text-muted` | neutral.700 (retro) / 600 | neutral.400 | labels, meta — ≥ 4.5:1 on every surface |
 | `link` / `link-visited` | accent.700 / visited.700 | accent.300 / visited.300 | links |
@@ -97,6 +97,7 @@ Components use semantic colours only. Ramps are an implementation detail.
 | success · warning · danger · info | 700 text, 50 bg, 200 border, 600 fill | 300 / 950 / 800 / 400 | messages, badges, status |
 | `highlight` | note.100 | note.950 | `<mark>`, the yellow notice |
 
+`frame` is the accent ramp unless `tokens/palette.mjs` sets a frame seed.
 Full list with values: [docs/tokens.md](docs/tokens.md). How the ramps are
 made and how to change them: [docs/theming.md](docs/theming.md).
 
@@ -107,6 +108,10 @@ Rules:
 3. **Links are coloured and underlined** wherever they sit in content. Visited links turn purple.
 4. **Colour is never the only signal**: status dots come with a word, errors with text.
 5. **One seed.** Re-brand by changing `accent` in `tokens/palette.mjs`; never by editing ramps or hex values.
+6. **The frame is the accent or a near-grey.** `frame` is `null` by default, so
+   the frame, bands, tabs and zebra rows come from the accent (the 2008 look).
+   A near-grey `frame` seed (stone, steel, grey) gives the modern look with
+   the colour only on what you can click. Never a second strong colour.
 
 ## 4. Type
 

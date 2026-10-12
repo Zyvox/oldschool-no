@@ -9,7 +9,7 @@ before anything else:
 
 ```bash
 git clone https://github.com/Zyvox/oldschool-no.git && cd oldschool-no
-# edit tokens/palette.mjs → export const accent = '#2f6b3f';
+# edit tokens/palette.mjs → export const accent = '#2f6b3f'; (and maybe frame, see the recipes)
 npm run build && npm test
 ```
 

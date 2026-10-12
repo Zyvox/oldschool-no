@@ -146,7 +146,7 @@ export function tokensMarkdown(pal = buildPalette()) {
   out.push('| Name | Min-width | Pixels |', '| --- | --- | --- |');
   for (const [k, v] of Object.entries(foundation.breakpoints)) out.push(`| ${k} | \`${v}\` | ${parseFloat(v) * 16}px |`);
 
-  out.push('', '## Palette', '', 'Ramps generated in OKLCH from the seeds in `tokens/palette.mjs`. Every ramp has identical lightness per step, so any seed keeps the contrast guarantees. Change `accent` there and rebuild to re-brand.', '');
+  out.push('', '## Palette', '', 'Ramps generated in OKLCH from the seeds in `tokens/palette.mjs`. Every ramp has identical lightness per step, so any seed keeps the contrast guarantees. Change `accent` (and optionally `frame`) there and rebuild to re-brand.', '');
   for (const [name, { description, ramp, seed }] of Object.entries(pal)) {
     out.push(`### ${name}`, '', `${description} Seed: \`${typeof seed === 'string' ? seed : JSON.stringify(seed)}\`.`, '');
     out.push(`| ${Object.keys(ramp).join(' | ')} |`, `| ${Object.keys(ramp).map(() => '---').join(' | ')} |`);

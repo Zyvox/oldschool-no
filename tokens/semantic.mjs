@@ -11,6 +11,7 @@
  *
  * Reference syntax:
  *   'accent.700'           step 700 of the theme's accent ramp
+ *   'frame.200'            the frame ramp (the accent ramp unless palette.frame is set)
  *   'neutral.0'            neutral ramps run 0 (white) … 1000 (near-black)
  *   'link.700'             ramp used for links (defaults to the accent ramp)
  *   'visited.700'          ramp used for visited links (theme-selectable)
@@ -31,12 +32,12 @@ export const colorGroups = [
   {
     group: 'Surface',
     colors: [
-      { name: 'canvas', light: 'accent.100', dark: 'neutral.1000', description: 'The frame: tinted page background that the white boxes sit on.' },
+      { name: 'canvas', light: 'frame.100', dark: 'neutral.1000', description: 'The frame: tinted page background that the white boxes sit on.' },
       { name: 'surface', light: 'neutral.0', dark: 'neutral.950', description: 'Panels, cards and form fields.' },
       { name: 'surface-raised', light: 'neutral.0', dark: 'neutral.900', description: 'Menus, popovers, dialogs and sticky bars.' },
       { name: 'surface-sunken', light: 'neutral.50', dark: 'neutral.1000', description: 'Wells and code blocks inside panels.' },
       { name: 'surface-muted', light: 'neutral.25', dark: 'neutral.900', description: 'Hover rows, zebra stripes and quiet fills.' },
-      { name: 'surface-tint', light: 'accent.50', dark: 'accent.950', description: 'Panel header bands, crumb bar and selected rows.' },
+      { name: 'surface-tint', light: 'accent.50', dark: 'accent.950', description: 'Hover and current items in menus, side menus and threads.' },
       { name: 'surface-tint-strong', light: 'accent.100', dark: 'accent.900', description: 'Pressed or current tinted fills.' },
       { name: 'surface-inverse', light: 'neutral.900', dark: 'neutral.50', description: 'Toasts, tooltips and inverse chips.' },
     ],
@@ -67,7 +68,7 @@ export const colorGroups = [
       { name: 'border', light: 'neutral.200', dark: 'neutral.800', description: 'Panel outlines and dividers.' },
       { name: 'border-subtle', light: 'neutral.150', dark: 'neutral.850', description: 'Hairlines inside panels (key/value rows).' },
       { name: 'border-strong', light: 'neutral.400', dark: 'neutral.500', description: 'Form control outlines — at least 3:1 against surface.' },
-      { name: 'border-tint', light: 'accent.100', dark: 'accent.900', description: 'Edges of tinted bands.' },
+      { name: 'border-tint', light: 'frame.100', dark: 'frame.900', description: 'Edges of tinted bands.' },
     ],
   },
   {
@@ -105,12 +106,12 @@ export const colorGroups = [
     group: 'Component',
     colors: [
       { name: 'masthead', light: 'transparent', dark: 'transparent', description: 'Masthead background (sits on the frame by default).' },
-      { name: 'crumbbar', light: 'accent.50', dark: 'accent.950', description: 'Crumb bar (breadcrumbs + pager) band.' },
-      { name: 'panel-border', light: 'accent.200', dark: 'neutral.800', description: 'Box outline — a hairline one step darker than the frame.' },
-      { name: 'panel-header', light: 'accent.100', dark: 'accent.950', description: 'Box header band.' },
-      { name: 'panel-header-border', light: 'accent.200', dark: 'neutral.800', description: 'Line under the box header band.' },
-      { name: 'tab', light: 'accent.50', dark: 'neutral.900', description: 'Inactive folder tab.' },
-      { name: 'zebra', light: 'accent.50', dark: 'neutral.900', description: 'Alternate table and list rows.' },
+      { name: 'crumbbar', light: 'frame.50', dark: 'frame.950', description: 'Crumb bar (breadcrumbs + pager) band.' },
+      { name: 'panel-border', light: 'frame.200', dark: 'neutral.800', description: 'Box outline — a hairline one step darker than the frame.' },
+      { name: 'panel-header', light: 'frame.100', dark: 'frame.950', description: 'Box header band.' },
+      { name: 'panel-header-border', light: 'frame.200', dark: 'neutral.800', description: 'Line under the box header band.' },
+      { name: 'tab', light: 'frame.50', dark: 'neutral.900', description: 'Inactive folder tab.' },
+      { name: 'zebra', light: 'frame.50', dark: 'neutral.900', description: 'Alternate table and list rows.' },
       { name: 'button', light: 'neutral.100', dark: 'neutral.850', description: 'Bottom of the secondary button gradient (top is surface).' },
       { name: 'button-hover', light: 'neutral.150', dark: 'neutral.800', description: 'Hovered secondary button.' },
       { name: 'price', light: '=text-strong', dark: '=text-strong', description: 'Prices and key figures.' },

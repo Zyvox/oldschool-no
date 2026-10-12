@@ -9,7 +9,7 @@
   [data-mode="dark"] { color-scheme: dark; }
 
   :where(:root, [data-theme]) {
-    --os-color-canvas: light-dark(var(--os-accent-100), var(--os-neutral-1000));
+    --os-color-canvas: light-dark(var(--os-frame-100), var(--os-neutral-1000));
     --os-color-surface: light-dark(var(--os-neutral-0), var(--os-neutral-950));
     --os-color-surface-raised: light-dark(var(--os-neutral-0), var(--os-neutral-900));
     --os-color-surface-sunken: light-dark(var(--os-neutral-50), var(--os-neutral-1000));
@@ -30,7 +30,7 @@
     --os-color-border: light-dark(var(--os-neutral-200), var(--os-neutral-800));
     --os-color-border-subtle: light-dark(var(--os-neutral-150), var(--os-neutral-850));
     --os-color-border-strong: light-dark(var(--os-neutral-400), var(--os-neutral-500));
-    --os-color-border-tint: light-dark(var(--os-accent-100), var(--os-accent-900));
+    --os-color-border-tint: light-dark(var(--os-frame-100), var(--os-frame-900));
     --os-color-accent: light-dark(var(--os-accent-600), var(--os-accent-400));
     --os-color-accent-hover: light-dark(var(--os-accent-700), var(--os-accent-300));
     --os-color-accent-active: light-dark(var(--os-accent-800), var(--os-accent-200));
@@ -60,12 +60,12 @@
     --os-color-shadow: light-dark(#11131514, #11131580);
     --os-color-shadow-strong: light-dark(#1113152e, #111315b3);
     --os-color-masthead: transparent;
-    --os-color-crumbbar: light-dark(var(--os-accent-50), var(--os-accent-950));
-    --os-color-panel-border: light-dark(var(--os-accent-200), var(--os-neutral-800));
-    --os-color-panel-header: light-dark(var(--os-accent-100), var(--os-accent-950));
-    --os-color-panel-header-border: light-dark(var(--os-accent-200), var(--os-neutral-800));
-    --os-color-tab: light-dark(var(--os-accent-50), var(--os-neutral-900));
-    --os-color-zebra: light-dark(var(--os-accent-50), var(--os-neutral-900));
+    --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
+    --os-color-panel-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
+    --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
+    --os-color-panel-header-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
+    --os-color-tab: light-dark(var(--os-frame-50), var(--os-neutral-900));
+    --os-color-zebra: light-dark(var(--os-frame-50), var(--os-neutral-900));
     --os-color-button: light-dark(var(--os-neutral-100), var(--os-neutral-850));
     --os-color-button-hover: light-dark(var(--os-neutral-150), var(--os-neutral-800));
     --os-color-price: var(--os-color-text-strong);

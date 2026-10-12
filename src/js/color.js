@@ -201,13 +201,18 @@ export function seedSpec(seed) {
 
 /**
  * Every ramp of a colour scheme from its seeds (see tokens/palette.mjs).
- * @returns {{accent, neutral, link?, visited, success, warning, danger, info, note}} name → {step → hex}
+ * `frame` (the frame, header bands, tabs and zebra rows) is the accent ramp
+ * unless a frame seed is given; a frame seed without a hue takes the accent's.
+ * The greys follow the frame's hue unless `neutral.hue` says otherwise.
+ * @returns {{accent, frame, neutral, link?, visited, success, warning, danger, info, note}} name → {step → hex}
  */
-export function schemeFromSeeds({ accent, neutral = { chroma: 0.008 }, link = null, visited, status = {} }) {
+export function schemeFromSeeds({ accent, frame = null, neutral = { chroma: 0.008 }, link = null, visited, status = {} }) {
   const a = seedSpec(accent);
+  const f = frame ? seedSpec(typeof frame === 'string' ? frame : { hue: a.hue, ...frame }) : a;
   const out = {
     accent: accentRamp(a),
-    neutral: neutralRamp({ hue: neutral.hue ?? a.hue, chroma: neutral.chroma ?? 0.008 }),
+    frame: accentRamp(f),
+    neutral: neutralRamp({ hue: neutral.hue ?? f.hue, chroma: neutral.chroma ?? 0.008 }),
   };
   if (link) out.link = accentRamp(seedSpec(link));
   if (visited) out.visited = accentRamp(seedSpec(visited));

@@ -15,7 +15,7 @@
  * on top of the base tokens (tokens/foundation.mjs, tokens/semantic.mjs):
  *   primitives  foundation primitives, e.g. { 'text-md': '0.75rem' }
  *   roles       role tokens, e.g. { 'radius-panel': '0' }
- *   colors      semantic colours, e.g. { canvas: { light: 'accent.200', dark: 'neutral.1000' } }
+ *   colors      semantic colours, e.g. { canvas: { light: 'frame.200', dark: 'neutral.1000' } }
  *
  * Apply with <html data-theme="standard">, or on any element to theme a
  * subtree. The default theme also applies when no data-theme is set.
@@ -59,10 +59,10 @@ export const themes = {
       'link-underline-offset': 'auto',
     },
     colors: {
-      canvas: { light: 'accent.200', dark: 'neutral.1000' },
-      crumbbar: { light: 'accent.50', dark: 'accent.950' },
+      canvas: { light: 'frame.200', dark: 'neutral.1000' },
+      crumbbar: { light: 'frame.50', dark: 'frame.950' },
       'panel-border': { light: 'transparent', dark: 'transparent' },
-      'panel-header': { light: 'accent.100', dark: 'accent.950' },
+      'panel-header': { light: 'frame.100', dark: 'frame.950' },
       'panel-header-border': { light: 'transparent', dark: 'transparent' },
       text: { light: 'neutral.900', dark: 'neutral.50' },
       'text-muted': { light: 'neutral.700', dark: 'neutral.400' },

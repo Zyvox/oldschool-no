@@ -15,6 +15,12 @@
     --os-accent-800: #1a4283;
     --os-accent-900: #113163;
     --os-accent-950: #0a2146;
+    /* frame — seed = accent */
+    --os-frame-50: #f1f6ff;
+    --os-frame-100: #dce9fd;
+    --os-frame-200: #c0d6f9;
+    --os-frame-900: #113163;
+    --os-frame-950: #0a2146;
     /* neutral — seed {chroma:0.008} */
     --os-neutral-0: #ffffff;
     --os-neutral-25: #f9fafc;
