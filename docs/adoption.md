@@ -23,7 +23,7 @@ Copy `dist/` (or the pieces you need) into your static assets:
 
 ```
 dist/oldschool.min.css  tokens, both themes, all components (15 kB gzip; .css is the readable twin)
-dist/oldschool.min.js   optional behaviors, classic script (5 kB gzip)
+dist/oldschool.min.js   optional behaviors, classic script (6 kB gzip)
 dist/icons.svg          optional icon sprite — reference as icons.svg#os-<name>
 ```
 

@@ -2,7 +2,7 @@
 
 Optional. Every component works without JavaScript; `oldschool.js` adds
 keyboard support, sorting, a few conveniences and the preference switch.
-5 kB gzipped.
+6 kB gzipped.
 
 ```html
 <script src="dist/oldschool.min.js" defer></script>          <!-- classic script, window.Oldschool -->
@@ -20,6 +20,7 @@ markup, call `Oldschool.init(container)`.
 | `data-os-sort` | `table.os-table` | header cells become sort buttons with `aria-sort`; `7 500,-`, `12,5 %` and `11.10.2026` sort as numbers; `data-os-nosort` on a `<th>` opts out; `data-sort-value` on a cell overrides its text |
 | `.os-table--stack` | `table` | copies each header's text (or its `title`) into `data-label` on cells that have none, for the stacked phone layout |
 | `.os-menu[popover]` | the menu | places it under its `popovertarget` button — start-aligned, end-aligned when there is no room, flipped above when there is no room below — and follows scrolling. CSS anchor positioning does the same without JS where supported; this covers other browsers and `showPopover()` from script |
+| `.os-notification` | server-rendered notifications | `[data-os-dismiss]` closes, `data-os-autohide="ms"` hides after a while (paused on hover and focus), Escape closes; a `--center` one with `popover` opens on load |
 | `data-os-toggle` | `<button>` | `aria-pressed` on/off; `data-os-label-pressed`, `data-os-toast-pressed`, `data-os-toast-released`, `data-os-persist="key"` |
 | `data-os-dialog="id"` | any button | opens `<dialog id>` with `showModal()` |
 | `data-os-copy` | `<button>` | copies its value, the text of `#id` when the value is `#id`, or its own text — then a toast |
@@ -30,7 +31,15 @@ markup, call `Oldschool.init(container)`.
 ## API
 
 ```js
-Oldschool.toast('Lagret!')                       // the yellow note, in a polite live region
+Oldschool.toast('Lagret!')                       // the yellow note at the top, in a polite live region
+Oldschool.notify({                               // the small window in the bottom corner
+  title: 'Jobben er ferdig',
+  message: '12 nye annonser i «Hytte i Valdres».',
+  tone: 'success',                               // info (default) · success · warning · danger (role="alert")
+  actions: [{ label: 'Se treffene', href: '/treff' }, { label: 'Angre', onClick: (event, n) => n.close() }],
+  duration: 6000,                                // ms; 0 = until closed. Default 6 s, 3 s centred, 0 with actions
+  placement: 'corner',                           // or 'center': mid-screen over a dimmed page (a popover)
+})                                               // → { element, close() }
 Oldschool.theme.set({ theme: 'standard' })       // also mode, density, width; persists, syncs tabs/iframes
 Oldschool.theme.get()                            // { theme, mode, density, width }
 Oldschool.theme.resolvedMode()                   // 'light' | 'dark'

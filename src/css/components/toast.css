@@ -1,6 +1,7 @@
 /*
  * Toast — the yellow "Lagret!" message that fades in at the top and goes away.
- * Created by Oldschool.toast('…'); lives in a polite live region.
+ * Created by Oldschool.toast('…'); lives in a polite live region. For news
+ * with a title and a link ("Jobben er ferdig"), use the notification.
  */
 @layer os.components {
   .os-toaster {
@@ -27,6 +28,10 @@
     font-weight: var(--os-weight-bold);
     pointer-events: auto;
     transition: opacity var(--os-duration-base) var(--os-ease-standard);
+  }
+
+  @starting-style {
+    .os-toast { opacity: 0; }
   }
 
   .os-toast[data-state="hidden"] {

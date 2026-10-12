@@ -32,6 +32,12 @@ The design is back to the 2008 original. Breaking changes throughout.
   two-line `<br>` headers, server-side sort links with `.os-table__sort`;
   `.os-tabs--nav` link tabs with `.os-tabs__count`; `.os-score`;
   `.os-output`; utilities `.os-clamp`, `.os-pre-line`, `.os-multicol`.
+- Notifications: `Oldschool.notify()` and `.os-notification` — a small
+  window with a tone-coloured title bar and close box, stacked in the bottom
+  corner (above the mobile bar on phones), or centred over a dimmed page with
+  `placement: 'center'` / `--center` (a light-dismiss popover). Timers pause on
+  hover and focus; Escape closes; danger uses `role="alert"`. Toasts and
+  notifications keep their order and speak in polite live regions.
 - `.os-menu` popovers open under their button in every browser and when
   opened with `showPopover()` (oldschool.js), with a 4px gap.
 - Fixed: visually hidden text in table cells widened the page on phones

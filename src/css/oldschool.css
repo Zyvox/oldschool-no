@@ -95,6 +95,7 @@
 @import "components/alert.css";
 @import "components/errorsummary.css";
 @import "components/toast.css";
+@import "components/notification.css";
 @import "components/tabs.css";
 @import "components/disclosure.css";
 @import "components/pagination.css";

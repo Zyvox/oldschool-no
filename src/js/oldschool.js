@@ -12,7 +12,7 @@
  */
 import { register, initAll } from './core.js';
 import { initTabs } from './tabs.js';
-import { toast } from './toast.js';
+import { toast, notify, initNotification } from './toast.js';
 import { initToggle, initShare, initCopy, initPrint, initDialogTrigger } from './actions.js';
 import { initSortableTable, initStackedTable } from './sort.js';
 import { initMenu } from './menu.js';
@@ -29,6 +29,7 @@ register('dialog', '[data-os-dialog]', initDialogTrigger);
 register('sort', 'table[data-os-sort]', initSortableTable);
 register('stack', 'table.os-table--stack', initStackedTable);
 register('menu', '.os-menu[popover]', initMenu);
+register('notification', '.os-notification', initNotification);
 register('theme-control', '[data-os-theme-control]', bindThemeControl);
 
 export function init(root = document) {
@@ -37,7 +38,7 @@ export function init(root = document) {
 
 export const theme = { get: getPreferences, set: setPreferences, resolvedMode };
 
-export { toast, register };
+export { toast, notify, register };
 
 function start() {
   document.documentElement.classList.add('os-js');

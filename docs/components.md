@@ -4,7 +4,7 @@
 Every component is plain HTML with `os-` classes (BEM: `block__element--modifier`), styled only through tokens.
 Live examples with copy-ready markup: `site/components.html`. Behaviors: [javascript.md](javascript.md).
 
-[icon](#icon) · [skiplink](#skiplink) · [masthead](#masthead) · [brand](#brand) · [utilnav](#utilnav) · [menu](#menu) · [tabbar](#tabbar) · [subnav](#subnav) · [crumbbar](#crumbbar) · [breadcrumbs](#breadcrumbs) · [pager](#pager) · [sidenav](#sidenav) · [alphabet](#alphabet) · [footer](#footer) · [mobilebar](#mobilebar) · [panel](#panel) · [heading](#heading) · [meta](#meta) · [actions](#actions) · [linkrow](#linkrow) · [kv](#kv) · [price](#price) · [summary](#summary) · [contact](#contact) · [linklist](#linklist) · [teaser](#teaser) · [tags](#tags) · [checklist](#checklist) · [schedule](#schedule) · [prose](#prose) · [stat](#stat) · [progress](#progress) · [steps](#steps) · [table](#table) · [toolbar](#toolbar) · [bars](#bars) · [calendar](#calendar) · [log](#log) · [thread](#thread) · [files](#files) · [output](#output) · [empty](#empty) · [button](#button) · [field](#field) · [choice](#choice) · [segmented](#segmented) · [search](#search) · [filters](#filters) · [chip](#chip) · [badge](#badge) · [status](#status) · [score](#score) · [alert](#alert) · [errorsummary](#errorsummary) · [toast](#toast) · [tabs](#tabs) · [disclosure](#disclosure) · [pagination](#pagination) · [result](#result) · [dialog](#dialog) · [bleed](#bleed)
+[icon](#icon) · [skiplink](#skiplink) · [masthead](#masthead) · [brand](#brand) · [utilnav](#utilnav) · [menu](#menu) · [tabbar](#tabbar) · [subnav](#subnav) · [crumbbar](#crumbbar) · [breadcrumbs](#breadcrumbs) · [pager](#pager) · [sidenav](#sidenav) · [alphabet](#alphabet) · [footer](#footer) · [mobilebar](#mobilebar) · [panel](#panel) · [heading](#heading) · [meta](#meta) · [actions](#actions) · [linkrow](#linkrow) · [kv](#kv) · [price](#price) · [summary](#summary) · [contact](#contact) · [linklist](#linklist) · [teaser](#teaser) · [tags](#tags) · [checklist](#checklist) · [schedule](#schedule) · [prose](#prose) · [stat](#stat) · [progress](#progress) · [steps](#steps) · [table](#table) · [toolbar](#toolbar) · [bars](#bars) · [calendar](#calendar) · [log](#log) · [thread](#thread) · [files](#files) · [output](#output) · [empty](#empty) · [button](#button) · [field](#field) · [choice](#choice) · [segmented](#segmented) · [search](#search) · [filters](#filters) · [chip](#chip) · [badge](#badge) · [status](#status) · [score](#score) · [alert](#alert) · [errorsummary](#errorsummary) · [toast](#toast) · [notification](#notification) · [tabs](#tabs) · [disclosure](#disclosure) · [pagination](#pagination) · [result](#result) · [dialog](#dialog) · [bleed](#bleed)
 
 ## icon
 
@@ -996,9 +996,48 @@ link to each field. Move focus to it after submit (tabindex="-1").
 ## toast
 
 Toast — the yellow "Lagret!" message that fades in at the top and goes away.
-Created by Oldschool.toast('…'); lives in a polite live region.
+Created by Oldschool.toast('…'); lives in a polite live region. For news
+with a title and a link ("Jobben er ferdig"), use the notification.
 
 <sub>Classes: `os-toaster` `os-toast` · Source: [src/css/components/toast.css](../src/css/components/toast.css)</sub>
+
+## notification
+
+Notification — the small window that slides up in the bottom corner when
+something has happened ("Jobben er ferdig – 12 nye treff"), like the
+messenger pop-ups of 2008: a title bar in the tone's colour with a close
+box, a line of text, and an optional link or two. For a quick "Lagret!"
+use the toast instead.
+
+From script:  Oldschool.notify({ title, message, tone, actions, duration })
+From the server (shown on load; the close box and auto-hide need oldschool.js):
+
+```html
+<div class="os-toaster os-toaster--corner" aria-live="polite">
+  <div class="os-notification os-notification--success" role="status" data-os-autohide="8000">
+    <div class="os-notification__bar">
+      <p class="os-notification__title">Jobben er ferdig</p>
+      <button class="os-notification__close" type="button" aria-label="Lukk" data-os-dismiss>×</button>
+    </div>
+    <div class="os-notification__body">
+      <p>12 nye annonser i «Hytte i Valdres».</p>
+      <p class="os-notification__actions"><a href="#">Se treffene</a></p>
+    </div>
+  </div>
+</div>
+```
+
+Tones: (info, the accent) · --success · --warning · --danger (use role="alert").
+
+--center: in the middle of the screen over a dimmed page, for the one
+confirmation that matters ("Takk! Søknaden er sendt"). Give it the popover
+attribute: Escape and a click outside close it. Oldschool.notify({
+placement: 'center', … }) builds and opens one; server-rendered ones with
+popover are opened on load by oldschool.js.
+Hovering or focusing a notification pauses its timer; Escape closes it.
+On phones the corner becomes the bottom edge, above the mobile bar.
+
+<sub>Classes: `os-toaster--corner` `os-mobilebar` `os-notification` `os-notification--success` `os-notification--warning` `os-notification--danger` `os-notification__bar` `os-notification__title` `os-notification__close` `os-notification__body` `os-notification__actions` `os-notification--center` `os-notification--static` · Source: [src/css/components/notification.css](../src/css/components/notification.css)</sub>
 
 ## tabs
 

@@ -157,6 +157,27 @@ await test('sticky actions: the column keeps the row colour and stays put while 
   expect(result.bg.includes('gradient'), 'sticky cell has no row colour layer');
 }, { width: 720, height: 900 });
 
+await test('notifications: corner window closes, times out, and the centred one is a light-dismiss popover', async (page) => {
+  await page.goto(`${url}/site/jobs.html`);
+  await page.click('text=Kjør alle nå');
+  await page.waitForSelector('.os-toaster--corner .os-notification');
+  expect(await page.$eval('.os-toaster--corner', (r) => r.getAttribute('aria-live')) === 'polite', 'region is not a polite live region');
+  await page.click('.os-toaster--corner .os-notification__close');
+  await page.waitForTimeout(500);
+  expect(!(await page.$('.os-toaster--corner .os-notification')), 'close box did not close it');
+  await page.evaluate(() => Oldschool.notify({ title: 'Kort', duration: 300 }));
+  await page.waitForTimeout(1000);
+  expect(!(await page.$('.os-toaster--corner .os-notification')), 'did not time out');
+  await page.click('button:has-text("Fortsett »")');
+  await page.waitForTimeout(100);
+  expect(await page.$eval('.os-notification--center', (n) => n.matches(':popover-open')), 'centred notification not open');
+  const [box, vw, vh] = await page.$eval('.os-notification--center', (n) => [n.getBoundingClientRect().toJSON(), innerWidth, innerHeight]);
+  expect(Math.abs(box.x + box.width / 2 - vw / 2) < 2 && Math.abs(box.y + box.height / 2 - vh / 2) < 2, 'centred notification is not centred');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(100);
+  expect(!(await page.$('.os-notification--center')), 'Escape did not close the centred notification');
+});
+
 await test('mobile: masthead menu popover and filter sheet open without JS', async (page) => {
   await page.goto(`${url}/site/search.html`);
   await page.click('.os-filters-toggle');

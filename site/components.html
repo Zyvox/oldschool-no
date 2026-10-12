@@ -38,7 +38,7 @@
           <li><span aria-current="page">Components</span></li>
         </ol>
       </nav>
-      <span>61 components · live examples · both themes</span>
+      <span>62 components · live examples · both themes</span>
     </div>
 
     <div class="os-layout os-layout--start">
@@ -96,6 +96,7 @@
                 <li><a href="#score">Score</a></li>
                 <li><a href="#output">Output</a></li>
                 <li><a href="#errorsummary">Error summary</a></li>
+                <li><a href="#notification">Notification</a></li>
                 <li><a href="#dialog">Dialog &amp; toast</a></li>
               </ul>
             </li>
@@ -918,6 +919,35 @@
 07:30:09 87 listings found, 12 new
 07:30:41 Gamlestølen 4: price changed 2 950 000 → 2 790 000
 07:31:12 Done in 71 s</pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="notification" aria-labelledby="h-notification">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-notification">Notification</h3><code>.os-notification Oldschool.notify()</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>The small window that slides up in the bottom corner when something has happened — a title bar in the tone's colour, a close box, a line of text and an optional link. It stays while the pointer or focus is inside; Escape closes it. <code>placement: 'center'</code> puts it in the middle of the screen over a dimmed page, for the one confirmation that matters.</p>
+            <div class="hx-demo" data-demo>
+              <div class="os-buttons">
+                <button class="os-button" type="button" onclick="Oldschool.notify({ title: 'Job finished', message: '12 new listings in “Cabins in Valdres”.', tone: 'success', actions: [{ label: 'See the matches', href: '#notification' }] })">Success</button>
+                <button class="os-button" type="button" onclick="Oldschool.notify({ title: 'New message', message: 'Kari Nordmann replied to your question about the concert.' })">Info</button>
+                <button class="os-button" type="button" onclick="Oldschool.notify({ title: 'Running slowly', message: 'The site is answering slowly. The job keeps trying.', tone: 'warning' })">Warning</button>
+                <button class="os-button" type="button" onclick="Oldschool.notify({ title: 'Job failed', message: 'Flats, Grünerløkka: the site did not answer.', tone: 'danger', actions: [{ label: 'Show the error', href: '#notification' }] })">Danger</button>
+                <button class="os-button os-button--primary" type="button" onclick="Oldschool.notify({ title: 'Thank you!', message: 'Your application has been sent. You will get a receipt by email within an hour.', tone: 'success', placement: 'center', actions: [{ label: 'OK', onClick: (e, n) => n.close() }] })">Centred</button>
+              </div>
+            </div>
+            <p>Server-rendered markup (here shown in place with <code>--static</code>; in a page it goes in <code>.os-toaster--corner</code>):</p>
+            <div class="hx-demo hx-demo--narrow" data-demo>
+              <div class="os-notification os-notification--success os-notification--static" role="status">
+                <div class="os-notification__bar">
+                  <p class="os-notification__title">Job finished</p>
+                  <button class="os-notification__close" type="button" aria-label="Close" data-os-dismiss>×</button>
+                </div>
+                <div class="os-notification__body">
+                  <p>12 new listings in “Cabins in Valdres”.</p>
+                  <p class="os-notification__actions"><a href="#notification">See the matches</a></p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

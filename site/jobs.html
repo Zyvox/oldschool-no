@@ -54,7 +54,7 @@
           <div class="os-panel__body">
             <div class="os-toolbar">
               <div class="os-toolbar__group">
-                <button class="os-button os-button--sm" type="button">Kjør alle nå</button>
+                <button class="os-button os-button--sm" type="button" onclick="Oldschool.notify({ title: 'Kjøring startet', message: '4 jobber er satt i kø. Du får beskjed når de er ferdige.', actions: [{ label: 'Se køen', href: '#h-log' }] })">Kjør alle nå</button>
                 <button class="os-button os-button--sm" type="button">Sett alle på pause</button>
               </div>
               <p class="os-toolbar__count">5 jobber · 1 kjører · 1 feilet</p>
@@ -293,7 +293,7 @@
         <section class="os-panel" aria-labelledby="h-new">
           <header class="os-panel__header"><h2 class="os-panel__title" id="h-new">Ny jobb</h2></header>
           <div class="os-panel__body">
-            <form class="os-form" action="#">
+            <form class="os-form" action="#" onsubmit="event.preventDefault(); Oldschool.notify({ title: 'Jobben er opprettet', message: 'Den første kjøringen starter om noen minutter.', tone: 'success', placement: 'center' })">
               <div class="os-field">
                 <label class="os-field__label" for="type">Type</label>
                 <select class="os-select" id="type" aria-describedby="type-hint">

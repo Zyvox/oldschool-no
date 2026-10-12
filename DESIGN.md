@@ -139,7 +139,7 @@ Rules:
 
 ## 6. Components
 
-61 components; markup for each in [docs/components.md](docs/components.md),
+62 components; markup for each in [docs/components.md](docs/components.md),
 live in `site/components.html`.
 
 | Group | Components |
@@ -147,7 +147,7 @@ live in `site/components.html`.
 | Page chrome | skip link, masthead, brand, utility links, menu, tab bar, sub nav, crumb bar, breadcrumbs, pager, side menu, A–Å index, footer, mobile bar, bleed |
 | Content | box (`os-panel`), heading, meta, action row, link row, facts (`os-kv`), key figure, summary, contact box, link list, teasers, tags, checklist, schedule, prose, stats, progress, table, toolbar, bars (poll), calendar, log, thread, files, output, empty state, icon |
 | Controls | button, forms, choices, segmented choice, search box, filters, chips, steps, tabs, disclosure, pagination, search results, dialog |
-| Feedback | badge, status, score, notices (`os-alert`, `os-note`), error summary, toast |
+| Feedback | badge, status, score, notices (`os-alert`, `os-note`), error summary, toast, notification (corner window or centred over the page) |
 
 Rules that hold across them:
 

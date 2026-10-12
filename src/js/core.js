@@ -46,11 +46,21 @@ const STRINGS = {
     copied: 'Copied to the clipboard',
     linkCopied: 'Link copied',
     copyFailed: 'Could not copy',
+    close: 'Close',
+    info: 'Information',
+    success: 'Done',
+    warning: 'Note',
+    danger: 'Something went wrong',
   },
   nb: {
     copied: 'Kopiert',
     linkCopied: 'Lenken er kopiert',
     copyFailed: 'Kunne ikke kopiere',
+    close: 'Lukk',
+    info: 'Informasjon',
+    success: 'Fullført',
+    warning: 'Obs!',
+    danger: 'Noe gikk galt',
   },
 };
 

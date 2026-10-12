@@ -4798,7 +4798,8 @@
 
 /*
  * Toast — the yellow "Lagret!" message that fades in at the top and goes away.
- * Created by Oldschool.toast('…'); lives in a polite live region.
+ * Created by Oldschool.toast('…'); lives in a polite live region. For news
+ * with a title and a link ("Jobben er ferdig"), use the notification.
  */
 @layer os.components {
   .os-toaster {
@@ -4827,8 +4828,185 @@
     transition: opacity var(--os-duration-base) var(--os-ease-standard);
   }
 
+  @starting-style {
+    .os-toast { opacity: 0; }
+  }
+
   .os-toast[data-state="hidden"] {
     opacity: 0;
+  }
+}
+
+/*
+ * Notification — the small window that slides up in the bottom corner when
+ * something has happened ("Jobben er ferdig – 12 nye treff"), like the
+ * messenger pop-ups of 2008: a title bar in the tone's colour with a close
+ * box, a line of text, and an optional link or two. For a quick "Lagret!"
+ * use the toast instead.
+ *
+ * From script:  Oldschool.notify({ title, message, tone, actions, duration })
+ * From the server (shown on load; the close box and auto-hide need oldschool.js):
+ *
+ *   <div class="os-toaster os-toaster--corner" aria-live="polite">
+ *     <div class="os-notification os-notification--success" role="status" data-os-autohide="8000">
+ *       <div class="os-notification__bar">
+ *         <p class="os-notification__title">Jobben er ferdig</p>
+ *         <button class="os-notification__close" type="button" aria-label="Lukk" data-os-dismiss>×</button>
+ *       </div>
+ *       <div class="os-notification__body">
+ *         <p>12 nye annonser i «Hytte i Valdres».</p>
+ *         <p class="os-notification__actions"><a href="#">Se treffene</a></p>
+ *       </div>
+ *     </div>
+ *   </div>
+ *
+ * Tones: (info, the accent) · --success · --warning · --danger (use role="alert").
+ *
+ * --center: in the middle of the screen over a dimmed page, for the one
+ * confirmation that matters ("Takk! Søknaden er sendt"). Give it the popover
+ * attribute: Escape and a click outside close it. Oldschool.notify({
+ * placement: 'center', … }) builds and opens one; server-rendered ones with
+ * popover are opened on load by oldschool.js.
+ * Hovering or focusing a notification pauses its timer; Escape closes it.
+ * On phones the corner becomes the bottom edge, above the mobile bar.
+ */
+@layer os.components {
+  .os-toaster--corner {
+    inset-block: auto var(--os-space-3);
+    inset-inline: auto var(--os-space-3);
+    align-items: stretch;
+    width: min(21rem, calc(100% - 2 * var(--os-space-3)));
+    padding: 0;
+  }
+
+  @media (max-width: 59.99em) {
+    body:has(> .os-mobilebar) .os-toaster--corner {
+      inset-block-end: calc(4.25rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  @media (max-width: 39.99em) {
+    .os-toaster--corner {
+      inset-inline: var(--os-space-2);
+      width: auto;
+    }
+  }
+
+  .os-notification {
+    --_bar: var(--os-color-accent);
+
+    overflow: hidden;
+    border: var(--os-border-width) solid var(--_bar);
+    border-radius: var(--os-radius-panel);
+    background-color: var(--os-color-surface-raised);
+    box-shadow: var(--os-shadow-overlay);
+    color: var(--os-color-text);
+    font-size: var(--os-text-sm);
+    pointer-events: auto;
+    transition:
+      opacity var(--os-duration-base) var(--os-ease-standard),
+      translate var(--os-duration-base) var(--os-ease-standard);
+  }
+
+  @starting-style {
+    .os-notification {
+      opacity: 0;
+      translate: 0 1rem;
+    }
+  }
+
+  .os-notification[data-state="hidden"] {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+
+  .os-notification--success { --_bar: var(--os-color-success-fill); }
+  .os-notification--warning { --_bar: var(--os-color-warning-fill); }
+  .os-notification--danger { --_bar: var(--os-color-danger-fill); }
+
+  .os-notification__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--os-space-2);
+    min-height: 1.75rem;
+    padding: var(--os-space-0-5) var(--os-space-1) var(--os-space-0-5) var(--os-space-2);
+    background-color: var(--_bar);
+    box-shadow: var(--os-bevel);
+    color: var(--os-color-text-on-accent);
+  }
+
+  .os-notification__title {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-notification__close {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: var(--os-border-width) solid color-mix(in srgb, currentColor 45%, transparent);
+    border-radius: var(--os-radius-control);
+    background: none;
+    color: inherit;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .os-notification__close:focus-visible {
+    outline-color: var(--os-color-text-on-accent);
+    outline-offset: -3px;
+  }
+
+  .os-notification__body {
+    display: grid;
+    gap: var(--os-space-1);
+    padding: var(--os-space-2) var(--os-space-2-5);
+  }
+
+  .os-notification__body > * {
+    margin: 0;
+  }
+
+  .os-notification__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--os-space-1) var(--os-space-3);
+    font-weight: var(--os-weight-bold);
+  }
+
+  .os-notification--center {
+    width: min(26rem, calc(100% - 2 * var(--os-gutter)));
+    font-size: var(--os-text-body);
+  }
+
+  .os-notification--center[popover] {
+    margin: auto;
+    padding: 0;
+  }
+
+  .os-notification--center::backdrop {
+    background-color: var(--os-color-overlay);
+  }
+
+  .os-notification--center .os-notification__bar {
+    min-height: 2rem;
+    font-size: var(--os-text-md);
+  }
+
+  .os-notification--center .os-notification__body {
+    gap: var(--os-space-2);
+    padding: var(--os-pad);
+  }
+
+  /* Inline in a page (a demo, or a list of past notifications): no shadow, no motion. */
+  .os-notification--static {
+    box-shadow: none;
   }
 }
 
