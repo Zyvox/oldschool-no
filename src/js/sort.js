@@ -50,7 +50,8 @@ export function initSortableTable(table) {
  * stacked (narrow) layout can label every value.
  */
 export function initStackedTable(table) {
-  const headers = $$('thead th', table).map((th) => th.textContent.trim());
+  // title holds the full name of a shortened header; innerText keeps <br> as a space.
+  const headers = $$('thead th', table).map((th) => (th.title || th.innerText || th.textContent).replace(/\s+/g, ' ').trim());
   for (const row of $$('tbody tr', table)) {
     Array.from(row.cells).forEach((cell, i) => {
       if (!cell.hasAttribute('data-label') && headers[i]) cell.dataset.label = headers[i];

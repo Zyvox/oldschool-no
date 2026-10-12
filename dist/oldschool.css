@@ -92,7 +92,6 @@
     --os-note-100: #f4e8bb;
     --os-note-200: #e9d57f;
     --os-note-800: #4d4600;
-    --os-note-900: #383400;
     --os-note-950: #262400;
   }
 }
@@ -273,7 +272,7 @@
     --os-color-info-fill: light-dark(var(--os-info-600), var(--os-info-400));
     --os-color-info-subtle: light-dark(var(--os-info-50), var(--os-info-950));
     --os-color-info-border: light-dark(var(--os-info-200), var(--os-info-800));
-    --os-color-highlight: light-dark(var(--os-note-100), var(--os-note-900));
+    --os-color-highlight: light-dark(var(--os-note-100), var(--os-note-950));
     --os-color-saved: light-dark(var(--os-danger-600), var(--os-danger-400));
     --os-color-overlay: light-dark(#11131573, #111315b8);
     --os-color-shadow: light-dark(#11131514, #11131580);
@@ -1253,6 +1252,10 @@
  *     <hr class="os-menu__sep">
  *     <button class="os-menu__item" type="button">Slett</button>
  *   </div>
+ *
+ * Opens under its button: by CSS anchor positioning where supported, and by
+ * oldschool.js everywhere else (and when opened with showPopover()).
+ * Form-wrapped actions work as items: <form method="post"><button class="os-menu__item">Slett</button></form>
  */
 @layer os.components {
   .os-menu {
@@ -1296,6 +1299,7 @@
 
   @supports (position-anchor: --a) {
     .os-menu[popover] {
+      margin-block: var(--os-space-1);
       position-area: bottom span-right;
       position-try-fallbacks: flip-block, flip-inline;
     }
@@ -3041,8 +3045,26 @@
  * buttons at the end of a row (kept on one line), .os-table__title for the
  * row's name.
  *
+ * Headers sit at the bottom of the header band, so a two-line header
+ * (<th title="Overvåkes nå">Over-<br>våkes</th>) lines up with one-line ones.
+ * Server-side sorting: put the link in the header as <a class="os-table__sort"
+ * href="?sort=navn&retning=synkende"> and aria-sort on the <th>; it looks
+ * like the buttons oldschool.js makes for data-os-sort.
+ *
+ * Cells that must not blow the table up:
+ *   .os-table__cap          6–14rem wide; long values wrap (add .os-clamp to cut them)
+ *   .os-table__cap--wide    14–26rem, for titles
+ *   .os-table__thumb        a fixed 5rem × 3.5rem picture column:
+ *     <td class="os-table__thumb"><img src="…" alt=""></td>
+ *     <td class="os-table__thumb"><span class="os-table__noimg">Uten bilde</span></td>
+ *
+ * Row states: .os-table__row--danger (failed) · .os-table__row--highlight (new, matched).
+ *
  * Variants: --plain (no zebra) · --compact · --grid (rules between cells too)
  *           --top (align cells to the top — for long running text)
+ *           --sticky (the .os-table__actions column stays at the right edge
+ *             while the rest scrolls sideways; it follows zebra, hover and
+ *             row states)
  *           --stack (narrow containers: every row becomes a small box of
  *             label/value lines instead of scrolling sideways; labels come
  *             from data-label on each cell, filled in from the header by
@@ -3060,7 +3082,10 @@
  *   </div>
  */
 @layer os.components {
+  /* position: relative contains visually hidden (absolute) text in cells,
+     which would otherwise escape the scroll box and widen the page. */
   .os-table-wrap {
+    position: relative;
     container-type: inline-size;
     max-width: 100%;
     overflow-x: auto;
@@ -3095,16 +3120,21 @@
     background-color: var(--os-color-panel-header);
     color: var(--os-color-text-strong);
     font-weight: var(--os-weight-bold);
+    vertical-align: bottom;
     white-space: nowrap;
   }
 
-  .os-table tbody tr:nth-child(even) {
-    background-color: var(--os-color-zebra);
+  /* Row colours go through --_row so a sticky cell can repeat them. */
+  .os-table tbody tr {
+    --_row: transparent;
+
+    background-color: var(--_row);
   }
 
-  .os-table tbody tr:hover {
-    background-color: var(--os-color-surface-tint-strong);
-  }
+  .os-table tbody tr:nth-child(even) { --_row: var(--os-color-zebra); }
+  .os-table tbody tr.os-table__row--highlight { --_row: var(--os-color-highlight); }
+  .os-table tbody tr.os-table__row--danger { --_row: var(--os-color-danger-subtle); }
+  .os-table tbody tr:hover { --_row: var(--os-color-surface-tint-strong); }
 
   .os-table tfoot :is(th, td) {
     border-block-end: 0;
@@ -3131,9 +3161,58 @@
     margin-inline-start: var(--os-space-1);
   }
 
-  .os-table--plain tbody tr:nth-child(even) {
-    background-color: transparent;
+  .os-table__cap {
+    min-width: 6rem;
+    max-width: 14rem;
+    overflow-wrap: break-word;
   }
+
+  .os-table__cap--wide {
+    min-width: 14rem;
+    max-width: 26rem;
+  }
+
+  .os-table__thumb {
+    width: 5.75rem;
+    min-width: 5.75rem;
+  }
+
+  .os-table .os-table__thumb {
+    padding-block: var(--os-space-1);
+  }
+
+  /* max-width: none — the base img rule would let the table squeeze it to a line. */
+  .os-table__thumb > :is(img, .os-table__noimg) {
+    display: block;
+    width: 5rem;
+    max-width: none;
+    height: 3.5rem;
+    border: var(--os-border-width) solid var(--os-color-border);
+    background-color: var(--os-color-surface-sunken);
+    object-fit: cover;
+  }
+
+  .os-table__noimg {
+    display: grid !important;
+    place-items: center;
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-2xs);
+    text-align: center;
+  }
+
+  .os-table--sticky .os-table__actions {
+    position: sticky;
+    inset-inline-end: 0;
+    z-index: 1;
+    box-shadow: calc(var(--os-border-width) * -1) 0 0 var(--os-color-border);
+  }
+
+  /* Opaque: the row colour layered over the surface. */
+  .os-table--sticky tbody .os-table__actions {
+    background: linear-gradient(var(--_row), var(--_row)), var(--os-color-surface);
+  }
+
+  .os-table--plain tbody tr:nth-child(even) { --_row: transparent; }
 
   .os-table--compact :is(th, td) {
     padding-block: var(--os-space-0-5);
@@ -3189,16 +3268,27 @@
 
     .os-table--stack tbody tr {
       border: var(--os-border-width) solid var(--os-color-border);
-      background-color: var(--os-color-surface);
     }
 
     .os-table--stack tbody tr + tr {
       margin-block-start: var(--os-space-2);
     }
 
+    .os-table--stack tbody tr,
     .os-table--stack tbody tr:nth-child(even),
     .os-table--stack tbody tr:hover {
-      background-color: var(--os-color-surface);
+      --_row: var(--os-color-surface);
+    }
+
+    .os-table--stack tbody tr.os-table__row--highlight { --_row: var(--os-color-highlight); }
+    .os-table--stack tbody tr.os-table__row--danger { --_row: var(--os-color-danger-subtle); }
+
+    .os-table--stack tbody :is(.os-table__row--danger, .os-table__row--highlight) > .os-table__title {
+      background-color: transparent;
+    }
+
+    .os-table--stack .os-table__cap {
+      max-width: none;
     }
 
     .os-table--stack td,
@@ -3235,8 +3325,10 @@
       display: flex;
       flex-wrap: wrap;
       gap: var(--os-space-1);
+      position: static;
       width: auto;
-      background-color: var(--os-color-surface-muted);
+      background: var(--os-color-surface-muted);
+      box-shadow: none;
     }
 
     .os-table--stack .os-table__actions > * + * {
@@ -3673,6 +3765,37 @@
     color: var(--os-color-text-muted);
     font-size: var(--os-text-xs);
     white-space: nowrap;
+  }
+}
+
+/*
+ * Output — raw text from a machine: a job log, a scraped description, an
+ * error. Keeps line breaks, scrolls after 24rem.
+ *
+ *   <pre class="os-output" tabindex="0" aria-label="Logg for Hytte i Valdres">08:00:01 Henter 87 annonser …</pre>
+ *
+ * --text: proportional font and normal size, for scraped prose that only
+ * needs its line breaks kept.
+ */
+@layer os.components {
+  .os-output {
+    max-height: 24rem;
+    margin: 0;
+    padding: var(--os-space-2);
+    overflow: auto;
+    border: var(--os-border-width) solid var(--os-color-border-subtle);
+    background-color: var(--os-color-surface-sunken);
+    color: var(--os-color-text);
+    font-family: var(--os-font-mono);
+    font-size: var(--os-text-xs);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .os-output--text {
+    font-family: inherit;
+    font-size: inherit;
+    white-space: pre-line;
   }
 }
 
@@ -4546,6 +4669,37 @@
 }
 
 /*
+ * Score — a number in a small tinted box: a match score, a rating, a grade.
+ * The number carries the meaning; the tint repeats it. Put the explanation
+ * in title (it shows a help cursor) or next to it.
+ *
+ *   <span class="os-score os-score--good" title="Treffsikkerhet 87 av 100">87</span>
+ *
+ * Tones: --good · --mid · --bad · --none (no score yet: "–")
+ */
+@layer os.components {
+  .os-score {
+    display: inline-block;
+    min-width: 2.4em;
+    padding: 0.0625rem var(--os-space-1);
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: var(--os-radius-badge);
+    background-color: var(--os-color-surface-sunken);
+    color: var(--os-color-text-strong);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--os-weight-bold);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .os-score[title] { cursor: help; }
+  .os-score--good { border-color: var(--os-color-success-border); background-color: var(--os-color-success-subtle); color: var(--os-color-success); }
+  .os-score--mid { border-color: var(--os-color-warning-border); background-color: var(--os-color-warning-subtle); color: var(--os-color-warning); }
+  .os-score--bad { border-color: var(--os-color-danger-border); background-color: var(--os-color-danger-subtle); color: var(--os-color-danger); }
+  .os-score--none { background-color: transparent; color: var(--os-color-text-muted); font-weight: var(--os-weight-regular); }
+}
+
+/*
  * Notices — a bordered message box with a bold first line. The yellow
  * warning box is the 2008 classic.
  *
@@ -4690,6 +4844,18 @@
  *     <section class="os-tabs__panel" id="t1"><h3 class="os-tabs__heading">Program</h3>…</section>
  *     <section class="os-tabs__panel" id="t2"><h3 class="os-tabs__heading">Praktisk info</h3>…</section>
  *   </div>
+ *
+ * Server-rendered tabs (one page per tab): --nav. The tabs are plain links in
+ * a <nav>, the current one has aria-current="page", and there is one panel.
+ * No JavaScript involved, so no data-os-tabs and no tab roles.
+ *
+ *   <div class="os-tabs os-tabs--nav">
+ *     <nav class="os-tabs__list" aria-label="Visning">
+ *       <a class="os-tabs__tab" href="?fane=kandidater" aria-current="page">Kandidater <span class="os-tabs__count">50</span></a>
+ *       <a class="os-tabs__tab" href="?fane=avvist">Avvist <span class="os-tabs__count">7</span></a>
+ *     </nav>
+ *     <div class="os-tabs__panel">…</div>
+ *   </div>
  */
 @layer os.components {
   .os-tabs__list {
@@ -4701,7 +4867,7 @@
     scrollbar-width: none;
   }
 
-  .os-tabs:not([data-ready]) > .os-tabs__list {
+  .os-tabs:not([data-ready], .os-tabs--nav) > .os-tabs__list {
     display: none;
   }
 
@@ -4736,7 +4902,8 @@
     white-space: nowrap;
   }
 
-  .os-tabs__tab[aria-selected="true"] {
+  .os-tabs__tab[aria-selected="true"],
+  .os-tabs__tab[aria-current="page"] {
     border-block-end-color: var(--os-color-surface);
     background-color: var(--os-color-surface);
     box-shadow: none;
@@ -4755,12 +4922,17 @@
     background-color: var(--os-color-surface);
   }
 
-  .os-tabs:not([data-ready]) > .os-tabs__panel {
+  .os-tabs:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
     border-block-start: var(--os-border-width) solid var(--os-color-panel-border);
   }
 
   .os-tabs:not([data-ready]) > .os-tabs__panel + .os-tabs__panel {
     margin-block-start: var(--os-gap);
+  }
+
+  .os-tabs__count {
+    color: var(--os-color-text-muted);
+    font-weight: var(--os-weight-regular);
   }
 }
 
@@ -5126,6 +5298,12 @@
   .os-align-end { text-align: end; }
   .os-align-center { text-align: center; }
   .os-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Cut text after N lines (default 2): <span class="os-clamp" style="--os-clamp: 1" title="full text">… */
+  .os-clamp { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--os-clamp, 2); line-clamp: var(--os-clamp, 2); overflow: hidden; overflow-wrap: anywhere; }
+  .os-pre-line { white-space: pre-line; }
+  /* Newspaper columns for long lists of checkboxes or links */
+  .os-multicol { columns: 16rem; column-gap: var(--os-space-6); }
+  .os-multicol > * { break-inside: avoid; }
   .os-measure { max-width: var(--os-measure); }
   .os-w-full { width: 100%; }
   .os-flush { margin: 0 !important; }

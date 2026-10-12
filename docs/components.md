@@ -4,7 +4,7 @@
 Every component is plain HTML with `os-` classes (BEM: `block__element--modifier`), styled only through tokens.
 Live examples with copy-ready markup: `site/components.html`. Behaviors: [javascript.md](javascript.md).
 
-[icon](#icon) · [skiplink](#skiplink) · [masthead](#masthead) · [brand](#brand) · [utilnav](#utilnav) · [menu](#menu) · [tabbar](#tabbar) · [subnav](#subnav) · [crumbbar](#crumbbar) · [breadcrumbs](#breadcrumbs) · [pager](#pager) · [sidenav](#sidenav) · [alphabet](#alphabet) · [footer](#footer) · [mobilebar](#mobilebar) · [panel](#panel) · [heading](#heading) · [meta](#meta) · [actions](#actions) · [linkrow](#linkrow) · [kv](#kv) · [price](#price) · [summary](#summary) · [contact](#contact) · [linklist](#linklist) · [teaser](#teaser) · [tags](#tags) · [checklist](#checklist) · [schedule](#schedule) · [prose](#prose) · [stat](#stat) · [progress](#progress) · [steps](#steps) · [table](#table) · [toolbar](#toolbar) · [bars](#bars) · [calendar](#calendar) · [log](#log) · [thread](#thread) · [files](#files) · [empty](#empty) · [button](#button) · [field](#field) · [choice](#choice) · [segmented](#segmented) · [search](#search) · [filters](#filters) · [chip](#chip) · [badge](#badge) · [status](#status) · [alert](#alert) · [errorsummary](#errorsummary) · [toast](#toast) · [tabs](#tabs) · [disclosure](#disclosure) · [pagination](#pagination) · [result](#result) · [dialog](#dialog) · [bleed](#bleed)
+[icon](#icon) · [skiplink](#skiplink) · [masthead](#masthead) · [brand](#brand) · [utilnav](#utilnav) · [menu](#menu) · [tabbar](#tabbar) · [subnav](#subnav) · [crumbbar](#crumbbar) · [breadcrumbs](#breadcrumbs) · [pager](#pager) · [sidenav](#sidenav) · [alphabet](#alphabet) · [footer](#footer) · [mobilebar](#mobilebar) · [panel](#panel) · [heading](#heading) · [meta](#meta) · [actions](#actions) · [linkrow](#linkrow) · [kv](#kv) · [price](#price) · [summary](#summary) · [contact](#contact) · [linklist](#linklist) · [teaser](#teaser) · [tags](#tags) · [checklist](#checklist) · [schedule](#schedule) · [prose](#prose) · [stat](#stat) · [progress](#progress) · [steps](#steps) · [table](#table) · [toolbar](#toolbar) · [bars](#bars) · [calendar](#calendar) · [log](#log) · [thread](#thread) · [files](#files) · [output](#output) · [empty](#empty) · [button](#button) · [field](#field) · [choice](#choice) · [segmented](#segmented) · [search](#search) · [filters](#filters) · [chip](#chip) · [badge](#badge) · [status](#status) · [score](#score) · [alert](#alert) · [errorsummary](#errorsummary) · [toast](#toast) · [tabs](#tabs) · [disclosure](#disclosure) · [pagination](#pagination) · [result](#result) · [dialog](#dialog) · [bleed](#bleed)
 
 ## icon
 
@@ -88,6 +88,10 @@ Menu — a dropdown list of links or actions, usually a popover.
   <button class="os-menu__item" type="button">Slett</button>
 </div>
 ```
+
+Opens under its button: by CSS anchor positioning where supported, and by
+oldschool.js everywhere else (and when opened with showPopover()).
+Form-wrapped actions work as items: <form method="post"><button class="os-menu__item">Slett</button></form>
 
 <sub>Classes: `os-menu` `os-menu__item` `os-menu__sep` · Source: [src/css/components/menu.css](../src/css/components/menu.css)</sub>
 
@@ -585,8 +589,30 @@ neighbour. Give a column .os-num for numbers, .os-table__actions for the
 buttons at the end of a row (kept on one line), .os-table__title for the
 row's name.
 
+Headers sit at the bottom of the header band, so a two-line header
+(<th title="Overvåkes nå">Over-<br>våkes</th>) lines up with one-line ones.
+Server-side sorting: put the link in the header as <a class="os-table__sort"
+href="?sort=navn&retning=synkende"> and aria-sort on the <th>; it looks
+like the buttons oldschool.js makes for data-os-sort.
+
+Cells that must not blow the table up:
+```html
+.os-table__cap          6–14rem wide; long values wrap (add .os-clamp to cut them)
+.os-table__cap--wide    14–26rem, for titles
+.os-table__thumb        a fixed 5rem × 3.5rem picture column:
+  <td class="os-table__thumb"><img src="…" alt=""></td>
+  <td class="os-table__thumb"><span class="os-table__noimg">Uten bilde</span></td>
+```
+
+Row states: .os-table__row--danger (failed) · .os-table__row--highlight (new, matched).
+
 Variants: --plain (no zebra) · --compact · --grid (rules between cells too)
           --top (align cells to the top — for long running text)
+```html
+        --sticky (the .os-table__actions column stays at the right edge
+```
+            while the rest scrolls sideways; it follows zebra, hover and
+            row states)
 ```html
         --stack (narrow containers: every row becomes a small box of
 ```
@@ -607,7 +633,7 @@ Variants: --plain (no zebra) · --compact · --grid (rules between cells too)
 </div>
 ```
 
-<sub>Classes: `os-num` `os-table__actions` `os-table__title` `os-table-wrap` `os-table` `os-table--top` `os-table--plain` `os-table--compact` `os-table--grid` `os-table__sort` `os-table--stack` · Source: [src/css/components/table.css](../src/css/components/table.css)</sub>
+<sub>Classes: `os-num` `os-table__actions` `os-table__title` `os-table__cap` `os-clamp` `os-table__cap--wide` `os-table__thumb` `os-table__row--danger` `os-table__row--highlight` `os-table-wrap` `os-table` `os-table--top` `os-table__noimg` `os-table--sticky` `os-table--plain` `os-table--compact` `os-table--grid` `os-table__sort` `os-table--stack` · Source: [src/css/components/table.css](../src/css/components/table.css)</sub>
 
 ## toolbar
 
@@ -734,6 +760,20 @@ guess what a click will fetch.
 ```
 
 <sub>Classes: `os-files` `os-files__item` `os-icon` `os-files__meta` · Source: [src/css/components/files.css](../src/css/components/files.css)</sub>
+
+## output
+
+Output — raw text from a machine: a job log, a scraped description, an
+error. Keeps line breaks, scrolls after 24rem.
+
+```html
+<pre class="os-output" tabindex="0" aria-label="Logg for Hytte i Valdres">08:00:01 Henter 87 annonser …</pre>
+```
+
+--text: proportional font and normal size, for scraped prose that only
+needs its line breaks kept.
+
+<sub>Classes: `os-output` `os-output--text` · Source: [src/css/components/output.css](../src/css/components/output.css)</sub>
 
 ## empty
 
@@ -901,6 +941,20 @@ Tones: (neutral, idle) · --running · --success · --warning · --danger
 
 <sub>Classes: `os-status` `os-status--running` `os-status--success` `os-status--warning` `os-status--danger` `os-status--pill` · Source: [src/css/components/status.css](../src/css/components/status.css)</sub>
 
+## score
+
+Score — a number in a small tinted box: a match score, a rating, a grade.
+The number carries the meaning; the tint repeats it. Put the explanation
+in title (it shows a help cursor) or next to it.
+
+```html
+<span class="os-score os-score--good" title="Treffsikkerhet 87 av 100">87</span>
+```
+
+Tones: --good · --mid · --bad · --none (no score yet: "–")
+
+<sub>Classes: `os-score` `os-score--good` `os-score--mid` `os-score--bad` `os-score--none` · Source: [src/css/components/score.css](../src/css/components/score.css)</sub>
+
 ## alert
 
 Notices — a bordered message box with a bold first line. The yellow
@@ -962,7 +1016,21 @@ keys). Without JavaScript every panel is shown in turn under its heading.
 </div>
 ```
 
-<sub>Classes: `os-tabs__list` `os-tabs` `os-tabs__heading` `os-tabs__tab` `os-tabs__panel` · Source: [src/css/components/tabs.css](../src/css/components/tabs.css)</sub>
+Server-rendered tabs (one page per tab): --nav. The tabs are plain links in
+a <nav>, the current one has aria-current="page", and there is one panel.
+No JavaScript involved, so no data-os-tabs and no tab roles.
+
+```html
+<div class="os-tabs os-tabs--nav">
+  <nav class="os-tabs__list" aria-label="Visning">
+    <a class="os-tabs__tab" href="?fane=kandidater" aria-current="page">Kandidater <span class="os-tabs__count">50</span></a>
+    <a class="os-tabs__tab" href="?fane=avvist">Avvist <span class="os-tabs__count">7</span></a>
+  </nav>
+  <div class="os-tabs__panel">…</div>
+</div>
+```
+
+<sub>Classes: `os-tabs__list` `os-tabs` `os-tabs--nav` `os-tabs__heading` `os-tabs__tab` `os-tabs__panel` `os-tabs__count` · Source: [src/css/components/tabs.css](../src/css/components/tabs.css)</sub>
 
 ## disclosure
 

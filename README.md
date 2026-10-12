@@ -70,16 +70,18 @@ How themes and colours are built, and how to add your own: [docs/theming.md](doc
   with fixed lightness per step. `prefers-contrast: more` is honoured.
 - **Three densities** (`compact`, `standard`, `comfortable`) and **two widths**
   (the classic 1000px page, or 1200px with `.os-container--wide`).
-- **59 components** as plain HTML + `os-` classes: page chrome (masthead, tab
+- **61 components** as plain HTML + `os-` classes: page chrome (masthead, tab
   bar, crumb bar, pager, side menu, A–Å index, mobile bar), content (boxes,
   facts, key figures, link lists, teasers, tag cloud, tables, poll bars,
   calendar, log, forum thread, files) and controls (buttons, forms, error
-  summary, search, filters, tabs, status, toasts, dialogs). Everything works
+  summary, search, filters, tabs, menus, status, scores, toasts, dialogs). Everything works
   without JavaScript.
 - **Tables for apps**: cells centred vertically, an actions column that stays
-  on one line, a toolbar, status dots — and `.os-table--stack`, which turns
+  on one line (and sticks to the right edge with `--sticky`), a "Mer ▾" menu
+  per row, capped cell widths, thumbnails, row states, scores, status dots,
+  link tabs for server-rendered views — and `.os-table--stack`, which turns
   rows into small label/value boxes on narrow screens instead of scrolling.
-- **Small optional JS** for tabs, sortable and stacked tables, dialogs,
+- **Small optional JS** for tabs, sortable and stacked tables, menu placement, dialogs,
   toggles, copy/share/print, toasts and the theme switch.
 - **Token exports**: `dist/tokens.json` (every value, resolved), a Tailwind v4
   bridge and a v3 preset.
@@ -94,8 +96,8 @@ no images.
 
 | File | Minified | gzip |
 | --- | --- | --- |
-| `dist/oldschool.min.css` — tokens, both themes, all 59 components | 84 kB | **14 kB** |
-| `dist/oldschool.min.js` — optional behaviors | 13 kB | **4.5 kB** |
+| `dist/oldschool.min.css` — tokens, both themes, all 61 components | 87 kB | **15 kB** |
+| `dist/oldschool.min.js` — optional behaviors | 14 kB | **5 kB** |
 | `dist/icons.svg` — optional sprite, 123 Lucide icons | 25 kB | 6 kB |
 
 ## Quick start

@@ -68,66 +68,196 @@
               </div>
             </div>
             <div class="os-table-wrap" tabindex="0" role="region" aria-label="Jobbtabell">
-              <table class="os-table os-table--stack" data-os-sort>
+              <table class="os-table os-table--stack os-table--sticky" data-os-sort>
                 <thead>
                   <tr>
                     <th scope="col">Navn</th>
                     <th scope="col">Type</th>
                     <th scope="col" class="os-num">Nye</th>
-                    <th scope="col" class="os-num">Overvåkes</th>
+                    <th scope="col" class="os-num" title="Annonser som overvåkes">Over-<br>våkes</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Sist kjørt</th>
-                    <th scope="col" data-os-nosort><span class="os-sr-only">Handlinger</span></th>
+                    <th scope="col" title="Sist kjørt">Sist<br>kjørt</th>
+                    <th scope="col" class="os-table__actions" data-os-nosort><span class="os-sr-only">Handlinger</span></th>
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                      <td class="os-table__title"><a href="#">Skiferie januar</a></td>
-                      <td>Pakkereiser (fly + hotell)</td>
-                      <td class="os-num"><a href="#" aria-label="3 nye i Skiferie januar">3</a></td>
-                      <td class="os-num">41</td>
-                      <td><span class="os-status os-status--running">Kjører</span></td>
-                      <td>11.10. 08:00</td>
-                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Finn nye</button> <button class="os-button os-button--sm" type="button">Oppdater liste</button></td>
-                    </tr>
-                    <tr>
-                      <td class="os-table__title"><a href="#">Hytte i Valdres</a></td>
-                      <td>Fritidsbolig til salgs</td>
-                      <td class="os-num"><a href="#" aria-label="12 nye i Hytte i Valdres">12</a></td>
-                      <td class="os-num">87</td>
-                      <td><span class="os-status os-status--success">Ferdig</span></td>
-                      <td>11.10. 07:30</td>
-                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Finn nye</button> <button class="os-button os-button--sm" type="button">Oppdater liste</button></td>
-                    </tr>
-                    <tr>
-                      <td class="os-table__title"><a href="#">Brukt sykkel</a></td>
-                      <td>Torget, Oslo</td>
-                      <td class="os-num">0</td>
-                      <td class="os-num">9</td>
-                      <td><span class="os-status os-status--success">Ferdig</span></td>
-                      <td>10.10. 22:00</td>
-                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Finn nye</button> <button class="os-button os-button--sm" type="button">Oppdater liste</button></td>
-                    </tr>
-                    <tr>
-                      <td class="os-table__title"><a href="#">Leilighet Tøyen</a></td>
-                      <td>Bolig til leie</td>
-                      <td class="os-num">0</td>
-                      <td class="os-num">0</td>
-                      <td><span class="os-status os-status--danger">Feilet</span></td>
-                      <td>09.10. 08:00</td>
-                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Prøv igjen</button></td>
-                    </tr>
-                    <tr>
-                      <td class="os-table__title"><a href="#">Konsertbilletter</a></td>
-                      <td>Arrangementer</td>
-                      <td class="os-num">0</td>
-                      <td class="os-num">14</td>
-                      <td><span class="os-status os-status">Satt på pause</span></td>
-                      <td>01.10. 10:02</td>
-                      <td class="os-table__actions"><button class="os-button os-button--sm" type="button">Fortsett</button></td>
-                    </tr>
+                  <tr>
+                    <td class="os-table__title os-table__cap--wide"><a href="#">Skiferie januar</a></td>
+                    <td class="os-table__cap">Pakkereiser (fly + hotell)</td>
+                    <td class="os-num"><a href="#" aria-label="3 nye i Skiferie januar">3</a></td>
+                    <td class="os-num">41</td>
+                    <td><span class="os-status os-status--running">Kjører</span></td>
+                    <td class="os-nowrap">11.10. 08:00</td>
+                    <td class="os-table__actions">
+                      <button class="os-button os-button--sm" type="button">Finn nye</button>
+                      <button class="os-button os-button--sm" type="button" popovertarget="meny-skiferie" aria-label="Flere handlinger for Skiferie januar">Mer ▾</button>
+                      <div class="os-menu" id="meny-skiferie" popover>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Oppdater liste</button></form>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Sett på pause</button></form>
+                        <a class="os-menu__item" href="#">Vis logg</a>
+                        <hr class="os-menu__sep">
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Slett jobben</button></form>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="os-table__row--highlight">
+                    <td class="os-table__title os-table__cap--wide"><a href="#">Hytte i Valdres</a></td>
+                    <td class="os-table__cap">Fritidsbolig til salgs</td>
+                    <td class="os-num"><a href="#" aria-label="12 nye i Hytte i Valdres">12</a></td>
+                    <td class="os-num">87</td>
+                    <td><span class="os-status os-status--success">Ferdig</span></td>
+                    <td class="os-nowrap">11.10. 07:30</td>
+                    <td class="os-table__actions">
+                      <button class="os-button os-button--sm" type="button">Finn nye</button>
+                      <button class="os-button os-button--sm" type="button" popovertarget="meny-valdres" aria-label="Flere handlinger for Hytte i Valdres">Mer ▾</button>
+                      <div class="os-menu" id="meny-valdres" popover>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Oppdater liste</button></form>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Sett på pause</button></form>
+                        <a class="os-menu__item" href="#">Vis logg</a>
+                        <hr class="os-menu__sep">
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Slett jobben</button></form>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="os-table__title os-table__cap--wide"><a href="#">Brukt sykkel</a></td>
+                    <td class="os-table__cap">Torget, Oslo</td>
+                    <td class="os-num">0</td>
+                    <td class="os-num">9</td>
+                    <td><span class="os-status os-status--success">Ferdig</span></td>
+                    <td class="os-nowrap">10.10. 22:00</td>
+                    <td class="os-table__actions">
+                      <button class="os-button os-button--sm" type="button">Finn nye</button>
+                      <button class="os-button os-button--sm" type="button" popovertarget="meny-sykkel" aria-label="Flere handlinger for Brukt sykkel">Mer ▾</button>
+                      <div class="os-menu" id="meny-sykkel" popover>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Oppdater liste</button></form>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Sett på pause</button></form>
+                        <a class="os-menu__item" href="#">Vis logg</a>
+                        <hr class="os-menu__sep">
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Slett jobben</button></form>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="os-table__row--danger">
+                    <td class="os-table__title os-table__cap--wide"><a href="#">Leilighet Tøyen</a></td>
+                    <td class="os-table__cap">Bolig til leie</td>
+                    <td class="os-num">0</td>
+                    <td class="os-num">0</td>
+                    <td><span class="os-status os-status--danger">Feilet</span></td>
+                    <td class="os-nowrap">09.10. 08:00</td>
+                    <td class="os-table__actions">
+                      <button class="os-button os-button--sm" type="button">Prøv igjen</button>
+                      <button class="os-button os-button--sm" type="button" popovertarget="meny-toyen" aria-label="Flere handlinger for Leilighet Tøyen">Mer ▾</button>
+                      <div class="os-menu" id="meny-toyen" popover>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Oppdater liste</button></form>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Sett på pause</button></form>
+                        <a class="os-menu__item" href="#">Vis logg</a>
+                        <hr class="os-menu__sep">
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Slett jobben</button></form>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="os-table__title os-table__cap--wide"><a href="#">Konsertbilletter</a></td>
+                    <td class="os-table__cap">Arrangementer</td>
+                    <td class="os-num">0</td>
+                    <td class="os-num">14</td>
+                    <td><span class="os-status">Satt på pause</span></td>
+                    <td class="os-nowrap">01.10. 10:02</td>
+                    <td class="os-table__actions">
+                      <button class="os-button os-button--sm" type="button">Fortsett</button>
+                      <button class="os-button os-button--sm" type="button" popovertarget="meny-konsert" aria-label="Flere handlinger for Konsertbilletter">Mer ▾</button>
+                      <div class="os-menu" id="meny-konsert" popover>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Oppdater liste</button></form>
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Sett på pause</button></form>
+                        <a class="os-menu__item" href="#">Vis logg</a>
+                        <hr class="os-menu__sep">
+                        <form method="post" action="#"><button class="os-menu__item" type="submit">Slett jobben</button></form>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="os-panel" aria-labelledby="h-hits">
+          <header class="os-panel__header"><h2 class="os-panel__title" id="h-hits">Treff i «Hytte i Valdres»</h2></header>
+          <div class="os-panel__body">
+            <div class="os-tabs os-tabs--nav">
+              <nav class="os-tabs__list" aria-label="Visning av treff">
+                <a class="os-tabs__tab" href="jobs.html" aria-current="page">Kandidater <span class="os-tabs__count">50</span></a>
+                <a class="os-tabs__tab" href="jobs.html">Avvist <span class="os-tabs__count">7</span></a>
+                <a class="os-tabs__tab" href="jobs.html">Alle <span class="os-tabs__count">87</span></a>
+              </nav>
+              <div class="os-tabs__panel">
+                <div class="os-table-wrap" tabindex="0" role="region" aria-label="Kandidater">
+                  <table class="os-table os-table--stack">
+                    <thead>
+                      <tr>
+                        <th scope="col" aria-sort="descending"><a class="os-table__sort" href="jobs.html">Score</a></th>
+                        <th scope="col"><a class="os-table__sort" href="jobs.html">Tittel</a></th>
+                        <th scope="col">Sted</th>
+                        <th scope="col" class="os-num"><a class="os-table__sort" href="jobs.html">Pris</a></th>
+                        <th scope="col" class="os-num" title="Endring siden forrige kjøring">Endring</th>
+                        <th scope="col" title="Lagt ut">Lagt<br>ut</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                  <tr class="os-table__row--highlight">
+                    <td><span class="os-score os-score--good" title="Treffsikkerhet 91 av 100">91</span></td>
+                    <td class="os-table__cap--wide"><a class="os-clamp" href="#" title="Gamlestølen 4 – laftet hytte med innlagt strøm og vei helt frem, 4 soverom og badstue">Gamlestølen 4 – laftet hytte med innlagt strøm og vei helt frem, 4 soverom og badstue</a></td>
+                    <td class="os-table__cap">Vestre Slidre</td>
+                    <td class="os-num">2 790 000</td>
+                    <td class="os-num"><span class="os-text-success os-bold"><span class="os-sr-only">Ned </span>▼ 160 000</span></td>
+                    <td>10.10.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="os-score os-score--good" title="Treffsikkerhet 78 av 100">78</span></td>
+                    <td class="os-table__cap--wide"><a class="os-clamp" href="#" title="Hytte ved Vasetvatnet">Hytte ved Vasetvatnet</a></td>
+                    <td class="os-table__cap">Vestre Slidre</td>
+                    <td class="os-num">3 450 000</td>
+                    <td class="os-num"></td>
+                    <td>09.10.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="os-score os-score--mid" title="Treffsikkerhet 64 av 100">64</span></td>
+                    <td class="os-table__cap--wide"><a class="os-clamp" href="#" title="Tomt med godkjente tegninger for fritidsbolig, solrik beliggenhet, utsikt mot Jotunheimen">Tomt med godkjente tegninger for fritidsbolig, solrik beliggenhet, utsikt mot Jotunheimen</a></td>
+                    <td class="os-table__cap">Øystre Slidre</td>
+                    <td class="os-num">890 000</td>
+                    <td class="os-num"><span class="os-text-danger os-bold"><span class="os-sr-only">Opp </span>▲ 40 000</span></td>
+                    <td>08.10.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="os-score os-score--bad" title="Treffsikkerhet 41 av 100">41</span></td>
+                    <td class="os-table__cap--wide"><a class="os-clamp" href="#" title="Seterbu, renoveringsobjekt">Seterbu, renoveringsobjekt</a></td>
+                    <td class="os-table__cap">Nord-Aurdal</td>
+                    <td class="os-num">650 000</td>
+                    <td class="os-num"></td>
+                    <td>05.10.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="os-score os-score--none" title="Ikke vurdert ennå">–</span></td>
+                    <td class="os-table__cap--wide"><a class="os-clamp" href="#" title="Fjellstue, til leie">Fjellstue, til leie</a></td>
+                    <td class="os-table__cap">Vang</td>
+                    <td class="os-num">12 000 / mnd.</td>
+                    <td class="os-num"></td>
+                    <td>04.10.</td>
+                  </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <details class="os-disclosure">
+                  <summary>Logg fra siste kjøring</summary>
+                  <div class="os-disclosure__content"><pre class="os-output" tabindex="0" aria-label="Logg fra siste kjøring">07:30:01 Starter «Hytte i Valdres»
+07:30:02 Henter lagret søk (3 sider)
+07:30:09 87 annonser funnet, 12 nye
+07:30:41 Gamlestølen 4: pris endret 2 950 000 → 2 790 000
+07:31:12 Ferdig på 71 s</pre></div>
+                </details>
+              </div>
             </div>
           </div>
         </section>

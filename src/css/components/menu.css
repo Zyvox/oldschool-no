@@ -7,6 +7,10 @@
  *     <hr class="os-menu__sep">
  *     <button class="os-menu__item" type="button">Slett</button>
  *   </div>
+ *
+ * Opens under its button: by CSS anchor positioning where supported, and by
+ * oldschool.js everywhere else (and when opened with showPopover()).
+ * Form-wrapped actions work as items: <form method="post"><button class="os-menu__item">Slett</button></form>
  */
 @layer os.components {
   .os-menu {
@@ -50,6 +54,7 @@
 
   @supports (position-anchor: --a) {
     .os-menu[popover] {
+      margin-block: var(--os-space-1);
       position-area: bottom span-right;
       position-try-fallbacks: flip-block, flip-inline;
     }

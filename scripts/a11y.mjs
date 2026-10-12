@@ -31,6 +31,7 @@ const variants = quick
     { theme: 'standard', mode: 'dark', width: 390 },
     { theme: 'standard', mode: 'light', width: 1280, density: 'comfortable', width_: 'wide' },
     { theme: 'retro', mode: 'light', width: 1280, contrast: true },
+    { theme: 'retro', mode: 'dark', width: 1440, width_: 'wide' },
   ];
 
 const { server, url } = await startServer(root);

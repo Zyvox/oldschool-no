@@ -1,0 +1,30 @@
+/*
+ * Output — raw text from a machine: a job log, a scraped description, an
+ * error. Keeps line breaks, scrolls after 24rem.
+ *
+ *   <pre class="os-output" tabindex="0" aria-label="Logg for Hytte i Valdres">08:00:01 Henter 87 annonser …</pre>
+ *
+ * --text: proportional font and normal size, for scraped prose that only
+ * needs its line breaks kept.
+ */
+@layer os.components {
+  .os-output {
+    max-height: 24rem;
+    margin: 0;
+    padding: var(--os-space-2);
+    overflow: auto;
+    border: var(--os-border-width) solid var(--os-color-border-subtle);
+    background-color: var(--os-color-surface-sunken);
+    color: var(--os-color-text);
+    font-family: var(--os-font-mono);
+    font-size: var(--os-text-xs);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .os-output--text {
+    font-family: inherit;
+    font-size: inherit;
+    white-space: pre-line;
+  }
+}

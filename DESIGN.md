@@ -95,7 +95,7 @@ Components use semantic colours only. Ramps are an implementation detail.
 | `accent` | accent.600 | accent.400 | the primary button, checked controls, focus |
 | `border-strong` | neutral.400 | neutral.500 | form controls — ≥ 3:1 |
 | success · warning · danger · info | 700 text, 50 bg, 200 border, 600 fill | 300 / 950 / 800 / 400 | messages, badges, status |
-| `highlight` | note.100 | note.900 | `<mark>`, the yellow notice |
+| `highlight` | note.100 | note.950 | `<mark>`, the yellow notice |
 
 Full list with values: [docs/tokens.md](docs/tokens.md). How the ramps are
 made and how to change them: [docs/theming.md](docs/theming.md).
@@ -139,15 +139,15 @@ Rules:
 
 ## 6. Components
 
-59 components; markup for each in [docs/components.md](docs/components.md),
+61 components; markup for each in [docs/components.md](docs/components.md),
 live in `site/components.html`.
 
 | Group | Components |
 | --- | --- |
 | Page chrome | skip link, masthead, brand, utility links, menu, tab bar, sub nav, crumb bar, breadcrumbs, pager, side menu, A–Å index, footer, mobile bar, bleed |
-| Content | box (`os-panel`), heading, meta, action row, link row, facts (`os-kv`), key figure, summary, contact box, link list, teasers, tags, checklist, schedule, prose, stats, progress, table, toolbar, bars (poll), calendar, log, thread, files, empty state, icon |
+| Content | box (`os-panel`), heading, meta, action row, link row, facts (`os-kv`), key figure, summary, contact box, link list, teasers, tags, checklist, schedule, prose, stats, progress, table, toolbar, bars (poll), calendar, log, thread, files, output, empty state, icon |
 | Controls | button, forms, choices, segmented choice, search box, filters, chips, steps, tabs, disclosure, pagination, search results, dialog |
-| Feedback | badge, status, notices (`os-alert`, `os-note`), error summary, toast |
+| Feedback | badge, status, score, notices (`os-alert`, `os-note`), error summary, toast |
 
 Rules that hold across them:
 
@@ -158,6 +158,11 @@ Rules that hold across them:
 - **Tables**: numbers right-aligned (`.os-num`), cells centred vertically, the
   row's name in `.os-table__title`, buttons in `.os-table__actions`, state as
   `.os-status`; add `.os-table--stack` when a table has more than four columns.
+  More than two row actions go in a "Mer ▾" `.os-menu`; wide tables get
+  `--sticky` so the actions stay in view. Cap free-text columns
+  (`.os-table__cap`) so one long value cannot blow the table up.
+- **Server-rendered views** of one list (Kandidater / Avvist / Alle) are
+  `.os-tabs--nav` link tabs with `aria-current="page"`, not ARIA tabs.
 - **Forms**: label column on wide screens, label above on narrow; hints under
   the field; errors as text linked with `aria-describedby`, and an
   `.os-errorsummary` at the top after a failed submit.

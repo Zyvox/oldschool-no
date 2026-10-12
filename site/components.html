@@ -38,7 +38,7 @@
           <li><span aria-current="page">Components</span></li>
         </ol>
       </nav>
-      <span>59 components · live examples · both themes</span>
+      <span>61 components · live examples · both themes</span>
     </div>
 
     <div class="os-layout os-layout--start">
@@ -93,6 +93,8 @@
               <ul role="list">
                 <li><a href="#alert">Notices &amp; badges</a></li>
                 <li><a href="#status">Status</a></li>
+                <li><a href="#score">Score</a></li>
+                <li><a href="#output">Output</a></li>
                 <li><a href="#errorsummary">Error summary</a></li>
                 <li><a href="#dialog">Dialog &amp; toast</a></li>
               </ul>
@@ -515,6 +517,26 @@
                 </table>
               </div>
             </div>
+            <p>Wide tables: <code>--sticky</code> keeps the actions column at the right edge while the rest scrolls sideways; <code>.os-table__thumb</code> is a fixed picture column; <code>.os-table__cap</code> and <code>.os-table__cap--wide</code> stop one long value from blowing the table up (with <code>.os-clamp</code> to cut it after two lines); row states <code>--danger</code> and <code>--highlight</code>. Headers sit at the bottom of the band, so a two-line header made with <code>&lt;br&gt;</code> lines up, and server-side sort links use <code>.os-table__sort</code> too. "More ▾" opens an <code>.os-menu</code> under its button.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <div class="os-table-wrap" tabindex="0" role="region" aria-label="Listings">
+                <table class="os-table os-table--sticky">
+                  <thead><tr>
+                    <th scope="col"><span class="os-sr-only">Picture</span></th>
+                    <th scope="col" aria-sort="descending"><a class="os-table__sort" href="#table">Score</a></th>
+                    <th scope="col"><a class="os-table__sort" href="#table">Title</a></th>
+                    <th scope="col">Area</th>
+                    <th scope="col" class="os-num" title="Price change since last run">Price<br>change</th>
+                    <th scope="col" class="os-table__actions"><span class="os-sr-only">Actions</span></th>
+                  </tr></thead>
+                  <tbody>
+                    <tr class="os-table__row--highlight"><td class="os-table__thumb"><span class="os-table__noimg">No picture</span></td><td><span class="os-score os-score--good" title="Match 91 of 100">91</span></td><td class="os-table__cap--wide"><a class="os-clamp" href="#table" title="Log cabin with power and road all the way, four bedrooms, sauna and a view of the lake">Log cabin with power and road all the way, four bedrooms, sauna and a view of the lake</a></td><td class="os-table__cap">Vestre Slidre</td><td class="os-num"><span class="os-text-success os-bold"><span class="os-sr-only">Down </span>▼ 160 000</span></td><td class="os-table__actions"><button class="os-button os-button--sm" type="button">Save</button> <button class="os-button os-button--sm" type="button" popovertarget="demo-menu-1" aria-label="More actions for the log cabin">More ▾</button><div class="os-menu" id="demo-menu-1" popover><button class="os-menu__item" type="button">Reject</button><a class="os-menu__item" href="#table">Open the listing</a><hr class="os-menu__sep"><button class="os-menu__item" type="button">Hide for a week</button></div></td></tr>
+                    <tr><td class="os-table__thumb"><span class="os-table__noimg">No picture</span></td><td><span class="os-score os-score--mid" title="Match 64 of 100">64</span></td><td class="os-table__cap--wide"><a class="os-clamp" href="#table">Plot with approved drawings</a></td><td class="os-table__cap">Øystre Slidre</td><td class="os-num"><span class="os-text-danger os-bold"><span class="os-sr-only">Up </span>▲ 40 000</span></td><td class="os-table__actions"><button class="os-button os-button--sm" type="button">Save</button></td></tr>
+                    <tr class="os-table__row--danger"><td class="os-table__thumb"><span class="os-table__noimg">No picture</span></td><td><span class="os-score os-score--none" title="Not scored">–</span></td><td class="os-table__cap--wide"><a href="#table">Mountain lodge</a> — could not be fetched</td><td class="os-table__cap">Vang</td><td class="os-num"></td><td class="os-table__actions"><button class="os-button os-button--sm" type="button">Retry</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -762,6 +784,17 @@
                 <section class="os-tabs__panel" id="tb-3"><h4 class="os-tabs__heading">Accessibility</h4><p>Step-free access from the south gate.</p></section>
               </div>
             </div>
+            <p>Server-rendered, one page per tab: <code>.os-tabs--nav</code> with plain links in a <code>&lt;nav&gt;</code> and <code>aria-current="page"</code> on the current one. No JavaScript, no tab roles.</p>
+            <div class="hx-demo" data-demo>
+              <div class="os-tabs os-tabs--nav">
+                <nav class="os-tabs__list" aria-label="Candidates view">
+                  <a class="os-tabs__tab" href="#tabs" aria-current="page">Candidates <span class="os-tabs__count">50</span></a>
+                  <a class="os-tabs__tab" href="#tabs">Rejected <span class="os-tabs__count">7</span></a>
+                  <a class="os-tabs__tab" href="#tabs">All <span class="os-tabs__count">87</span></a>
+                </nav>
+                <div class="os-tabs__panel"><p>Only the current tab's content is on the page.</p></div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -856,6 +889,35 @@
                   <li><a href="#f-type">Choose a subject</a></li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="score" aria-labelledby="h-score">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-score">Score</h3><code>.os-score</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>A number in a small tinted box: a match score, a rating, a grade. The number carries the meaning; put the explanation in <code>title</code>.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <p class="os-buttons">
+                <span class="os-score os-score--good" title="Match 91 of 100">91</span>
+                <span class="os-score os-score--mid" title="Match 64 of 100">64</span>
+                <span class="os-score os-score--bad" title="Match 41 of 100">41</span>
+                <span class="os-score os-score--none" title="Not scored yet">–</span>
+                <span class="os-score">B+</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="os-panel hx-section" id="output" aria-labelledby="h-output">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-output">Output</h3><code>.os-output</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>Raw text from a machine — a job log, a scraped description — with its line breaks kept; scrolls after 24rem. <code>--text</code> uses the body font.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <pre class="os-output" tabindex="0" aria-label="Log of the last run">07:30:01 Starting "Cabins in Valdres"
+07:30:09 87 listings found, 12 new
+07:30:41 Gamlestølen 4: price changed 2 950 000 → 2 790 000
+07:31:12 Done in 71 s</pre>
             </div>
           </div>
         </section>

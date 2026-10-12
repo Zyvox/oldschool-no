@@ -78,6 +78,7 @@
 @import "components/log.css";
 @import "components/thread.css";
 @import "components/files.css";
+@import "components/output.css";
 @import "components/empty.css";
 
 /* Components — controls & feedback */
@@ -90,6 +91,7 @@
 @import "components/chip.css";
 @import "components/badge.css";
 @import "components/status.css";
+@import "components/score.css";
 @import "components/alert.css";
 @import "components/errorsummary.css";
 @import "components/toast.css";

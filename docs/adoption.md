@@ -22,8 +22,8 @@ breaks a contrast pair. Then use *your* `dist/` with any option below. See
 Copy `dist/` (or the pieces you need) into your static assets:
 
 ```
-dist/oldschool.min.css  tokens, both themes, all components (14 kB gzip; .css is the readable twin)
-dist/oldschool.min.js   optional behaviors, classic script (4.5 kB gzip)
+dist/oldschool.min.css  tokens, both themes, all components (15 kB gzip; .css is the readable twin)
+dist/oldschool.min.js   optional behaviors, classic script (5 kB gzip)
 dist/icons.svg          optional icon sprite — reference as icons.svg#os-<name>
 ```
 

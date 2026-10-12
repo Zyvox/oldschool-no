@@ -1,0 +1,30 @@
+/*
+ * Score — a number in a small tinted box: a match score, a rating, a grade.
+ * The number carries the meaning; the tint repeats it. Put the explanation
+ * in title (it shows a help cursor) or next to it.
+ *
+ *   <span class="os-score os-score--good" title="Treffsikkerhet 87 av 100">87</span>
+ *
+ * Tones: --good · --mid · --bad · --none (no score yet: "–")
+ */
+@layer os.components {
+  .os-score {
+    display: inline-block;
+    min-width: 2.4em;
+    padding: 0.0625rem var(--os-space-1);
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: var(--os-radius-badge);
+    background-color: var(--os-color-surface-sunken);
+    color: var(--os-color-text-strong);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--os-weight-bold);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .os-score[title] { cursor: help; }
+  .os-score--good { border-color: var(--os-color-success-border); background-color: var(--os-color-success-subtle); color: var(--os-color-success); }
+  .os-score--mid { border-color: var(--os-color-warning-border); background-color: var(--os-color-warning-subtle); color: var(--os-color-warning); }
+  .os-score--bad { border-color: var(--os-color-danger-border); background-color: var(--os-color-danger-subtle); color: var(--os-color-danger); }
+  .os-score--none { background-color: transparent; color: var(--os-color-text-muted); font-weight: var(--os-weight-regular); }
+}

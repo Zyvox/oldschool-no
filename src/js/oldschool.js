@@ -15,6 +15,7 @@ import { initTabs } from './tabs.js';
 import { toast } from './toast.js';
 import { initToggle, initShare, initCopy, initPrint, initDialogTrigger } from './actions.js';
 import { initSortableTable, initStackedTable } from './sort.js';
+import { initMenu } from './menu.js';
 import { getPreferences, setPreferences, resolvedMode, bindThemeControl, listenForPreferenceChanges } from './theme.js';
 
 export const version = '0.2.0';
@@ -27,6 +28,7 @@ register('print', '[data-os-print]', initPrint);
 register('dialog', '[data-os-dialog]', initDialogTrigger);
 register('sort', 'table[data-os-sort]', initSortableTable);
 register('stack', 'table.os-table--stack', initStackedTable);
+register('menu', '.os-menu[popover]', initMenu);
 register('theme-control', '[data-os-theme-control]', bindThemeControl);
 
 export function init(root = document) {

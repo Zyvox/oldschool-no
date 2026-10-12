@@ -394,7 +394,8 @@ function initSortableTable(table) {
  * stacked (narrow) layout can label every value.
  */
 function initStackedTable(table) {
-  const headers = $$('thead th', table).map((th) => th.textContent.trim());
+  // title holds the full name of a shortened header; innerText keeps <br> as a space.
+  const headers = $$('thead th', table).map((th) => (th.title || th.innerText || th.textContent).replace(/\s+/g, ' ').trim());
   for (const row of $$('tbody tr', table)) {
     Array.from(row.cells).forEach((cell, i) => {
       if (!cell.hasAttribute('data-label') && headers[i]) cell.dataset.label = headers[i];
@@ -403,6 +404,57 @@ function initStackedTable(table) {
 }
   __exports.initSortableTable = initSortableTable;
   __exports.initStackedTable = initStackedTable;
+});
+
+__define("menu.js", function (__require, __exports) {
+/**
+ * Menus — places an .os-menu popover under the button that opens it.
+ *
+ * CSS anchor positioning does this on its own in browsers that support it
+ * and when the popover is opened by its popovertarget button. Everywhere
+ * else (older browsers, showPopover() from script) a fixed popover would open
+ * in the top-left corner, so this measures the button instead: below it,
+ * aligned to its start edge (or its end edge when there is no room), flipped
+ * above when there is no room below. Follows scrolling while open.
+ */
+const { $ } = __require("core.js");
+const GAP = 4;
+const EDGE = 8;
+
+function place(menu, button) {
+  const r = button.getBoundingClientRect();
+  menu.style.positionArea = 'none';
+  menu.style.margin = '0';
+  const w = menu.offsetWidth;
+  const h = menu.offsetHeight;
+  const vw = document.documentElement.clientWidth;
+  const vh = window.innerHeight;
+  let left = r.left + w <= vw - EDGE ? r.left : r.right - w;
+  left = Math.max(EDGE, Math.min(left, vw - w - EDGE));
+  const below = r.bottom + GAP + h <= vh - EDGE;
+  menu.style.left = `${left}px`;
+  menu.style.top = `${below ? r.bottom + GAP : Math.max(EDGE, r.top - h - GAP)}px`;
+}
+
+function initMenu(menu) {
+  if (!menu.id) return;
+  let button = null;
+  const update = () => button && place(menu, button);
+  menu.addEventListener('toggle', (event) => {
+    if (event.newState === 'open') {
+      button = event.source ?? $(`[popovertarget="${CSS.escape(menu.id)}"]`);
+      if (!button) return;
+      update();
+      window.addEventListener('scroll', update, { capture: true, passive: true });
+      window.addEventListener('resize', update, { passive: true });
+    } else {
+      window.removeEventListener('scroll', update, { capture: true });
+      window.removeEventListener('resize', update);
+      button = null;
+    }
+  });
+}
+  __exports.initMenu = initMenu;
 });
 
 __define("theme.js", function (__require, __exports) {
@@ -527,6 +579,7 @@ const { initTabs } = __require("tabs.js");
 const { toast } = __require("toast.js");
 const { initToggle, initShare, initCopy, initPrint, initDialogTrigger } = __require("actions.js");
 const { initSortableTable, initStackedTable } = __require("sort.js");
+const { initMenu } = __require("menu.js");
 const { getPreferences, setPreferences, resolvedMode, bindThemeControl, listenForPreferenceChanges } = __require("theme.js");
 const version = '0.2.0';
 
@@ -538,6 +591,7 @@ register('print', '[data-os-print]', initPrint);
 register('dialog', '[data-os-dialog]', initDialogTrigger);
 register('sort', 'table[data-os-sort]', initSortableTable);
 register('stack', 'table.os-table--stack', initStackedTable);
+register('menu', '.os-menu[popover]', initMenu);
 register('theme-control', '[data-os-theme-control]', bindThemeControl);
 
 function init(root = document) {

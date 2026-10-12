@@ -15,8 +15,26 @@
  * buttons at the end of a row (kept on one line), .os-table__title for the
  * row's name.
  *
+ * Headers sit at the bottom of the header band, so a two-line header
+ * (<th title="Overvåkes nå">Over-<br>våkes</th>) lines up with one-line ones.
+ * Server-side sorting: put the link in the header as <a class="os-table__sort"
+ * href="?sort=navn&retning=synkende"> and aria-sort on the <th>; it looks
+ * like the buttons oldschool.js makes for data-os-sort.
+ *
+ * Cells that must not blow the table up:
+ *   .os-table__cap          6–14rem wide; long values wrap (add .os-clamp to cut them)
+ *   .os-table__cap--wide    14–26rem, for titles
+ *   .os-table__thumb        a fixed 5rem × 3.5rem picture column:
+ *     <td class="os-table__thumb"><img src="…" alt=""></td>
+ *     <td class="os-table__thumb"><span class="os-table__noimg">Uten bilde</span></td>
+ *
+ * Row states: .os-table__row--danger (failed) · .os-table__row--highlight (new, matched).
+ *
  * Variants: --plain (no zebra) · --compact · --grid (rules between cells too)
  *           --top (align cells to the top — for long running text)
+ *           --sticky (the .os-table__actions column stays at the right edge
+ *             while the rest scrolls sideways; it follows zebra, hover and
+ *             row states)
  *           --stack (narrow containers: every row becomes a small box of
  *             label/value lines instead of scrolling sideways; labels come
  *             from data-label on each cell, filled in from the header by
@@ -34,7 +52,10 @@
  *   </div>
  */
 @layer os.components {
+  /* position: relative contains visually hidden (absolute) text in cells,
+     which would otherwise escape the scroll box and widen the page. */
   .os-table-wrap {
+    position: relative;
     container-type: inline-size;
     max-width: 100%;
     overflow-x: auto;
@@ -69,16 +90,21 @@
     background-color: var(--os-color-panel-header);
     color: var(--os-color-text-strong);
     font-weight: var(--os-weight-bold);
+    vertical-align: bottom;
     white-space: nowrap;
   }
 
-  .os-table tbody tr:nth-child(even) {
-    background-color: var(--os-color-zebra);
+  /* Row colours go through --_row so a sticky cell can repeat them. */
+  .os-table tbody tr {
+    --_row: transparent;
+
+    background-color: var(--_row);
   }
 
-  .os-table tbody tr:hover {
-    background-color: var(--os-color-surface-tint-strong);
-  }
+  .os-table tbody tr:nth-child(even) { --_row: var(--os-color-zebra); }
+  .os-table tbody tr.os-table__row--highlight { --_row: var(--os-color-highlight); }
+  .os-table tbody tr.os-table__row--danger { --_row: var(--os-color-danger-subtle); }
+  .os-table tbody tr:hover { --_row: var(--os-color-surface-tint-strong); }
 
   .os-table tfoot :is(th, td) {
     border-block-end: 0;
@@ -105,9 +131,58 @@
     margin-inline-start: var(--os-space-1);
   }
 
-  .os-table--plain tbody tr:nth-child(even) {
-    background-color: transparent;
+  .os-table__cap {
+    min-width: 6rem;
+    max-width: 14rem;
+    overflow-wrap: break-word;
   }
+
+  .os-table__cap--wide {
+    min-width: 14rem;
+    max-width: 26rem;
+  }
+
+  .os-table__thumb {
+    width: 5.75rem;
+    min-width: 5.75rem;
+  }
+
+  .os-table .os-table__thumb {
+    padding-block: var(--os-space-1);
+  }
+
+  /* max-width: none — the base img rule would let the table squeeze it to a line. */
+  .os-table__thumb > :is(img, .os-table__noimg) {
+    display: block;
+    width: 5rem;
+    max-width: none;
+    height: 3.5rem;
+    border: var(--os-border-width) solid var(--os-color-border);
+    background-color: var(--os-color-surface-sunken);
+    object-fit: cover;
+  }
+
+  .os-table__noimg {
+    display: grid !important;
+    place-items: center;
+    color: var(--os-color-text-muted);
+    font-size: var(--os-text-2xs);
+    text-align: center;
+  }
+
+  .os-table--sticky .os-table__actions {
+    position: sticky;
+    inset-inline-end: 0;
+    z-index: 1;
+    box-shadow: calc(var(--os-border-width) * -1) 0 0 var(--os-color-border);
+  }
+
+  /* Opaque: the row colour layered over the surface. */
+  .os-table--sticky tbody .os-table__actions {
+    background: linear-gradient(var(--_row), var(--_row)), var(--os-color-surface);
+  }
+
+  .os-table--plain tbody tr:nth-child(even) { --_row: transparent; }
 
   .os-table--compact :is(th, td) {
     padding-block: var(--os-space-0-5);
@@ -163,16 +238,27 @@
 
     .os-table--stack tbody tr {
       border: var(--os-border-width) solid var(--os-color-border);
-      background-color: var(--os-color-surface);
     }
 
     .os-table--stack tbody tr + tr {
       margin-block-start: var(--os-space-2);
     }
 
+    .os-table--stack tbody tr,
     .os-table--stack tbody tr:nth-child(even),
     .os-table--stack tbody tr:hover {
-      background-color: var(--os-color-surface);
+      --_row: var(--os-color-surface);
+    }
+
+    .os-table--stack tbody tr.os-table__row--highlight { --_row: var(--os-color-highlight); }
+    .os-table--stack tbody tr.os-table__row--danger { --_row: var(--os-color-danger-subtle); }
+
+    .os-table--stack tbody :is(.os-table__row--danger, .os-table__row--highlight) > .os-table__title {
+      background-color: transparent;
+    }
+
+    .os-table--stack .os-table__cap {
+      max-width: none;
     }
 
     .os-table--stack td,
@@ -209,8 +295,10 @@
       display: flex;
       flex-wrap: wrap;
       gap: var(--os-space-1);
+      position: static;
       width: auto;
-      background-color: var(--os-color-surface-muted);
+      background: var(--os-color-surface-muted);
+      box-shadow: none;
     }
 
     .os-table--stack .os-table__actions > * + * {

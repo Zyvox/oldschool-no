@@ -25,6 +25,17 @@ The design is back to the 2008 original. Breaking changes throughout.
 - **Accessibility**: 24px targets for list links, tags, teasers and utility
   links; contrast checked in more-contrast mode too (368 pairs); axe in 8 variants.
 - `data-os-copy="#id"` copies the text of that element.
+- From use in a real app: `.os-table--sticky` (actions column pinned to the
+  right edge, following zebra, hover and row states), `.os-table__cap` /
+  `--wide`, `.os-table__thumb` (+ `.os-table__noimg`), row states
+  `.os-table__row--danger` / `--highlight`, bottom-aligned headers for
+  two-line `<br>` headers, server-side sort links with `.os-table__sort`;
+  `.os-tabs--nav` link tabs with `.os-tabs__count`; `.os-score`;
+  `.os-output`; utilities `.os-clamp`, `.os-pre-line`, `.os-multicol`.
+- `.os-menu` popovers open under their button in every browser and when
+  opened with `showPopover()` (oldschool.js), with a 4px gap.
+- Fixed: visually hidden text in table cells widened the page on phones
+  (`.os-table-wrap` is now `position: relative`).
 - Showcase: an app dashboard (`jobs.html`), an accent playground and recipes on
   the themes page, width switch in the harness bar; images and Inter removed.
 

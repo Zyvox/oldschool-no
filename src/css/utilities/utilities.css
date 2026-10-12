@@ -41,6 +41,12 @@
   .os-align-end { text-align: end; }
   .os-align-center { text-align: center; }
   .os-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Cut text after N lines (default 2): <span class="os-clamp" style="--os-clamp: 1" title="full text">… */
+  .os-clamp { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--os-clamp, 2); line-clamp: var(--os-clamp, 2); overflow: hidden; overflow-wrap: anywhere; }
+  .os-pre-line { white-space: pre-line; }
+  /* Newspaper columns for long lists of checkboxes or links */
+  .os-multicol { columns: 16rem; column-gap: var(--os-space-6); }
+  .os-multicol > * { break-inside: avoid; }
   .os-measure { max-width: var(--os-measure); }
   .os-w-full { width: 100%; }
   .os-flush { margin: 0 !important; }

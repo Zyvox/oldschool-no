@@ -54,7 +54,7 @@
     --os-color-info-fill: light-dark(var(--os-info-600), var(--os-info-400));
     --os-color-info-subtle: light-dark(var(--os-info-50), var(--os-info-950));
     --os-color-info-border: light-dark(var(--os-info-200), var(--os-info-800));
-    --os-color-highlight: light-dark(var(--os-note-100), var(--os-note-900));
+    --os-color-highlight: light-dark(var(--os-note-100), var(--os-note-950));
     --os-color-saved: light-dark(var(--os-danger-600), var(--os-danger-400));
     --os-color-overlay: light-dark(#11131573, #111315b8);
     --os-color-shadow: light-dark(#11131514, #11131580);

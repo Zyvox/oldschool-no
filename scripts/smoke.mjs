@@ -127,6 +127,36 @@ await test('stacked table: rows become labelled boxes on phones, a table on desk
   expect(Math.abs(main - aside) < 2, 'aside not beside main at 1280px');
 }, { width: 390, height: 844 });
 
+await test('menu: opens under its button, also when opened from script', async (page) => {
+  await page.goto(`${url}/site/jobs.html`);
+  const check = async (label) => {
+    const [m, b] = await page.evaluate(() => ['#meny-toyen', '[popovertarget="meny-toyen"]'].map((s) => document.querySelector(s).getBoundingClientRect().toJSON()));
+    expect(Math.abs(m.top - (b.bottom + 4)) < 2 || Math.abs(m.bottom - (b.top - 4)) < 2, `${label}: menu top ${m.top}, button bottom ${b.bottom}`);
+    expect(m.left < b.right && m.right > b.left, `${label}: menu not over the button (${m.left}–${m.right} vs ${b.left}–${b.right})`);
+  };
+  await page.click('[popovertarget="meny-toyen"]');
+  await page.waitForTimeout(100);
+  await check('click');
+  await page.keyboard.press('Escape');
+  await page.evaluate(() => document.getElementById('meny-toyen').showPopover());
+  await page.waitForTimeout(100);
+  await check('showPopover()');
+});
+
+await test('sticky actions: the column keeps the row colour and stays put while scrolling', async (page) => {
+  await page.goto(`${url}/site/jobs.html`);
+  const result = await page.evaluate(() => {
+    const wrap = document.querySelector('.os-table--sticky').closest('.os-table-wrap');
+    const cell = document.querySelector('.os-table--sticky tr.os-table__row--danger .os-table__actions');
+    const before = cell.getBoundingClientRect().right;
+    wrap.scrollLeft = 100;
+    return { scrolls: wrap.scrollWidth > wrap.clientWidth, moved: Math.abs(cell.getBoundingClientRect().right - before), bg: getComputedStyle(cell).backgroundImage };
+  });
+  expect(result.scrolls, 'table does not scroll at this width');
+  expect(result.moved < 1, `actions column moved ${result.moved}px`);
+  expect(result.bg.includes('gradient'), 'sticky cell has no row colour layer');
+}, { width: 720, height: 900 });
+
 await test('mobile: masthead menu popover and filter sheet open without JS', async (page) => {
   await page.goto(`${url}/site/search.html`);
   await page.click('.os-filters-toggle');

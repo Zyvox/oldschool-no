@@ -110,7 +110,7 @@ Values shown for the default theme (`retro`). Reference = ramp step used in ligh
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-highlight` | `#f4e8bb` | `#383400` | note.100 / note.900 | <mark> and matched search terms. |
+| `--os-color-highlight` | `#f4e8bb` | `#262400` | note.100 / note.950 | <mark> and matched search terms. |
 | `--os-color-saved` | `#bc3735` | `#ef7a70` | danger.600 / danger.400 | Filled heart/star on saved items. |
 | `--os-color-overlay` | `#11131573` | `#111315b8` | mix(neutral.1000 45%) / mix(neutral.1000 72%) | Backdrop behind dialogs and sheets. |
 | `--os-color-shadow` | `#11131514` | `#11131580` | mix(neutral.1000 8%) / mix(neutral.1000 50%) | Soft shadow color. |

@@ -10,6 +10,18 @@
  *     <section class="os-tabs__panel" id="t1"><h3 class="os-tabs__heading">Program</h3>…</section>
  *     <section class="os-tabs__panel" id="t2"><h3 class="os-tabs__heading">Praktisk info</h3>…</section>
  *   </div>
+ *
+ * Server-rendered tabs (one page per tab): --nav. The tabs are plain links in
+ * a <nav>, the current one has aria-current="page", and there is one panel.
+ * No JavaScript involved, so no data-os-tabs and no tab roles.
+ *
+ *   <div class="os-tabs os-tabs--nav">
+ *     <nav class="os-tabs__list" aria-label="Visning">
+ *       <a class="os-tabs__tab" href="?fane=kandidater" aria-current="page">Kandidater <span class="os-tabs__count">50</span></a>
+ *       <a class="os-tabs__tab" href="?fane=avvist">Avvist <span class="os-tabs__count">7</span></a>
+ *     </nav>
+ *     <div class="os-tabs__panel">…</div>
+ *   </div>
  */
 @layer os.components {
   .os-tabs__list {
@@ -21,7 +33,7 @@
     scrollbar-width: none;
   }
 
-  .os-tabs:not([data-ready]) > .os-tabs__list {
+  .os-tabs:not([data-ready], .os-tabs--nav) > .os-tabs__list {
     display: none;
   }
 
@@ -56,7 +68,8 @@
     white-space: nowrap;
   }
 
-  .os-tabs__tab[aria-selected="true"] {
+  .os-tabs__tab[aria-selected="true"],
+  .os-tabs__tab[aria-current="page"] {
     border-block-end-color: var(--os-color-surface);
     background-color: var(--os-color-surface);
     box-shadow: none;
@@ -75,11 +88,16 @@
     background-color: var(--os-color-surface);
   }
 
-  .os-tabs:not([data-ready]) > .os-tabs__panel {
+  .os-tabs:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
     border-block-start: var(--os-border-width) solid var(--os-color-panel-border);
   }
 
   .os-tabs:not([data-ready]) > .os-tabs__panel + .os-tabs__panel {
     margin-block-start: var(--os-gap);
+  }
+
+  .os-tabs__count {
+    color: var(--os-color-text-muted);
+    font-weight: var(--os-weight-regular);
   }
 }

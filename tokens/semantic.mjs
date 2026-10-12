@@ -94,7 +94,7 @@ export const colorGroups = [
   {
     group: 'Misc',
     colors: [
-      { name: 'highlight', light: 'note.100', dark: 'note.900', description: '<mark> and matched search terms.' },
+      { name: 'highlight', light: 'note.100', dark: 'note.950', description: '<mark> and matched search terms.' },
       { name: 'saved', light: 'danger.600', dark: 'danger.400', description: 'Filled heart/star on saved items.' },
       { name: 'overlay', light: 'mix(neutral.1000 45%)', dark: 'mix(neutral.1000 72%)', description: 'Backdrop behind dialogs and sheets.' },
       { name: 'shadow', light: 'mix(neutral.1000 8%)', dark: 'mix(neutral.1000 50%)', description: 'Soft shadow color.' },
@@ -163,6 +163,11 @@ export const contrastPairs = [
   ['success', 'surface', 4.5],
   ['danger', 'surface', 4.5],
   ['text', 'highlight', 4.5],
+  ['link', 'highlight', 4.5, 'Highlighted table rows'],
+  ['text-muted', 'highlight', 4.5],
+  ['text', 'danger-subtle', 4.5, 'Failed table rows'],
+  ['link', 'danger-subtle', 4.5],
+  ['text-muted', 'danger-subtle', 4.5],
   ['border-strong', 'surface', 3, 'WCAG 1.4.11 non-text contrast for control outlines'],
   ['focus', 'surface', 3, 'WCAG 2.4.13 focus appearance'],
   ['focus', 'canvas', 3],
