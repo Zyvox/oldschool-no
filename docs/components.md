@@ -4,7 +4,7 @@
 Every component is plain HTML with `os-` classes (BEM: `block__element--modifier`), styled only through tokens.
 Live examples with copy-ready markup: `site/components.html`. Behaviors: [javascript.md](javascript.md).
 
-[icon](#icon) · [skiplink](#skiplink) · [masthead](#masthead) · [brand](#brand) · [utilnav](#utilnav) · [menu](#menu) · [tabbar](#tabbar) · [subnav](#subnav) · [crumbbar](#crumbbar) · [breadcrumbs](#breadcrumbs) · [pager](#pager) · [sidenav](#sidenav) · [alphabet](#alphabet) · [footer](#footer) · [mobilebar](#mobilebar) · [panel](#panel) · [heading](#heading) · [meta](#meta) · [actions](#actions) · [linkrow](#linkrow) · [kv](#kv) · [price](#price) · [summary](#summary) · [contact](#contact) · [linklist](#linklist) · [teaser](#teaser) · [tags](#tags) · [checklist](#checklist) · [schedule](#schedule) · [prose](#prose) · [stat](#stat) · [progress](#progress) · [steps](#steps) · [table](#table) · [toolbar](#toolbar) · [bars](#bars) · [calendar](#calendar) · [log](#log) · [thread](#thread) · [files](#files) · [output](#output) · [empty](#empty) · [button](#button) · [field](#field) · [choice](#choice) · [segmented](#segmented) · [search](#search) · [filters](#filters) · [chip](#chip) · [badge](#badge) · [status](#status) · [score](#score) · [alert](#alert) · [errorsummary](#errorsummary) · [toast](#toast) · [notification](#notification) · [tabs](#tabs) · [disclosure](#disclosure) · [pagination](#pagination) · [result](#result) · [dialog](#dialog) · [bleed](#bleed)
+[icon](#icon) · [skiplink](#skiplink) · [masthead](#masthead) · [brand](#brand) · [utilnav](#utilnav) · [menu](#menu) · [tabbar](#tabbar) · [subnav](#subnav) · [crumbbar](#crumbbar) · [breadcrumbs](#breadcrumbs) · [pager](#pager) · [sidenav](#sidenav) · [alphabet](#alphabet) · [footer](#footer) · [mobilebar](#mobilebar) · [panel](#panel) · [heading](#heading) · [meta](#meta) · [actions](#actions) · [linkrow](#linkrow) · [kv](#kv) · [price](#price) · [summary](#summary) · [contact](#contact) · [linklist](#linklist) · [teaser](#teaser) · [tags](#tags) · [checklist](#checklist) · [schedule](#schedule) · [prose](#prose) · [stat](#stat) · [progress](#progress) · [steps](#steps) · [table](#table) · [toolbar](#toolbar) · [bars](#bars) · [calendar](#calendar) · [log](#log) · [thread](#thread) · [files](#files) · [carousel](#carousel) · [output](#output) · [empty](#empty) · [button](#button) · [field](#field) · [choice](#choice) · [segmented](#segmented) · [search](#search) · [filters](#filters) · [chip](#chip) · [badge](#badge) · [status](#status) · [score](#score) · [alert](#alert) · [errorsummary](#errorsummary) · [toast](#toast) · [notification](#notification) · [tabs](#tabs) · [disclosure](#disclosure) · [pagination](#pagination) · [result](#result) · [dialog](#dialog) · [bleed](#bleed)
 
 ## icon
 
@@ -264,19 +264,22 @@ Box — the white box on the frame. Everything on a page lives in one.
 </section>
 ```
 
-The header is the tinted band of the original, with a one-pixel highlight.
+The header is the tinted band of the original.
 Variants:
 ```html
 --plain     no band: the title sits in the box (secondary boxes)
 ```
-  --flush     body without padding (tables, link lists)
+  --flush     every body without padding (tables, link lists); for one
+```html
+            body only, use .os-panel__body--flush
+```
   --accent    band in the accent colour with white text ("Viktig!")
   --tint      tinted body (highlighted summaries, tips)
   --note      yellow sticky-note box
 
 Boxes are size containers: components inside respond to the box's width.
 
-<sub>Classes: `os-panel` `os-panel__header` `os-panel__title` `os-panel__title--sm` `os-panel__action` `os-panel__body` `os-panel__heading` `os-panel__footer` `os-panel__footer--end` `os-panel--plain` `os-panel--flush` `os-panel--accent` `os-panel--tint` `os-panel--note` · Source: [src/css/components/panel.css](../src/css/components/panel.css)</sub>
+<sub>Classes: `os-panel__body--flush` `os-panel` `os-panel__header` `os-panel__title` `os-panel__title--sm` `os-panel__action` `os-panel__body` `os-panel__heading` `os-panel__footer` `os-panel__footer--end` `os-panel--plain` `os-panel--flush` `os-panel--accent` `os-panel--tint` `os-panel--note` · Source: [src/css/components/panel.css](../src/css/components/panel.css)</sub>
 
 ## heading
 
@@ -593,7 +596,8 @@ Headers sit at the bottom of the header band, so a two-line header
 (<th title="Overvåkes nå">Over-<br>våkes</th>) lines up with one-line ones.
 Server-side sorting: put the link in the header as <a class="os-table__sort"
 href="?sort=navn&retning=synkende"> and aria-sort on the <th>; it looks
-like the buttons oldschool.js makes for data-os-sort.
+like the buttons oldschool.js makes for data-os-sort: the header's own
+colour, underlined on hover, with ↕ / ▲ / ▼ after it.
 
 Cells that must not blow the table up:
 ```html
@@ -761,6 +765,41 @@ guess what a click will fetch.
 
 <sub>Classes: `os-files` `os-files__item` `os-icon` `os-files__meta` · Source: [src/css/components/files.css](../src/css/components/files.css)</sub>
 
+## carousel
+
+Carousel — the pictures of one item (a listing, a cabin), one per view, on
+a sunken background. Swipe on touch screens (scroll-snap), arrows over the
+edges elsewhere, an "n / total" counter in the corner, and an optional
+strip of thumbnails that marks the current picture.
+
+```html
+<section class="os-carousel" aria-roledescription="carousel" aria-label="Bilder av hytta">
+  <div class="os-carousel__stage">
+    <div class="os-carousel__track" tabindex="0">
+      <div class="os-carousel__slide" id="bilde-1" role="group" aria-roledescription="slide" aria-label="1 av 5">
+        <img src="1.jpg" alt="Inngangspartiet om kvelden">
+      </div>
+      <div class="os-carousel__slide" id="bilde-2" role="group" aria-roledescription="slide" aria-label="2 av 5">
+        <img src="2.jpg" alt="…" loading="lazy">               every picture but the first
+      </div> …
+    </div>
+  </div>
+  <nav class="os-carousel__thumbs" aria-label="Velg bilde">     (optional)
+    <a class="os-carousel__thumb" href="#bilde-1" aria-current="true"><img src="1-small.jpg" alt="Bilde 1"></a> …
+  </nav>
+</section>
+```
+
+oldschool.js adds the ‹ › buttons (hidden on touch-only screens, dimmed at
+the first and last picture), the counter, arrow keys and Home/End on the
+focused track, and keeps the thumbnails in step. Without it the track still
+swipes and scrolls, and the thumbnails are links to the slides.
+
+Knobs: --os-carousel-ratio (default 4 / 3) · --os-carousel-fit (contain;
+cover crops to fill).
+
+<sub>Classes: `os-carousel` `os-carousel__stage` `os-carousel__track` `os-carousel__slide` `os-carousel__nav` `os-carousel__nav--prev` `os-carousel__nav--next` `os-carousel__count` `os-carousel__thumbs` `os-carousel__thumb` · Source: [src/css/components/carousel.css](../src/css/components/carousel.css)</sub>
+
 ## output
 
 Output — raw text from a machine: a job log, a scraped description, an
@@ -791,8 +830,6 @@ Empty state — when there is nothing to show, say why and what to do.
 ## button
 
 Button — <button> for actions, <a> for navigation; same looks.
-A faint top-to-bottom gradient and a one-pixel highlight: the 2008 button,
-flattened just enough.
 
 ```html
 <button class="os-button" type="button">Avbryt</button>
@@ -803,20 +840,21 @@ Looks:  (default) · --primary · --danger · --link · --ghost (no box: "···
 Sizes:  --sm · (default 30px, 40px on touch screens) · --lg
 Other:  --block (full width) · --icon (square; needs aria-label)
 
-Two styles. The default is the retro button: gradient and highlight.
---flat is the plain one — solid primary, white secondary with a rule,
-no gradient — for app screens. Put it on one button, or data-buttons="flat"
-on any element (or <html>) to make every button inside flat. Every look,
-size and group works in both styles.
+Two styles, one component. The standard theme's buttons are flat: a solid
+primary and a white secondary with a rule. The retro theme's are the 2008
+button: a top-to-bottom gradient. Switch either way on one button with
+--retro / --flat, or on everything inside an element (or <html>) with
+data-buttons="retro" / "flat". The nearest setting wins; every look, size
+and group works in both. (Under the hood: --os-button-retro, 0 or 1.)
 
 ```html
-<button class="os-button os-button--flat os-button--primary" type="button">
+<button class="os-button os-button--primary" type="button">
   <svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-search"></use></svg> Finn nye
 </button>
-<div data-buttons="flat">…every .os-button in here is flat…</div>
+<div data-buttons="retro">…every .os-button in here is bevelled…</div>
 ```
 
-<sub>Classes: `os-button` `os-button--flat` `os-icon` `os-button--primary` `os-button--danger` `os-button--ghost` `os-button--link` `os-button--sm` `os-button--lg` `os-button--block` `os-button--icon` `os-button-group` `os-buttons` · Source: [src/css/components/button.css](../src/css/components/button.css)</sub>
+<sub>Classes: `os-button` `os-button--retro` `os-button--flat` `os-icon` `os-button--primary` `os-button--danger` `os-button--ghost` `os-button--link` `os-button--sm` `os-button--lg` `os-button--block` `os-button--icon` `os-button-group` `os-buttons` · Source: [src/css/components/button.css](../src/css/components/button.css)</sub>
 
 ## field
 
@@ -949,7 +987,8 @@ table cells. The word carries the meaning, the dot only repeats it.
 <span class="os-status os-status--running">Kjører</span>
 ```
 
-Tones: (neutral, idle) · --running · --success · --warning · --danger
+Tones: (neutral: never run, cancelled) · --running (the dot pulses slowly;
+still with reduced motion) · --success · --warning · --danger
 --pill adds a tinted box around it.
 
 <sub>Classes: `os-status` `os-status--running` `os-status--success` `os-status--warning` `os-status--danger` `os-status--pill` · Source: [src/css/components/status.css](../src/css/components/status.css)</sub>
@@ -1054,7 +1093,8 @@ On phones the corner becomes the bottom edge, above the mobile bar.
 
 ## tabs
 
-Tabs — folder tabs on top of a box. Enhanced by oldschool.js (roles, arrow
+Tabs — words on the frame with a bar under the current one; each panel is
+see-through, so put boxes in it. Enhanced by oldschool.js (roles, arrow
 keys). Without JavaScript every panel is shown in turn under its heading.
 
 ```html
@@ -1082,11 +1122,14 @@ No JavaScript involved, so no data-os-tabs and no tab roles.
 </div>
 ```
 
---line: the plain style — words on the frame with a coloured bar under the
-current one, no folder tabs; the panels are see-through, so put boxes in
-them. Works with ARIA tabs and with --nav.
+--folder: the 2008 style — folder tabs on top of a white box that holds the
+panel. Works with ARIA tabs and with --nav.
 
-<sub>Classes: `os-tabs__list` `os-tabs` `os-tabs--nav` `os-tabs__heading` `os-tabs__tab` `os-tabs__panel` `os-tabs__count` `os-tabs--line` · Source: [src/css/components/tabs.css](../src/css/components/tabs.css)</sub>
+```html
+<div class="os-tabs os-tabs--folder" data-os-tabs>…</div>
+```
+
+<sub>Classes: `os-tabs__list` `os-tabs` `os-tabs--nav` `os-tabs__heading` `os-tabs__tab` `os-tabs__panel` `os-tabs__count` `os-tabs--folder` · Source: [src/css/components/tabs.css](../src/css/components/tabs.css)</sub>
 
 ## disclosure
 

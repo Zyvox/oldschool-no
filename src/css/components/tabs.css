@@ -1,5 +1,6 @@
 /*
- * Tabs — folder tabs on top of a box. Enhanced by oldschool.js (roles, arrow
+ * Tabs — words on the frame with a bar under the current one; each panel is
+ * see-through, so put boxes in it. Enhanced by oldschool.js (roles, arrow
  * keys). Without JavaScript every panel is shown in turn under its heading.
  *
  *   <div class="os-tabs" data-os-tabs>
@@ -23,17 +24,18 @@
  *     <div class="os-tabs__panel">…</div>
  *   </div>
  *
- * --line: the plain style — words on the frame with a coloured bar under the
- * current one, no folder tabs; the panels are see-through, so put boxes in
- * them. Works with ARIA tabs and with --nav.
+ * --folder: the 2008 style — folder tabs on top of a white box that holds the
+ * panel. Works with ARIA tabs and with --nav.
+ *
+ *   <div class="os-tabs os-tabs--folder" data-os-tabs>…</div>
  */
 @layer os.components {
   .os-tabs__list {
     display: flex;
-    gap: var(--os-space-1);
-    padding-inline: var(--os-space-2);
+    gap: var(--os-space-5);
+    padding-inline: var(--os-space-1);
     overflow-x: auto;
-    border-block-end: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-end: var(--os-border-width) solid var(--os-color-border);
     scrollbar-width: none;
   }
 
@@ -56,29 +58,28 @@
 
   .os-tabs__tab {
     margin-block-end: calc(var(--os-border-width) * -1);
-    padding: var(--os-space-1) var(--os-space-3);
-    border: var(--os-border-width) solid var(--os-color-panel-border);
-    border-block-end-color: transparent;
-    border-start-start-radius: var(--os-radius-tab);
-    border-start-end-radius: var(--os-radius-tab);
-    background-color: var(--os-color-tab);
-    box-shadow: var(--os-bevel);
-    color: var(--os-color-link);
+    padding: var(--os-space-2) var(--os-space-0-5);
+    border: 0;
+    border-block-end: 3px solid transparent;
+    background: none;
+    color: var(--os-color-text);
     font-family: var(--os-font-body);
     font-size: var(--os-text-sm);
     font-weight: var(--os-weight-bold);
-    text-decoration: underline;
-    text-underline-offset: var(--os-link-underline-offset);
+    text-decoration: none;
     white-space: nowrap;
   }
 
-  .os-tabs__tab[aria-selected="true"],
-  .os-tabs__tab[aria-current="page"] {
-    border-block-end-color: var(--os-color-surface);
-    background-color: var(--os-color-surface);
-    box-shadow: none;
-    color: var(--os-color-text-strong);
-    text-decoration: none;
+  .os-tabs__tab:hover {
+    border-block-end-color: var(--os-color-border-strong);
+    color: var(--os-color-text);
+  }
+
+  .os-tabs__tab:is([aria-selected="true"], [aria-current="page"]) {
+    border-block-end-color: var(--os-color-accent);
+    color: var(--os-color-link);
+    text-decoration: underline;
+    text-underline-offset: var(--os-link-underline-offset);
   }
 
   .os-tabs__tab:focus-visible {
@@ -86,14 +87,7 @@
   }
 
   .os-tabs__panel {
-    padding: var(--os-pad);
-    border: var(--os-border-width) solid var(--os-color-panel-border);
-    border-block-start: 0;
-    background-color: var(--os-color-surface);
-  }
-
-  .os-tabs:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
-    border-block-start: var(--os-border-width) solid var(--os-color-panel-border);
+    margin-block-start: var(--os-gap);
   }
 
   .os-tabs:not([data-ready]) > .os-tabs__panel + .os-tabs__panel {
@@ -105,40 +99,52 @@
     font-weight: var(--os-weight-regular);
   }
 
-  /* Line tabs */
-  .os-tabs--line > .os-tabs__list {
-    gap: var(--os-space-5);
-    padding-inline: var(--os-space-1);
-    border-block-end-color: var(--os-color-border);
+  /* Folder tabs */
+  .os-tabs--folder > .os-tabs__list {
+    gap: var(--os-space-1);
+    padding-inline: var(--os-space-2);
+    border-block-end-color: var(--os-color-panel-border);
   }
 
-  .os-tabs--line .os-tabs__tab {
-    margin-block-end: calc(var(--os-border-width) * -1);
-    padding: var(--os-space-2) var(--os-space-0-5);
-    border: 0;
-    border-block-end: 3px solid transparent;
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-    color: var(--os-color-text);
-    font-size: var(--os-text-sm);
-  }
-
-  .os-tabs--line .os-tabs__tab:hover {
-    border-block-end-color: var(--os-color-border-strong);
-  }
-
-  .os-tabs--line .os-tabs__tab:is([aria-selected="true"], [aria-current="page"]) {
-    border-block-end-color: var(--os-color-accent);
+  .os-tabs--folder .os-tabs__tab {
+    padding: var(--os-space-1) var(--os-space-3);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-end-color: transparent;
+    border-start-start-radius: var(--os-radius-tab);
+    border-start-end-radius: var(--os-radius-tab);
+    background-color: var(--os-color-tab);
+    box-shadow: var(--os-bevel);
     color: var(--os-color-link);
     text-decoration: underline;
+    text-underline-offset: var(--os-link-underline-offset);
   }
 
-  .os-tabs--line > .os-tabs__panel,
-  .os-tabs--line:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
+  .os-tabs--folder .os-tabs__tab:hover {
+    border-block-end-color: transparent;
+    color: var(--os-color-link-hover);
+  }
+
+  .os-tabs--folder .os-tabs__tab:is([aria-selected="true"], [aria-current="page"]) {
+    border-block-end-color: var(--os-color-surface);
+    background-color: var(--os-color-surface);
+    box-shadow: none;
+    color: var(--os-color-text-strong);
+    text-decoration: none;
+  }
+
+  .os-tabs--folder > .os-tabs__panel {
+    margin-block-start: 0;
+    padding: var(--os-pad);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-start: 0;
+    background-color: var(--os-color-surface);
+  }
+
+  .os-tabs--folder:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
+    border-block-start: var(--os-border-width) solid var(--os-color-panel-border);
+  }
+
+  .os-tabs--folder:not([data-ready]) > .os-tabs__panel + .os-tabs__panel {
     margin-block-start: var(--os-gap);
-    padding: 0;
-    border: 0;
-    background: none;
   }
 }

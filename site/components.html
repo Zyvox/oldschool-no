@@ -38,7 +38,7 @@
           <li><span aria-current="page">Components</span></li>
         </ol>
       </nav>
-      <span>62 components · live examples · both themes</span>
+      <span>63 components · live examples · both themes</span>
     </div>
 
     <div class="os-layout os-layout--start">
@@ -76,6 +76,7 @@
                 <li><a href="#log">Log</a></li>
                 <li><a href="#thread">Thread</a></li>
                 <li><a href="#files">Files</a></li>
+                <li><a href="#carousel">Carousel</a></li>
               </ul>
             </li>
             <li><a href="#controls">Controls</a>
@@ -255,7 +256,7 @@
         <section class="os-panel hx-section" id="panel" aria-labelledby="h-panel">
           <header class="os-panel__header"><h3 class="os-panel__title" id="h-panel">Box</h3><code>.os-panel</code></header>
           <div class="os-panel__body os-stack os-stack--sm">
-            <p>The white box on the frame with the tinted header band. Boxes are size containers — what is inside responds to the box's width.</p>
+            <p>The white box on the frame with the tinted header band. Boxes are size containers — what is inside responds to the box's width. <code>.os-panel--flush</code> takes the padding off every body (for a table or a link list); <code>.os-panel__body--flush</code> takes it off one body.</p>
             <div class="hx-demo" data-demo>
               <div class="os-columns">
                 <section class="os-panel" aria-labelledby="bx1">
@@ -648,18 +649,46 @@
           </div>
         </section>
 
+        <section class="os-panel hx-section" id="carousel" aria-labelledby="h-carousel">
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-carousel">Carousel</h3><code>.os-carousel</code></header>
+          <div class="os-panel__body os-stack os-stack--sm">
+            <p>The pictures of one item, one per view on a sunken background. Swipe on touch screens; ‹ › buttons, the counter, arrow keys and Home/End come from oldschool.js. Thumbnails are links to the slides, so it all works without JavaScript. Use <code>&lt;img&gt;</code> in the slides (shown with <code>object-fit: contain</code>) and <code>loading="lazy"</code> on every picture but the first; the demo uses drawn placeholders because the showcase has no photos.</p>
+            <div class="hx-demo hx-demo--white" data-demo>
+              <section class="os-carousel hx-carousel" aria-roledescription="carousel" aria-label="Pictures of the cabin">
+                <div class="os-carousel__stage">
+                  <div class="os-carousel__track" tabindex="0">
+                    <div class="os-carousel__slide" id="car-1" role="group" aria-roledescription="slide" aria-label="1 of 5"><div class="hx-pic hx-pic--1" role="img" aria-label="Front door at night (placeholder picture)">Front door at night</div></div>
+                    <div class="os-carousel__slide" id="car-2" role="group" aria-roledescription="slide" aria-label="2 of 5"><div class="hx-pic hx-pic--2" role="img" aria-label="The kitchen (placeholder picture)">The kitchen</div></div>
+                    <div class="os-carousel__slide" id="car-3" role="group" aria-roledescription="slide" aria-label="3 of 5"><div class="hx-pic hx-pic--3" role="img" aria-label="Living room (placeholder picture)">Living room</div></div>
+                    <div class="os-carousel__slide" id="car-4" role="group" aria-roledescription="slide" aria-label="4 of 5"><div class="hx-pic hx-pic--4" role="img" aria-label="Bedroom (placeholder picture)">Bedroom</div></div>
+                    <div class="os-carousel__slide" id="car-5" role="group" aria-roledescription="slide" aria-label="5 of 5"><div class="hx-pic hx-pic--5" role="img" aria-label="The view (placeholder picture)">The view</div></div>
+                  </div>
+                </div>
+                <nav class="os-carousel__thumbs" aria-label="Choose a picture">
+                  <a class="os-carousel__thumb" href="#car-1" aria-current="true"><span class="hx-pic hx-pic--1"></span><span class="os-sr-only">Picture 1: Front door at night</span></a>
+                  <a class="os-carousel__thumb" href="#car-2"><span class="hx-pic hx-pic--2"></span><span class="os-sr-only">Picture 2: The kitchen</span></a>
+                  <a class="os-carousel__thumb" href="#car-3"><span class="hx-pic hx-pic--3"></span><span class="os-sr-only">Picture 3: Living room</span></a>
+                  <a class="os-carousel__thumb" href="#car-4"><span class="hx-pic hx-pic--4"></span><span class="os-sr-only">Picture 4: Bedroom</span></a>
+                  <a class="os-carousel__thumb" href="#car-5"><span class="hx-pic hx-pic--5"></span><span class="os-sr-only">Picture 5: The view</span></a>
+                </nav>
+              </section>
+            </div>
+          </div>
+        </section>
+
         <h2 class="os-sectionhead" id="controls">Controls</h2>
 
         <section class="os-panel hx-section" id="button" aria-labelledby="h-button">
-          <header class="os-panel__header"><h3 class="os-panel__title" id="h-button">Buttons</h3><code>.os-button .os-button--flat</code></header>
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-button">Buttons</h3><code>.os-button .os-button--retro</code></header>
           <div class="os-panel__body os-stack os-stack--sm">
-            <p>The 2008 button, flattened just enough: faint gradient, one-pixel highlight, bold label. 30px tall; 40px on touch screens. One primary per view.</p>
+            <p>Flat: a solid primary, a white secondary with a rule, a bold label. 30px tall; 40px on touch screens. One primary per view. <code>.os-button--ghost</code> is a button without a box, for "··· More".</p>
             <div class="hx-demo hx-demo--white" data-demo>
               <div class="os-stack os-stack--sm">
                 <div class="os-buttons">
                   <button class="os-button os-button--primary" type="button">Send</button>
                   <button class="os-button" type="button">Cancel</button>
                   <button class="os-button os-button--danger" type="button">Delete</button>
+                  <button class="os-button os-button--ghost" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-ellipsis"></use></svg> More</button>
                   <button class="os-button os-button--link" type="button">Link button</button>
                   <button class="os-button" type="button" disabled>Disabled</button>
                 </div>
@@ -678,9 +707,9 @@
                 </div>
               </div>
             </div>
-            <p><strong>Flat style</strong> for app screens: <code>.os-button--flat</code> on a button, or <code>data-buttons="flat"</code> on any element (or <code>&lt;html&gt;</code>) to make every button inside flat. Solid primary, white secondary with a rule, no gradient. <code>.os-button--ghost</code> is a button without a box, for "··· More". Sizes, icons and groups work in both styles.</p>
+            <p><strong>Retro style</strong>, the 2008 button: a top-to-bottom gradient. The retro theme uses it everywhere; elsewhere use <code>.os-button--retro</code> on a button, or <code>data-buttons="retro"</code> on any element (or <code>&lt;html&gt;</code>) for every button inside. <code>--flat</code> and <code>data-buttons="flat"</code> switch back. The nearest setting wins; sizes, icons and groups work in both styles.</p>
             <div class="hx-demo hx-demo--white" data-demo>
-              <div class="os-stack os-stack--sm" data-buttons="flat">
+              <div class="os-stack os-stack--sm" data-buttons="retro">
                 <div class="os-buttons">
                   <button class="os-button os-button--primary" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-search"></use></svg> Find new candidates</button>
                   <button class="os-button" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-rotate-ccw"></use></svg> Update watchlist</button>
@@ -690,7 +719,7 @@
                   <button class="os-button os-button--sm" type="button"><svg class="os-icon" aria-hidden="true"><use href="../dist/icons.svg#os-plus"></use></svg> Add</button>
                   <button class="os-button os-button--danger" type="button">Delete</button>
                   <button class="os-button os-button--primary os-button--lg" type="button">Large</button>
-                  <div class="os-button-group" role="group" aria-label="Pages (flat)">
+                  <div class="os-button-group" role="group" aria-label="Pages (retro)">
                     <button class="os-button" type="button">« Previous</button>
                     <button class="os-button" type="button">Next »</button>
                   </div>
@@ -790,9 +819,9 @@
         </section>
 
         <section class="os-panel hx-section" id="tabs" aria-labelledby="h-tabs">
-          <header class="os-panel__header"><h3 class="os-panel__title" id="h-tabs">Tabs</h3><code>.os-tabs</code></header>
+          <header class="os-panel__header"><h3 class="os-panel__title" id="h-tabs">Tabs</h3><code>.os-tabs .os-tabs--folder</code></header>
           <div class="os-panel__body os-stack os-stack--sm">
-            <p>Folder tabs over a box, with ARIA roles and arrow keys from oldschool.js. Without JavaScript each panel is shown under its own heading.</p>
+            <p>Words with a bar under the current one, with ARIA roles and arrow keys from oldschool.js. The panel is see-through, so it holds text inside a box or boxes on the frame. Without JavaScript each panel is shown under its own heading.</p>
             <div class="hx-demo" data-demo>
               <div class="os-tabs" data-os-tabs>
                 <div class="os-tabs__list" role="tablist" aria-label="Event">
@@ -816,9 +845,9 @@
                 <div class="os-tabs__panel"><p>Only the current tab's content is on the page.</p></div>
               </div>
             </div>
-            <p><strong>Line tabs</strong>, the plain style: <code>.os-tabs--line</code> — words with a bar under the current one, no folder tabs. The panel is see-through, so it holds boxes. Works with ARIA tabs and with <code>--nav</code>.</p>
+            <p>Tabs above boxes, as in an app: the panel holds a box.</p>
             <div class="hx-demo" data-demo>
-              <div class="os-tabs os-tabs--line os-tabs--nav">
+              <div class="os-tabs os-tabs--nav">
                 <nav class="os-tabs__list" aria-label="Job sections">
                   <a class="os-tabs__tab" href="#tabs" aria-current="page">Candidates</a>
                   <a class="os-tabs__tab" href="#tabs">Watchlist</a>
@@ -834,6 +863,17 @@
                     </div>
                   </section>
                 </div>
+              </div>
+            </div>
+            <p><strong>Folder tabs</strong>, the 2008 style: <code>.os-tabs--folder</code> — tabs on top of a white box that holds the panel. Works with ARIA tabs and with <code>--nav</code>.</p>
+            <div class="hx-demo" data-demo>
+              <div class="os-tabs os-tabs--folder" data-os-tabs>
+                <div class="os-tabs__list" role="tablist" aria-label="Event, folder tabs">
+                  <button class="os-tabs__tab" role="tab" aria-controls="tf-1" aria-selected="true">Programme</button>
+                  <button class="os-tabs__tab" role="tab" aria-controls="tf-2">Practical info</button>
+                </div>
+                <section class="os-tabs__panel" id="tf-1"><h4 class="os-tabs__heading">Programme</h4><p>13:00 first set · 13:50 break · 14:10 second set.</p></section>
+                <section class="os-tabs__panel" id="tf-2"><h4 class="os-tabs__heading">Practical info</h4><p>Bring a blanket. Moves indoors if it rains.</p></section>
               </div>
             </div>
           </div>

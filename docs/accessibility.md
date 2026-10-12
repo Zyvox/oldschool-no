@@ -44,11 +44,11 @@ these margins — and the check proves it for the seed you choose.
 ## Tested in a browser
 
 `npm run a11y` runs axe-core (WCAG 2.0–2.2 A/AA + best practices) on every
-showcase page in eight variants: retro light, dark, phone width and compact;
-standard light, dark on a phone, and comfortable + wide; retro with
-`prefers-contrast: more`. `npm run smoke` checks tabs, sorting, stacked
-tables, dialogs, toggles, preference persistence, popovers, the accent
-playground and horizontal overflow at 360px.
+showcase page in nine variants: standard light, dark, phone width and compact;
+retro light, dark on a phone, and comfortable + wide; standard with
+`prefers-contrast: more`; standard dark on the wide page. `npm run smoke` checks tabs, sorting, stacked
+tables, dialogs, toggles, preference persistence, popovers, menus,
+notifications, the carousel, the accent playground and horizontal overflow at 360px.
 
 ## Your responsibilities
 

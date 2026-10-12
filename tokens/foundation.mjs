@@ -2,9 +2,10 @@
  * Foundation — the non-color scales.
  *
  * The proportions are the 2000s ones on purpose: a ~1000px page, a 300px
- * sidebar, 14px Arial body text, 10px gaps between boxes, 12px padding inside
+ * sidebar, 13px Arial body text, 8px gaps between boxes, 12px padding inside
  * them. What changed from the originals is consistency (one 4px grid, one
- * type scale) and legibility (14px instead of 11–12px, 1.45 leading).
+ * type scale), 30px controls and legibility (13px instead of 11px, 1.4 leading).
+ * These base values are the standard theme; retro overrides some of them.
  *
  * Two tiers:
  *  1. Primitive scales (`--os-space-4`, `--os-text-lg`, `--os-radius-sm` …),
@@ -24,14 +25,14 @@ export const fonts = {
 /** Type scale — fixed, like the originals, one step apart in px. */
 export const text = {
   '2xs': '0.6875rem', // 11
-  xs: '0.75rem', //       12
-  sm: '0.8125rem', //     13
-  md: '0.875rem', //      14  body
-  lg: '1rem', //          16  box titles
-  xl: '1.125rem', //      18
+  xs: '0.6875rem', //     11  meta
+  sm: '0.75rem', //       12  labels, tables
+  md: '0.8125rem', //     13  body
+  lg: '0.9375rem', //     15  box titles
+  xl: '1.0625rem', //     17
   '2xl': '1.25rem', //    20
-  '3xl': '1.5rem', //     24  page title
-  '4xl': '1.875rem', //   30  key figures
+  '3xl': '1.375rem', //   22  page title
+  '4xl': '1.75rem', //    28  key figures
   '5xl': '2.25rem', //    36
 };
 
@@ -78,15 +79,15 @@ export const roles = [
   // Typography
   ['font-body', '{font.sans}', 'Body copy font stack.'],
   ['font-heading', '{font.sans}', 'Headings font stack.'],
-  ['text-body', '{text.md}', 'Body copy size (14px).'],
-  ['leading-body', '{leading.normal}', 'Body copy line-height.'],
+  ['text-body', '{text.md}', 'Body copy size (13px).'],
+  ['leading-body', '1.4', 'Body copy line-height.'],
   ['weight-heading', '{weight.bold}', 'Weight for headings and box titles.'],
   ['weight-strong', '{weight.bold}', 'Weight for values, prices, <strong>.'],
-  ['tracking-heading', '{tracking.tight}', 'Letter-spacing for headings.'],
+  ['tracking-heading', '{tracking.normal}', 'Letter-spacing for headings.'],
 
   // Layout rhythm
   ['gutter', '0.75rem', 'Side padding of the page frame.'],
-  ['gap', '0.625rem', 'Gap between boxes on the canvas (10px).'],
+  ['gap', '0.5rem', 'Gap between boxes on the canvas (8px).'],
   ['pad', '0.75rem', 'Inner padding of boxes (12px).'],
   ['row-pad', '0.3125rem', 'Vertical padding of key/value, table and list rows.'],
   ['measure', '72ch', 'Max line length for running text.'],
@@ -95,8 +96,8 @@ export const roles = [
   ['sidebar-width', '12.5rem', 'Width of a left navigation column (200px).'],
 
   // Shape
-  ['radius-panel', '{radius.sm}', 'Corner radius of boxes (3px).'],
-  ['radius-control', '{radius.sm}', 'Corner radius of buttons and inputs.'],
+  ['radius-panel', '{radius.none}', 'Corner radius of boxes (square).'],
+  ['radius-control', '{radius.sm}', 'Corner radius of buttons and inputs (3px).'],
   ['radius-tab', '{radius.md}', 'Top corners of folder tabs.'],
   ['radius-badge', '{radius.xs}', 'Corner radius of badges.'],
   ['border-width', '{border.thin}', 'Border and rule width.'],
@@ -111,12 +112,13 @@ export const roles = [
   ['shadow-panel', 'none', 'Boxes are flat.'],
   ['shadow-raised', '0 2px 6px {color.shadow}', 'Menus and popovers.'],
   ['shadow-overlay', '0 4px 24px {color.shadow-strong}', 'Dialogs.'],
-  ['bevel', 'inset 0 1px 0 rgb(255 255 255 / 0.55)', 'Top highlight on buttons and bands — the one nod to 2008 gloss.'],
+  ['bevel', 'none', 'Top highlight on folder tabs and bands, e.g. inset 0 1px 0 rgb(255 255 255 / 0.55). None in both themes.'],
+  ['button-retro', '0', 'Button style: 0 = flat (solid primary, white secondary), 1 = the bevelled 2008 gradient. Retro sets 1; data-buttons or .os-button--retro/--flat override it.'],
 
   // Focus & links
   ['focus-width', '2px', 'Focus ring thickness.'],
   ['focus-offset', '1px', 'Gap between element and focus ring.'],
-  ['link-underline-offset', '0.15em', 'Distance from baseline to link underline.'],
+  ['link-underline-offset', 'auto', 'Distance from baseline to link underline.'],
   ['link-underline-thickness', '1px', 'Link underline thickness.'],
 ];
 

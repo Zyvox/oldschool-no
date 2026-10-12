@@ -1,5 +1,57 @@
 # Changelog
 
+## 0.3.0 — 2026-10-12
+
+The look of a real app built on Oldschool (Utkikk) is now the default: the
+2008 layout with today's controls. Retro becomes the alternative.
+
+- **`standard` is the default theme** and takes over v0.1's "Retro 2011"
+  look: Arial 13px, the saturated frame, square boxes without an outline, 8px
+  gaps, 12px padding, 30px controls with 3px corners, muted text at
+  `neutral.700`. The old tidier standard (Arial 14px, paler frame, 3px boxes,
+  hairlines, bevel) is gone. `retro` keeps Verdana 12px and 24px square
+  controls, and its buttons are the bevelled gradient.
+- **Flat buttons by default.** `.os-button` is flat (solid primary, white
+  secondary with a rule). The 2008 gradient comes with the retro theme, or
+  anywhere with `.os-button--retro` or `data-buttons="retro"`; `--flat` and
+  `data-buttons="flat"` switch back. The nearest setting wins (role token
+  `--os-button-retro`, 0 or 1).
+- **Line tabs by default.** `.os-tabs` is the underlined style; the folder
+  tabs are `.os-tabs--folder`. `.os-tabs--line` is gone (it is the default).
+- **Carousel** (`.os-carousel`): scroll-snap swipe, one picture per view with
+  `object-fit: contain` on the sunken surface, ‹ › buttons (dimmed at the
+  ends, hidden on touch-only screens), an "n / total" counter, arrow keys and
+  Home/End, an optional thumbnail strip with `aria-current`. Works as a
+  swipeable strip with link thumbnails without JS.
+- `.os-status--running` pulses slowly (still with reduced motion).
+- `.os-panel__body--flush` takes the padding off one box body.
+- `.os-table__sort` takes the header's colour and underlines on hover.
+- **Recipe** "Portal grey": the portal blue on a steel-grey frame.
+
+### Replacing local copies in an app
+
+| Local class or code | Oldschool 0.3 |
+| --- | --- |
+| `u-notify` | `Oldschool.notify({ title, message, tone, actions, duration })`, or `.os-notification` in an `.os-toaster.os-toaster--corner` (`data-os-autohide`, `data-os-dismiss`) |
+| `u-thumbcell`, `u-thumb`, `u-thumb--none` | `.os-table__thumb` with an `<img>` or `.os-table__noimg` |
+| `u-titlecell`, `u-textcell` | `.os-table__cap`, `.os-table__cap--wide` (and `.os-table__title` for the row's name) |
+| `u-clamp` | `.os-clamp`, lines in `--os-clamp` (default 2), full text in `title` |
+| `u-actions-col` | `.os-table--sticky` on the table, `.os-table__actions` on the cells |
+| `u-sort` | `.os-table__sort` links, `aria-sort` on the `<th>` |
+| `u-items thead th` (bottom-aligned) | built in: headers sit at the bottom of the header row |
+| `tr.u-fail`, `tr.u-hl` | `.os-table__row--danger`, `.os-table__row--highlight` |
+| `u-score` (`--good`, `--mid`, `--bad`, `--none`) | `.os-score` with the same tones |
+| `os-badge--dot` for job state | `.os-status` (`--running`, `--success`, `--warning`, `--danger`) |
+| `u-carousel` | `.os-carousel` |
+| `u-pre` | `.os-pre-line` |
+| `u-columns` | `.os-multicol` |
+| `u-log` | `.os-output` (`.os-log` is the event list) |
+| `u-small`, `u-muted`, `u-nowrap` | `.os-text-sm`, `.os-text-muted`, `.os-nowrap` |
+| `u-up`, `u-down` | `.os-text-danger` / `.os-text-success` with a visually hidden "Opp" / "Ned" |
+| `data-ready` written into link tabs | `.os-tabs--nav` (no `data-ready`, no JS) |
+| the script that places `.os-menu` under its button | built into oldschool.js |
+| `../src/fonts/…` URLs in `dist/` | no web fonts any more: Arial and Verdana from the system |
+
 ## 0.2.0 — 2026-10-11
 
 The design is back to the 2008 original. Breaking changes throughout.

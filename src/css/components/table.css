@@ -19,7 +19,8 @@
  * (<th title="Overvåkes nå">Over-<br>våkes</th>) lines up with one-line ones.
  * Server-side sorting: put the link in the header as <a class="os-table__sort"
  * href="?sort=navn&retning=synkende"> and aria-sort on the <th>; it looks
- * like the buttons oldschool.js makes for data-os-sort.
+ * like the buttons oldschool.js makes for data-os-sort: the header's own
+ * colour, underlined on hover, with ↕ / ▲ / ▼ after it.
  *
  * Cells that must not blow the table up:
  *   .os-table__cap          6–14rem wide; long values wrap (add .os-clamp to cut them)
@@ -200,11 +201,16 @@
     padding: 0;
     border: 0;
     background: none;
-    color: var(--os-color-link);
+    color: inherit;
     font: inherit;
     text-align: inherit;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
+  }
+
+  .os-table__sort:hover {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .os-table__sort::after {

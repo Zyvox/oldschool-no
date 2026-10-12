@@ -10,11 +10,11 @@ The design is kept as it was. What changed is what dated it: the palette is
 generated and contrast-checked, targets are 24px, it works on phones and in
 dark mode, and the code underneath is modern CSS with no dependencies.
 
-![The detail page in the default retro theme](screenshots/detail-desktop.png)
+![The detail page in the default standard theme](screenshots/detail-desktop.png)
 
-| Standard theme | Dark mode | Phone |
+| Retro theme | Dark mode | Phone |
 | --- | --- | --- |
-| ![Standard theme](screenshots/detail-standard.png) | ![Dark mode](screenshots/detail-dark.png) | ![Phone](screenshots/detail-mobile.png) |
+| ![Retro theme](screenshots/detail-retro.png) | ![Dark mode](screenshots/detail-dark.png) | ![Phone](screenshots/detail-mobile.png) |
 
 | An app page on the wide frame | The same table on a phone |
 | --- | --- |
@@ -41,15 +41,17 @@ and the frame keep WCAG AA contrast whatever colour you pick — and `npm test`
 fails if a seed ever breaks a pair.
 
 Portal blue is the 2008 look: the frame and header bands are the accent, so
-the site is blue all over. The other recipes are the modern look: the frame
+the site is blue all over. Portal grey is the same blue on a grey frame. The
+other recipes are the modern look too: the frame
 and bands are a near-grey (`frame`), and the colour sits only on buttons,
 links and focus.
 
-![The retro theme with six recipes: portal blue, forest, fjord, clay, indigo and graphite](screenshots/accent-recipes.png)
+![Seven recipes: portal blue, portal grey, forest, fjord, clay, indigo and graphite](screenshots/accent-recipes.png)
 
 | Recipe | `accent` | `frame` | `link` |
 | --- | --- | --- | --- |
 | Portal blue (default) | `'#2a5aa8'` | `null` | `null` |
+| Portal grey | `'#2a5aa8'` | `{ hue: 250, chroma: 0.02 }` (steel) | `null` |
 | Forest | `'#2f6b3f'` | `{ hue: 80, chroma: 0.02 }` (stone) | `null` |
 | Fjord | `'#0f6e6a'` | `{ hue: 250, chroma: 0.02 }` (steel) | `null` |
 | Clay | `'#b4532a'` | `{ hue: 80, chroma: 0.02 }` (stone) | `null` |
@@ -69,31 +71,33 @@ How themes and colours are built, and how to add your own: [docs/theming.md](doc
 ## What's in it
 
 - **Two themes**, both in light and dark mode:
-  - **`retro`** (default) — the 2008 portal as it was: Verdana 12px, a
-    saturated frame, square corners, tight boxes;
-  - **`standard`** — the same structure tidied: Arial 14px, a paler frame,
-    3px corners, ruled rows, more air.
+  - **`standard`** (default) — the 2008 layout with today's controls: Arial
+    13px, the saturated frame, square boxes, flat buttons with 3px corners,
+    line tabs;
+  - **`retro`** — the 2008 portal all the way: Verdana 12px, 24px square
+    controls, bevelled gradient buttons.
 - **One accent seed** in `tokens/palette.mjs` → every ramp, generated in OKLCH
   with fixed lightness per step; an optional neutral frame for a modern look.
   `prefers-contrast: more` is honoured.
 - **Three densities** (`compact`, `standard`, `comfortable`) and **two widths**
   (the classic 1000px page, or 1200px with `.os-container--wide`).
-- **62 components** as plain HTML + `os-` classes: page chrome (masthead, tab
+- **63 components** as plain HTML + `os-` classes: page chrome (masthead, tab
   bar, crumb bar, pager, side menu, A–Å index, mobile bar), content (boxes,
   facts, key figures, link lists, teasers, tag cloud, tables, poll bars,
-  calendar, log, forum thread, files) and controls (buttons, forms, error
+  calendar, log, forum thread, files, picture carousel) and controls (buttons, forms, error
   summary, search, filters, tabs, menus, status, scores, toasts, notifications, dialogs). Everything works
   without JavaScript.
-- **Two button styles**: the retro bevelled `.os-button`, and a flat one
-  (`.os-button--flat`, or `data-buttons="flat"` for a whole page) with a
-  borderless `--ghost` variant; folder tabs or plain `.os-tabs--line` tabs.
+- **Modern by default, retro on request**: flat buttons (solid primary,
+  white secondary, borderless `--ghost`) and line tabs; the 2008 bevelled
+  button with `.os-button--retro` or `data-buttons="retro"` (automatic in the
+  retro theme), folder tabs with `.os-tabs--folder`.
 - **Tables for apps**: cells centred vertically, an actions column that stays
   on one line (and sticks to the right edge with `--sticky`), a "Mer ▾" menu
   per row, capped cell widths, thumbnails, row states, scores, status dots,
   link tabs for server-rendered views — and `.os-table--stack`, which turns
   rows into small label/value boxes on narrow screens instead of scrolling.
-- **Small optional JS** for tabs, sortable and stacked tables, menu placement, dialogs,
-  toggles, copy/share/print, toasts and the theme switch.
+- **Small optional JS** for tabs, sortable and stacked tables, menu placement, the
+  carousel, dialogs, toggles, copy/share/print, toasts, notifications and the theme switch.
 - **Token exports**: `dist/tokens.json` (every value, resolved), a Tailwind v4
   bridge and a v3 preset.
 - **Showcase site** (`site/`, Norwegian demo pages): front page, article,
@@ -107,15 +111,15 @@ no images.
 
 | File | Minified | gzip |
 | --- | --- | --- |
-| `dist/oldschool.min.css` — tokens, both themes, all 62 components | 87 kB | **15 kB** |
-| `dist/oldschool.min.js` — optional behaviors | 18 kB | **6 kB** |
+| `dist/oldschool.min.css` — tokens, both themes, all 63 components | 93 kB | **16 kB** |
+| `dist/oldschool.min.js` — optional behaviors | 21 kB | **7 kB** |
 | `dist/icons.svg` — optional sprite, 123 Lucide icons | 25 kB | 6 kB |
 
 ## Quick start
 
 ```html
 <!doctype html>
-<html lang="nb">                    <!-- retro by default; data-theme="standard" for the tidier look -->
+<html lang="nb">                    <!-- standard by default; data-theme="retro" for the full 2008 look -->
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="oldschool/dist/oldschool.min.css">

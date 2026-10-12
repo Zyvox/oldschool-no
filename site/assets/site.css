@@ -504,3 +504,29 @@
 .hx-after-table {
   margin-block-start: var(--os-space-2);
 }
+
+/* Carousel demo: drawn placeholders instead of photos */
+.hx-carousel {
+  max-width: 36rem;
+}
+
+.hx-pic {
+  display: grid;
+  place-items: end start;
+  width: 100%;
+  height: 100%;
+  padding: var(--os-space-3);
+  color: var(--os-color-text-strong);
+  font-weight: var(--os-weight-bold);
+  background:
+    linear-gradient(to top, var(--_ground) 0 30%, transparent 30%),
+    radial-gradient(circle at 75% 30%, var(--os-color-highlight) 0 8%, transparent 8.5%),
+    linear-gradient(var(--_sky), var(--os-color-surface-sunken));
+}
+
+.os-carousel__thumb .hx-pic { padding: 0; }
+.hx-pic--1 { --_sky: var(--os-color-info-border); --_ground: var(--os-color-success-border); }
+.hx-pic--2 { --_sky: var(--os-color-warning-subtle); --_ground: var(--os-color-warning-border); }
+.hx-pic--3 { --_sky: var(--os-color-accent-muted); --_ground: var(--os-color-border); }
+.hx-pic--4 { --_sky: var(--os-color-danger-subtle); --_ground: var(--os-color-danger-border); }
+.hx-pic--5 { --_sky: var(--os-color-info-subtle); --_ground: var(--os-color-success-border); }

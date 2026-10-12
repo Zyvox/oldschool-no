@@ -88,9 +88,9 @@ if (form) {
   const checks = document.getElementById('accent-checks');
   const code = document.getElementById('accent-code');
   const frames = [
-    sample({ theme: 'retro', mode: 'light' }, 'Retro, light'),
     sample({ theme: 'standard', mode: 'light' }, 'Standard, light'),
-    sample({ theme: 'retro', mode: 'dark' }, 'Retro, dark'),
+    sample({ theme: 'retro', mode: 'light' }, 'Retro, light'),
+    sample({ theme: 'standard', mode: 'dark' }, 'Standard, dark'),
   ];
   preview.append(...frames);
 
@@ -109,7 +109,7 @@ if (form) {
     const l = s.link ?? a;
     const rows = [
       ['Links on white', l[700], n[0], 4.5],
-      ['Links on the retro frame', l[700], fr[200], 4.5],
+      ['Links on the frame', l[700], fr[200], 4.5],
       ['Links on header bands', l[700], fr[100], 4.5],
       ['White text on buttons', n[0], a[600], 4.5],
       ['Focus ring on white', a[600], n[0], 3],
@@ -143,7 +143,7 @@ if (form) {
 const recipes = document.getElementById('recipes');
 if (recipes) {
   for (const [label, value, frame, links] of PRESETS) {
-    const fig = sample({ theme: 'retro', mode: 'light' },
+    const fig = sample({ theme: 'standard', mode: 'light' },
       `<strong>${label}</strong> — <code>accent = '${value}'</code>${frame === 'accent' ? '' : `, ${frame} frame`}${links ? ', blue links' : ''}`);
     paint(fig.querySelector('.hx-theme__frame'), scheme(value, frame, links));
     recipes.append(fig);

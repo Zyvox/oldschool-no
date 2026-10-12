@@ -16,9 +16,10 @@ import { toast, notify, initNotification } from './toast.js';
 import { initToggle, initShare, initCopy, initPrint, initDialogTrigger } from './actions.js';
 import { initSortableTable, initStackedTable } from './sort.js';
 import { initMenu } from './menu.js';
+import { initCarousel } from './carousel.js';
 import { getPreferences, setPreferences, resolvedMode, bindThemeControl, listenForPreferenceChanges } from './theme.js';
 
-export const version = '0.2.0';
+export const version = '0.3.0';
 
 register('tabs', '[data-os-tabs]', initTabs);
 register('toggle', '[data-os-toggle]', initToggle);
@@ -30,6 +31,7 @@ register('sort', 'table[data-os-sort]', initSortableTable);
 register('stack', 'table.os-table--stack', initStackedTable);
 register('menu', '.os-menu[popover]', initMenu);
 register('notification', '.os-notification', initNotification);
+register('carousel', '.os-carousel', initCarousel);
 register('theme-control', '[data-os-theme-control]', bindThemeControl);
 
 export function init(root = document) {

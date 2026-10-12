@@ -78,16 +78,16 @@ await test('sort: headers become buttons; dates and "1 284,-" amounts sort numer
 await test('theme: harness controls set data attributes and persist', async (page) => {
   await page.goto(`${url}/site/detail.html`);
   const before = await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor + getComputedStyle(document.body).backgroundColor);
-  await page.selectOption('.hx-bar select[data-os-theme-control="theme"]', 'standard');
+  await page.selectOption('.hx-bar select[data-os-theme-control="theme"]', 'retro');
   await page.selectOption('.hx-bar select[data-os-theme-control="mode"]', 'dark');
   await page.selectOption('.hx-bar select[data-os-theme-control="density"]', 'compact');
   await page.selectOption('.hx-bar select[data-os-theme-control="width"]', 'wide');
-  expect(await page.getAttribute('html', 'data-theme') === 'standard', 'theme not set');
+  expect(await page.getAttribute('html', 'data-theme') === 'retro', 'theme not set');
   expect(await page.getAttribute('html', 'data-width') === 'wide', 'width not set');
   expect(await page.getAttribute('html', 'data-mode') === 'dark', 'mode not set');
   expect(await page.getAttribute('html', 'data-density') === 'compact', 'density not set');
   await page.goto(`${url}/site/search.html`);
-  expect(await page.getAttribute('html', 'data-theme') === 'standard', 'theme not persisted across pages');
+  expect(await page.getAttribute('html', 'data-theme') === 'retro', 'theme not persisted across pages');
   const container = await page.$eval('.os-container', (c) => c.getBoundingClientRect().width);
   expect(container > 1100, `wide container is ${container}px`);
   expect(await page.getAttribute('html', 'data-density') === 'compact', 'density not persisted');
@@ -116,7 +116,7 @@ await test('themes page: accent playground re-colours the previews and passes co
   const code = await page.textContent('#accent-code');
   expect(code.includes("'#2f6b3f'") && code.includes('frame = { hue: 80'), `snippet not updated: ${code}`);
   expect(!(await page.$('#accent-checks .os-badge--danger')), 'a preset fails contrast');
-  expect(await page.$$eval('#recipes .hx-theme__frame', (f) => new Set(f.map((x) => x.style.getPropertyValue('--os-accent-600'))).size) === 6, 'recipes are not six colours');
+  expect(await page.$$eval('#recipes .hx-theme__frame', (f) => new Set(f.map((x) => x.style.getPropertyValue('--os-accent-600') + x.style.getPropertyValue('--os-frame-200'))).size) === 7, 'recipes are not seven palettes');
 });
 
 await test('stacked table: rows become labelled boxes on phones, a table on desktop', async (page) => {
@@ -179,6 +179,27 @@ await test('notifications: corner window closes, times out, and the centred one 
   await page.keyboard.press('Escape');
   await page.waitForTimeout(100);
   expect(!(await page.$('.os-notification--center')), 'Escape did not close the centred notification');
+});
+
+await test('carousel: buttons, keys, counter and thumbnails move together', async (page) => {
+  await page.goto(`${url}/site/components.html#carousel`);
+  const count = () => page.textContent('#carousel .os-carousel__count');
+  expect(await count() === '1 / 5', 'counter missing');
+  expect(await page.isDisabled('#carousel .os-carousel__nav--prev'), 'prev enabled on the first picture');
+  await page.click('#carousel .os-carousel__nav--next');
+  await page.waitForTimeout(600);
+  expect(await count() === '2 / 5', `next did not move: ${await count()}`);
+  expect(await page.getAttribute('#carousel .os-carousel__thumb:nth-child(2)', 'aria-current') === 'true', 'thumbnail not marked');
+  await page.focus('#carousel .os-carousel__track');
+  await page.keyboard.press('End');
+  await page.waitForTimeout(700);
+  expect(await count() === '5 / 5' && await page.isDisabled('#carousel .os-carousel__nav--next'), 'End did not reach the last picture');
+  const y = await page.evaluate(() => scrollY);
+  await page.click('#carousel .os-carousel__thumb:nth-child(1)');
+  await page.waitForTimeout(700);
+  expect(await count() === '1 / 5', 'thumbnail did not move the track');
+  expect(Math.abs(await page.evaluate(() => scrollY) - y) < 2, 'thumbnail jumped the page');
+  expect(await page.$eval('#carousel .os-carousel__slide', (s) => s.getAttribute('aria-roledescription')) === 'slide', 'slide role missing');
 });
 
 await test('mobile: masthead menu popover and filter sheet open without JS', async (page) => {

@@ -1,7 +1,5 @@
 /*
  * Button — <button> for actions, <a> for navigation; same looks.
- * A faint top-to-bottom gradient and a one-pixel highlight: the 2008 button,
- * flattened just enough.
  *
  *   <button class="os-button" type="button">Avbryt</button>
  *   <button class="os-button os-button--primary" type="submit">Send</button>
@@ -10,21 +8,38 @@
  * Sizes:  --sm · (default 30px, 40px on touch screens) · --lg
  * Other:  --block (full width) · --icon (square; needs aria-label)
  *
- * Two styles. The default is the retro button: gradient and highlight.
- * --flat is the plain one — solid primary, white secondary with a rule,
- * no gradient — for app screens. Put it on one button, or data-buttons="flat"
- * on any element (or <html>) to make every button inside flat. Every look,
- * size and group works in both styles.
+ * Two styles, one component. The standard theme's buttons are flat: a solid
+ * primary and a white secondary with a rule. The retro theme's are the 2008
+ * button: a top-to-bottom gradient. Switch either way on one button with
+ * --retro / --flat, or on everything inside an element (or <html>) with
+ * data-buttons="retro" / "flat". The nearest setting wins; every look, size
+ * and group works in both. (Under the hood: --os-button-retro, 0 or 1.)
  *
- *   <button class="os-button os-button--flat os-button--primary" type="button">
+ *   <button class="os-button os-button--primary" type="button">
  *     <svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-search"></use></svg> Finn nye
  *   </button>
- *   <div data-buttons="flat">…every .os-button in here is flat…</div>
+ *   <div data-buttons="retro">…every .os-button in here is bevelled…</div>
  */
 @layer os.components {
+  [data-buttons="retro"],
+  .os-button.os-button--retro {
+    --os-button-retro: 1;
+  }
+
+  [data-buttons="flat"],
+  .os-button.os-button--flat {
+    --os-button-retro: 0;
+  }
+
+  /* Each look names its colours twice: retro (--_r*) and flat (--_f*). --_on
+     picks one; the gradient's top is the shine in retro and the fill in flat. */
   .os-button {
-    --_top: var(--os-color-surface);
-    --_bottom: var(--os-color-button);
+    --_on: calc(var(--os-button-retro, 0) * 100%);
+    --_rb: var(--os-color-button);
+    --_fb: var(--os-color-surface);
+    --_shine: var(--os-color-surface);
+    --_bottom: color-mix(in srgb, var(--_rb) var(--_on), var(--_fb));
+    --_top: color-mix(in srgb, var(--_shine) var(--_on), var(--_bottom));
     --_fg: var(--os-color-text-strong);
     --_border: var(--os-color-border-strong);
 
@@ -51,34 +66,14 @@
   }
 
   .os-button:hover {
-    --_top: var(--os-color-surface);
-    --_bottom: var(--os-color-button-hover);
+    --_rb: var(--os-color-button-hover);
+    --_fb: var(--os-color-surface-tint);
     color: var(--_fg);
     text-decoration: none;
   }
 
   .os-button:active {
     background-image: linear-gradient(var(--_bottom), var(--_top));
-    box-shadow: inset 0 1px 2px var(--os-color-shadow);
-  }
-
-  /* Flat style. Before the looks below, so --primary and --danger keep their colours. */
-  .os-button--flat,
-  :where([data-buttons="flat"]) .os-button {
-    --_bottom: var(--os-color-surface);
-
-    background-image: none;
-    box-shadow: none;
-  }
-
-  .os-button--flat:hover,
-  :where([data-buttons="flat"]) .os-button:hover {
-    --_bottom: var(--os-color-surface-tint);
-  }
-
-  .os-button--flat:active,
-  :where([data-buttons="flat"]) .os-button:active {
-    background-image: none;
     box-shadow: inset 0 1px 2px var(--os-color-shadow);
   }
 
@@ -93,43 +88,31 @@
   }
 
   .os-button--primary {
-    --_top: color-mix(in srgb, var(--os-color-accent) 82%, white);
-    --_bottom: var(--os-color-accent);
+    --_rb: var(--os-color-accent);
+    --_fb: var(--os-color-accent-hover);
+    --_shine: color-mix(in srgb, var(--os-color-accent) 82%, white);
     --_fg: var(--os-color-text-on-accent);
-    --_border: var(--os-color-accent-active);
+    --_border: color-mix(in srgb, var(--os-color-accent-active) var(--_on), var(--os-color-accent-hover));
   }
 
   .os-button--primary:hover {
-    --_top: var(--os-color-accent);
-    --_bottom: var(--os-color-accent-hover);
+    --_rb: var(--os-color-accent-hover);
+    --_fb: var(--os-color-accent-active);
+    --_shine: var(--os-color-accent);
   }
 
   .os-button--danger {
-    --_top: color-mix(in srgb, var(--os-color-danger-fill) 85%, white);
-    --_bottom: var(--os-color-danger-fill);
+    --_rb: var(--os-color-danger-fill);
+    --_fb: var(--os-color-danger-fill);
+    --_shine: color-mix(in srgb, var(--os-color-danger-fill) 85%, white);
     --_fg: var(--os-color-text-on-accent);
     --_border: var(--os-color-danger);
   }
 
   .os-button--danger:hover {
-    --_top: var(--os-color-danger-fill);
-    --_bottom: var(--os-color-danger);
-  }
-
-  .os-button--flat.os-button--primary,
-  :where([data-buttons="flat"]) .os-button--primary {
-    --_bottom: var(--os-color-accent-hover);
-    --_border: var(--os-color-accent-hover);
-  }
-
-  .os-button--flat.os-button--primary:hover,
-  :where([data-buttons="flat"]) .os-button--primary:hover {
-    --_bottom: var(--os-color-accent-active);
-  }
-
-  .os-button--flat.os-button--danger:hover,
-  :where([data-buttons="flat"]) .os-button--danger:hover {
-    --_bottom: var(--os-color-danger);
+    --_rb: var(--os-color-danger);
+    --_fb: var(--os-color-danger);
+    --_shine: var(--os-color-danger-fill);
   }
 
   .os-button--ghost {

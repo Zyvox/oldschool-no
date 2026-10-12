@@ -13,13 +13,13 @@ const shots = [
   { name: 'detail-desktop', page: 'detail', width: 1280, height: 900 },
   { name: 'detail-mobile', page: 'detail', width: 390, height: 844, scale: 2 },
   { name: 'detail-dark', page: 'detail', width: 1280, height: 900, mode: 'dark' },
-  { name: 'detail-standard', page: 'detail', width: 1280, height: 900, theme: 'standard' },
+  { name: 'detail-retro', page: 'detail', width: 1280, height: 900, theme: 'retro' },
   { name: 'jobs-desktop', page: 'jobs', width: 1440, height: 760 },
   { name: 'jobs-mobile', page: 'jobs', width: 390, height: 844, scale: 2 },
   { name: 'portal-desktop', page: 'portal', width: 1280, height: 900 },
-  { name: 'search-desktop', page: 'search', width: 1280, height: 900, theme: 'standard' },
+  { name: 'search-desktop', page: 'search', width: 1280, height: 900 },
   { name: 'app-desktop', page: 'app', width: 1280, height: 900 },
-  { name: 'article-desktop', page: 'article', width: 1280, height: 900, theme: 'standard' },
+  { name: 'article-desktop', page: 'article', width: 1280, height: 900, theme: 'retro' },
   { name: 'themes', page: 'themes', width: 1280, height: 900, scrollTo: '#h-compare' },
   { name: 'accent-recipes', page: 'themes', width: 1280, height: 900, element: '#recipes' },
   { name: 'accent-playground', page: 'themes', width: 1280, height: 900, element: '#h-accent', parent: true, click: '#accent-presets [data-hex="#2f6b3f"]' },
@@ -32,7 +32,7 @@ const { server, url } = await startServer(root);
 const browser = await chromium.launch();
 for (const s of shots) {
   const context = await browser.newContext({ viewport: { width: s.width, height: s.height }, deviceScaleFactor: s.scale ?? 1, reducedMotion: 'reduce' });
-  await context.addInitScript((p) => localStorage.setItem('os-prefs', JSON.stringify(p)), { theme: s.theme ?? 'retro', mode: s.mode ?? 'light', density: s.density ?? 'standard' });
+  await context.addInitScript((p) => localStorage.setItem('os-prefs', JSON.stringify(p)), { theme: s.theme ?? 'standard', mode: s.mode ?? 'light', density: s.density ?? 'standard' });
   const page = await context.newPage();
   await page.goto(`${url}/site/${s.page}.html`, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);

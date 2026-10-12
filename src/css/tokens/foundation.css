@@ -7,14 +7,14 @@
     --os-font-serif: Georgia, "Times New Roman", "Liberation Serif", serif;
     --os-font-mono: "Courier New", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
     --os-text-2xs: 0.6875rem;
-    --os-text-xs: 0.75rem;
-    --os-text-sm: 0.8125rem;
-    --os-text-md: 0.875rem;
-    --os-text-lg: 1rem;
-    --os-text-xl: 1.125rem;
+    --os-text-xs: 0.6875rem;
+    --os-text-sm: 0.75rem;
+    --os-text-md: 0.8125rem;
+    --os-text-lg: 0.9375rem;
+    --os-text-xl: 1.0625rem;
     --os-text-2xl: 1.25rem;
-    --os-text-3xl: 1.5rem;
-    --os-text-4xl: 1.875rem;
+    --os-text-3xl: 1.375rem;
+    --os-text-4xl: 1.75rem;
     --os-text-5xl: 2.25rem;
     --os-leading-none: 1;
     --os-leading-tight: 1.2;
@@ -77,21 +77,21 @@
   :where(:root, [data-theme]) {
     --os-font-body: var(--os-font-sans); /* Body copy font stack. */
     --os-font-heading: var(--os-font-sans); /* Headings font stack. */
-    --os-text-body: var(--os-text-md); /* Body copy size (14px). */
-    --os-leading-body: var(--os-leading-normal); /* Body copy line-height. */
+    --os-text-body: var(--os-text-md); /* Body copy size (13px). */
+    --os-leading-body: 1.4; /* Body copy line-height. */
     --os-weight-heading: var(--os-weight-bold); /* Weight for headings and box titles. */
     --os-weight-strong: var(--os-weight-bold); /* Weight for values, prices, <strong>. */
-    --os-tracking-heading: var(--os-tracking-tight); /* Letter-spacing for headings. */
+    --os-tracking-heading: var(--os-tracking-normal); /* Letter-spacing for headings. */
     --os-gutter: 0.75rem; /* Side padding of the page frame. */
-    --os-gap: 0.625rem; /* Gap between boxes on the canvas (10px). */
+    --os-gap: 0.5rem; /* Gap between boxes on the canvas (8px). */
     --os-pad: 0.75rem; /* Inner padding of boxes (12px). */
     --os-row-pad: 0.3125rem; /* Vertical padding of key/value, table and list rows. */
     --os-measure: 72ch; /* Max line length for running text. */
     --os-container-width: var(--os-container-lg); /* Max width of the page (1000px). .os-container--wide and data-width="wide": 1200px. */
     --os-aside-width: 18.75rem; /* Width of the right column (300px — the classic sidebar). */
     --os-sidebar-width: 12.5rem; /* Width of a left navigation column (200px). */
-    --os-radius-panel: var(--os-radius-sm); /* Corner radius of boxes (3px). */
-    --os-radius-control: var(--os-radius-sm); /* Corner radius of buttons and inputs. */
+    --os-radius-panel: var(--os-radius-none); /* Corner radius of boxes (square). */
+    --os-radius-control: var(--os-radius-sm); /* Corner radius of buttons and inputs (3px). */
     --os-radius-tab: var(--os-radius-md); /* Top corners of folder tabs. */
     --os-radius-badge: var(--os-radius-xs); /* Corner radius of badges. */
     --os-border-width: var(--os-border-thin); /* Border and rule width. */
@@ -102,10 +102,11 @@
     --os-shadow-panel: none; /* Boxes are flat. */
     --os-shadow-raised: 0 2px 6px var(--os-color-shadow); /* Menus and popovers. */
     --os-shadow-overlay: 0 4px 24px var(--os-color-shadow-strong); /* Dialogs. */
-    --os-bevel: inset 0 1px 0 rgb(255 255 255 / 0.55); /* Top highlight on buttons and bands — the one nod to 2008 gloss. */
+    --os-bevel: none; /* Top highlight on folder tabs and bands, e.g. inset 0 1px 0 rgb(255 255 255 / 0.55). None in both themes. */
+    --os-button-retro: 0; /* Button style: 0 = flat (solid primary, white secondary), 1 = the bevelled 2008 gradient. Retro sets 1; data-buttons or .os-button--retro/--flat override it. */
     --os-focus-width: 2px; /* Focus ring thickness. */
     --os-focus-offset: 1px; /* Gap between element and focus ring. */
-    --os-link-underline-offset: 0.15em; /* Distance from baseline to link underline. */
+    --os-link-underline-offset: auto; /* Distance from baseline to link underline. */
     --os-link-underline-thickness: 1px; /* Link underline thickness. */
   }
 

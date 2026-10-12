@@ -1,0 +1,162 @@
+/*
+ * Carousel — the pictures of one item (a listing, a cabin), one per view, on
+ * a sunken background. Swipe on touch screens (scroll-snap), arrows over the
+ * edges elsewhere, an "n / total" counter in the corner, and an optional
+ * strip of thumbnails that marks the current picture.
+ *
+ *   <section class="os-carousel" aria-roledescription="carousel" aria-label="Bilder av hytta">
+ *     <div class="os-carousel__stage">
+ *       <div class="os-carousel__track" tabindex="0">
+ *         <div class="os-carousel__slide" id="bilde-1" role="group" aria-roledescription="slide" aria-label="1 av 5">
+ *           <img src="1.jpg" alt="Inngangspartiet om kvelden">
+ *         </div>
+ *         <div class="os-carousel__slide" id="bilde-2" role="group" aria-roledescription="slide" aria-label="2 av 5">
+ *           <img src="2.jpg" alt="…" loading="lazy">               every picture but the first
+ *         </div> …
+ *       </div>
+ *     </div>
+ *     <nav class="os-carousel__thumbs" aria-label="Velg bilde">     (optional)
+ *       <a class="os-carousel__thumb" href="#bilde-1" aria-current="true"><img src="1-small.jpg" alt="Bilde 1"></a> …
+ *     </nav>
+ *   </section>
+ *
+ * oldschool.js adds the ‹ › buttons (hidden on touch-only screens, dimmed at
+ * the first and last picture), the counter, arrow keys and Home/End on the
+ * focused track, and keeps the thumbnails in step. Without it the track still
+ * swipes and scrolls, and the thumbnails are links to the slides.
+ *
+ * Knobs: --os-carousel-ratio (default 4 / 3) · --os-carousel-fit (contain;
+ * cover crops to fill).
+ */
+@layer os.components {
+  .os-carousel {
+    display: grid;
+    gap: var(--os-space-2);
+    min-width: 0;
+  }
+
+  .os-carousel__stage {
+    position: relative;
+    min-width: 0;
+    background-color: var(--os-color-surface-sunken);
+  }
+
+  .os-carousel__track {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .os-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .os-carousel__track:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .os-carousel__slide {
+    display: grid;
+    flex: 0 0 100%;
+    place-items: center;
+    aspect-ratio: var(--os-carousel-ratio, 4 / 3);
+    overflow: hidden;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .os-carousel__slide > :is(img, picture, video) {
+    width: 100%;
+    height: 100%;
+    object-fit: var(--os-carousel-fit, contain);
+  }
+
+  .os-carousel__nav {
+    position: absolute;
+    inset-block-start: 50%;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 3.75rem;
+    padding: 0 0 0.15em;
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: var(--os-radius-control);
+    background-color: color-mix(in srgb, var(--os-color-surface-raised) 88%, transparent);
+    box-shadow: var(--os-shadow-raised);
+    color: var(--os-color-text-strong);
+    font-family: var(--os-font-body);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    translate: 0 -50%;
+  }
+
+  .os-carousel__nav:hover {
+    background-color: var(--os-color-surface-raised);
+  }
+
+  .os-carousel__nav:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .os-carousel__nav--prev { inset-inline-start: var(--os-space-2); }
+  .os-carousel__nav--next { inset-inline-end: var(--os-space-2); }
+
+  @media (hover: none) and (pointer: coarse) {
+    .os-carousel__nav {
+      display: none;
+    }
+  }
+
+  .os-carousel__count {
+    position: absolute;
+    inset-block-end: var(--os-space-2);
+    inset-inline-end: var(--os-space-2);
+    margin: 0;
+    padding: var(--os-space-0-5) var(--os-space-2);
+    border-radius: var(--os-radius-badge);
+    background-color: color-mix(in srgb, var(--os-color-surface-raised) 88%, transparent);
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-xs);
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+  }
+
+  .os-carousel__thumbs {
+    display: flex;
+    gap: var(--os-space-2);
+    overflow-x: auto;
+    padding-block-end: var(--os-space-0-5);
+  }
+
+  /* position: relative keeps visually hidden labels inside the scrolling strip. */
+  .os-carousel__thumb {
+    position: relative;
+    display: block;
+    flex: none;
+    width: 5.25rem;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background-color: var(--os-color-surface-sunken);
+  }
+
+  .os-carousel__thumb > :is(img, picture) {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .os-carousel__thumb[aria-current="true"] {
+    border-color: var(--os-color-accent);
+  }
+
+  .os-carousel__thumb:focus-visible {
+    outline-offset: 1px;
+  }
+}

@@ -60,7 +60,7 @@
               <h1 class="os-heading__title" id="intro">The 2008 Nordic portal, brought back</h1>
               <p class="os-heading__subtitle">Same design. A calmer palette, accessible sizes, modern CSS underneath.</p>
             </div>
-            <p class="os-prose__ingress os-measure">Oldschool is a reference harness for the practical Norwegian web of the late 2000s — the classifieds, municipalities and newspapers that put a tinted frame around white boxes, underlined every link and listed facts as <em>label : value</em>. It keeps that design exactly — Verdana, the blue frame, square boxes — and fixes only what dates it: the palette, the contrast, the target sizes and the code underneath.</p>
+            <p class="os-prose__ingress os-measure">Oldschool is a reference harness for the practical Norwegian web of the late 2000s — the classifieds, municipalities and newspapers that put a tinted frame around white boxes, underlined every link and listed facts as <em>label : value</em>. It keeps that design — the blue frame, square white boxes, header bands — and fixes only what dates it: the palette, the contrast, the target sizes and the code underneath.</p>
             <p class="os-buttons"><a class="os-button os-button--primary" href="detail.html">See a detail page</a><a class="os-button" href="components.html">Browse components</a></p>
           </div>
         </section>
@@ -79,8 +79,8 @@
               <ul class="os-checklist" role="list">
                 <li>Facts as <em>label : value</em> rows</li>
                 <li>One big price in a side box</li>
-                <li>Grey buttons, one blue one</li>
-                <li>Verdana, fixed pixel sizes, bold headings</li>
+                <li>White buttons, one blue one (bevelled in retro)</li>
+                <li>Fixed pixel sizes, bold headings</li>
                 <li>Link lists with » and a yellow note</li>
               </ul>
             </div>
@@ -95,7 +95,7 @@
                 <thead><tr><th scope="col">Then</th><th scope="col">Now</th><th scope="col">Why</th></tr></thead>
                 <tbody>
                   <tr><td>Saturated sky-blue frame, hand-picked colours</td><td>The same frame, every shade grown from one accent seed</td><td>Re-brand with one line; contrast stays guaranteed</td></tr>
-                  <tr><td>Verdana 11px</td><td>Verdana 12px — or Arial 14px in the standard theme</td><td>Readable on today's screens without zooming</td></tr>
+                  <tr><td>Verdana 11px</td><td>Arial 13px — or Verdana 12px in the retro theme</td><td>Readable on today's screens without zooming</td></tr>
                   <tr><td>16–18px buttons and links</td><td>24px minimum targets</td><td>WCAG 2.2 target size</td></tr>
                   <tr><td>Table layout, image sprites</td><td>Grid, container queries, SVG icons; tables stack on phones</td><td>Works from 320px phones to wide screens</td></tr>
                   <tr><td>A fixed 1000px page</td><td>1000px, or 1200px with <code>.os-container--wide</code></td><td>Room for tables on 16:9 screens, still centred</td></tr>
@@ -104,7 +104,7 @@
                 </tbody>
               </table>
             </div>
-            <p class="os-text-sm os-text-muted hx-after-table">Prefer it tidier? Choose <strong>Standard</strong> in the grey bar — Arial 14px, a paler frame, 3px corners — or compare both on the <a href="themes.html#h-compare">themes page</a>.</p>
+            <p class="os-text-sm os-text-muted hx-after-table">Want the full 2008 look? Choose <strong>Retro</strong> in the grey bar — Verdana 12px, 24px square controls, bevelled buttons — or compare both on the <a href="themes.html#h-compare">themes page</a>.</p>
           </div>
         </section>
 
@@ -144,7 +144,7 @@
           <header class="os-panel__header"><h2 class="os-panel__title" id="h-start">Quick start</h2></header>
           <div class="os-panel__body os-stack os-stack--sm">
             <p>Two files, no dependencies. Everything works without the script; it only adds tabs, sorting, dialogs and the theme switch.</p>
-            <pre tabindex="0"><code>&lt;html lang="nb"&gt;   &lt;!-- retro by default; data-theme="standard" for the tidier look --&gt;
+            <pre tabindex="0"><code>&lt;html lang="nb"&gt;   &lt;!-- standard by default; data-theme="retro" for the full 2008 look --&gt;
 &lt;link rel="stylesheet" href="oldschool/dist/oldschool.min.css"&gt;
 &lt;script src="oldschool/dist/oldschool.min.js" defer&gt;&lt;/script&gt;
 
@@ -188,13 +188,13 @@
           <header class="os-panel__header"><h2 class="os-panel__title os-panel__title--sm" id="h-numbers">In the box</h2></header>
           <div class="os-panel__body">
             <dl class="os-kv os-kv--end">
-              <div><dt>Components</dt><dd>62</dd></div>
+              <div><dt>Components</dt><dd>63</dd></div>
               <div><dt>Themes</dt><dd>2</dd></div>
               <div><dt>Accent seeds</dt><dd>1</dd></div>
               <div><dt>Densities</dt><dd>3</dd></div>
               <div><dt>Icons</dt><dd>123</dd></div>
-              <div><dt>CSS (min + gzip)</dt><dd>≈ 15 kB</dd></div>
-              <div><dt>JS (min + gzip)</dt><dd>≈ 6 kB</dd></div>
+              <div><dt>CSS (min + gzip)</dt><dd>≈ 16 kB</dd></div>
+              <div><dt>JS (min + gzip)</dt><dd>≈ 7 kB</dd></div>
               <div><dt>JavaScript</dt><dd>optional</dd></div>
               <div><dt>Dependencies</dt><dd>0</dd></div>
             </dl>

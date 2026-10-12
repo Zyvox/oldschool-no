@@ -47,7 +47,7 @@
         '</ul></nav>' +
         '<button class="hx-bar__toggle hx-bar__toggle--end" type="button" popovertarget="hx-controls">Theme ▾</button>' +
         '<div class="hx-bar__controls" id="hx-controls" popover>' +
-          '<label>Theme <select data-os-theme-control="theme">' + options(window.OS_THEMES || { retro: 'Retro', standard: 'Standard' }) + '</select></label>' +
+          '<label>Theme <select data-os-theme-control="theme">' + options(window.OS_THEMES || { standard: 'Standard', retro: 'Retro' }) + '</select></label>' +
           '<label>Mode <select data-os-theme-control="mode">' + options({ auto: 'Auto', light: 'Light', dark: 'Dark' }) + '</select></label>' +
           '<label>Density <select data-os-theme-control="density">' + options({ compact: 'Compact', standard: 'Standard', comfortable: 'Comfortable' }) + '</select></label>' +
           '<label>Width <select data-os-theme-control="width">' + options({ classic: 'Classic', wide: 'Wide' }) + '</select></label>' +

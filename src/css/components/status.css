@@ -5,7 +5,8 @@
  *
  *   <span class="os-status os-status--running">Kjører</span>
  *
- * Tones: (neutral, idle) · --running · --success · --warning · --danger
+ * Tones: (neutral: never run, cancelled) · --running (the dot pulses slowly;
+ * still with reduced motion) · --success · --warning · --danger
  * --pill adds a tinted box around it.
  */
 @layer os.components {
@@ -32,6 +33,20 @@
   }
 
   .os-status--running { --_dot: var(--os-color-accent); --_bg: var(--os-color-accent-subtle); }
+
+  .os-status--running::before {
+    animation: os-pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes os-pulse {
+    50% { opacity: 0.3; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .os-status--running::before {
+      animation: none;
+    }
+  }
   .os-status--success { --_dot: var(--os-color-success-fill); --_bg: var(--os-color-success-subtle); }
   .os-status--warning { --_dot: var(--os-color-warning-fill); --_bg: var(--os-color-warning-subtle); }
   .os-status--danger { --_dot: var(--os-color-danger-fill); --_bg: var(--os-color-danger-subtle); }

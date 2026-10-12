@@ -51,6 +51,9 @@ const STRINGS = {
     success: 'Done',
     warning: 'Note',
     danger: 'Something went wrong',
+    prevPicture: 'Previous picture',
+    nextPicture: 'Next picture',
+    pictureOf: '{i} of {n}',
   },
   nb: {
     copied: 'Kopiert',
@@ -61,6 +64,9 @@ const STRINGS = {
     success: 'Fullført',
     warning: 'Obs!',
     danger: 'Noe gikk galt',
+    prevPicture: 'Forrige bilde',
+    nextPicture: 'Neste bilde',
+    pictureOf: '{i} av {n}',
   },
 };
 

@@ -21,17 +21,17 @@ const quick = process.argv.includes('--quick');
 
 const pages = fs.readdirSync(path.join(root, 'site')).filter((f) => f.endsWith('.html'));
 const variants = quick
-  ? [{ theme: 'retro', mode: 'light', width: 1280 }]
+  ? [{ theme: 'standard', mode: 'light', width: 1280 }]
   : [
-    { theme: 'retro', mode: 'light', width: 1280 },
-    { theme: 'retro', mode: 'dark', width: 1280 },
-    { theme: 'retro', mode: 'light', width: 390 },
-    { theme: 'retro', mode: 'light', width: 1280, density: 'compact' },
     { theme: 'standard', mode: 'light', width: 1280 },
-    { theme: 'standard', mode: 'dark', width: 390 },
-    { theme: 'standard', mode: 'light', width: 1280, density: 'comfortable', width_: 'wide' },
-    { theme: 'retro', mode: 'light', width: 1280, contrast: true },
-    { theme: 'retro', mode: 'dark', width: 1440, width_: 'wide' },
+    { theme: 'standard', mode: 'dark', width: 1280 },
+    { theme: 'standard', mode: 'light', width: 390 },
+    { theme: 'standard', mode: 'light', width: 1280, density: 'compact' },
+    { theme: 'retro', mode: 'light', width: 1280 },
+    { theme: 'retro', mode: 'dark', width: 390 },
+    { theme: 'retro', mode: 'light', width: 1280, density: 'comfortable', width_: 'wide' },
+    { theme: 'standard', mode: 'light', width: 1280, contrast: true },
+    { theme: 'standard', mode: 'dark', width: 1440, width_: 'wide' },
   ];
 
 const { server, url } = await startServer(root);

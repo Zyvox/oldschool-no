@@ -1,4 +1,4 @@
-/*! Oldschool v0.2.0 · MIT · https://github.com/Zyvox/oldschool-no */
+/*! Oldschool v0.3.0 · MIT · https://github.com/Zyvox/oldschool-no */
 /*
  * Oldschool — the 2008 Scandinavian web, brought back.
  *
@@ -111,14 +111,14 @@
     --os-font-serif: Georgia, "Times New Roman", "Liberation Serif", serif;
     --os-font-mono: "Courier New", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
     --os-text-2xs: 0.6875rem;
-    --os-text-xs: 0.75rem;
-    --os-text-sm: 0.8125rem;
-    --os-text-md: 0.875rem;
-    --os-text-lg: 1rem;
-    --os-text-xl: 1.125rem;
+    --os-text-xs: 0.6875rem;
+    --os-text-sm: 0.75rem;
+    --os-text-md: 0.8125rem;
+    --os-text-lg: 0.9375rem;
+    --os-text-xl: 1.0625rem;
     --os-text-2xl: 1.25rem;
-    --os-text-3xl: 1.5rem;
-    --os-text-4xl: 1.875rem;
+    --os-text-3xl: 1.375rem;
+    --os-text-4xl: 1.75rem;
     --os-text-5xl: 2.25rem;
     --os-leading-none: 1;
     --os-leading-tight: 1.2;
@@ -181,21 +181,21 @@
   :where(:root, [data-theme]) {
     --os-font-body: var(--os-font-sans); /* Body copy font stack. */
     --os-font-heading: var(--os-font-sans); /* Headings font stack. */
-    --os-text-body: var(--os-text-md); /* Body copy size (14px). */
-    --os-leading-body: var(--os-leading-normal); /* Body copy line-height. */
+    --os-text-body: var(--os-text-md); /* Body copy size (13px). */
+    --os-leading-body: 1.4; /* Body copy line-height. */
     --os-weight-heading: var(--os-weight-bold); /* Weight for headings and box titles. */
     --os-weight-strong: var(--os-weight-bold); /* Weight for values, prices, <strong>. */
-    --os-tracking-heading: var(--os-tracking-tight); /* Letter-spacing for headings. */
+    --os-tracking-heading: var(--os-tracking-normal); /* Letter-spacing for headings. */
     --os-gutter: 0.75rem; /* Side padding of the page frame. */
-    --os-gap: 0.625rem; /* Gap between boxes on the canvas (10px). */
+    --os-gap: 0.5rem; /* Gap between boxes on the canvas (8px). */
     --os-pad: 0.75rem; /* Inner padding of boxes (12px). */
     --os-row-pad: 0.3125rem; /* Vertical padding of key/value, table and list rows. */
     --os-measure: 72ch; /* Max line length for running text. */
     --os-container-width: var(--os-container-lg); /* Max width of the page (1000px). .os-container--wide and data-width="wide": 1200px. */
     --os-aside-width: 18.75rem; /* Width of the right column (300px — the classic sidebar). */
     --os-sidebar-width: 12.5rem; /* Width of a left navigation column (200px). */
-    --os-radius-panel: var(--os-radius-sm); /* Corner radius of boxes (3px). */
-    --os-radius-control: var(--os-radius-sm); /* Corner radius of buttons and inputs. */
+    --os-radius-panel: var(--os-radius-none); /* Corner radius of boxes (square). */
+    --os-radius-control: var(--os-radius-sm); /* Corner radius of buttons and inputs (3px). */
     --os-radius-tab: var(--os-radius-md); /* Top corners of folder tabs. */
     --os-radius-badge: var(--os-radius-xs); /* Corner radius of badges. */
     --os-border-width: var(--os-border-thin); /* Border and rule width. */
@@ -206,10 +206,11 @@
     --os-shadow-panel: none; /* Boxes are flat. */
     --os-shadow-raised: 0 2px 6px var(--os-color-shadow); /* Menus and popovers. */
     --os-shadow-overlay: 0 4px 24px var(--os-color-shadow-strong); /* Dialogs. */
-    --os-bevel: inset 0 1px 0 rgb(255 255 255 / 0.55); /* Top highlight on buttons and bands — the one nod to 2008 gloss. */
+    --os-bevel: none; /* Top highlight on folder tabs and bands, e.g. inset 0 1px 0 rgb(255 255 255 / 0.55). None in both themes. */
+    --os-button-retro: 0; /* Button style: 0 = flat (solid primary, white secondary), 1 = the bevelled 2008 gradient. Retro sets 1; data-buttons or .os-button--retro/--flat override it. */
     --os-focus-width: 2px; /* Focus ring thickness. */
     --os-focus-offset: 1px; /* Gap between element and focus ring. */
-    --os-link-underline-offset: 0.15em; /* Distance from baseline to link underline. */
+    --os-link-underline-offset: auto; /* Distance from baseline to link underline. */
     --os-link-underline-thickness: 1px; /* Link underline thickness. */
   }
 
@@ -233,7 +234,7 @@
   [data-mode="dark"] { color-scheme: dark; }
 
   :where(:root, [data-theme]) {
-    --os-color-canvas: light-dark(var(--os-frame-100), var(--os-neutral-1000));
+    --os-color-canvas: light-dark(var(--os-frame-200), var(--os-neutral-1000));
     --os-color-surface: light-dark(var(--os-neutral-0), var(--os-neutral-950));
     --os-color-surface-raised: light-dark(var(--os-neutral-0), var(--os-neutral-900));
     --os-color-surface-sunken: light-dark(var(--os-neutral-50), var(--os-neutral-1000));
@@ -243,7 +244,7 @@
     --os-color-surface-inverse: light-dark(var(--os-neutral-900), var(--os-neutral-50));
     --os-color-text: light-dark(var(--os-neutral-900), var(--os-neutral-50));
     --os-color-text-strong: light-dark(var(--os-neutral-1000), var(--os-neutral-0));
-    --os-color-text-muted: light-dark(var(--os-neutral-600), var(--os-neutral-400));
+    --os-color-text-muted: light-dark(var(--os-neutral-700), var(--os-neutral-400));
     --os-color-text-subtle: light-dark(var(--os-neutral-500), var(--os-neutral-400));
     --os-color-text-inverse: light-dark(var(--os-neutral-0), var(--os-neutral-1000));
     --os-color-text-on-accent: light-dark(var(--os-neutral-0), var(--os-neutral-1000));
@@ -285,9 +286,9 @@
     --os-color-shadow-strong: light-dark(#1113152e, #111315b3);
     --os-color-masthead: transparent;
     --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
-    --os-color-panel-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
+    --os-color-panel-border: transparent;
     --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
-    --os-color-panel-header-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
+    --os-color-panel-header-border: transparent;
     --os-color-tab: light-dark(var(--os-frame-50), var(--os-neutral-900));
     --os-color-zebra: light-dark(var(--os-frame-50), var(--os-neutral-900));
     --os-color-button: light-dark(var(--os-neutral-100), var(--os-neutral-850));
@@ -300,8 +301,34 @@
 /* Themes: overrides of primitives, roles and semantic colors on top of the base tokens.
    Apply with data-theme="…" on <html> or on any element. */
 @layer os.tokens {
-  /* Retro — The default. The 2008 portal as it was: Verdana 12px, saturated frame, square corners, tight boxes. */
-  :root, [data-theme="retro"] {
+  /* Standard — The default. The 2008 layout with today's controls: Arial 13px, saturated frame, square boxes, flat buttons with 3px corners. */
+  :root, [data-theme="standard"] {
+    --os-text-2xs: 0.6875rem;
+    --os-text-xs: 0.6875rem;
+    --os-text-sm: 0.75rem;
+    --os-text-md: 0.8125rem;
+    --os-text-lg: 0.9375rem;
+    --os-text-xl: 1.0625rem;
+    --os-text-2xl: 1.25rem;
+    --os-text-3xl: 1.375rem;
+    --os-text-4xl: 1.75rem;
+    --os-text-5xl: 2.25rem;
+    --os-font-body: var(--os-font-sans);
+    --os-leading-body: 1.4;
+    --os-pad: 0.75rem;
+    --os-row-pad: 0.3125rem;
+    --os-radius-control: var(--os-radius-sm);
+    --os-radius-tab: var(--os-radius-md);
+    --os-radius-badge: var(--os-radius-xs);
+    --os-control-height: 1.875rem;
+    --os-control-height-sm: 1.5rem;
+    --os-control-height-lg: 2.25rem;
+    --os-control-pad-x: 0.625rem;
+    --os-button-retro: 0;
+  }
+
+  /* Retro — The 2008 portal all the way: Verdana 12px, 24px square controls, bevelled buttons, tight boxes. */
+  [data-theme="retro"] {
     --os-text-2xs: 0.625rem;
     --os-text-xs: 0.6875rem;
     --os-text-sm: 0.6875rem;
@@ -314,11 +341,8 @@
     --os-text-5xl: 1.75rem;
     --os-font-body: var(--os-font-verdana);
     --os-leading-body: 1.35;
-    --os-tracking-heading: 0;
-    --os-gap: 0.5rem;
     --os-pad: 0.625rem;
     --os-row-pad: 0.25rem;
-    --os-radius-panel: 0;
     --os-radius-control: 0;
     --os-radius-tab: 0;
     --os-radius-badge: 0;
@@ -326,52 +350,7 @@
     --os-control-height-sm: 1.5rem;
     --os-control-height-lg: 1.875rem;
     --os-control-pad-x: 0.5rem;
-    --os-bevel: none;
-    --os-link-underline-offset: auto;
-    --os-color-canvas: light-dark(var(--os-frame-200), var(--os-neutral-1000));
-    --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
-    --os-color-panel-border: transparent;
-    --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
-    --os-color-panel-header-border: transparent;
-    --os-color-text: light-dark(var(--os-neutral-900), var(--os-neutral-50));
-    --os-color-text-muted: light-dark(var(--os-neutral-700), var(--os-neutral-400));
-  }
-
-  /* Standard — The same structure, tidied: Arial 14px, a paler frame, 3px corners, ruled rows and more air. */
-  [data-theme="standard"] {
-    --os-text-2xs: 0.6875rem;
-    --os-text-xs: 0.75rem;
-    --os-text-sm: 0.8125rem;
-    --os-text-md: 0.875rem;
-    --os-text-lg: 1rem;
-    --os-text-xl: 1.125rem;
-    --os-text-2xl: 1.25rem;
-    --os-text-3xl: 1.5rem;
-    --os-text-4xl: 1.875rem;
-    --os-text-5xl: 2.25rem;
-    --os-font-body: var(--os-font-sans);
-    --os-leading-body: var(--os-leading-normal);
-    --os-tracking-heading: var(--os-tracking-tight);
-    --os-gap: 0.625rem;
-    --os-pad: 0.75rem;
-    --os-row-pad: 0.3125rem;
-    --os-radius-panel: var(--os-radius-sm);
-    --os-radius-control: var(--os-radius-sm);
-    --os-radius-tab: var(--os-radius-md);
-    --os-radius-badge: var(--os-radius-xs);
-    --os-control-height: 1.875rem;
-    --os-control-height-sm: 1.5rem;
-    --os-control-height-lg: 2.25rem;
-    --os-control-pad-x: 0.625rem;
-    --os-bevel: inset 0 1px 0 rgb(255 255 255 / 0.55);
-    --os-link-underline-offset: 0.15em;
-    --os-color-canvas: light-dark(var(--os-frame-100), var(--os-neutral-1000));
-    --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
-    --os-color-panel-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
-    --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
-    --os-color-panel-header-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
-    --os-color-text: light-dark(var(--os-neutral-900), var(--os-neutral-50));
-    --os-color-text-muted: light-dark(var(--os-neutral-600), var(--os-neutral-400));
+    --os-button-retro: 1;
   }
 
   /* Stronger values when the visitor asks for more contrast, on top of any theme. */
@@ -1872,10 +1851,11 @@
  *     <footer class="os-panel__footer">…</footer>             (optional)
  *   </section>
  *
- * The header is the tinted band of the original, with a one-pixel highlight.
+ * The header is the tinted band of the original.
  * Variants:
  *   --plain     no band: the title sits in the box (secondary boxes)
- *   --flush     body without padding (tables, link lists)
+ *   --flush     every body without padding (tables, link lists); for one
+ *               body only, use .os-panel__body--flush
  *   --accent    band in the accent colour with white text ("Viktig!")
  *   --tint      tinted body (highlighted summaries, tips)
  *   --note      yellow sticky-note box
@@ -1960,7 +1940,8 @@
     box-shadow: none;
   }
 
-  .os-panel--flush > .os-panel__body {
+  .os-panel--flush > .os-panel__body,
+  .os-panel__body--flush {
     padding: 0;
   }
 
@@ -3055,7 +3036,8 @@
  * (<th title="Overvåkes nå">Over-<br>våkes</th>) lines up with one-line ones.
  * Server-side sorting: put the link in the header as <a class="os-table__sort"
  * href="?sort=navn&retning=synkende"> and aria-sort on the <th>; it looks
- * like the buttons oldschool.js makes for data-os-sort.
+ * like the buttons oldschool.js makes for data-os-sort: the header's own
+ * colour, underlined on hover, with ↕ / ▲ / ▼ after it.
  *
  * Cells that must not blow the table up:
  *   .os-table__cap          6–14rem wide; long values wrap (add .os-clamp to cut them)
@@ -3236,11 +3218,16 @@
     padding: 0;
     border: 0;
     background: none;
-    color: var(--os-color-link);
+    color: inherit;
     font: inherit;
     text-align: inherit;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
+  }
+
+  .os-table__sort:hover {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .os-table__sort::after {
@@ -3775,6 +3762,169 @@
 }
 
 /*
+ * Carousel — the pictures of one item (a listing, a cabin), one per view, on
+ * a sunken background. Swipe on touch screens (scroll-snap), arrows over the
+ * edges elsewhere, an "n / total" counter in the corner, and an optional
+ * strip of thumbnails that marks the current picture.
+ *
+ *   <section class="os-carousel" aria-roledescription="carousel" aria-label="Bilder av hytta">
+ *     <div class="os-carousel__stage">
+ *       <div class="os-carousel__track" tabindex="0">
+ *         <div class="os-carousel__slide" id="bilde-1" role="group" aria-roledescription="slide" aria-label="1 av 5">
+ *           <img src="1.jpg" alt="Inngangspartiet om kvelden">
+ *         </div>
+ *         <div class="os-carousel__slide" id="bilde-2" role="group" aria-roledescription="slide" aria-label="2 av 5">
+ *           <img src="2.jpg" alt="…" loading="lazy">               every picture but the first
+ *         </div> …
+ *       </div>
+ *     </div>
+ *     <nav class="os-carousel__thumbs" aria-label="Velg bilde">     (optional)
+ *       <a class="os-carousel__thumb" href="#bilde-1" aria-current="true"><img src="1-small.jpg" alt="Bilde 1"></a> …
+ *     </nav>
+ *   </section>
+ *
+ * oldschool.js adds the ‹ › buttons (hidden on touch-only screens, dimmed at
+ * the first and last picture), the counter, arrow keys and Home/End on the
+ * focused track, and keeps the thumbnails in step. Without it the track still
+ * swipes and scrolls, and the thumbnails are links to the slides.
+ *
+ * Knobs: --os-carousel-ratio (default 4 / 3) · --os-carousel-fit (contain;
+ * cover crops to fill).
+ */
+@layer os.components {
+  .os-carousel {
+    display: grid;
+    gap: var(--os-space-2);
+    min-width: 0;
+  }
+
+  .os-carousel__stage {
+    position: relative;
+    min-width: 0;
+    background-color: var(--os-color-surface-sunken);
+  }
+
+  .os-carousel__track {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .os-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .os-carousel__track:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .os-carousel__slide {
+    display: grid;
+    flex: 0 0 100%;
+    place-items: center;
+    aspect-ratio: var(--os-carousel-ratio, 4 / 3);
+    overflow: hidden;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .os-carousel__slide > :is(img, picture, video) {
+    width: 100%;
+    height: 100%;
+    object-fit: var(--os-carousel-fit, contain);
+  }
+
+  .os-carousel__nav {
+    position: absolute;
+    inset-block-start: 50%;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 3.75rem;
+    padding: 0 0 0.15em;
+    border: var(--os-border-width) solid var(--os-color-border);
+    border-radius: var(--os-radius-control);
+    background-color: color-mix(in srgb, var(--os-color-surface-raised) 88%, transparent);
+    box-shadow: var(--os-shadow-raised);
+    color: var(--os-color-text-strong);
+    font-family: var(--os-font-body);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    translate: 0 -50%;
+  }
+
+  .os-carousel__nav:hover {
+    background-color: var(--os-color-surface-raised);
+  }
+
+  .os-carousel__nav:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .os-carousel__nav--prev { inset-inline-start: var(--os-space-2); }
+  .os-carousel__nav--next { inset-inline-end: var(--os-space-2); }
+
+  @media (hover: none) and (pointer: coarse) {
+    .os-carousel__nav {
+      display: none;
+    }
+  }
+
+  .os-carousel__count {
+    position: absolute;
+    inset-block-end: var(--os-space-2);
+    inset-inline-end: var(--os-space-2);
+    margin: 0;
+    padding: var(--os-space-0-5) var(--os-space-2);
+    border-radius: var(--os-radius-badge);
+    background-color: color-mix(in srgb, var(--os-color-surface-raised) 88%, transparent);
+    color: var(--os-color-text-strong);
+    font-size: var(--os-text-xs);
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+  }
+
+  .os-carousel__thumbs {
+    display: flex;
+    gap: var(--os-space-2);
+    overflow-x: auto;
+    padding-block-end: var(--os-space-0-5);
+  }
+
+  /* position: relative keeps visually hidden labels inside the scrolling strip. */
+  .os-carousel__thumb {
+    position: relative;
+    display: block;
+    flex: none;
+    width: 5.25rem;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background-color: var(--os-color-surface-sunken);
+  }
+
+  .os-carousel__thumb > :is(img, picture) {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .os-carousel__thumb[aria-current="true"] {
+    border-color: var(--os-color-accent);
+  }
+
+  .os-carousel__thumb:focus-visible {
+    outline-offset: 1px;
+  }
+}
+
+/*
  * Output — raw text from a machine: a job log, a scraped description, an
  * error. Keeps line breaks, scrolls after 24rem.
  *
@@ -3835,8 +3985,6 @@
 /* Components — controls & feedback */
 /*
  * Button — <button> for actions, <a> for navigation; same looks.
- * A faint top-to-bottom gradient and a one-pixel highlight: the 2008 button,
- * flattened just enough.
  *
  *   <button class="os-button" type="button">Avbryt</button>
  *   <button class="os-button os-button--primary" type="submit">Send</button>
@@ -3845,21 +3993,38 @@
  * Sizes:  --sm · (default 30px, 40px on touch screens) · --lg
  * Other:  --block (full width) · --icon (square; needs aria-label)
  *
- * Two styles. The default is the retro button: gradient and highlight.
- * --flat is the plain one — solid primary, white secondary with a rule,
- * no gradient — for app screens. Put it on one button, or data-buttons="flat"
- * on any element (or <html>) to make every button inside flat. Every look,
- * size and group works in both styles.
+ * Two styles, one component. The standard theme's buttons are flat: a solid
+ * primary and a white secondary with a rule. The retro theme's are the 2008
+ * button: a top-to-bottom gradient. Switch either way on one button with
+ * --retro / --flat, or on everything inside an element (or <html>) with
+ * data-buttons="retro" / "flat". The nearest setting wins; every look, size
+ * and group works in both. (Under the hood: --os-button-retro, 0 or 1.)
  *
- *   <button class="os-button os-button--flat os-button--primary" type="button">
+ *   <button class="os-button os-button--primary" type="button">
  *     <svg class="os-icon" aria-hidden="true"><use href="icons.svg#os-search"></use></svg> Finn nye
  *   </button>
- *   <div data-buttons="flat">…every .os-button in here is flat…</div>
+ *   <div data-buttons="retro">…every .os-button in here is bevelled…</div>
  */
 @layer os.components {
+  [data-buttons="retro"],
+  .os-button.os-button--retro {
+    --os-button-retro: 1;
+  }
+
+  [data-buttons="flat"],
+  .os-button.os-button--flat {
+    --os-button-retro: 0;
+  }
+
+  /* Each look names its colours twice: retro (--_r*) and flat (--_f*). --_on
+     picks one; the gradient's top is the shine in retro and the fill in flat. */
   .os-button {
-    --_top: var(--os-color-surface);
-    --_bottom: var(--os-color-button);
+    --_on: calc(var(--os-button-retro, 0) * 100%);
+    --_rb: var(--os-color-button);
+    --_fb: var(--os-color-surface);
+    --_shine: var(--os-color-surface);
+    --_bottom: color-mix(in srgb, var(--_rb) var(--_on), var(--_fb));
+    --_top: color-mix(in srgb, var(--_shine) var(--_on), var(--_bottom));
     --_fg: var(--os-color-text-strong);
     --_border: var(--os-color-border-strong);
 
@@ -3886,34 +4051,14 @@
   }
 
   .os-button:hover {
-    --_top: var(--os-color-surface);
-    --_bottom: var(--os-color-button-hover);
+    --_rb: var(--os-color-button-hover);
+    --_fb: var(--os-color-surface-tint);
     color: var(--_fg);
     text-decoration: none;
   }
 
   .os-button:active {
     background-image: linear-gradient(var(--_bottom), var(--_top));
-    box-shadow: inset 0 1px 2px var(--os-color-shadow);
-  }
-
-  /* Flat style. Before the looks below, so --primary and --danger keep their colours. */
-  .os-button--flat,
-  :where([data-buttons="flat"]) .os-button {
-    --_bottom: var(--os-color-surface);
-
-    background-image: none;
-    box-shadow: none;
-  }
-
-  .os-button--flat:hover,
-  :where([data-buttons="flat"]) .os-button:hover {
-    --_bottom: var(--os-color-surface-tint);
-  }
-
-  .os-button--flat:active,
-  :where([data-buttons="flat"]) .os-button:active {
-    background-image: none;
     box-shadow: inset 0 1px 2px var(--os-color-shadow);
   }
 
@@ -3928,43 +4073,31 @@
   }
 
   .os-button--primary {
-    --_top: color-mix(in srgb, var(--os-color-accent) 82%, white);
-    --_bottom: var(--os-color-accent);
+    --_rb: var(--os-color-accent);
+    --_fb: var(--os-color-accent-hover);
+    --_shine: color-mix(in srgb, var(--os-color-accent) 82%, white);
     --_fg: var(--os-color-text-on-accent);
-    --_border: var(--os-color-accent-active);
+    --_border: color-mix(in srgb, var(--os-color-accent-active) var(--_on), var(--os-color-accent-hover));
   }
 
   .os-button--primary:hover {
-    --_top: var(--os-color-accent);
-    --_bottom: var(--os-color-accent-hover);
+    --_rb: var(--os-color-accent-hover);
+    --_fb: var(--os-color-accent-active);
+    --_shine: var(--os-color-accent);
   }
 
   .os-button--danger {
-    --_top: color-mix(in srgb, var(--os-color-danger-fill) 85%, white);
-    --_bottom: var(--os-color-danger-fill);
+    --_rb: var(--os-color-danger-fill);
+    --_fb: var(--os-color-danger-fill);
+    --_shine: color-mix(in srgb, var(--os-color-danger-fill) 85%, white);
     --_fg: var(--os-color-text-on-accent);
     --_border: var(--os-color-danger);
   }
 
   .os-button--danger:hover {
-    --_top: var(--os-color-danger-fill);
-    --_bottom: var(--os-color-danger);
-  }
-
-  .os-button--flat.os-button--primary,
-  :where([data-buttons="flat"]) .os-button--primary {
-    --_bottom: var(--os-color-accent-hover);
-    --_border: var(--os-color-accent-hover);
-  }
-
-  .os-button--flat.os-button--primary:hover,
-  :where([data-buttons="flat"]) .os-button--primary:hover {
-    --_bottom: var(--os-color-accent-active);
-  }
-
-  .os-button--flat.os-button--danger:hover,
-  :where([data-buttons="flat"]) .os-button--danger:hover {
-    --_bottom: var(--os-color-danger);
+    --_rb: var(--os-color-danger);
+    --_fb: var(--os-color-danger);
+    --_shine: var(--os-color-danger-fill);
   }
 
   .os-button--ghost {
@@ -4697,7 +4830,8 @@
  *
  *   <span class="os-status os-status--running">Kjører</span>
  *
- * Tones: (neutral, idle) · --running · --success · --warning · --danger
+ * Tones: (neutral: never run, cancelled) · --running (the dot pulses slowly;
+ * still with reduced motion) · --success · --warning · --danger
  * --pill adds a tinted box around it.
  */
 @layer os.components {
@@ -4724,6 +4858,20 @@
   }
 
   .os-status--running { --_dot: var(--os-color-accent); --_bg: var(--os-color-accent-subtle); }
+
+  .os-status--running::before {
+    animation: os-pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes os-pulse {
+    50% { opacity: 0.3; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .os-status--running::before {
+      animation: none;
+    }
+  }
   .os-status--success { --_dot: var(--os-color-success-fill); --_bg: var(--os-color-success-subtle); }
   .os-status--warning { --_dot: var(--os-color-warning-fill); --_bg: var(--os-color-warning-subtle); }
   .os-status--danger { --_dot: var(--os-color-danger-fill); --_bg: var(--os-color-danger-subtle); }
@@ -5079,7 +5227,8 @@
 }
 
 /*
- * Tabs — folder tabs on top of a box. Enhanced by oldschool.js (roles, arrow
+ * Tabs — words on the frame with a bar under the current one; each panel is
+ * see-through, so put boxes in it. Enhanced by oldschool.js (roles, arrow
  * keys). Without JavaScript every panel is shown in turn under its heading.
  *
  *   <div class="os-tabs" data-os-tabs>
@@ -5103,17 +5252,18 @@
  *     <div class="os-tabs__panel">…</div>
  *   </div>
  *
- * --line: the plain style — words on the frame with a coloured bar under the
- * current one, no folder tabs; the panels are see-through, so put boxes in
- * them. Works with ARIA tabs and with --nav.
+ * --folder: the 2008 style — folder tabs on top of a white box that holds the
+ * panel. Works with ARIA tabs and with --nav.
+ *
+ *   <div class="os-tabs os-tabs--folder" data-os-tabs>…</div>
  */
 @layer os.components {
   .os-tabs__list {
     display: flex;
-    gap: var(--os-space-1);
-    padding-inline: var(--os-space-2);
+    gap: var(--os-space-5);
+    padding-inline: var(--os-space-1);
     overflow-x: auto;
-    border-block-end: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-end: var(--os-border-width) solid var(--os-color-border);
     scrollbar-width: none;
   }
 
@@ -5136,29 +5286,28 @@
 
   .os-tabs__tab {
     margin-block-end: calc(var(--os-border-width) * -1);
-    padding: var(--os-space-1) var(--os-space-3);
-    border: var(--os-border-width) solid var(--os-color-panel-border);
-    border-block-end-color: transparent;
-    border-start-start-radius: var(--os-radius-tab);
-    border-start-end-radius: var(--os-radius-tab);
-    background-color: var(--os-color-tab);
-    box-shadow: var(--os-bevel);
-    color: var(--os-color-link);
+    padding: var(--os-space-2) var(--os-space-0-5);
+    border: 0;
+    border-block-end: 3px solid transparent;
+    background: none;
+    color: var(--os-color-text);
     font-family: var(--os-font-body);
     font-size: var(--os-text-sm);
     font-weight: var(--os-weight-bold);
-    text-decoration: underline;
-    text-underline-offset: var(--os-link-underline-offset);
+    text-decoration: none;
     white-space: nowrap;
   }
 
-  .os-tabs__tab[aria-selected="true"],
-  .os-tabs__tab[aria-current="page"] {
-    border-block-end-color: var(--os-color-surface);
-    background-color: var(--os-color-surface);
-    box-shadow: none;
-    color: var(--os-color-text-strong);
-    text-decoration: none;
+  .os-tabs__tab:hover {
+    border-block-end-color: var(--os-color-border-strong);
+    color: var(--os-color-text);
+  }
+
+  .os-tabs__tab:is([aria-selected="true"], [aria-current="page"]) {
+    border-block-end-color: var(--os-color-accent);
+    color: var(--os-color-link);
+    text-decoration: underline;
+    text-underline-offset: var(--os-link-underline-offset);
   }
 
   .os-tabs__tab:focus-visible {
@@ -5166,14 +5315,7 @@
   }
 
   .os-tabs__panel {
-    padding: var(--os-pad);
-    border: var(--os-border-width) solid var(--os-color-panel-border);
-    border-block-start: 0;
-    background-color: var(--os-color-surface);
-  }
-
-  .os-tabs:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
-    border-block-start: var(--os-border-width) solid var(--os-color-panel-border);
+    margin-block-start: var(--os-gap);
   }
 
   .os-tabs:not([data-ready]) > .os-tabs__panel + .os-tabs__panel {
@@ -5185,41 +5327,53 @@
     font-weight: var(--os-weight-regular);
   }
 
-  /* Line tabs */
-  .os-tabs--line > .os-tabs__list {
-    gap: var(--os-space-5);
-    padding-inline: var(--os-space-1);
-    border-block-end-color: var(--os-color-border);
+  /* Folder tabs */
+  .os-tabs--folder > .os-tabs__list {
+    gap: var(--os-space-1);
+    padding-inline: var(--os-space-2);
+    border-block-end-color: var(--os-color-panel-border);
   }
 
-  .os-tabs--line .os-tabs__tab {
-    margin-block-end: calc(var(--os-border-width) * -1);
-    padding: var(--os-space-2) var(--os-space-0-5);
-    border: 0;
-    border-block-end: 3px solid transparent;
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-    color: var(--os-color-text);
-    font-size: var(--os-text-sm);
-  }
-
-  .os-tabs--line .os-tabs__tab:hover {
-    border-block-end-color: var(--os-color-border-strong);
-  }
-
-  .os-tabs--line .os-tabs__tab:is([aria-selected="true"], [aria-current="page"]) {
-    border-block-end-color: var(--os-color-accent);
+  .os-tabs--folder .os-tabs__tab {
+    padding: var(--os-space-1) var(--os-space-3);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-end-color: transparent;
+    border-start-start-radius: var(--os-radius-tab);
+    border-start-end-radius: var(--os-radius-tab);
+    background-color: var(--os-color-tab);
+    box-shadow: var(--os-bevel);
     color: var(--os-color-link);
     text-decoration: underline;
+    text-underline-offset: var(--os-link-underline-offset);
   }
 
-  .os-tabs--line > .os-tabs__panel,
-  .os-tabs--line:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
+  .os-tabs--folder .os-tabs__tab:hover {
+    border-block-end-color: transparent;
+    color: var(--os-color-link-hover);
+  }
+
+  .os-tabs--folder .os-tabs__tab:is([aria-selected="true"], [aria-current="page"]) {
+    border-block-end-color: var(--os-color-surface);
+    background-color: var(--os-color-surface);
+    box-shadow: none;
+    color: var(--os-color-text-strong);
+    text-decoration: none;
+  }
+
+  .os-tabs--folder > .os-tabs__panel {
+    margin-block-start: 0;
+    padding: var(--os-pad);
+    border: var(--os-border-width) solid var(--os-color-panel-border);
+    border-block-start: 0;
+    background-color: var(--os-color-surface);
+  }
+
+  .os-tabs--folder:not([data-ready], .os-tabs--nav) > .os-tabs__panel {
+    border-block-start: var(--os-border-width) solid var(--os-color-panel-border);
+  }
+
+  .os-tabs--folder:not([data-ready]) > .os-tabs__panel + .os-tabs__panel {
     margin-block-start: var(--os-gap);
-    padding: 0;
-    border: 0;
-    background: none;
   }
 }
 

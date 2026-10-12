@@ -10,7 +10,7 @@ The practical Norwegian web of 2006–2011 — portals, classifieds,
 municipalities, newspapers — **kept as it was**: a tinted frame around white
 boxes with header bands, small utility links top right, folder tabs, bold
 breadcrumbs, a result pager, blue underlined links, facts as *label : value*,
-one big price, grey buttons and one blue one. Text first; no image is ever
+one big price, white buttons and one blue one. Text first; no image is ever
 required.
 
 Only what dates it is fixed:
@@ -18,7 +18,7 @@ Only what dates it is fixed:
 | Then | Now | Why |
 | --- | --- | --- |
 | Hand-picked, saturated colours | Every shade grown from one accent seed in OKLCH | Re-brand with one line; contrast stays guaranteed |
-| Verdana 11px | Verdana 12px (retro) or Arial 14px (standard) | Readable without zooming |
+| Verdana 11px | Arial 13px (standard) or Verdana 12px (retro) | Readable without zooming |
 | 16–18px buttons and links | 24px minimum targets | WCAG 2.2 target size |
 | Contrast by luck | WCAG 2.2 AA checked on every build | Universell utforming is the law |
 | Table layout, a fixed 1000px page | Grid, container queries; 1000px or 1200px wide; phones | Works from 320px to 16:9 screens |
@@ -26,13 +26,15 @@ Only what dates it is fixed:
 
 Two themes share all markup:
 
-- **`retro`** — the default: Verdana 12px, the saturated frame (`frame.200`),
-  square corners, no outline around boxes, tight spacing (8px gaps, 10px padding).
-- **`standard`** — tidied: Arial 14px, a paler frame (`frame.100`), 3px
-  corners, hairline box outlines, a one-pixel bevel, 10/12px spacing.
+- **`standard`** — the default: the 2008 layout with today's controls. Arial
+  13px, the saturated frame (`frame.200`), square boxes with no outline, 8px
+  gaps and 12px padding; 30px controls with 3px corners, flat buttons, line tabs.
+- **`retro`** — the 2008 portal all the way: Verdana 12px, 24px square
+  controls, bevelled gradient buttons, 10px padding.
 
-Use `standard` when a page is read for long stretches; `retro` for everything
-else. Never mix them on one page except to compare.
+Single components can borrow the retro look on a standard page — the bevelled
+button (`.os-button--retro`, `data-buttons="retro"`) and folder tabs
+(`.os-tabs--folder`). Never mix the two themes on one page except to compare.
 
 ## 2. Page anatomy
 
@@ -86,11 +88,11 @@ Components use semantic colours only. Ramps are an implementation detail.
 
 | Role | Light | Dark | Used for |
 | --- | --- | --- | --- |
-| `canvas` | frame.200 (retro) / frame.100 | neutral.1000 | the frame |
+| `canvas` | frame.200 | neutral.1000 | the frame |
 | `surface` | white | neutral.950 | boxes, inputs |
 | `panel-header`, `crumbbar` | frame.100, frame.50 | frame.950 | header bands, crumb bar |
 | `text` / `text-strong` | neutral.900 / 1000 | neutral.50 / 0 | body / headings, values, prices |
-| `text-muted` | neutral.700 (retro) / 600 | neutral.400 | labels, meta — ≥ 4.5:1 on every surface |
+| `text-muted` | neutral.700 | neutral.400 | labels, meta — ≥ 4.5:1 on every surface, the frame included |
 | `link` / `link-visited` | accent.700 / visited.700 | accent.300 / visited.300 | links |
 | `accent` | accent.600 | accent.400 | the primary button, checked controls, focus |
 | `border-strong` | neutral.400 | neutral.500 | form controls — ≥ 3:1 |
@@ -115,7 +117,7 @@ Rules:
 
 ## 4. Type
 
-- **Families**: Verdana (retro body) or Arial (standard, and headings in both),
+- **Families**: Arial (standard, and headings in both) or Verdana (retro body),
   from the system. No web fonts. Courier New for code.
 - **Fixed pixel steps**, no fluid type:
 
@@ -124,8 +126,8 @@ Rules:
   | `text-2xs` | 11px | 10px | badges |
   | `text-xs` | 12px | 11px | meta, captions, utility links |
   | `text-sm` | 13px | 11px | secondary text, tables, labels |
-  | `text-md` | 14px | 12px | body (`--os-text-body`) |
-  | `text-lg` | 16px | 14px | box titles |
+  | `text-md` | 13px | 12px | body (`--os-text-body`) |
+  | `text-lg` | 15px | 14px | box titles |
   | `text-3xl` | 24px | 20px | page title |
   | `text-4xl` | 30px | 24px | the key figure |
 
@@ -136,21 +138,22 @@ Rules:
 
 ## 5. Shape, space and elevation
 
-- 4px grid. Retro: 8px gaps, 10px padding, 4px rows. Standard: 10 / 12 / 5px.
-- Corners: 0 (retro) or 3px (standard); folder tabs 4px on top only.
+- 4px grid. Standard: 8px gaps, 12px padding, 5px rows. Retro: 8 / 10 / 4px.
+- Boxes are square in both themes. Controls have 3px corners (standard) or none
+  (retro); folder tabs 4px on top only.
 - Boxes are flat. Shadows only on menus, popovers and dialogs.
 - Rules: 1px. Hairlines inside boxes use `border-subtle`.
-- Controls: 24px (retro) / 30px (standard) tall; 44px with `data-density="comfortable"`.
+- Controls: 30px (standard) / 24px (retro) tall; 44px with `data-density="comfortable"`.
 
 ## 6. Components
 
-62 components; markup for each in [docs/components.md](docs/components.md),
+63 components; markup for each in [docs/components.md](docs/components.md),
 live in `site/components.html`.
 
 | Group | Components |
 | --- | --- |
 | Page chrome | skip link, masthead, brand, utility links, menu, tab bar, sub nav, crumb bar, breadcrumbs, pager, side menu, A–Å index, footer, mobile bar, bleed |
-| Content | box (`os-panel`), heading, meta, action row, link row, facts (`os-kv`), key figure, summary, contact box, link list, teasers, tags, checklist, schedule, prose, stats, progress, table, toolbar, bars (poll), calendar, log, thread, files, output, empty state, icon |
+| Content | box (`os-panel`), heading, meta, action row, link row, facts (`os-kv`), key figure, summary, contact box, link list, teasers, tags, checklist, schedule, prose, stats, progress, table, toolbar, bars (poll), calendar, log, thread, files, carousel, output, empty state, icon |
 | Controls | button, forms, choices, segmented choice, search box, filters, chips, steps, tabs, disclosure, pagination, search results, dialog |
 | Feedback | badge, status, score, notices (`os-alert`, `os-note`), error summary, toast, notification (corner window or centred over the page) |
 
@@ -158,11 +161,12 @@ Rules that hold across them:
 
 - **Everything lives in a box.** Loose text on the frame is only for the masthead, crumb bar and footer.
 - **One primary button and one key figure per view.**
-- **Two button styles, one component.** `.os-button` is the retro button
-  (gradient, highlight). `.os-button--flat` — or `data-buttons="flat"` on a
-  page or section — is the plain one for app screens: solid primary, white
-  secondary with a rule, `--ghost` for "··· Mer". Pick one style per page.
-  Tabs come the same way: folder tabs (default) or `.os-tabs--line`.
+- **Two button styles, one component.** `.os-button` is flat in the standard
+  theme: solid primary, white secondary with a rule, `--ghost` for "··· Mer".
+  The retro theme's buttons are the 2008 gradient; borrow it with
+  `.os-button--retro` or `data-buttons="retro"` on a page or section
+  (`--flat` / `data-buttons="flat"` switch back). Pick one style per page.
+  Tabs come the same way: line tabs (default) or `.os-tabs--folder`.
 - **Facts are `.os-kv`** — label muted, value strong — never a sentence.
 - **Detail pages** get breadcrumbs and a result pager in the crumb bar.
 - **Tables**: numbers right-aligned (`.os-num`), cells centred vertically, the
@@ -181,7 +185,7 @@ Rules that hold across them:
 
 WCAG 2.2 AA is a requirement, not a goal; see [docs/accessibility.md](docs/accessibility.md).
 Contrast is checked for every pair in both themes, both modes and
-more-contrast mode on every build; every page is audited with axe in eight
+more-contrast mode on every build; every page is audited with axe in nine
 variants.
 
 ## 8. Non-negotiables for re-implementations

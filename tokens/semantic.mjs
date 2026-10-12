@@ -32,7 +32,7 @@ export const colorGroups = [
   {
     group: 'Surface',
     colors: [
-      { name: 'canvas', light: 'frame.100', dark: 'neutral.1000', description: 'The frame: tinted page background that the white boxes sit on.' },
+      { name: 'canvas', light: 'frame.200', dark: 'neutral.1000', description: 'The frame: tinted page background that the white boxes sit on.' },
       { name: 'surface', light: 'neutral.0', dark: 'neutral.950', description: 'Panels, cards and form fields.' },
       { name: 'surface-raised', light: 'neutral.0', dark: 'neutral.900', description: 'Menus, popovers, dialogs and sticky bars.' },
       { name: 'surface-sunken', light: 'neutral.50', dark: 'neutral.1000', description: 'Wells and code blocks inside panels.' },
@@ -47,7 +47,7 @@ export const colorGroups = [
     colors: [
       { name: 'text', light: 'neutral.900', dark: 'neutral.50', description: 'Body text.' },
       { name: 'text-strong', light: 'neutral.1000', dark: 'neutral.0', description: 'Headings, values and prices.' },
-      { name: 'text-muted', light: 'neutral.600', dark: 'neutral.400', description: 'Labels, meta and secondary text. AA on every surface.' },
+      { name: 'text-muted', light: 'neutral.700', dark: 'neutral.400', description: 'Labels, meta and secondary text. AA on every surface, the frame included.' },
       { name: 'text-subtle', light: 'neutral.500', dark: 'neutral.400', description: 'Placeholders and captions. AA on surface.' },
       { name: 'text-inverse', light: 'neutral.0', dark: 'neutral.1000', description: 'Text on surface-inverse.' },
       { name: 'text-on-accent', light: 'neutral.0', dark: 'neutral.1000', description: 'Text and icons on accent and status fills.' },
@@ -107,9 +107,9 @@ export const colorGroups = [
     colors: [
       { name: 'masthead', light: 'transparent', dark: 'transparent', description: 'Masthead background (sits on the frame by default).' },
       { name: 'crumbbar', light: 'frame.50', dark: 'frame.950', description: 'Crumb bar (breadcrumbs + pager) band.' },
-      { name: 'panel-border', light: 'frame.200', dark: 'neutral.800', description: 'Box outline — a hairline one step darker than the frame.' },
+      { name: 'panel-border', light: 'transparent', dark: 'transparent', description: 'Box outline. None: boxes stand out from the frame by colour alone.' },
       { name: 'panel-header', light: 'frame.100', dark: 'frame.950', description: 'Box header band.' },
-      { name: 'panel-header-border', light: 'frame.200', dark: 'neutral.800', description: 'Line under the box header band.' },
+      { name: 'panel-header-border', light: 'transparent', dark: 'transparent', description: 'Line under the box header band.' },
       { name: 'tab', light: 'frame.50', dark: 'neutral.900', description: 'Inactive folder tab.' },
       { name: 'zebra', light: 'frame.50', dark: 'neutral.900', description: 'Alternate table and list rows.' },
       { name: 'button', light: 'neutral.100', dark: 'neutral.850', description: 'Bottom of the secondary button gradient (top is surface).' },

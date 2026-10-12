@@ -11,10 +11,11 @@
  *     <footer class="os-panel__footer">…</footer>             (optional)
  *   </section>
  *
- * The header is the tinted band of the original, with a one-pixel highlight.
+ * The header is the tinted band of the original.
  * Variants:
  *   --plain     no band: the title sits in the box (secondary boxes)
- *   --flush     body without padding (tables, link lists)
+ *   --flush     every body without padding (tables, link lists); for one
+ *               body only, use .os-panel__body--flush
  *   --accent    band in the accent colour with white text ("Viktig!")
  *   --tint      tinted body (highlighted summaries, tips)
  *   --note      yellow sticky-note box
@@ -99,7 +100,8 @@
     box-shadow: none;
   }
 
-  .os-panel--flush > .os-panel__body {
+  .os-panel--flush > .os-panel__body,
+  .os-panel__body--flush {
     padding: 0;
   }
 

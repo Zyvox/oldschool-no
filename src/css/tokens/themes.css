@@ -2,8 +2,34 @@
 /* Themes: overrides of primitives, roles and semantic colors on top of the base tokens.
    Apply with data-theme="…" on <html> or on any element. */
 @layer os.tokens {
-  /* Retro — The default. The 2008 portal as it was: Verdana 12px, saturated frame, square corners, tight boxes. */
-  :root, [data-theme="retro"] {
+  /* Standard — The default. The 2008 layout with today's controls: Arial 13px, saturated frame, square boxes, flat buttons with 3px corners. */
+  :root, [data-theme="standard"] {
+    --os-text-2xs: 0.6875rem;
+    --os-text-xs: 0.6875rem;
+    --os-text-sm: 0.75rem;
+    --os-text-md: 0.8125rem;
+    --os-text-lg: 0.9375rem;
+    --os-text-xl: 1.0625rem;
+    --os-text-2xl: 1.25rem;
+    --os-text-3xl: 1.375rem;
+    --os-text-4xl: 1.75rem;
+    --os-text-5xl: 2.25rem;
+    --os-font-body: var(--os-font-sans);
+    --os-leading-body: 1.4;
+    --os-pad: 0.75rem;
+    --os-row-pad: 0.3125rem;
+    --os-radius-control: var(--os-radius-sm);
+    --os-radius-tab: var(--os-radius-md);
+    --os-radius-badge: var(--os-radius-xs);
+    --os-control-height: 1.875rem;
+    --os-control-height-sm: 1.5rem;
+    --os-control-height-lg: 2.25rem;
+    --os-control-pad-x: 0.625rem;
+    --os-button-retro: 0;
+  }
+
+  /* Retro — The 2008 portal all the way: Verdana 12px, 24px square controls, bevelled buttons, tight boxes. */
+  [data-theme="retro"] {
     --os-text-2xs: 0.625rem;
     --os-text-xs: 0.6875rem;
     --os-text-sm: 0.6875rem;
@@ -16,11 +42,8 @@
     --os-text-5xl: 1.75rem;
     --os-font-body: var(--os-font-verdana);
     --os-leading-body: 1.35;
-    --os-tracking-heading: 0;
-    --os-gap: 0.5rem;
     --os-pad: 0.625rem;
     --os-row-pad: 0.25rem;
-    --os-radius-panel: 0;
     --os-radius-control: 0;
     --os-radius-tab: 0;
     --os-radius-badge: 0;
@@ -28,52 +51,7 @@
     --os-control-height-sm: 1.5rem;
     --os-control-height-lg: 1.875rem;
     --os-control-pad-x: 0.5rem;
-    --os-bevel: none;
-    --os-link-underline-offset: auto;
-    --os-color-canvas: light-dark(var(--os-frame-200), var(--os-neutral-1000));
-    --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
-    --os-color-panel-border: transparent;
-    --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
-    --os-color-panel-header-border: transparent;
-    --os-color-text: light-dark(var(--os-neutral-900), var(--os-neutral-50));
-    --os-color-text-muted: light-dark(var(--os-neutral-700), var(--os-neutral-400));
-  }
-
-  /* Standard — The same structure, tidied: Arial 14px, a paler frame, 3px corners, ruled rows and more air. */
-  [data-theme="standard"] {
-    --os-text-2xs: 0.6875rem;
-    --os-text-xs: 0.75rem;
-    --os-text-sm: 0.8125rem;
-    --os-text-md: 0.875rem;
-    --os-text-lg: 1rem;
-    --os-text-xl: 1.125rem;
-    --os-text-2xl: 1.25rem;
-    --os-text-3xl: 1.5rem;
-    --os-text-4xl: 1.875rem;
-    --os-text-5xl: 2.25rem;
-    --os-font-body: var(--os-font-sans);
-    --os-leading-body: var(--os-leading-normal);
-    --os-tracking-heading: var(--os-tracking-tight);
-    --os-gap: 0.625rem;
-    --os-pad: 0.75rem;
-    --os-row-pad: 0.3125rem;
-    --os-radius-panel: var(--os-radius-sm);
-    --os-radius-control: var(--os-radius-sm);
-    --os-radius-tab: var(--os-radius-md);
-    --os-radius-badge: var(--os-radius-xs);
-    --os-control-height: 1.875rem;
-    --os-control-height-sm: 1.5rem;
-    --os-control-height-lg: 2.25rem;
-    --os-control-pad-x: 0.625rem;
-    --os-bevel: inset 0 1px 0 rgb(255 255 255 / 0.55);
-    --os-link-underline-offset: 0.15em;
-    --os-color-canvas: light-dark(var(--os-frame-100), var(--os-neutral-1000));
-    --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
-    --os-color-panel-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
-    --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
-    --os-color-panel-header-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
-    --os-color-text: light-dark(var(--os-neutral-900), var(--os-neutral-50));
-    --os-color-text-muted: light-dark(var(--os-neutral-600), var(--os-neutral-400));
+    --os-button-retro: 1;
   }
 
   /* Stronger values when the visitor asks for more contrast, on top of any theme. */

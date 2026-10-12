@@ -9,7 +9,7 @@
   [data-mode="dark"] { color-scheme: dark; }
 
   :where(:root, [data-theme]) {
-    --os-color-canvas: light-dark(var(--os-frame-100), var(--os-neutral-1000));
+    --os-color-canvas: light-dark(var(--os-frame-200), var(--os-neutral-1000));
     --os-color-surface: light-dark(var(--os-neutral-0), var(--os-neutral-950));
     --os-color-surface-raised: light-dark(var(--os-neutral-0), var(--os-neutral-900));
     --os-color-surface-sunken: light-dark(var(--os-neutral-50), var(--os-neutral-1000));
@@ -19,7 +19,7 @@
     --os-color-surface-inverse: light-dark(var(--os-neutral-900), var(--os-neutral-50));
     --os-color-text: light-dark(var(--os-neutral-900), var(--os-neutral-50));
     --os-color-text-strong: light-dark(var(--os-neutral-1000), var(--os-neutral-0));
-    --os-color-text-muted: light-dark(var(--os-neutral-600), var(--os-neutral-400));
+    --os-color-text-muted: light-dark(var(--os-neutral-700), var(--os-neutral-400));
     --os-color-text-subtle: light-dark(var(--os-neutral-500), var(--os-neutral-400));
     --os-color-text-inverse: light-dark(var(--os-neutral-0), var(--os-neutral-1000));
     --os-color-text-on-accent: light-dark(var(--os-neutral-0), var(--os-neutral-1000));
@@ -61,9 +61,9 @@
     --os-color-shadow-strong: light-dark(#1113152e, #111315b3);
     --os-color-masthead: transparent;
     --os-color-crumbbar: light-dark(var(--os-frame-50), var(--os-frame-950));
-    --os-color-panel-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
+    --os-color-panel-border: transparent;
     --os-color-panel-header: light-dark(var(--os-frame-100), var(--os-frame-950));
-    --os-color-panel-header-border: light-dark(var(--os-frame-200), var(--os-neutral-800));
+    --os-color-panel-header-border: transparent;
     --os-color-tab: light-dark(var(--os-frame-50), var(--os-neutral-900));
     --os-color-zebra: light-dark(var(--os-frame-50), var(--os-neutral-900));
     --os-color-button: light-dark(var(--os-neutral-100), var(--os-neutral-850));

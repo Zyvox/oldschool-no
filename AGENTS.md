@@ -51,7 +51,9 @@ when **replicating this design in another repo**.
 - Demo pages (`portal`, `article`, `detail`, `search`, `app`, `jobs`) are Norwegian
   (bokmål); the docs pages (`index`, `components`, `tokens`, `themes`, `preview`) are
   English. All people, brands and listings are fictional. No images.
-- Themes: `retro` (default) and `standard`, defined as overrides in `tokens/themes.mjs`.
+- Themes: `standard` (default) and `retro`, defined as overrides in `tokens/themes.mjs`.
+  Component styles that borrow the retro look: `.os-button--retro` / `data-buttons="retro"`
+  and `.os-tabs--folder`.
   Read [docs/theming.md](docs/theming.md) before changing tokens or adding a theme.
 - Size matters: the CSS ships as one file to every visitor. Keep components small, reuse
   role tokens, and check the gzip size `npm run build` prints.

@@ -13,14 +13,14 @@ Machine-readable, fully resolved values for every theme live in [`dist/tokens.js
 
 ## Semantic colors
 
-Values shown for the default theme (`retro`). Reference = ramp step used in light / dark mode.
+Values shown for the default theme (`standard`). Reference = ramp step used in light / dark mode.
 
 
 ### Surface
 
 | Token | Light | Dark | Reference | Use |
 | --- | --- | --- | --- | --- |
-| `--os-color-canvas` | `#c0d6f9` | `#111315` | frame.100 / neutral.1000 | The frame: tinted page background that the white boxes sit on. |
+| `--os-color-canvas` | `#c0d6f9` | `#111315` | frame.200 / neutral.1000 | The frame: tinted page background that the white boxes sit on. |
 | `--os-color-surface` | `#ffffff` | `#191b1e` | neutral.0 / neutral.950 | Panels, cards and form fields. |
 | `--os-color-surface-raised` | `#ffffff` | `#222427` | neutral.0 / neutral.900 | Menus, popovers, dialogs and sticky bars. |
 | `--os-color-surface-sunken` | `#f4f5f8` | `#111315` | neutral.50 / neutral.1000 | Wells and code blocks inside panels. |
@@ -35,7 +35,7 @@ Values shown for the default theme (`retro`). Reference = ramp step used in ligh
 | --- | --- | --- | --- | --- |
 | `--os-color-text` | `#222427` | `#f4f5f8` | neutral.900 / neutral.50 | Body text. |
 | `--os-color-text-strong` | `#111315` | `#ffffff` | neutral.1000 / neutral.0 | Headings, values and prices. |
-| `--os-color-text-muted` | `#484a4f` | `#8f9297` | neutral.600 / neutral.400 | Labels, meta and secondary text. AA on every surface. |
+| `--os-color-text-muted` | `#484a4f` | `#8f9297` | neutral.700 / neutral.400 | Labels, meta and secondary text. AA on every surface, the frame included. |
 | `--os-color-text-subtle` | `#707378` | `#8f9297` | neutral.500 / neutral.400 | Placeholders and captions. AA on surface. |
 | `--os-color-text-inverse` | `#ffffff` | `#111315` | neutral.0 / neutral.1000 | Text on surface-inverse. |
 | `--os-color-text-on-accent` | `#ffffff` | `#111315` | neutral.0 / neutral.1000 | Text and icons on accent and status fills. |
@@ -122,9 +122,9 @@ Values shown for the default theme (`retro`). Reference = ramp step used in ligh
 | --- | --- | --- | --- | --- |
 | `--os-color-masthead` | `transparent` | `transparent` | transparent / transparent | Masthead background (sits on the frame by default). |
 | `--os-color-crumbbar` | `#f1f6ff` | `#0a2146` | frame.50 / frame.950 | Crumb bar (breadcrumbs + pager) band. |
-| `--os-color-panel-border` | `transparent` | `transparent` | frame.200 / neutral.800 | Box outline — a hairline one step darker than the frame. |
+| `--os-color-panel-border` | `transparent` | `transparent` | transparent / transparent | Box outline. None: boxes stand out from the frame by colour alone. |
 | `--os-color-panel-header` | `#dce9fd` | `#0a2146` | frame.100 / frame.950 | Box header band. |
-| `--os-color-panel-header-border` | `transparent` | `transparent` | frame.200 / neutral.800 | Line under the box header band. |
+| `--os-color-panel-header-border` | `transparent` | `transparent` | transparent / transparent | Line under the box header band. |
 | `--os-color-tab` | `#f1f6ff` | `#222427` | frame.50 / neutral.900 | Inactive folder tab. |
 | `--os-color-zebra` | `#f1f6ff` | `#222427` | frame.50 / neutral.900 | Alternate table and list rows. |
 | `--os-color-button` | `#eceef2` | `#2c2e31` | neutral.100 / neutral.850 | Bottom of the secondary button gradient (top is surface). |
@@ -137,34 +137,35 @@ Re-declared per theme and density. Values for the default theme, standard densit
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--os-font-body` | `Verdana, "DejaVu Sans", Geneva, Tahoma, sans-serif` | Body copy font stack. |
+| `--os-font-body` | `Arial, "Helvetica Neue", Helvetica, "Liberation Sans", "Nimbus Sans", sans-serif` | Body copy font stack. |
 | `--os-font-heading` | `Arial, "Helvetica Neue", Helvetica, "Liberation Sans", "Nimbus Sans", sans-serif` | Headings font stack. |
-| `--os-text-body` | `0.75rem` | Body copy size (14px). |
-| `--os-leading-body` | `1.35` | Body copy line-height. |
+| `--os-text-body` | `0.8125rem` | Body copy size (13px). |
+| `--os-leading-body` | `1.4` | Body copy line-height. |
 | `--os-weight-heading` | `700` | Weight for headings and box titles. |
 | `--os-weight-strong` | `700` | Weight for values, prices, <strong>. |
 | `--os-tracking-heading` | `0` | Letter-spacing for headings. |
 | `--os-gutter` | `0.75rem` | Side padding of the page frame. |
-| `--os-gap` | `0.5rem` | Gap between boxes on the canvas (10px). |
-| `--os-pad` | `0.625rem` | Inner padding of boxes (12px). |
-| `--os-row-pad` | `0.25rem` | Vertical padding of key/value, table and list rows. |
+| `--os-gap` | `0.5rem` | Gap between boxes on the canvas (8px). |
+| `--os-pad` | `0.75rem` | Inner padding of boxes (12px). |
+| `--os-row-pad` | `0.3125rem` | Vertical padding of key/value, table and list rows. |
 | `--os-measure` | `72ch` | Max line length for running text. |
 | `--os-container-width` | `62.5rem` | Max width of the page (1000px). .os-container--wide and data-width="wide": 1200px. |
 | `--os-aside-width` | `18.75rem` | Width of the right column (300px — the classic sidebar). |
 | `--os-sidebar-width` | `12.5rem` | Width of a left navigation column (200px). |
-| `--os-radius-panel` | `0` | Corner radius of boxes (3px). |
-| `--os-radius-control` | `0` | Corner radius of buttons and inputs. |
-| `--os-radius-tab` | `0` | Top corners of folder tabs. |
-| `--os-radius-badge` | `0` | Corner radius of badges. |
+| `--os-radius-panel` | `0` | Corner radius of boxes (square). |
+| `--os-radius-control` | `3px` | Corner radius of buttons and inputs (3px). |
+| `--os-radius-tab` | `4px` | Top corners of folder tabs. |
+| `--os-radius-badge` | `2px` | Corner radius of badges. |
 | `--os-border-width` | `1px` | Border and rule width. |
-| `--os-control-height` | `1.5rem` | Height of buttons and inputs (30px; 40px on touch screens). |
+| `--os-control-height` | `1.875rem` | Height of buttons and inputs (30px; 40px on touch screens). |
 | `--os-control-height-sm` | `1.5rem` | Height of small buttons and inputs. |
-| `--os-control-height-lg` | `1.875rem` | Height of large buttons and inputs. |
-| `--os-control-pad-x` | `0.5rem` | Horizontal padding of buttons and inputs. |
+| `--os-control-height-lg` | `2.25rem` | Height of large buttons and inputs. |
+| `--os-control-pad-x` | `0.625rem` | Horizontal padding of buttons and inputs. |
 | `--os-shadow-panel` | `none` | Boxes are flat. |
 | `--os-shadow-raised` | `0 2px 6px #11131514` | Menus and popovers. |
 | `--os-shadow-overlay` | `0 4px 24px #1113152e` | Dialogs. |
-| `--os-bevel` | `none` | Top highlight on buttons and bands — the one nod to 2008 gloss. |
+| `--os-bevel` | `none` | Top highlight on folder tabs and bands, e.g. inset 0 1px 0 rgb(255 255 255 / 0.55). None in both themes. |
+| `--os-button-retro` | `0` | Button style: 0 = flat (solid primary, white secondary), 1 = the bevelled 2008 gradient. Retro sets 1; data-buttons or .os-button--retro/--flat override it. |
 | `--os-focus-width` | `2px` | Focus ring thickness. |
 | `--os-focus-offset` | `1px` | Gap between element and focus ring. |
 | `--os-link-underline-offset` | `auto` | Distance from baseline to link underline. |
@@ -200,14 +201,14 @@ Re-declared per theme and density. Values for the default theme, standard densit
 | Token | Value |
 | --- | --- |
 | `--os-text-2xs` | `0.6875rem` |
-| `--os-text-xs` | `0.75rem` |
-| `--os-text-sm` | `0.8125rem` |
-| `--os-text-md` | `0.875rem` |
-| `--os-text-lg` | `1rem` |
-| `--os-text-xl` | `1.125rem` |
+| `--os-text-xs` | `0.6875rem` |
+| `--os-text-sm` | `0.75rem` |
+| `--os-text-md` | `0.8125rem` |
+| `--os-text-lg` | `0.9375rem` |
+| `--os-text-xl` | `1.0625rem` |
 | `--os-text-2xl` | `1.25rem` |
-| `--os-text-3xl` | `1.5rem` |
-| `--os-text-4xl` | `1.875rem` |
+| `--os-text-3xl` | `1.375rem` |
+| `--os-text-4xl` | `1.75rem` |
 | `--os-text-5xl` | `2.25rem` |
 
 ### leading
@@ -408,5 +409,5 @@ Post-it yellow: notices and <mark>. Seed: `{"hue":100,"chroma":0.3,"hueShift":-1
 
 | Theme | `data-theme` | Description |
 | --- | --- | --- |
-| Retro | `retro` (default) | The default. The 2008 portal as it was: Verdana 12px, saturated frame, square corners, tight boxes. |
-| Standard | `standard` | The same structure, tidied: Arial 14px, a paler frame, 3px corners, ruled rows and more air. |
+| Standard | `standard` (default) | The default. The 2008 layout with today's controls: Arial 13px, saturated frame, square boxes, flat buttons with 3px corners. |
+| Retro | `retro` | The 2008 portal all the way: Verdana 12px, 24px square controls, bevelled buttons, tight boxes. |

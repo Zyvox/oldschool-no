@@ -5,29 +5,34 @@
  * decides *how* the ramps are used and how big, tight and square things are.
  * There are two:
  *
- *   retro     the default. The 2008 portal as it was — Verdana, a saturated
- *             frame, square corners, tight boxes — with a calmer palette,
- *             24px targets and WCAG AA contrast.
- *   standard  the same structure, tidied: Arial 14px, a paler frame, 3px
- *             corners, ruled rows and a little more air.
+ *   standard  the default. The 2008 portal layout with today's controls:
+ *             Arial 13px, the saturated frame, square boxes, 30px controls
+ *             with 3px corners, flat buttons. The base tokens
+ *             (tokens/foundation.mjs, tokens/semantic.mjs) *are* this theme.
+ *   retro     the 2008 portal all the way: Verdana 12px, 24px square
+ *             controls, bevelled gradient buttons, tight boxes.
  *
  * Light/dark mode and density work with both. A theme is a list of overrides
- * on top of the base tokens (tokens/foundation.mjs, tokens/semantic.mjs):
+ * on top of the base tokens:
  *   primitives  foundation primitives, e.g. { 'text-md': '0.75rem' }
  *   roles       role tokens, e.g. { 'radius-panel': '0' }
  *   colors      semantic colours, e.g. { canvas: { light: 'frame.200', dark: 'neutral.1000' } }
  *
- * Apply with <html data-theme="standard">, or on any element to theme a
+ * Apply with <html data-theme="retro">, or on any element to theme a
  * subtree. The default theme also applies when no data-theme is set.
  * How to add one: docs/theming.md.
  */
 
-export const defaultTheme = 'retro';
+export const defaultTheme = 'standard';
 
 export const themes = {
+  standard: {
+    label: 'Standard',
+    description: 'The default. The 2008 layout with today\'s controls: Arial 13px, saturated frame, square boxes, flat buttons with 3px corners.',
+  },
   retro: {
     label: 'Retro',
-    description: 'The default. The 2008 portal as it was: Verdana 12px, saturated frame, square corners, tight boxes.',
+    description: 'The 2008 portal all the way: Verdana 12px, 24px square controls, bevelled buttons, tight boxes.',
     primitives: {
       'text-2xs': '0.625rem',
       'text-xs': '0.6875rem',
@@ -43,11 +48,8 @@ export const themes = {
     roles: {
       'font-body': '{font.verdana}',
       'leading-body': '1.35',
-      'tracking-heading': '0',
-      gap: '0.5rem',
       pad: '0.625rem',
       'row-pad': '0.25rem',
-      'radius-panel': '0',
       'radius-control': '0',
       'radius-tab': '0',
       'radius-badge': '0',
@@ -55,22 +57,8 @@ export const themes = {
       'control-height-sm': '1.5rem',
       'control-height-lg': '1.875rem',
       'control-pad-x': '0.5rem',
-      bevel: 'none',
-      'link-underline-offset': 'auto',
+      'button-retro': '1',
     },
-    colors: {
-      canvas: { light: 'frame.200', dark: 'neutral.1000' },
-      crumbbar: { light: 'frame.50', dark: 'frame.950' },
-      'panel-border': { light: 'transparent', dark: 'transparent' },
-      'panel-header': { light: 'frame.100', dark: 'frame.950' },
-      'panel-header-border': { light: 'transparent', dark: 'transparent' },
-      text: { light: 'neutral.900', dark: 'neutral.50' },
-      'text-muted': { light: 'neutral.700', dark: 'neutral.400' },
-    },
-  },
-  standard: {
-    label: 'Standard',
-    description: 'The same structure, tidied: Arial 14px, a paler frame, 3px corners, ruled rows and more air.',
   },
 };
 

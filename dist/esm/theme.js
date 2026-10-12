@@ -1,7 +1,7 @@
 /**
  * Theme, mode, density and width preferences.
  *
- *   <html data-theme="standard" data-mode="dark" data-density="compact" data-width="wide">
+ *   <html data-theme="retro" data-mode="dark" data-density="compact" data-width="wide">
  *
  * Preferences persist in localStorage ("os-prefs") and sync across tabs and
  * iframes. Put this in <head> *before* the stylesheet to avoid a flash:
@@ -19,7 +19,7 @@
 import { $$, store } from './core.js';
 
 const KEY = 'os-prefs';
-const DEFAULTS = { theme: 'retro', mode: 'auto', density: 'standard', width: 'classic' };
+const DEFAULTS = { theme: 'standard', mode: 'auto', density: 'standard', width: 'classic' };
 const ATTRS = { theme: 'data-theme', mode: 'data-mode', density: 'data-density', width: 'data-width' };
 
 function root() {

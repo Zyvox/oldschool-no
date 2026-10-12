@@ -5,7 +5,7 @@ on `<html>` — or on any element, to change just that subtree.
 
 | Attribute | Values | Decides |
 | --- | --- | --- |
-| `data-theme` | `retro` (default) · `standard` | the look: type, spacing, corners, which shade goes where |
+| `data-theme` | `standard` (default) · `retro` | the look: type, spacing, corners, button style |
 | `data-mode` | `auto` (default) · `light` · `dark` | light or dark; `auto` follows the OS |
 | `data-density` | `compact` · `standard` (default) · `comfortable` | text size, row and box padding, control heights |
 | `data-width` | `classic` (default) · `wide` | page width: 1000px or 1200px (also `.os-container--wide`) |
@@ -42,7 +42,7 @@ src/js/color.js        seed → ramp          accent-50 … accent-950, frame-*,
 tokens/semantic.mjs    what a colour is for --os-color-link = accent.700 (light) / accent.300 (dark)
 tokens/foundation.mjs  sizes and roles      --os-pad, --os-radius-panel, --os-text-md, …
                                             ▼
-tokens/themes.mjs      the two looks        retro: canvas = frame.200, text-md = 12px, radius 0 …
+tokens/themes.mjs      the two looks        retro: text-md = 12px, Verdana, radius 0, button-retro 1 …
                                             ▼
 scripts/build.mjs      → src/css/tokens/*.css → dist/oldschool.css (+ .min.css)
                        → dist/tokens.json, Tailwind bridges, docs/tokens.md
@@ -135,13 +135,14 @@ palette itself, so each is safe to paste.
 | Look | `accent` | `frame` | `link` |
 | --- | --- | --- | --- |
 | Portal blue (default) — the 2008 look | `'#2a5aa8'` | `null` | `null` |
+| Portal grey — the same blue on grey | `'#2a5aa8'` | `{ hue: 250, chroma: 0.02 }` (steel) | `null` |
 | Forest | `'#2f6b3f'` | `{ hue: 80, chroma: 0.02 }` (stone) | `null` |
 | Fjord | `'#0f6e6a'` | `{ hue: 250, chroma: 0.02 }` (steel) | `null` |
 | Clay | `'#b4532a'` | `{ hue: 80, chroma: 0.02 }` (stone) | `null` |
 | Indigo | `'#4b47c9'` | `{ hue: 250, chroma: 0.02 }` (steel) | `null` |
 | Graphite | `'#3d4654'` | `{ chroma: 0 }` (grey) | `'#2a5aa8'` |
 
-![The retro theme with the six recipes](../screenshots/accent-recipes.png)
+![The seven recipes](../screenshots/accent-recipes.png)
 
 ## The two themes
 
@@ -152,19 +153,23 @@ A theme is a list of overrides on top of the base tokens. The base values in
 | Token | Standard (base) | Retro |
 | --- | --- | --- |
 | `--os-font-body` | Arial | Verdana |
-| `--os-text-md` (body) … scale | 14px, 13, 12 … 36 | 12px, 11, 11 … 28 |
-| `--os-gap` / `--os-pad` | 10px / 12px | 8px / 10px |
+| `--os-text-md` (body) … scale | 13px, 12, 11 … 36 | 12px, 11, 11 … 28 |
+| `--os-pad` | 12px | 10px |
 | `--os-row-pad` | 5px | 4px |
-| radii | 3px panels and controls, 4px tabs | 0 |
+| control and badge radii | 3px controls, 2px badges, 4px folder tabs | 0 |
 | `--os-control-height` | 30px | 24px (the WCAG 2.2 minimum) |
-| `--os-bevel` | one-pixel white highlight | none |
-| `--os-color-canvas` (frame) | `frame.100` | `frame.200` — the saturated frame |
-| `--os-color-panel-border` | `frame.200` hairline | none |
-| `--os-color-text-muted` | `neutral.600` | `neutral.700` (smaller text needs more contrast) |
+| `--os-button-retro` | `0` — flat buttons | `1` — the bevelled gradient |
+
+Both have square boxes without an outline on the saturated frame
+(`frame.200`), 8px gaps and `neutral.700` muted text.
+
+`--os-button-retro` is the switch behind the two button styles. Components
+re-declare it too: `data-buttons="retro"` / `"flat"` on any element and
+`.os-button--retro` / `--flat` on one button, so the nearest setting wins.
 
 The default theme also applies when no `data-theme` is set. In the generated
-CSS it claims `:root`; `[data-theme="standard"]` comes later in the file with
-the same specificity, so it wins on `<html data-theme="standard">`. Every key
+CSS it claims `:root`; `[data-theme="retro"]` comes later in the file with
+the same specificity, so it wins on `<html data-theme="retro">`. Every key
 that *any* theme overrides is declared by *every* theme, so a standard box
 inside a retro page never inherits retro's overrides.
 
@@ -224,8 +229,8 @@ To make it the default, set `defaultTheme` in `tokens/themes.mjs` (and
 
 Densities live in `tokens/foundation.mjs` → `densities`. Each re-points a few
 role tokens; values are absolute, so they behave the same under both themes
-(compact drops body text one step of the active theme's scale: 11px Verdana in
-retro, 13px Arial in standard).
+(compact drops body text one step of the active theme's scale: 12px Arial in
+standard, 11px Verdana in retro).
 
 ```js
 compact: { description: '…', values: { 'text-body': '{text.sm}', gap: '0.5rem', 'control-height': '1.5rem', … } },
@@ -265,7 +270,7 @@ stores the choice in `localStorage["os-prefs"]`, syncs tabs and iframes and
 fires `os:preferences`. Declarative controls:
 
 ```html
-<select data-os-theme-control="theme"><option value="retro">Retro</option><option value="standard">Standard</option></select>
+<select data-os-theme-control="theme"><option value="standard">Standard</option><option value="retro">Retro</option></select>
 <select data-os-theme-control="mode">…auto | light | dark…</select>
 ```
 
